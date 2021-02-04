@@ -18,8 +18,7 @@ class StreamTest(rfm.RegressionTest):
     def __init__(self):
         self.descr = 'STREAM Benchmark'
         self.exclusive_access = True
-        self.valid_systems = ['kebnekaise:bdw', 'kebnekaise:sky', 'kebnekaise:knl',
-                              'kebnekaise:lm']
+        self.valid_systems = ['kebnekaise:%s' % x for x in ['bdw', 'sky', 'knl', 'gpu', 'lm']]
         self.valid_prog_environs = ['foss', 'intel']
 
         self.use_multithreading = False
@@ -29,14 +28,9 @@ class StreamTest(rfm.RegressionTest):
             'intel': ['-qopenmp', '-O3', '-xHost', '-static', '-qopt-prefetch-distance=64,8', '-qopt-streaming-cache-evict=0', '-qopt-streaming-stores always'],
         }
 
-        if self.current_system.name in ['arolla', 'tsa']:
-            self.exclusive_access = True
-            self.valid_prog_environs = ['PrgEnv-gnu']
-
         self.build_locally = False
         self.sourcepath = 'stream.c'
         self.build_system = 'SingleSource'
-        self.build_system.cppflags = ['-DDEFAULT_STREAM_ARRAY_SIZE=4676648960']
         self.num_tasks = 1
         self.num_tasks_per_node = 1
         self.stream_cpus_per_task = {
@@ -44,6 +38,15 @@ class StreamTest(rfm.RegressionTest):
             'kebnekaise:sky': 24,
             'kebnekaise:gpu': 24,
             'kebnekaise:knl': 68,
+            'kebnekaise:lm': 72,
+        }
+        # Memory in MB to use per core
+        self.stream_array = {
+            'kebnekaise:bdw': 4460,
+            'kebnekaise:sky': 4460,
+            'kebnekaise:gpu': 4460,
+            'kebnekaise:knl': 700,
+            'kebnekaise:lm': 41666,
         }
         self.variables = {
             'OMP_PLACES': 'threads',
@@ -64,42 +67,42 @@ class StreamTest(rfm.RegressionTest):
         self.stream_bw_reference = {
             'foss': {
                 'kebnekaise:bdw': {
-                    'copy':  (93500, -0.05, 0.05, 'MB/s'),
-                    'scale': (74000, -0.05, 0.05, 'MB/s'),
-                    'add':   (81100, -0.05, 0.05, 'MB/s'),
-                    'triad': (84400, -0.05, 0.05, 'MB/s'),
+                    'copy':  (73900, -0.05, 0.05, 'MB/s'),
+                    'scale': (73900, -0.05, 0.05, 'MB/s'),
+                    'add':   (83900, -0.05, 0.05, 'MB/s'),
+                    'triad': (83900, -0.05, 0.05, 'MB/s'),
                 },
                 'kebnekaise:sky': {
-                    'copy':  (102200, -0.05, 0.05, 'MB/s'),
-                    'scale': (107700, -0.05, 0.05, 'MB/s'),
-                    'add':   (125100, -0.05, 0.05, 'MB/s'),
-                    'triad': (127500, -0.05, 0.05, 'MB/s'),
+                    'copy':  (103800, -0.05, 0.05, 'MB/s'),
+                    'scale': (103800, -0.05, 0.05, 'MB/s'),
+                    'add':   (116200, -0.05, 0.05, 'MB/s'),
+                    'triad': (116200, -0.05, 0.05, 'MB/s'),
                 },
                 'kebnekaise:knl': {
-                    'copy':  (249200, -0.05, 0.05, 'MB/s'),
-                    'scale': (304700, -0.05, 0.05, 'MB/s'),
-                    'add':   (332000, -0.05, 0.05, 'MB/s'),
-                    'triad': (334700, -0.05, 0.05, 'MB/s'),
+                    'copy':  (249200, -0.55, None, 'MB/s'),
+                    'scale': (304700, -0.55, None, 'MB/s'),
+                    'add':   (332000, -0.55, None, 'MB/s'),
+                    'triad': (334700, -0.55, None, 'MB/s'),
                 },
             },
             'intel': {
                 'kebnekaise:bdw': {
-                    'copy':  (115700, -0.05, 0.05, 'MB/s'),
-                    'scale': (85500, -0.05, 0.05, 'MB/s'),
-                    'add':   (107900, -0.05, 0.05, 'MB/s'),
+                    'copy':  (101100, -0.05, 0.05, 'MB/s'),
+                    'scale': (101100, -0.05, 0.05, 'MB/s'),
+                    'add':   (111100, -0.05, 0.05, 'MB/s'),
                     'triad': (111100, -0.05, 0.05, 'MB/s'),
                 },
                 'kebnekaise:sky': {
-                    'copy':  (141800, -0.05, 0.05, 'MB/s'),
-                    'scale': (145800, -0.05, 0.05, 'MB/s'),
-                    'add':   (137400, -0.05, 0.05, 'MB/s'),
-                    'triad': (146100, -0.05, 0.05, 'MB/s'),
+                    'copy':  (132600, -0.05, 0.05, 'MB/s'),
+                    'scale': (132600, -0.05, 0.05, 'MB/s'),
+                    'add':   (121800, -0.05, 0.05, 'MB/s'),
+                    'triad': (125000, -0.05, 0.05, 'MB/s'),
                 },
                 'kebnekaise:knl': {
-                    'copy':  (270000, -0.05, 0.05, 'MB/s'),
-                    'scale': (270000, -0.05, 0.05, 'MB/s'),
-                    'add':   (324000, -0.05, 0.05, 'MB/s'),
-                    'triad': (320000, -0.05, 0.05, 'MB/s'),
+                    'copy':  (270000, -0.55, None, 'MB/s'),
+                    'scale': (270000, -0.55, None, 'MB/s'),
+                    'add':   (324000, -0.55, None, 'MB/s'),
+                    'triad': (320000, -0.55, None, 'MB/s'),
                 },
             },
         }
@@ -121,3 +124,12 @@ class StreamTest(rfm.RegressionTest):
             self.reference = self.stream_bw_reference[envname]
         except KeyError:
             self.reference = self.stream_bw_reference['foss']
+
+    @rfm.run_before('run')
+    def set_array_size(self):
+        mem_sz = self.stream_array.get(self.current_partition.fullname, 2500)*1024*1024
+        self.executable_opts = ["-s", "%s" % mem_sz]
+
+    @rfm.run_after('run')
+    def set_nodelist(self):
+        self.mynodelist = self.job.nodelist
