@@ -96,9 +96,6 @@
  *          per array.
  */
 #ifndef DEFAULT_STREAM_ARRAY_SIZE
-/* DEFAULT_STREAM_ARRAY_SIZE is set to amount of memory available per core for openmp runs
- * to test the whole memory
- */
 #   define DEFAULT_STREAM_ARRAY_SIZE	2684354560
 #endif
 size_t STREAM_ARRAY_SIZE = DEFAULT_STREAM_ARRAY_SIZE;
