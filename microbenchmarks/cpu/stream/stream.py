@@ -40,13 +40,13 @@ class StreamTest(rfm.RegressionTest):
             'kebnekaise:knl': 68,
             'kebnekaise:lm': 72,
         }
-        # Memory in MB to use per core
+        # Size of array in Mi-elements (*1024^2), total memory usage is size * 1024^2 * 8 * 3
         self.stream_array = {
-            'kebnekaise:bdw': 4460,
-            'kebnekaise:sky': 4460,
-            'kebnekaise:gpu': 4460,
-            'kebnekaise:knl': 700,
-            'kebnekaise:lm': 41666,
+            'kebnekaise:bdw': 5200,
+            'kebnekaise:sky': 5200,
+            'kebnekaise:gpu': 5200,
+            'kebnekaise:knl': 7500,
+            'kebnekaise:lm': 125000,
         }
         self.variables = {
             'OMP_PLACES': 'threads',
@@ -79,10 +79,10 @@ class StreamTest(rfm.RegressionTest):
                     'triad': (116200, -0.05, 0.05, 'MB/s'),
                 },
                 'kebnekaise:knl': {
-                    'copy':  (249200, -0.55, None, 'MB/s'),
-                    'scale': (304700, -0.55, None, 'MB/s'),
-                    'add':   (332000, -0.55, None, 'MB/s'),
-                    'triad': (334700, -0.55, None, 'MB/s'),
+                    'copy':  (56000, -0.05, 0.05, 'MB/s'),
+                    'scale': (56000, -0.05, 0.05, 'MB/s'),
+                    'add':   (62000, -0.05, 0.05, 'MB/s'),
+                    'triad': (62000, -0.05, 0.05, 'MB/s'),
                 },
             },
             'intel': {
@@ -99,10 +99,10 @@ class StreamTest(rfm.RegressionTest):
                     'triad': (125000, -0.05, 0.05, 'MB/s'),
                 },
                 'kebnekaise:knl': {
-                    'copy':  (270000, -0.55, None, 'MB/s'),
-                    'scale': (270000, -0.55, None, 'MB/s'),
-                    'add':   (324000, -0.55, None, 'MB/s'),
-                    'triad': (320000, -0.55, None, 'MB/s'),
+                    'copy':  (56800, -0.05, 0.05, 'MB/s'),
+                    'scale': (56800, -0.05, 0.05, 'MB/s'),
+                    'add':   (57600, -0.05, 0.05, 'MB/s'),
+                    'triad': (57600, -0.05, 0.05, 'MB/s'),
                 },
             },
         }
@@ -113,7 +113,15 @@ class StreamTest(rfm.RegressionTest):
     def prepare_test(self):
         self.num_cpus_per_task = self.stream_cpus_per_task.get(
             self.current_partition.fullname, 1)
-        self.variables['OMP_NUM_THREADS'] = str(self.num_cpus_per_task)
+        self.extra_resources = {
+            'threads': {'threads': 4},
+        }
+
+        omp_threads = self.num_cpus_per_task
+        if self.current_partition.fullname == 'kebnekaise:knl':
+            omp_threads *= 4
+        
+        self.variables['OMP_NUM_THREADS'] = str(omp_threads)
         envname = self.current_environ.name
 
         self.build_system.cflags = self.prgenv_flags.get(envname, ['-O3'])
