@@ -22,11 +22,12 @@ class StreamTest(rfm.RegressionTest):
         self.valid_systems = ['kebnekaise:%s' % x for x in ['bdw', 'sky', 'knl', 'gpu', 'lm']]
         self.valid_prog_environs = ['foss', 'intel']
 
-        self.use_multithreading = False
+        #self.use_multithreading = False
 
         self.prgenv_flags = {
             'foss': ['-fopenmp', '-O3', '-march=native', '-static'],
-            'intel': ['-qopenmp', '-O3', '-xHost', '-static', '-qopt-prefetch-distance=64,8', '-qopt-streaming-cache-evict=0', '-qopt-streaming-stores always'],
+            #'intel': ['-qopenmp', '-O3', '-xHost', '-static', '-qopt-prefetch-distance=64,8', '-qopt-streaming-cache-evict=0', '-qopt-streaming-stores always'],
+            'intel': ['-qopenmp', '-O3', '-xHost', '-ip', '-ansi-alias', '-fno-alias', '-static', '-qopt-prefetch-distance=64,8', '-qopt-streaming-cache-evict=0', '-qopt-streaming-stores always'],
         }
 
         self.build_locally = False
