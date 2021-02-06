@@ -5,6 +5,7 @@
 
 import reframe as rfm
 import reframe.utility.sanity as sn
+from reframe.core.backends import getlauncher
 
 
 @rfm.required_version('>=2.14')
@@ -125,13 +126,17 @@ class StreamTest(rfm.RegressionTest):
         envname = self.current_environ.name
 
         self.build_system.cflags = self.prgenv_flags.get(envname, ['-O3'])
-        if envname == 'PrgEnv-pgi':
-            self.variables['OMP_PROC_BIND'] = 'true'
 
         try:
             self.reference = self.stream_bw_reference[envname]
         except KeyError:
             self.reference = self.stream_bw_reference['foss']
+
+    # Stream is serial or OpenMP and should not be started by srun.
+    # Especially on the KNLs where that may cause bad thread placement.
+    @rfm.run_after('setup')
+    def set_launcher(self):
+        self.job.launcher = getlauncher('local')()
 
     @rfm.run_before('run')
     def set_array_size(self):
