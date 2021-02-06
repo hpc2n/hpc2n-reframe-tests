@@ -42,10 +42,10 @@ class StreamTest(rfm.RegressionTest):
         }
         # Size of array in Mi-elements (*1024^2), total memory usage is size * 1024^2 * 8 * 3
         self.stream_array = {
-            'kebnekaise:bdw': 5050,
-            'kebnekaise:sky': 5050,
-            'kebnekaise:gpu': 5050,
-            'kebnekaise:knl': 7500,
+            'kebnekaise:bdw': 4500,
+            'kebnekaise:sky': 4500,
+            'kebnekaise:gpu': 4500,
+            'kebnekaise:knl': 6800,
             'kebnekaise:lm': 24000, # 121000, for using the whole memory, but that takes forever.
         }
         self.variables = {
