@@ -26,7 +26,6 @@ class StreamTest(rfm.RegressionTest):
 
         self.prgenv_flags = {
             'foss': ['-fopenmp', '-O3', '-march=native', '-static'],
-            #'intel': ['-qopenmp', '-O3', '-xHost', '-static', '-qopt-prefetch-distance=64,8', '-qopt-streaming-cache-evict=0', '-qopt-streaming-stores always'],
             'intel': ['-qopenmp', '-O3', '-xHost', '-ip', '-ansi-alias', '-fno-alias', '-static', '-qopt-prefetch-distance=64,8', '-qopt-streaming-cache-evict=0', '-qopt-streaming-stores always'],
         }
 
@@ -69,42 +68,66 @@ class StreamTest(rfm.RegressionTest):
         self.stream_bw_reference = {
             'foss': {
                 'kebnekaise:bdw': {
-                    'copy':  (73900, -0.05, 0.05, 'MB/s'),
-                    'scale': (73900, -0.05, 0.05, 'MB/s'),
-                    'add':   (83900, -0.05, 0.05, 'MB/s'),
-                    'triad': (83900, -0.05, 0.05, 'MB/s'),
+                    'copy':  (74000, -0.05, 0.05, 'MB/s'),
+                    'scale': (74000, -0.05, 0.05, 'MB/s'),
+                    'add':   (84500, -0.05, 0.05, 'MB/s'),
+                    'triad': (84500, -0.05, 0.05, 'MB/s'),
                 },
                 'kebnekaise:sky': {
-                    'copy':  (103800, -0.05, 0.05, 'MB/s'),
-                    'scale': (103800, -0.05, 0.05, 'MB/s'),
-                    'add':   (116200, -0.05, 0.05, 'MB/s'),
-                    'triad': (116200, -0.05, 0.05, 'MB/s'),
+                    'copy':  (103900, -0.05, 0.05, 'MB/s'),
+                    'scale': (103900, -0.05, 0.05, 'MB/s'),
+                    'add':   (116700, -0.05, 0.05, 'MB/s'),
+                    'triad': (116700, -0.05, 0.05, 'MB/s'),
                 },
                 'kebnekaise:knl': {
-                    'copy':  (56000, -0.05, 0.05, 'MB/s'),
+                    'copy':  (57000, -0.05, 0.05, 'MB/s'),
                     'scale': (56000, -0.05, 0.05, 'MB/s'),
-                    'add':   (62000, -0.05, 0.05, 'MB/s'),
-                    'triad': (62000, -0.05, 0.05, 'MB/s'),
+                    'add':   (63000, -0.05, 0.05, 'MB/s'),
+                    'triad': (63000, -0.05, 0.05, 'MB/s'),
+                },
+                'kebnekaise:gpu': {
+                    'copy':  (74000, -0.05, 0.05, 'MB/s'),
+                    'scale': (74000, -0.05, 0.05, 'MB/s'),
+                    'add':   (84500, -0.05, 0.05, 'MB/s'),
+                    'triad': (84500, -0.05, 0.05, 'MB/s'),
+                },
+                'kebnekaise:lm': {
+                    'copy':  (191500, -0.05, 0.05, 'MB/s'),
+                    'scale': (191500, -0.05, 0.05, 'MB/s'),
+                    'add':   (198000, -0.05, 0.05, 'MB/s'),
+                    'triad': (198000, -0.05, 0.05, 'MB/s'),
                 },
             },
             'intel': {
                 'kebnekaise:bdw': {
-                    'copy':  (101100, -0.05, 0.05, 'MB/s'),
-                    'scale': (101100, -0.05, 0.05, 'MB/s'),
-                    'add':   (111100, -0.05, 0.05, 'MB/s'),
-                    'triad': (111100, -0.05, 0.05, 'MB/s'),
+                    'copy':  (120500, -0.05, 0.05, 'MB/s'),
+                    'scale': (120500, -0.05, 0.05, 'MB/s'),
+                    'add':   (108000, -0.05, 0.05, 'MB/s'),
+                    'triad': (108000, -0.05, 0.05, 'MB/s'),
                 },
                 'kebnekaise:sky': {
-                    'copy':  (132600, -0.05, 0.05, 'MB/s'),
-                    'scale': (132600, -0.05, 0.05, 'MB/s'),
-                    'add':   (121800, -0.05, 0.05, 'MB/s'),
-                    'triad': (125000, -0.05, 0.05, 'MB/s'),
+                    'copy':  (155000, -0.05, 0.05, 'MB/s'),
+                    'scale': (155000, -0.05, 0.05, 'MB/s'),
+                    'add':   (113000, -0.05, 0.05, 'MB/s'),
+                    'triad': (115000, -0.05, 0.05, 'MB/s'),
                 },
                 'kebnekaise:knl': {
-                    'copy':  (56800, -0.05, 0.05, 'MB/s'),
-                    'scale': (56800, -0.05, 0.05, 'MB/s'),
-                    'add':   (57600, -0.05, 0.05, 'MB/s'),
-                    'triad': (57600, -0.05, 0.05, 'MB/s'),
+                    'copy':  (57000, -0.05, 0.05, 'MB/s'),
+                    'scale': (57000, -0.05, 0.05, 'MB/s'),
+                    'add':   (57900, -0.05, 0.05, 'MB/s'),
+                    'triad': (57900, -0.05, 0.05, 'MB/s'),
+                },
+                'kebnekaise:gpu': {
+                    'copy':  (120500, -0.05, 0.05, 'MB/s'),
+                    'scale': (120500, -0.05, 0.05, 'MB/s'),
+                    'add':   (108000, -0.05, 0.05, 'MB/s'),
+                    'triad': (108000, -0.05, 0.05, 'MB/s'),
+                },
+                'kebnekaise:lm': {
+                    'copy':  (233000, -0.05, 0.05, 'MB/s'),
+                    'scale': (228000, -0.05, 0.05, 'MB/s'),
+                    'add':   (225000, -0.05, 0.05, 'MB/s'),
+                    'triad': (230000, -0.05, 0.05, 'MB/s'),
                 },
             },
         }
