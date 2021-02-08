@@ -19,7 +19,7 @@ class StreamTest(rfm.RegressionTest):
     def __init__(self):
         self.descr = 'STREAM Benchmark'
         self.exclusive_access = True
-        self.valid_systems = ['kebnekaise:%s' % x for x in ['bdw', 'sky', 'knl', 'gpu', 'lm']]
+        self.valid_systems = ['kebnekaise:%s' % x for x in ['bdw', 'sky', 'knl', 'lm']]
         self.valid_prog_environs = ['foss', 'intel']
 
         #self.use_multithreading = False
@@ -85,12 +85,6 @@ class StreamTest(rfm.RegressionTest):
                     'add':   (63000, -0.05, 0.05, 'MB/s'),
                     'triad': (63000, -0.05, 0.05, 'MB/s'),
                 },
-                'kebnekaise:gpu': {
-                    'copy':  (74000, -0.05, 0.05, 'MB/s'),
-                    'scale': (74000, -0.05, 0.05, 'MB/s'),
-                    'add':   (84500, -0.05, 0.05, 'MB/s'),
-                    'triad': (84500, -0.05, 0.05, 'MB/s'),
-                },
                 'kebnekaise:lm': {
                     'copy':  (191500, -0.05, 0.05, 'MB/s'),
                     'scale': (191500, -0.05, 0.05, 'MB/s'),
@@ -116,12 +110,6 @@ class StreamTest(rfm.RegressionTest):
                     'scale': (57000, -0.05, 0.05, 'MB/s'),
                     'add':   (57900, -0.05, 0.05, 'MB/s'),
                     'triad': (57900, -0.05, 0.05, 'MB/s'),
-                },
-                'kebnekaise:gpu': {
-                    'copy':  (120500, -0.05, 0.05, 'MB/s'),
-                    'scale': (120500, -0.05, 0.05, 'MB/s'),
-                    'add':   (108000, -0.05, 0.05, 'MB/s'),
-                    'triad': (108000, -0.05, 0.05, 'MB/s'),
                 },
                 'kebnekaise:lm': {
                     'copy':  (233000, -0.05, 0.05, 'MB/s'),
