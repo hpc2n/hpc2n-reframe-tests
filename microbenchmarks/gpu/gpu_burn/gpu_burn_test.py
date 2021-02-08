@@ -37,7 +37,7 @@ class GpuBurnTest(rfm.RegressionTest):
                 'perf': (1000, -0.10, None, 'Gflop/s'),
             },
             'kebnekaise:gpu_2xV100': {
-                'perf': (1000, -0.10, None, 'Gflop/s'),
+                'perf': (6100, -0.10, None, 'Gflop/s'),
             },
             'dom:gpu': {
                 'perf': (4115, -0.10, None, 'Gflop/s'),
