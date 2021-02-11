@@ -35,9 +35,9 @@ class StreamTest(rfm.RegressionTest):
         self.num_tasks = 1
         self.num_tasks_per_node = 1
         self.stream_cpus_per_task = {
-            'kebnekaise:bdw': 24,
-            'kebnekaise:sky': 24,
-            'kebnekaise:gpu': 24,
+            'kebnekaise:bdw': 28,
+            'kebnekaise:sky': 28,
+            'kebnekaise:gpu': 28,
             'kebnekaise:knl': 68,
             'kebnekaise:lm': 72,
         }
