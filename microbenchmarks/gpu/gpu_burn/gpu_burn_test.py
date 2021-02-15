@@ -12,10 +12,9 @@ import reframe.utility.sanity as sn
 @rfm.simple_test
 class GpuBurnTest(rfm.RegressionTest):
     def __init__(self):
-        self.valid_systems = ['kebnekaise:gpu_2xK80', 'kebnekaise:gpu_4xK80', 'kebnekaise:gpu_2xV100']
+        self.valid_systems = ['kebnekaise:gpu_2xK80', 'kebnekaise:gpu_4xK80', 'kebnekaise:gpu_2xV100', 'alvis']
         self.descr = 'GPU burn test'
         self.valid_prog_environs = ['fosscuda']
-        self.exclusive_access = True
         self.executable_opts = ['-d', '40']
         self.build_system = 'Make'
         self.executable = './gpu_burn.x'
@@ -29,6 +28,11 @@ class GpuBurnTest(rfm.RegressionTest):
             'temp': sn.max(sn.extractall(patt, self.stdout, 'temp', float)),
         }
 
+        if self.current_system.name == 'alvis':
+            self.exclusive_access = False
+        else:
+            self.exclusive_access = True
+
         self.reference = {
             'kebnekaise:gpu_2xK80': {
                 'perf': (1000, -0.10, None, 'Gflop/s'),
@@ -37,6 +41,9 @@ class GpuBurnTest(rfm.RegressionTest):
                 'perf': (1000, -0.10, None, 'Gflop/s'),
             },
             'kebnekaise:gpu_2xV100': {
+                'perf': (6100, -0.10, None, 'Gflop/s'),
+            },
+            'alvis:2xV100': {
                 'perf': (6100, -0.10, None, 'Gflop/s'),
             },
             'dom:gpu': {
@@ -91,8 +98,11 @@ class GpuBurnTest(rfm.RegressionTest):
         if cn in {'gpu_1xK80', 'gpu_2xK80', 'gpu_4xK80'}:
             gpu_arch = '52'
 
-        if cn in {'gpu_1xV100', 'gpu_2xV100'}:
+        if cn in {'gpu_1xV100', 'gpu_2xV100', '2xV100'}:
             gpu_arch = '70'
+
+        if 'T4' in cn:
+            gpu_arch = '75'
 
         if cs in {'dom', 'daint'}:
             gpu_arch = '60'
@@ -130,11 +140,12 @@ class GpuBurnTest(rfm.RegressionTest):
         cs = self.current_system.name
         cp = self.current_partition.fullname
         cn = self.current_partition.name
-        if cn in {'gpu_1xK80', 'gpu_2xV100'}:
+
+        if cn in {'gpu_1xK80', 'gpu_2xV100', '2xV100'}:
             self.num_gpus_per_node = 2
-        elif cn in {'gpu_2xK80'}:
+        elif cn in {'gpu_2xK80', '4xV100'}:
             self.num_gpus_per_node = 4
-        elif cn in {'gpu_4xK80'}:
+        elif cn in {'gpu_4xK80', '8xT4'}:
             self.num_gpus_per_node = 8
         elif cs in {'dom', 'daint'}:
             self.num_gpus_per_node = 1
