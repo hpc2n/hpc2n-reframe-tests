@@ -14,8 +14,13 @@ import reframe.utility.osext as osext
 class TensorFlow2HorovodTest(rfm.RunOnlyRegressionTest):
     def __init__(self, variant):
         self.descr = 'Distributed training with TensorFlow2 and Horovod'
+
+        self.valid_systems = ['kebnekaise:gpu_%s' % x for x in ['2xK80', '4xK80', '2xV100']]
+        self.valid_systems += ['alvis:%s' % x for x in ['8xT4', '2xV100', '4xV100', '4xA100']]
+        self.valid_systems += ['daint:gpu']
+
         self.kebnekaise_single_socket = ['kebnekaise:gpu_%s' % x for x in ['1xK80', '1xV100']]
-        self.valid_systems = ['kebnekaise:gpu_%s' % x for x in ['2xK80', '4xK80', '2xV100']] + ['alvis'] + ['daint:gpu']
+
         self.valid_prog_environs = ['builtin', 'fosscuda']
 
         self.variant = variant
