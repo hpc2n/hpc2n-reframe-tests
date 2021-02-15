@@ -43,7 +43,7 @@ class GpuBurnTest(rfm.RegressionTest):
             'kebnekaise:gpu_2xV100': {
                 'perf': (6100, -0.10, None, 'Gflop/s'),
             },
-            'alvis:2xV100': {
+            'alvis:NxV100': {
                 'perf': (6100, -0.10, None, 'Gflop/s'),
             },
             'dom:gpu': {
@@ -95,14 +95,17 @@ class GpuBurnTest(rfm.RegressionTest):
         gpu_arch = None
 
         # Nvidia options
-        if cn in {'gpu_1xK80', 'gpu_2xK80', 'gpu_4xK80'}:
+        if 'K80' in cn:
             gpu_arch = '52'
 
-        if cn in {'gpu_1xV100', 'gpu_2xV100', '2xV100'}:
+        if 'V100' in cn:
             gpu_arch = '70'
 
         if 'T4' in cn:
             gpu_arch = '75'
+
+        if 'A100' in cn:
+            gpu_arch = '80'
 
         if cs in {'dom', 'daint'}:
             gpu_arch = '60'
@@ -141,7 +144,7 @@ class GpuBurnTest(rfm.RegressionTest):
         cp = self.current_partition.fullname
         cn = self.current_partition.name
 
-        if cn in {'gpu_1xK80', 'gpu_2xV100', '2xV100'}:
+        if cn in {'gpu_1xK80', 'gpu_2xV100', 'NxV100'}:
             self.num_gpus_per_node = 2
         elif cn in {'gpu_2xK80', '4xV100'}:
             self.num_gpus_per_node = 4
