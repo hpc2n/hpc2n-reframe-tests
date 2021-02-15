@@ -24,7 +24,7 @@ class TensorFlow2HorovodTest(rfm.RunOnlyRegressionTest):
 
         cray_cdt_version = osext.cray_cdt_version()
         if cs == 'kebnekaise' or cs == 'alvis':
-            self.modules = ['Horovod/0.19.1-TensorFlow-2.1.0-Python-3.7.4']
+            self.modules = ['fosscuda/2019b', 'Horovod/0.19.1-TensorFlow-2.1.0-Python-3.7.4']
         # FIXME: The following will not be needed after the Daint upgrade
         elif cs == 'dom':
             self.modules = [
