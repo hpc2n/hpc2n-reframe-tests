@@ -8,11 +8,10 @@ import reframe.utility.sanity as sn
 import reframe.utility.osext as osext
 
 
-@rfm.required_version('>=2.16')
-#@rfm.parameterized_test(['small'], ['large'])
-@rfm.parameterized_test(['small'])
 class TensorFlow2HorovodTest(rfm.RunOnlyRegressionTest):
-    def __init__(self, variant):
+    variant = parameter(['small', 'large'])
+
+    def __init__(self):
         self.descr = 'Distributed training with TensorFlow2 and Horovod'
 
         self.valid_systems = ['kebnekaise:gpu_%s' % x for x in ['2xK80', '4xK80', '2xV100']]
@@ -23,17 +22,14 @@ class TensorFlow2HorovodTest(rfm.RunOnlyRegressionTest):
 
         self.valid_prog_environs = ['builtin', 'fosscuda']
 
-        self.variant = variant
-
         cs = self.current_system.name
 
-        cray_cdt_version = osext.cray_cdt_version()
         if cs == 'kebnekaise' or cs == 'alvis':
             self.modules = ['fosscuda/2019b', 'Horovod/0.19.1-TensorFlow-2.1.0-Python-3.7.4']
         # FIXME: The following will not be needed after the Daint upgrade
         elif cs == 'dom':
             self.modules = [
-                f'Horovod/0.21.0-CrayGNU-{cray_cdt_version}-tf-2.4.0'
+                f'Horovod/0.21.0-CrayGNU-{osext.cray_cdt_version()}-tf-2.4.0'
             ]
         else:
             self.modules = ['Horovod/0.19.1-CrayGNU-20.08-tf-2.2.0']
@@ -94,7 +90,7 @@ class TensorFlow2HorovodTest(rfm.RunOnlyRegressionTest):
 
         self.sourcesdir = None
 
-        if variant == 'small':
+        if self.variant == 'small':
             self.valid_systems += ['dom:gpu'] + self.kebnekaise_single_socket
             self.reference = {
                 'dom:gpu': {
@@ -143,9 +139,9 @@ class TensorFlow2HorovodTest(rfm.RunOnlyRegressionTest):
             '--num-warmup-batches 5',
         ]
         self.tags = {'production'}
-        self.maintainers = ['RS', 'TR']
+        self.maintainers = ['RS', 'TR', 'AS']
 
-    @rfm.run_before('run')
+    @run_before('run')
     def set_run_params(self):
         cs = self.current_system.name
         cp = self.current_partition.fullname
