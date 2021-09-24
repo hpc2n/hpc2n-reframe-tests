@@ -27,7 +27,7 @@ site_configuration = {
                     'scheduler': 'slurm',
                     'launcher': 'srun',
                     'access': ['-A SNIC2021-5-261', '-C 8xT4'],
-                    'environs': ['gnu', 'foss', 'intel', 'fosscuda'],
+                    'environs': ['gnu', 'foss', 'fosscuda', 'fosscuda_2019b', 'fosscuda_2020a', 'fosscuda_2020b', 'foss_2021a', 'intelcuda_2019b', 'intelcuda_2020a', 'intelcuda_2020b'],
                     'resources': [
                         {
                             'name': '_rfm_gpu',
@@ -41,7 +41,7 @@ site_configuration = {
                     'scheduler': 'slurm',
                     'launcher': 'srun',
                     'access': ['-A SNIC2021-5-261', '-C 2xV100'],
-                    'environs': ['gnu', 'foss', 'intel', 'fosscuda'],
+                    'environs': ['gnu', 'foss', 'fosscuda', 'fosscuda_2019b', 'fosscuda_2020a', 'fosscuda_2020b', 'foss_2021a', 'intelcuda_2019b', 'intelcuda_2020a', 'intelcuda_2020b'],
                     'resources': [
                         {
                             'name': '_rfm_gpu',
@@ -55,7 +55,7 @@ site_configuration = {
                     'scheduler': 'slurm',
                     'launcher': 'srun',
                     'access': ['-A SNIC2021-5-261', '-C 4xA100'],
-                    'environs': ['gnu', 'foss', 'intel', 'fosscuda'],
+                    'environs': ['gnu', 'foss', 'fosscuda', 'fosscuda_2019b', 'fosscuda_2020a', 'fosscuda_2020b', 'foss_2021a', 'intelcuda_2019b', 'intelcuda_2020a', 'intelcuda_2020b'],
                     'resources': [
                         {
                             'name': '_rfm_gpu',
