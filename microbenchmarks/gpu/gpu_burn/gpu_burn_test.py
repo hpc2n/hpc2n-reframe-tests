@@ -34,6 +34,9 @@ class gpu_burn_check(GpuBurn):
         'kebnekaise:gpu_2xV100': {
             'min_perf': (6100, -0.10, None, 'Gflop/s'),
         },
+        'alvis:NxT4': {
+            'min_perf': (248, -0.10, None, 'Gflop/s'),
+        },
         'alvis:NxV100': {
             'min_perf': (6100, -0.10, None, 'Gflop/s'),
         },
