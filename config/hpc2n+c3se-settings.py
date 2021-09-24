@@ -366,6 +366,22 @@ site_configuration = {
             'target_systems': ['kebnekaise', 'alvis'],
         },
         {
+            'name': 'intelcuda_2020a',
+            'modules': ['intelcuda/2020a'],
+            'cc': 'icc',
+            'cxx': 'icpc',
+            'ftn': 'ifort',
+            'target_systems': ['alvis'],
+        },
+        {
+            'name': 'intelcuda_2020b',
+            'modules': ['intelcuda/2020b'],
+            'cc': 'icc',
+            'cxx': 'icpc',
+            'ftn': 'ifort',
+            'target_systems': ['alvis'],
+        },
+        {
             'name': 'builtin',
             'cc': 'gcc',
             'cxx': 'g++',
