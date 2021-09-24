@@ -18,6 +18,7 @@ class StreamTest2Base(rfm.RunOnlyRegressionTest):
     def __init__(self):
         self.exclusive_access = True
         self.valid_systems = ['kebnekaise:%s' % x for x in ['bdw', 'sky', 'knl', 'lm']]
+        self.valid_systems += ['alvis:Nx%s' % x for x in ['T4', 'V100', 'A100']]
         self.valid_prog_environs = ['%s_%s' % (tc, tv) for tc in ['foss', 'intel']
             for tv in ['2019a', '2019b', '2020a', '2020b', '2021a']]
         self.num_tasks = 1
