@@ -26,7 +26,7 @@ site_configuration = {
                     'descr': 'GPU T4',
                     'scheduler': 'slurm',
                     'launcher': 'srun',
-                    'access': ['-A SNIC2020-5-235', '-C 8xT4'],
+                    'access': ['-A SNIC2021-5-261', '-C 8xT4'],
                     'environs': ['gnu', 'foss', 'intel', 'fosscuda'],
                     'resources': [
                         {
@@ -40,7 +40,7 @@ site_configuration = {
                     'descr': 'GPU V100',
                     'scheduler': 'slurm',
                     'launcher': 'srun',
-                    'access': ['-A SNIC2020-5-235', '-C 2xV100'],
+                    'access': ['-A SNIC2021-5-261', '-C 2xV100'],
                     'environs': ['gnu', 'foss', 'intel', 'fosscuda'],
                     'resources': [
                         {
@@ -54,7 +54,7 @@ site_configuration = {
                     'descr': 'GPU A100',
                     'scheduler': 'slurm',
                     'launcher': 'srun',
-                    'access': ['-A SNIC2020-5-235', '-C 4xA100'],
+                    'access': ['-A SNIC2021-5-261', '-C 4xA100'],
                     'environs': ['gnu', 'foss', 'intel', 'fosscuda'],
                     'resources': [
                         {
