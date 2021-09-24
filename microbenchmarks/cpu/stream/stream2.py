@@ -62,6 +62,9 @@ class StreamTest2(StreamTest2Base):
             'kebnekaise:gpu': 28,
             'kebnekaise:knl': 68,
             'kebnekaise:lm': 72,
+            'alvis:NxT4': 32,
+            'alvis:NxV100': 32,
+            'alvis:NxA100': 32,
         }
         # Size of array in Mi-elements (*1024^2), total memory usage is size * 1024^2 * 8 * 3
         self.stream_array = {
@@ -71,6 +74,9 @@ class StreamTest2(StreamTest2Base):
             'kebnekaise:gpu': 4500,
             'kebnekaise:knl': 6800,
             'kebnekaise:lm': 24000, # 121000, for using the whole memory, but that takes forever.
+            'alvis:NxT4': 20000,
+            'alvis:NxV100': 26000,
+            'alvis:NxA100': 26000,
         }
         self.variables = {
             'OMP_PLACES': 'threads',
