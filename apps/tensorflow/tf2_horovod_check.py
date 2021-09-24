@@ -8,6 +8,7 @@ import reframe.utility.sanity as sn
 import reframe.utility.osext as osext
 
 
+@rfm.simple_test
 class TensorFlow2HorovodTest(rfm.RunOnlyRegressionTest):
     variant = parameter(['small', 'large'])
 
