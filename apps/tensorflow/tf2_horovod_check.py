@@ -94,6 +94,26 @@ class TensorFlow2HorovodTest(rfm.RunOnlyRegressionTest):
         if self.variant == 'small':
             self.valid_systems += ['dom:gpu'] + self.kebnekaise_single_socket
             self.reference = {
+                'kebnekaise:gpu_1xK80': {
+                    'throughput': (124, -0.05, None, 'images/s'),
+                    'throughput_per_gpu': (62, -0.05, None, 'images/s'),
+                },
+                'kebnekaise:gpu_2xK80': {
+                    'throughput': (247, -0.05, None, 'images/s'),
+                    'throughput_per_gpu': (62, -0.05, None, 'images/s'),
+                },
+                'kebnekaise:gpu_4xK80': {
+                    'throughput': (494, -0.05, None, 'images/s'),
+                    'throughput_per_gpu': (62, -0.05, None, 'images/s'),
+                },
+                'kebnekaise:gpu_1xV100': {
+                    'throughput': (439, -0.05, None, 'images/s'),
+                    'throughput_per_gpu': (439, -0.05, None, 'images/s'),
+                },
+                'kebnekaise:gpu_2xV100': {
+                    'throughput': (832, -0.05, None, 'images/s'),
+                    'throughput_per_gpu': (416, -0.05, None, 'images/s'),
+                },
                 'dom:gpu': {
                     'throughput': (1712, -0.05, None, 'images/s'),
                     'throughput_per_gpu': (214, -0.05, None, 'images/s'),
@@ -119,7 +139,7 @@ class TensorFlow2HorovodTest(rfm.RunOnlyRegressionTest):
         ])
         self.variables = {
             'NCCL_DEBUG': 'INFO',
-            'NCCL_IB_HCA': 'ipogif0',
+            'NCCL_IB_HCA': 'mlx5_0',
             'NCCL_IB_CUDA_SUPPORT': '1',
             'OMP_NUM_THREADS': '$SLURM_CPUS_PER_TASK',
             'OMPI_MCA_mpi_warn_on_fork': '0',
