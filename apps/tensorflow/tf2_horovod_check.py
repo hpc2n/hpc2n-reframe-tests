@@ -21,7 +21,8 @@ class TensorFlow2HorovodTest(rfm.RunOnlyRegressionTest):
 
         self.kebnekaise_single_socket = ['kebnekaise:gpu_%s' % x for x in ['1xK80', '1xV100']]
 
-        self.valid_prog_environs = ['builtin', 'fosscuda']
+        # This test uses prebuilt modules so only builtin is usable here
+        self.valid_prog_environs = ['builtin']
 
         cs = self.current_system.name
 
