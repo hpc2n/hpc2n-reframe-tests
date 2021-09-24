@@ -27,12 +27,18 @@ class TensorFlow2HorovodTest(rfm.RunOnlyRegressionTest):
 
         if cs == 'kebnekaise' or cs == 'alvis':
             self.modules = ['fosscuda/2019b', 'Horovod/0.19.1-TensorFlow-2.1.0-Python-3.7.4']
+            if cs == 'kebnekaise':
+                self.IB_ifc = 'mlx5_0
+            else:
+                self.IB_ifc = 'mlx5_2'
         # FIXME: The following will not be needed after the Daint upgrade
         elif cs == 'dom':
+            self.IB_ifc = 'ipogif0'
             self.modules = [
                 f'Horovod/0.21.0-CrayGNU-{osext.cray_cdt_version()}-tf-2.4.0'
             ]
         else:
+            self.IB_ifc = 'ipogif0'
             self.modules = ['Horovod/0.19.1-CrayGNU-20.08-tf-2.2.0']
 
         # Settings for various systems. num_tasks is per-variant
@@ -143,7 +149,7 @@ class TensorFlow2HorovodTest(rfm.RunOnlyRegressionTest):
         ])
         self.variables = {
             'NCCL_DEBUG': 'INFO',
-            'NCCL_IB_HCA': 'mlx5_0',
+            'NCCL_IB_HCA': self.IB_ifc,
             'NCCL_IB_CUDA_SUPPORT': '1',
             'OMP_NUM_THREADS': '$SLURM_CPUS_PER_TASK',
             'OMPI_MCA_mpi_warn_on_fork': '0',
