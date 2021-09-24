@@ -18,7 +18,7 @@ class StreamTest2Base(rfm.RunOnlyRegressionTest):
     def __init__(self):
         self.exclusive_access = True
         self.valid_systems = ['kebnekaise:%s' % x for x in ['bdw', 'sky', 'knl', 'lm']]
-        self.valid_systems += ['alvis:Nx%s' % x for x in ['T4', 'V100', 'A100']]
+        self.valid_systems += ['alvis]
         self.valid_prog_environs = ['%s%s_%s' % (tc, c, tv) for tc in ['foss', 'intel']
             for c in ['', 'cuda']
             for tv in ['2019a', '2019b', '2020a', '2020b', '2021a']]
@@ -187,7 +187,9 @@ class StreamTest2Build(rfm.CompileOnlyRegressionTest):
     def __init__(self):
         self.descr = 'STREAM Benchmark Build test'
         self.valid_systems = ['kebnekaise:%s' % x for x in ['bdw', 'sky', 'knl', 'lm']]
-        self.valid_prog_environs = ['%s_%s' % (tc, tv) for tc in ['foss', 'intel']
+        self.valid_systems += ['alvis]
+        self.valid_prog_environs = ['%s%s_%s' % (tc, c, tv) for tc in ['foss', 'intel']
+            for c in ['', 'cuda']
             for tv in ['2019a', '2019b', '2020a', '2020b', '2021a']]
 
         self.prgenv_flags = {
