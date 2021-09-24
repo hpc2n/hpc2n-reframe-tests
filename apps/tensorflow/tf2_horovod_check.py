@@ -96,15 +96,15 @@ class TensorFlow2HorovodTest(rfm.RunOnlyRegressionTest):
             self.reference = {
                 'kebnekaise:gpu_1xK80': {
                     'throughput': (124, -0.05, None, 'images/s'),
-                    'throughput_per_gpu': (62, -0.05, None, 'images/s'),
+                    'throughput_per_gpu': (62.4, -0.05, None, 'images/s'),
                 },
                 'kebnekaise:gpu_2xK80': {
-                    'throughput': (247, -0.05, None, 'images/s'),
-                    'throughput_per_gpu': (62, -0.05, None, 'images/s'),
+                    'throughput': (249, -0.05, None, 'images/s'),
+                    'throughput_per_gpu': (62.4, -0.05, None, 'images/s'),
                 },
                 'kebnekaise:gpu_4xK80': {
                     'throughput': (494, -0.05, None, 'images/s'),
-                    'throughput_per_gpu': (62, -0.05, None, 'images/s'),
+                    'throughput_per_gpu': (62.4, -0.05, None, 'images/s'),
                 },
                 'kebnekaise:gpu_1xV100': {
                     'throughput': (439, -0.05, None, 'images/s'),
@@ -125,6 +125,10 @@ class TensorFlow2HorovodTest(rfm.RunOnlyRegressionTest):
             }
         else:
             self.reference = {
+                'kebnekaise:gpu_2xK80': {
+                    'throughput': (493, -0.05, None, 'images/s'),
+                    'throughput_per_gpu': (61.6, -0.05, None, 'images/s')
+                },
                 'daint:gpu': {
                     'throughput': (6848, -0.05, None, 'images/s'),
                     'throughput_per_gpu': (214, -0.05, None, 'images/s')
