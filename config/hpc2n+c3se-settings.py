@@ -147,7 +147,7 @@ site_configuration = {
                     'descr': 'GPU 4xK80 nodes',
                     'scheduler': 'slurm',
                     'launcher': 'srun',
-                    'access': ['-A sysop', '-p gpu', '-C broadwell&4xV80', '--gres=gpu:k80:4', '--exclusive'],
+                    'access': ['-A sysop', '-p gpu', '-C broadwell&4xK80', '--gres=gpu:k80:4', '--exclusive'],
                     'environs': ['gnu', 'foss', 'intel', 'fosscuda', 'foss_2019a', 'foss_2019b', 'foss_2020a', 'foss_2020b', 'foss_2021a', 'intel_2019a', 'intel_2019b', 'intel_2020a', 'intel_2020b', 'intel_2021a'],
                 },
                 {
