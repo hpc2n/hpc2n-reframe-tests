@@ -101,6 +101,14 @@ class TensorFlow2HorovodTest(rfm.RunOnlyRegressionTest):
         if self.variant == 'small':
             self.valid_systems += ['dom:gpu'] + self.kebnekaise_single_socket
             self.reference = {
+                'alvis:8xT4': {
+                    'throughput': (1233, -0.05, None, 'images/s'),
+                    'throughput_per_gpu': (154, -0.05, None, 'images/s'),
+                },
+                'alvis:2xV100': {
+                    'throughput': (865, -0.05, None, 'images/s'),
+                    'throughput_per_gpu': (432, -0.05, None, 'images/s'),
+                },
                 'kebnekaise:gpu_1xK80': {
                     'throughput': (124, -0.05, None, 'images/s'),
                     'throughput_per_gpu': (62.4, -0.05, None, 'images/s'),
@@ -132,6 +140,14 @@ class TensorFlow2HorovodTest(rfm.RunOnlyRegressionTest):
             }
         else:
             self.reference = {
+                'alvis:8xT4': {
+                    'throughput': (4847, -0.05, None, 'images/s'),
+                    'throughput_per_gpu': (151, -0.05, None, 'images/s')
+                },
+                'alvis:2xV100': {
+                    'throughput': (3242, -0.05, None, 'images/s'),
+                    'throughput_per_gpu': (405, -0.05, None, 'images/s')
+                },
                 'kebnekaise:gpu_2xK80': {
                     'throughput': (493, -0.05, None, 'images/s'),
                     'throughput_per_gpu': (61.6, -0.05, None, 'images/s')
