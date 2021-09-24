@@ -209,3 +209,6 @@ class TensorFlow2HorovodTest(rfm.RunOnlyRegressionTest):
                 self.stdout, 'throughput_per_gpu', float)
         }
 
+    @run_after('run')
+    def set_nodelist(self):
+        self.mynodelist = self.job.nodelist
