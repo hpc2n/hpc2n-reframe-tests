@@ -28,7 +28,7 @@ class TensorFlow2HorovodTest(rfm.RunOnlyRegressionTest):
         if cs == 'kebnekaise' or cs == 'alvis':
             self.modules = ['fosscuda/2019b', 'Horovod/0.19.1-TensorFlow-2.1.0-Python-3.7.4']
             if cs == 'kebnekaise':
-                self.IB_ifc = 'mlx5_0
+                self.IB_ifc = 'mlx5_0'
             else:
                 self.IB_ifc = 'mlx5_2'
         # FIXME: The following will not be needed after the Daint upgrade
