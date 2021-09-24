@@ -19,7 +19,8 @@ class StreamTest2Base(rfm.RunOnlyRegressionTest):
         self.exclusive_access = True
         self.valid_systems = ['kebnekaise:%s' % x for x in ['bdw', 'sky', 'knl', 'lm']]
         self.valid_systems += ['alvis:Nx%s' % x for x in ['T4', 'V100', 'A100']]
-        self.valid_prog_environs = ['%s_%s' % (tc, tv) for tc in ['foss', 'intel']
+        self.valid_prog_environs = ['%s%s_%s' % (tc, c, tv) for tc in ['foss', 'intel']
+            for c in ['', 'cuda']
             for tv in ['2019a', '2019b', '2020a', '2020b', '2021a']]
         self.num_tasks = 1
         self.num_tasks_per_node = 1
@@ -203,5 +204,5 @@ class StreamTest2Build(rfm.CompileOnlyRegressionTest):
     @run_after('setup')
     def prepare_test(self):
         envname = self.current_environ.name
-        tc_name = envname.split('_')[0]
+        tc_name = envname.split('_')[0].replace("cuda", "")
         self.build_system.cflags = self.prgenv_flags.get(tc_name, ['-O3'])
