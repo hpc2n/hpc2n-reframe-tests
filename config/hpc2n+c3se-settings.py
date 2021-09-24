@@ -68,7 +68,7 @@ site_configuration = {
                     'descr': 'GPU 2xV100 nodes',
                     'scheduler': 'slurm',
                     'launcher': 'srun',
-                    'access': ['-A SNIC2020-5-235', '-C 2xV100', '--gpus-per-node=V100:2'],
+                    'access': ['-A SNIC2021-5-261', '-C 2xV100', '--gpus-per-node=V100:2'],
                     'environs': ['gnu', 'foss', 'fosscuda', 'fosscuda_2019b', 'fosscuda_2020a', 'fosscuda_2020b', 'foss_2021a', 'intelcuda_2019b', 'intelcuda_2020a', 'intelcuda_2020b'],
                 },
                 {
@@ -76,7 +76,7 @@ site_configuration = {
                     'descr': 'GPU 4xV100 nodes',
                     'scheduler': 'slurm',
                     'launcher': 'srun',
-                    'access': ['-A SNIC2020-5-235', '-C 4xV100', '--gpus-per-node=V100:4'],
+                    'access': ['-A SNIC2021-5-261', '-C 4xV100', '--gpus-per-node=V100:4'],
                     'environs': ['gnu', 'foss', 'fosscuda', 'fosscuda_2019b', 'fosscuda_2020a', 'fosscuda_2020b', 'foss_2021a', 'intelcuda_2019b', 'intelcuda_2020a', 'intelcuda_2020b'],
                 },
                 {
@@ -84,7 +84,7 @@ site_configuration = {
                     'descr': 'GPU 8xT4 nodes',
                     'scheduler': 'slurm',
                     'launcher': 'srun',
-                    'access': ['-A SNIC2020-5-235', '-C 8xT4', '--gpus-per-node=T4:8'],
+                    'access': ['-A SNIC2021-5-261', '-C 8xT4', '--gpus-per-node=T4:8'],
                     'environs': ['gnu', 'foss', 'fosscuda', 'fosscuda_2019b', 'fosscuda_2020a', 'fosscuda_2020b', 'foss_2021a', 'intelcuda_2019b', 'intelcuda_2020a', 'intelcuda_2020b'],
                 },
                 {
@@ -92,7 +92,7 @@ site_configuration = {
                     'descr': 'GPU 4xA100 nodes',
                     'scheduler': 'slurm',
                     'launcher': 'srun',
-                    'access': ['-A SNIC2020-5-235', '-C 4xA100', '--gpus-per-node=A100:4'],
+                    'access': ['-A SNIC2021-5-261', '-C 4xA100', '--gpus-per-node=A100:4'],
                     'environs': ['gnu', 'foss', 'fosscuda', 'fosscuda_2019b', 'fosscuda_2020a', 'fosscuda_2020b', 'foss_2021a', 'intelcuda_2019b', 'intelcuda_2020a', 'intelcuda_2020b'],
                 },
             ],
