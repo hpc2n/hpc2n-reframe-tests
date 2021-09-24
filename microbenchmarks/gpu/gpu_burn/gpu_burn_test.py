@@ -10,20 +10,33 @@ import reframe.utility.osext as osext
 from reframe.core.exceptions import SanityError
 
 from hpctestlib.microbenchmarks.gpu.gpu_burn import GpuBurn
-import cscstests.microbenchmarks.gpu.hooks as hooks
+import hpc2ntests.microbenchmarks.gpu.hooks as hooks
 
 
 @rfm.simple_test
 class gpu_burn_check(GpuBurn):
     valid_systems = [
+        'kebnekaise:gpu_2xK80', 'kebnekaise:gpu_4xK80', 'kebnekaise:gpu_2xV100', 'alvis',
         'daint:gpu', 'dom:gpu', 'arolla:cn', 'tsa:cn', 'ault:amdv100',
         'ault:intelv100', 'ault:amda100', 'ault:amdvega'
     ]
-    valid_prog_environs = ['PrgEnv-gnu']
-    exclusive_access = True
+    valid_prog_environs = ['PrgEnv-gnu', 'fosscuda']
     executable_opts = ['-d', '40']
     num_tasks = 0
+
     reference = {
+        'kebnekaise:gpu_2xK80': {
+            'min_perf': (1000, -0.10, None, 'Gflop/s'),
+        },
+        'kebnekaise:gpu_4xK80': {
+            'min_perf': (1000, -0.10, None, 'Gflop/s'),
+        },
+        'kebnekaise:gpu_2xV100': {
+            'min_perf': (6100, -0.10, None, 'Gflop/s'),
+        },
+        'alvis:NxV100': {
+            'min_perf': (6100, -0.10, None, 'Gflop/s'),
+        },
         'dom:gpu': {
             'min_perf': (4115, -0.10, None, 'Gflop/s'),
         },
@@ -48,9 +61,10 @@ class gpu_burn_check(GpuBurn):
         'ault:amdvega': {
             'min_perf': (3450, -0.10, None, 'Gflop/s'),
         },
+        '*': {'temp': (0, None, None, 'degC')},
     }
 
-    maintainers = ['AJ', 'TM']
+    maintainers = ['AJ', 'TM', 'AS']
     tags = {'diagnostic', 'benchmark', 'craype'}
 
     # Inject external hooks
@@ -61,6 +75,16 @@ class gpu_burn_check(GpuBurn):
     @run_before('run')
     def set_num_gpus_per_node(self):
         hooks.set_num_gpus_per_node(self)
+
+    @run_before('run')
+    def set_exclusive_access(self):
+        cs = self.current_system.name
+        if cs == 'alvis':
+            exclusive_access = False
+        else:
+            exclusive_access = True
+        if cs in {'kebnekaise', 'alvis'}:
+            num_tasks_per_node = 1
 
     @run_before('performance')
     def report_slow_nodes(self):
