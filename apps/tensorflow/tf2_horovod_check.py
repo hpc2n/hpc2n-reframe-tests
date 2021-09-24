@@ -16,7 +16,7 @@ class TensorFlow2HorovodTest(rfm.RunOnlyRegressionTest):
         self.descr = 'Distributed training with TensorFlow2 and Horovod'
 
         self.valid_systems = ['kebnekaise:gpu_%s' % x for x in ['2xK80', '4xK80', '2xV100']]
-        self.valid_systems += ['alvis:%s' % x for x in ['8xT4', '2xV100', '4xV100', '4xA100']]
+        self.valid_systems += ['alvis']
         self.valid_systems += ['daint:gpu']
 
         self.kebnekaise_single_socket = ['kebnekaise:gpu_%s' % x for x in ['1xK80', '1xV100']]
@@ -46,22 +46,22 @@ class TensorFlow2HorovodTest(rfm.RunOnlyRegressionTest):
             'alvis:2xV100': {
                 'num_cpus_per_task': 8,
                 'num_tasks_per_node': 2,
-                'num_tasks': {'small': 2},
+                'num_tasks': {'small': 2, 'large': 8},
             },
             'alvis:4xV100': {
                 'num_cpus_per_task': 8,
                 'num_tasks_per_node': 4,
-                'num_tasks': {'small': 4},
+                'num_tasks': {'small': 4, 'large': 12},
             },
             'alvis:8xT4': {
                 'num_cpus_per_task': 4,
                 'num_tasks_per_node': 8,
-                'num_tasks': {'small': 8},
+                'num_tasks': {'small': 8, 'large': 32},
             },
             'alvis:4xA100': {
                 'num_cpus_per_task': 8,
                 'num_tasks_per_node': 4,
-                'num_tasks': {'small': 4},
+                'num_tasks': {'small': 4, 'large': 4},
             },
             'kebnekaise:gpu_1xK80': {
                 'num_cpus_per_task': 7,
