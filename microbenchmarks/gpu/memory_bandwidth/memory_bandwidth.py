@@ -5,7 +5,7 @@
 
 import reframe as rfm
 
-import cscstests.microbenchmarks.gpu.hooks as hooks
+import hpc2ntests.microbenchmarks.gpu.hooks as hooks
 from hpctestlib.microbenchmarks.gpu.memory_bandwidth import *
 
 
@@ -28,12 +28,28 @@ class SystemConfigCSCS(rfm.RegressionMixin):
 @rfm.simple_test
 class gpu_bandwidth_check(GpuBandwidth, SystemConfigCSCS):
     valid_systems = [
+        'kebnekaise:gpu_2xK80', 'kebnekaise:gpu_4xK80', 'kebnekaise:gpu_2xV100', 'alvis',
         'daint:gpu', 'dom:gpu', 'arolla:cn', 'tsa:cn',
         'ault:amdv100', 'ault:intelv100', 'ault:amda100', 'ault:amdvega'
     ]
-    valid_prog_environs = ['PrgEnv-gnu']
+    valid_prog_environs = ['PrgEnv-gnu', 'fosscuda']
     num_tasks = 0
     reference = {
+        'kebnekaise:gpu_2xK80': {
+            'h2d': (10.25, -0.1, None, 'GB/s'),
+            'd2h': (10.45, -0.1, None, 'GB/s'),
+            'd2d': (150.9, -0.1, None, 'GB/s')
+        },
+        'kebnekaise:gpu_4xK80': {
+            'h2d': (10.25, -0.1, None, 'GB/s'),
+            'd2h': (10.45, -0.1, None, 'GB/s'),
+            'd2d': (150.9, -0.1, None, 'GB/s')
+        },
+        'kebnekaise:gpu_2xV100': {
+            'h2d': (10.25, -0.1, None, 'GB/s'),
+            'd2h': (10.45, -0.1, None, 'GB/s'),
+            'd2d': (150.9, -0.1, None, 'GB/s')
+        },
         'daint:gpu': {
             'h2d': (11.881, -0.1, None, 'GB/s'),
             'd2h': (12.571, -0.1, None, 'GB/s'),
@@ -77,10 +93,11 @@ class gpu_bandwidth_check(GpuBandwidth, SystemConfigCSCS):
 @rfm.simple_test
 class gpu_bandwidth_d2d_check(GpuBandwidthD2D, SystemConfigCSCS):
     valid_systems = [
+        'kebnekaise:gpu_2xK80', 'kebnekaise:gpu_4xK80', 'kebnekaise:gpu_2xV100', 'alvis',
         'tsa:cn', 'arola:cn', 'ault:amdv100', 'ault:intelv100',
         'ault:amda100', 'ault:amdvega'
     ]
-    valid_prog_environs = ['PrgEnv-gnu']
+    valid_prog_environs = ['PrgEnv-gnu', 'fosscuda']
     num_tasks = 0
     tags = {'diagnostic', 'mch', 'craype', 'benchmark'}
     maintainers = ['AJ', 'SK']
@@ -91,6 +108,15 @@ class gpu_bandwidth_d2d_check(GpuBandwidthD2D, SystemConfigCSCS):
 
         if self.p2p:
             self.reference = {
+                'kebnekaise:gpu_2xK80': {
+                    'bw':   (163, -0.05, None, 'GB/s'),
+                },
+                'kebnekaise:gpu_4xK80': {
+                    'bw':   (163, -0.05, None, 'GB/s'),
+                },
+                'kebnekaise:gpu_2xV100': {
+                    'bw':   (163, -0.05, None, 'GB/s'),
+                },
                 'tsa:cn': {
                     'bw':   (163, -0.05, None, 'GB/s'),
                 },
@@ -112,6 +138,15 @@ class gpu_bandwidth_d2d_check(GpuBandwidthD2D, SystemConfigCSCS):
             }
         else:
             self.reference = {
+                'kebnekaise:gpu_2xK80': {
+                    'bw': (74, -0.05, None, 'GB/s'),
+                },
+                'kebnekaise:gpu_4xK80': {
+                    'bw': (74, -0.05, None, 'GB/s'),
+                },
+                'kebnekaise:gpu_2xV100': {
+                    'bw': (74, -0.05, None, 'GB/s'),
+                },
                 'tsa:cn': {
                     'bw': (74, -0.05, None, 'GB/s'),
                 },
