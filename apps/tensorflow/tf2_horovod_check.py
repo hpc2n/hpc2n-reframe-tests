@@ -109,6 +109,10 @@ class TensorFlow2HorovodTest(rfm.RunOnlyRegressionTest):
                     'throughput': (865, -0.05, None, 'images/s'),
                     'throughput_per_gpu': (432, -0.05, None, 'images/s'),
                 },
+                'alvis:4xA100': {
+                    'throughput': (559, -0.05, None, 'images/s'),
+                    'throughput_per_gpu': (2236, -0.05, None, 'images/s'),
+                },
                 'kebnekaise:gpu_1xK80': {
                     'throughput': (124, -0.05, None, 'images/s'),
                     'throughput_per_gpu': (62.4, -0.05, None, 'images/s'),
@@ -147,6 +151,10 @@ class TensorFlow2HorovodTest(rfm.RunOnlyRegressionTest):
                 'alvis:2xV100': {
                     'throughput': (3242, -0.05, None, 'images/s'),
                     'throughput_per_gpu': (405, -0.05, None, 'images/s')
+                },
+                'alvis:4xA100': {
+                    'throughput': (2233, -0.05, None, 'images/s'),
+                    'throughput_per_gpu': (558, -0.05, None, 'images/s')
                 },
                 'kebnekaise:gpu_2xK80': {
                     'throughput': (493, -0.05, None, 'images/s'),
