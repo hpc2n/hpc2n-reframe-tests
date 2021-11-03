@@ -18,7 +18,7 @@ site_configuration = {
         {
             'name': 'alvis',
             'descr': 'Alvis cluster',
-            'hostnames': ['alvis1', 'alvis2'],
+            'hostnames': ['alvis1', 'alvis2', 'alvis3'],
             'modules_system': 'lmod',
             'partitions': [
                 {
@@ -64,6 +64,20 @@ site_configuration = {
                     ],
                 },
                 {
+                    'name': 'NxA40',
+                    'descr': 'GPU A40',
+                    'scheduler': 'slurm',
+                    'launcher': 'srun',
+                    'access': ['-A C3SE-STAFF', '--reservation=test', '-C 4xA40'],
+                    'environs': ['builtin', 'gnu', 'foss', 'fosscuda', 'fosscuda_2019b', 'fosscuda_2020a', 'fosscuda_2020b', 'foss_2021a', 'intelcuda_2019b', 'intelcuda_2020a', 'intelcuda_2020b'],
+                    'resources': [
+                        {
+                            'name': '_rfm_gpu',
+                            'options': ['--gpus-per-node=A40:{num_gpus_per_node}'],
+                        },
+                    ],
+                },
+                {
                     'name': '2xV100',
                     'descr': 'GPU 2xV100 nodes',
                     'scheduler': 'slurm',
@@ -93,6 +107,14 @@ site_configuration = {
                     'scheduler': 'slurm',
                     'launcher': 'srun',
                     'access': ['-A SNIC2021-5-261', '-C 4xA100', '--gpus-per-node=A100:4'],
+                    'environs': ['builtin', 'gnu', 'foss', 'fosscuda', 'fosscuda_2019b', 'fosscuda_2020a', 'fosscuda_2020b', 'foss_2021a', 'intelcuda_2019b', 'intelcuda_2020a', 'intelcuda_2020b'],
+                },
+                {
+                    'name': '4xA40',
+                    'descr': 'GPU 4xA40 nodes',
+                    'scheduler': 'slurm',
+                    'launcher': 'srun',
+                    'access': ['-A C3SE-STAFF', '--reservation=test', '-C 4xA40', '--gpus-per-node=A40:4'],
                     'environs': ['builtin', 'gnu', 'foss', 'fosscuda', 'fosscuda_2019b', 'fosscuda_2020a', 'fosscuda_2020b', 'foss_2021a', 'intelcuda_2019b', 'intelcuda_2020a', 'intelcuda_2020b'],
                 },
             ],
