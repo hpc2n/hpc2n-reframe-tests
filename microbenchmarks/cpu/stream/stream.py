@@ -8,7 +8,6 @@ import reframe.utility.sanity as sn
 from reframe.core.backends import getlauncher
 
 
-@rfm.required_version('>=2.14')
 @rfm.simple_test
 class StreamTest(rfm.RegressionTest):
     '''This test checks the stream test:
@@ -122,7 +121,7 @@ class StreamTest(rfm.RegressionTest):
         self.tags = {'production'}
         self.maintainers = ['ÅS']
 
-    @rfm.run_after('setup')
+    @run_after('setup')
     def prepare_test(self):
         self.num_cpus_per_task = self.stream_cpus_per_task.get(
             self.current_partition.fullname, 1)
@@ -146,15 +145,15 @@ class StreamTest(rfm.RegressionTest):
 
     # Stream is serial or OpenMP and should not be started by srun.
     # Especially on the KNLs where that may cause bad thread placement.
-    @rfm.run_after('setup')
+    @run_after('setup')
     def set_launcher(self):
         self.job.launcher = getlauncher('local')()
 
-    @rfm.run_before('run')
+    @run_before('run')
     def set_array_size(self):
         mem_sz = self.stream_array.get(self.current_partition.fullname, 2500)*1024*1024
         self.executable_opts = ["-s", "%s" % mem_sz]
 
-    @rfm.run_after('run')
+    @run_after('run')
     def set_nodelist(self):
         self.mynodelist = self.job.nodelist
