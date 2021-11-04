@@ -54,6 +54,11 @@ class gpu_bandwidth_check(GpuBandwidth, SystemConfigCSCS):
             'd2h': (10.45, -0.1, None, 'GB/s'),
             'd2d': (150.9, -0.1, None, 'GB/s')
         },
+        'alvis:NxT4': {
+            'h2d': (5.83, -0.1, None, 'GB/s'),
+            'd2h': (6.14, -0.1, None, 'GB/s'),
+            'd2d': (226.2, -0.1, None, 'GB/s')
+        },
         'daint:gpu': {
             'h2d': (11.881, -0.1, None, 'GB/s'),
             'd2h': (12.571, -0.1, None, 'GB/s'),
