@@ -64,6 +64,11 @@ class TensorFlow2HorovodTest(rfm.RunOnlyRegressionTest):
                 'num_tasks_per_node': 4,
                 'num_tasks': {'small': 4, 'large': 4},
             },
+            'alvis:4xA40': {
+                'num_cpus_per_task': 16,
+                'num_tasks_per_node': 4,
+                'num_tasks': {'small': 4, 'large': 32},
+            },
             'kebnekaise:gpu_1xK80': {
                 'num_cpus_per_task': 7,
                 'num_tasks_per_node': 2,
