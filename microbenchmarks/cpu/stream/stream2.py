@@ -17,11 +17,13 @@ class StreamTest2Base(rfm.RunOnlyRegressionTest):
 
     def __init__(self):
         self.exclusive_access = True
+        if self.current_system.name == 'alvis':
+            self.exclusive_access = False
         self.valid_systems = ['kebnekaise:%s' % x for x in ['bdw', 'sky', 'knl', 'lm']]
         self.valid_systems += ['alvis']
         self.valid_prog_environs = ['%s%s_%s' % (tc, c, tv) for tc in ['foss', 'intel']
             for c in ['', 'cuda']
-            for tv in ['2019a', '2019b', '2020a', '2020b', '2021a']]
+            for tv in ['2019a', '2019b', '2020a', '2020b', '2021a']] + ['builtin']
         self.num_tasks = 1
         self.num_tasks_per_node = 1
         self.depends_on('StreamTest2Build', udeps.by_env)
@@ -62,9 +64,11 @@ class StreamTest2(StreamTest2Base):
             'kebnekaise:gpu': 28,
             'kebnekaise:knl': 68,
             'kebnekaise:lm': 72,
-            'alvis:NxT4': 32,
-            'alvis:NxV100': 32,
-            'alvis:NxA100': 32,
+            'alvis:8xT4': 32,
+            'alvis:2xV100': 16,
+            'alvis:4xV100': 32,
+            'alvis:4xA100': 32,
+            'alvis:4xA40': 64,
         }
         # Size of array in Mi-elements (*1024^2), total memory usage is size * 1024^2 * 8 * 3
         self.stream_array = {
@@ -74,9 +78,11 @@ class StreamTest2(StreamTest2Base):
             'kebnekaise:gpu': 4500,
             'kebnekaise:knl': 6800,
             'kebnekaise:lm': 24000, # 121000, for using the whole memory, but that takes forever.
-            'alvis:NxT4': 20000,
-            'alvis:NxV100': 26000,
-            'alvis:NxA100': 26000,
+            'alvis:8xT4': 23000,
+            'alvis:2xV100': 31000,
+            'alvis:4xV100': 31000,
+            'alvis:4xA100': 31000,
+            'alvis:4xA40': 10500,
         }
         self.variables = {
             'OMP_PLACES': 'threads',
@@ -107,6 +113,18 @@ class StreamTest2(StreamTest2Base):
                     'scale': (191500, -0.05, 0.05, 'MB/s'),
                     'add':   (198000, -0.05, 0.05, 'MB/s'),
                     'triad': (198000, -0.05, 0.05, 'MB/s'),
+                },
+                'alvis:8xT4': {
+                    'copy':  (135000, -0.05, 0.05, 'MB/s'),
+                    'scale': (135000, -0.05, 0.05, 'MB/s'),
+                    'add':   (152000, -0.05, 0.05, 'MB/s'),
+                    'triad': (152000, -0.05, 0.05, 'MB/s'),
+                },
+                'alvis:4xA40': {
+                    'copy':  (283600, -0.05, 0.05, 'MB/s'),
+                    'scale': (282600, -0.05, 0.05, 'MB/s'),
+                    'add':   (294000, -0.05, 0.05, 'MB/s'),
+                    'triad': (294200, -0.05, 0.05, 'MB/s'),
                 },
             },
             'intel': {
@@ -196,11 +214,12 @@ class StreamTest2Build(rfm.CompileOnlyRegressionTest):
         self.valid_systems += ['alvis']
         self.valid_prog_environs = ['%s%s_%s' % (tc, c, tv) for tc in ['foss', 'intel']
             for c in ['', 'cuda']
-            for tv in ['2019a', '2019b', '2020a', '2020b', '2021a']]
+            for tv in ['2019a', '2019b', '2020a', '2020b', '2021a']] + ['builtin']
 
+        static = 'static' if self.current_system.name != 'alvis' else ''
         self.prgenv_flags = {
-            'foss': ['-fopenmp', '-O3', '-march=native', '-static'],
-            'intel': ['-qopenmp', '-O3', '-xHost', '-ip', '-ansi-alias', '-fno-alias', '-static', '-qopt-prefetch-distance=64,8', '-qopt-streaming-cache-evict=0', '-qopt-streaming-stores always'],
+            'foss': ['-fopenmp', '-O3', '-march=native', static],
+            'intel': ['-qopenmp', '-O3', '-xHost', '-ip', '-ansi-alias', '-fno-alias', static, '-qopt-prefetch-distance=64,8', '-qopt-streaming-cache-evict=0', '-qopt-streaming-stores always'],
         }
 
         self.build_locally = False
