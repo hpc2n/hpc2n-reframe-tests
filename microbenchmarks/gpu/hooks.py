@@ -61,11 +61,11 @@ def set_num_gpus_per_node(self):
     cn = self.current_partition.name
 
     if cs in {'alvis', 'kebnekaise'}:
-        if cn in {'gpu_1xK80', 'gpu_2xV100', 'NxV100'}:
+        if cn in {'gpu_1xK80', 'gpu_2xV100', 'NxV100', '2xV100'}:
             self.num_gpus_per_node = 2
-        elif cn in {'gpu_2xK80', 'NxA100', 'NxA40'}:
+        elif cn in {'gpu_2xK80', 'NxA100', 'NxA40', '4xV100', '4xA100', '4xA40'}:
             self.num_gpus_per_node = 4
-        elif cn in {'gpu_4xK80', 'NxT4'}:
+        elif cn in {'gpu_4xK80', 'NxT4', '8xT4'}:
             self.num_gpus_per_node = 8
     elif cs in {'dom', 'daint'}:
         self.num_gpus_per_node = 1
