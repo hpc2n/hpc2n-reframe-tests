@@ -23,17 +23,28 @@ class MLPerfInferenceBase(rfm.RunOnlyRegressionTest):
         self.valid_prog_environs = ['builtin']
 
         self.time_limit = '1h'
+
+        # Create some temp dirs where it can write stuff
+        self.prerun_cmds = [
+            'mkdir -p $TMPDIR/{dali,engines,logs,measurements}',
+        ]
+
         # This is a container run
         self.container_platform = 'Singularity'
         self.container_platform.image = '/cephyr/NOBACKUP/priv/c3-alvis/mlperf-inference-lni-latest.sif'
         self.container_platform.mount_points = [
-            ("/cephyr/NOBACKUP/priv/c3-alvis/datasets/mlperf-v0.7-inference/Language Processing/measurements", "/work/measurements"),
             ("/cephyr/NOBACKUP/priv/c3-alvis/datasets/mlperf-v0.7-inference/Language Processing/build", "/work/build"),
             ("/cephyr/NOBACKUP/priv/c3-alvis/datasets/mlperf-v0.7-inference/Language Processing", "/dataset"),
             ("/cephyr/NOBACKUP/priv/c3-alvis/datasets/mlperf-v0.7-inference/nvidia/models", "/work/build/models"),
             ("/cephyr/NOBACKUP/priv/c3-alvis/datasets/mlperf-v0.7-inference/nvidia/data", "/work/build/data"),
             ("/cephyr/NOBACKUP/priv/c3-alvis/datasets/mlperf-v0.7-inference/nvidia/preprocessed_data", "/work/build/preprocessed_data"),
+            ("$TMPDIR/measurements", "/work/measurements"),
+            ("$TMPDIR/engines", "/work/build/engines"),
+            ("$TMPDIR/logs", "/work/build/logs"),
         ]
+        if self.benchmark == 'dali':
+            self.container_platform.mount_points.append(("$TMPDIR/dali", "/work/build/bin/dali"))
+
         self.container_platform.options = ['--pwd /work']
         self.container_platform.command = (
             'make run RUN_ARGS="--benchmarks=%s --scenarios=offline --config_ver=default --test_mode=PerformanceOnly"' % self.benchmark
@@ -68,7 +79,7 @@ class MLPerfInferenceBase(rfm.RunOnlyRegressionTest):
 @rfm.simple_test
 class MLPerfInference(MLPerfInferenceBase):
     # resnet50 ssd-resnet34 bert dlrm rnnt 3d-unet
-    benchmark = parameter(['bert', 'resnet50', 'ssd-resnet34', 'dlrm', 'rnnt', '3d-unet'])
+    benchmark = parameter(['bert', 'resnet50', 'ssd-resnet34', 'rnnt', '3d-unet'])
 
     def __init__(self):
         super().__init__()
