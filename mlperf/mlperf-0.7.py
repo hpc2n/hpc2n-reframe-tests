@@ -8,11 +8,10 @@ import reframe.utility.osext as osext
 
 from reframe.core.backends import getlauncher
 
-@rfm.simple_test
-class MLPerfBertInference(rfm.RunOnlyRegressionTest):
+class MLPerfInferenceBase(rfm.RunOnlyRegressionTest):
 
     def __init__(self):
-        self.descr = 'MLPerf Bert'
+        self.descr = 'MLPerf Inference'
 
         self.valid_systems = ['kebnekaise:gpu_%s' % x for x in ['2xK80', '4xK80', '2xV100']]
         self.valid_systems += ['alvis']
@@ -37,15 +36,9 @@ class MLPerfBertInference(rfm.RunOnlyRegressionTest):
         ]
         self.container_platform.options = ['--pwd /work']
         self.container_platform.command = (
-            'make run RUN_ARGS="--benchmarks=bert --scenarios=offline --config_ver=default --test_mode=PerformanceOnly"'
+            'make run RUN_ARGS="--benchmarks=%s --scenarios=offline --config_ver=default --test_mode=PerformanceOnly"' % self.benchmark
         )
         self.container_platform.with_cuda = True
-
-        self.reference = {
-            'alvis:8xT4': {
-                'samples_per_second': (3456, -0.05, None, 'samples/s'),
-            },
-        }
 
         self.sanity_patterns = sn.all([
             sn.assert_found(rf'Mode\s*:\s*Performance', self.stdout),
@@ -57,12 +50,10 @@ class MLPerfBertInference(rfm.RunOnlyRegressionTest):
 
         self.perf_patterns = {
             'samples_per_second': sn.extractsingle(
-                rf'bert:\s*Samples\s+per\s+second:\s*(?P<samples_per_second>\S+)\s+and\s+Result\s+is\s*:\s*VALID',
+                rf'%s:\s*Samples\s+per\s+second:\s*(?P<samples_per_second>\S+)\s+and\s+Result\s+is\s*:\s*VALID' % self.benchmark,
                 self.stdout, 'samples_per_second', float),
         }
 
-        self.tags = {'production'}
-        self.maintainers = ['AS']
 
     # Don't use srun for this
     @run_after('setup')
@@ -72,3 +63,47 @@ class MLPerfBertInference(rfm.RunOnlyRegressionTest):
     @run_after('run')
     def set_nodelist(self):
         self.mynodelist = self.job.nodelist
+
+
+@rfm.simple_test
+class MLPerfInference(MLPerfInferenceBase):
+    # resnet50 ssd-resnet34 bert dlrm rnnt 3d-unet
+    benchmark = parameter(['bert', 'resnet50', 'ssd-resnet34', 'dlrm', 'rnnt', '3d-unet'])
+
+    def __init__(self):
+        super().__init__()
+        references = {
+            'bert': {
+                'alvis:8xT4': {
+                    'samples_per_second': (3456, -0.05, None, 'samples/s'),
+                },
+            },
+            'resnet50': {
+                'alvis:8xT4': {
+                    'samples_per_second': (46130, -0.05, None, 'samples/s'),
+                },
+            },
+            'ssd-resnet34': {
+                'alvis:8xT4': {
+                    'samples_per_second': (1086, -0.05, None, 'samples/s'),
+                },
+            },
+            'dlrm': {
+            },
+            'rnnt': {
+                'alvis:8xT4': {
+                    'samples_per_second': (10630, -0.05, None, 'samples/s'),
+                },
+            },
+            '3d-unet': {
+                'alvis:8xT4': {
+                    'samples_per_second': (53, -0.05, None, 'samples/s'),
+                },
+            },
+        }
+
+        self.reference = references[self.benchmark]
+
+        self.tags = {'production'}
+        self.maintainers = ['AS']
+
