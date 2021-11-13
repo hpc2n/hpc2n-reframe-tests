@@ -42,7 +42,7 @@ class MLPerfInferenceBase(rfm.RunOnlyRegressionTest):
             ("$TMPDIR/engines", "/work/build/engines"),
             ("$TMPDIR/logs", "/work/build/logs"),
         ]
-        if self.benchmark == 'dali':
+        if self.benchmark == 'rnnt':
             self.container_platform.mount_points.append(("$TMPDIR/dali", "/work/build/bin/dali"))
 
         self.container_platform.options = ['--pwd /work']
