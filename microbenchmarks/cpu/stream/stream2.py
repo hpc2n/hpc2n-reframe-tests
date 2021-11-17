@@ -216,7 +216,7 @@ class StreamTest2Build(rfm.CompileOnlyRegressionTest):
             for c in ['', 'cuda']
             for tv in ['2019a', '2019b', '2020a', '2020b', '2021a']] + ['builtin']
 
-        static = 'static' if self.current_system.name != 'alvis' else ''
+        static = '-static' if self.current_system.name != 'alvis' else ''
         self.prgenv_flags = {
             'foss': ['-fopenmp', '-O3', '-march=native', static],
             'intel': ['-qopenmp', '-O3', '-xHost', '-ip', '-ansi-alias', '-fno-alias', static, '-qopt-prefetch-distance=64,8', '-qopt-streaming-cache-evict=0', '-qopt-streaming-stores always'],
