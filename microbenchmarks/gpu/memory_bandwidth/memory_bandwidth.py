@@ -40,19 +40,19 @@ class gpu_bandwidth_check(GpuBandwidth, SystemConfigCSCS):
     num_tasks = 0
     reference = {
         'kebnekaise:gpu_2xK80': {
-            'h2d': (10.25, -0.1, None, 'GB/s'),
-            'd2h': (10.45, -0.1, None, 'GB/s'),
-            'd2d': (150.9, -0.1, None, 'GB/s')
+            'h2d': (11.2, -0.1, None, 'GB/s'),
+            'd2h': (11.4, -0.1, None, 'GB/s'),
+            'd2d': (167.5, -0.1, None, 'GB/s')
         },
         'kebnekaise:gpu_4xK80': {
-            'h2d': (10.25, -0.1, None, 'GB/s'),
-            'd2h': (10.45, -0.1, None, 'GB/s'),
-            'd2d': (150.9, -0.1, None, 'GB/s')
+            'h2d': (11.2, -0.1, None, 'GB/s'),
+            'd2h': (11.4, -0.1, None, 'GB/s'),
+            'd2d': (167.5, -0.1, None, 'GB/s')
         },
         'kebnekaise:gpu_2xV100': {
-            'h2d': (10.25, -0.1, None, 'GB/s'),
-            'd2h': (10.45, -0.1, None, 'GB/s'),
-            'd2d': (150.9, -0.1, None, 'GB/s')
+            'h2d': (12.6, -0.1, None, 'GB/s'),
+            'd2h': (13.5, -0.1, None, 'GB/s'),
+            'd2d': (816.4, -0.1, None, 'GB/s')
         },
         'alvis:NxT4': {
             'h2d': (5.83, -0.1, None, 'GB/s'),
