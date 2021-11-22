@@ -124,7 +124,7 @@ class gpu_bandwidth_d2d_check(GpuBandwidthD2D, SystemConfigCSCS):
                     'bw':   (163, -0.05, None, 'GB/s'),
                 },
                 'kebnekaise:gpu_2xV100': {
-                    'bw':   (163, -0.05, None, 'GB/s'),
+                    'bw':   (9.55, -0.05, None, 'GB/s'),
                 },
                 'tsa:cn': {
                     'bw':   (163, -0.05, None, 'GB/s'),
@@ -148,13 +148,13 @@ class gpu_bandwidth_d2d_check(GpuBandwidthD2D, SystemConfigCSCS):
         else:
             self.reference = {
                 'kebnekaise:gpu_2xK80': {
-                    'bw': (74, -0.05, None, 'GB/s'),
+                    'bw': (29.77, -0.05, None, 'GB/s'),
                 },
                 'kebnekaise:gpu_4xK80': {
-                    'bw': (74, -0.05, None, 'GB/s'),
+                    'bw': (64.92, -0.05, None, 'GB/s'),
                 },
                 'kebnekaise:gpu_2xV100': {
-                    'bw': (74, -0.05, None, 'GB/s'),
+                    'bw': (11.36, -0.05, None, 'GB/s'),
                 },
                 'tsa:cn': {
                     'bw': (74, -0.05, None, 'GB/s'),
