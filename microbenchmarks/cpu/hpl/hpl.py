@@ -42,10 +42,10 @@ class HPLBase(rfm.RunOnlyRegressionTest):
     def setup_HPL_data(self):
         '''Create the HPL.dat input file'''
 
-        N = self.values.get('N', 1)
+        N = self.values.get('N', 1000)
         if not isinstance(N, list):
             N = [N]
-        NB = self.values.get('NB', 1)
+        NB = self.values.get('NB', 100)
         if not isinstance(NB, list):
             NB = [NB]
         P = self.values.get('P', 1)
@@ -100,17 +100,21 @@ class HPLBaseSingleNode_Fixed(HPLBase):
     def __init__(self):
         super().__init__()
 
-        self.host_settings = {
+        self.hpl_settings = {
             'kebnekaise:bdw': {'N': 107520, 'NB': 192, 'P': 7, 'Q': 4},
+            'kebnekaise:skx': {'N': 107520, 'NB': 192, 'P': 7, 'Q': 4},
         }
 
         self.reference = {
             'kebnekaise:bdw': {
                 'GFlops': (871, -0.05, 0.05, 'GFlops/s'),
             }
+            'kebnekaise:skx': {
+                'GFlops': (871, -0.05, 0.05, 'GFlops/s'),
+            }
         }
 
     @run_after('setup')
     def prepare_test(self):
-        self.values = self.host_settings.get(self.current_partition.fullname)
+        self.values = self.hpl_settings.get(self.current_partition.fullname, {})
 
