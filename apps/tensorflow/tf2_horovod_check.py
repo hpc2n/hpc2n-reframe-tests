@@ -4,44 +4,93 @@
 # SPDX-License-Identifier: BSD-3-Clause
 
 import reframe as rfm
-import reframe.utility.sanity as sn
 import reframe.utility.osext as osext
+from hpctestlib.apps.tensorflow.base_check import TensorFlow2Horovod_BaseTest
+
+REFERENCE_SMALL_PERFOMANCE = {
+    'dom:gpu': {
+        'throughput': (1712, -0.05, None, 'images/s'),
+        'throughput_per_gpu': (214, -0.05, None, 'images/s'),
+    },
+    'daint:gpu': {
+        'throughput': (1712, -0.05, None, 'images/s'),
+        'throughput_per_gpu': (214, -0.05, None, 'images/s')
+    },
+    'alvis:8xT4': {
+        'throughput': (1233, -0.05, None, 'images/s'),
+        'throughput_per_gpu': (154, -0.05, None, 'images/s'),
+    },
+    'alvis:2xV100': {
+        'throughput': (865, -0.05, None, 'images/s'),
+        'throughput_per_gpu': (432, -0.05, None, 'images/s'),
+    },
+    'alvis:4xA100': {
+        'throughput': (559, -0.05, None, 'images/s'),
+        'throughput_per_gpu': (2236, -0.05, None, 'images/s'),
+    },
+    'kebnekaise:gpu_1xK80': {
+        'throughput': (124, -0.05, None, 'images/s'),
+        'throughput_per_gpu': (62.4, -0.05, None, 'images/s'),
+    },
+    'kebnekaise:gpu_2xK80': {
+        'throughput': (249, -0.05, None, 'images/s'),
+        'throughput_per_gpu': (62.4, -0.05, None, 'images/s'),
+    },
+    'kebnekaise:gpu_4xK80': {
+        'throughput': (494, -0.05, None, 'images/s'),
+        'throughput_per_gpu': (62.4, -0.05, None, 'images/s'),
+    },
+    'kebnekaise:gpu_1xV100': {
+        'throughput': (439, -0.05, None, 'images/s'),
+        'throughput_per_gpu': (439, -0.05, None, 'images/s'),
+    },
+    'kebnekaise:gpu_2xV100': {
+        'throughput': (832, -0.05, None, 'images/s'),
+        'throughput_per_gpu': (416, -0.05, None, 'images/s'),
+    },
+}
+
+REFERENCE_LARGE_PERFOMANCE = {
+    'daint:gpu': {
+        'throughput': (6848, -0.05, None, 'images/s'),
+        'throughput_per_gpu': (214, -0.05, None, 'images/s')
+    },
+    'alvis:8xT4': {
+        'throughput': (4847, -0.05, None, 'images/s'),
+        'throughput_per_gpu': (151, -0.05, None, 'images/s')
+    },
+    'alvis:2xV100': {
+        'throughput': (3242, -0.05, None, 'images/s'),
+        'throughput_per_gpu': (405, -0.05, None, 'images/s')
+    },
+    'alvis:4xA100': {
+        'throughput': (2233, -0.05, None, 'images/s'),
+        'throughput_per_gpu': (558, -0.05, None, 'images/s')
+    },
+    'kebnekaise:gpu_2xK80': {
+        'throughput': (493, -0.05, None, 'images/s'),
+        'throughput_per_gpu': (61.6, -0.05, None, 'images/s')
+    },
+}
 
 
 @rfm.simple_test
-class TensorFlow2HorovodTest(rfm.RunOnlyRegressionTest):
+class TensorFlow2HorovodTestSNIC(rfm.RunOnlyRegressionTest):
     variant = parameter(['small', 'large'])
+    sourcesdir = None
+    batch_size = 64
+    tags = {'production'}
+    maintainers = ['RS', 'TR', 'AS']
+    valid_prog_environs = ['builtin']
 
-    def __init__(self):
-        self.descr = 'Distributed training with TensorFlow2 and Horovod'
+    valid_systems = ['daint:gpu']
+    valid_systems += ['kebnekaise:gpu_%s' % x for x in ['2xK80', '4xK80', '2xV100']]
+    valid_systems += ['alvis']
 
-        self.valid_systems = ['kebnekaise:gpu_%s' % x for x in ['2xK80', '4xK80', '2xV100']]
-        self.valid_systems += ['alvis']
-        self.valid_systems += ['daint:gpu']
+    kebnekaise_single_socket = ['kebnekaise:gpu_%s' % x for x in ['1xK80', '1xV100']]
 
-        self.kebnekaise_single_socket = ['kebnekaise:gpu_%s' % x for x in ['1xK80', '1xV100']]
-
-        # This test uses prebuilt modules so only builtin is usable here
-        self.valid_prog_environs = ['builtin']
-
-        cs = self.current_system.name
-
-        if cs == 'kebnekaise' or cs == 'alvis':
-            self.modules = ['fosscuda/2019b', 'Horovod/0.19.1-TensorFlow-2.1.0-Python-3.7.4']
-            if cs == 'kebnekaise':
-                self.IB_ifc = 'mlx5_0'
-            else:
-                self.IB_ifc = 'mlx5_2'
-        # FIXME: The following will not be needed after the Daint upgrade
-        elif cs == 'dom':
-            self.IB_ifc = 'ipogif0'
-            self.modules = [
-                f'Horovod/0.21.0-CrayGNU-{osext.cray_cdt_version()}-tf-2.4.0'
-            ]
-        else:
-            self.IB_ifc = 'ipogif0'
-            self.modules = ['Horovod/0.19.1-CrayGNU-20.08-tf-2.2.0']
-
+    @run_after('init')
+    def set_num_task(self):
         # Settings for various systems. num_tasks is per-variant
         self.tasks_cpu_settings = {
             'alvis:2xV100': {
@@ -94,133 +143,63 @@ class TensorFlow2HorovodTest(rfm.RunOnlyRegressionTest):
                 'num_tasks_per_node': 2,
                 'num_tasks': {'small': 2, 'large': 4},
             },
-            'default': {
+            'dom:gpu': {
+                'num_cpus_per_task': 12,
+                'num_tasks_per_node': 1,
+                'num_tasks': {'small': 8},
+            },
+            'daint:gpu': {
                 'num_cpus_per_task': 12,
                 'num_tasks_per_node': 1,
                 'num_tasks': {'small': 8, 'large': 32},
             },
         }
 
-        self.sourcesdir = None
-
         if self.variant == 'small':
             self.valid_systems += ['dom:gpu'] + self.kebnekaise_single_socket
-            self.reference = {
-                'alvis:8xT4': {
-                    'throughput': (1233, -0.05, None, 'images/s'),
-                    'throughput_per_gpu': (154, -0.05, None, 'images/s'),
-                },
-                'alvis:2xV100': {
-                    'throughput': (865, -0.05, None, 'images/s'),
-                    'throughput_per_gpu': (432, -0.05, None, 'images/s'),
-                },
-                'alvis:4xA100': {
-                    'throughput': (559, -0.05, None, 'images/s'),
-                    'throughput_per_gpu': (2236, -0.05, None, 'images/s'),
-                },
-                'kebnekaise:gpu_1xK80': {
-                    'throughput': (124, -0.05, None, 'images/s'),
-                    'throughput_per_gpu': (62.4, -0.05, None, 'images/s'),
-                },
-                'kebnekaise:gpu_2xK80': {
-                    'throughput': (249, -0.05, None, 'images/s'),
-                    'throughput_per_gpu': (62.4, -0.05, None, 'images/s'),
-                },
-                'kebnekaise:gpu_4xK80': {
-                    'throughput': (494, -0.05, None, 'images/s'),
-                    'throughput_per_gpu': (62.4, -0.05, None, 'images/s'),
-                },
-                'kebnekaise:gpu_1xV100': {
-                    'throughput': (439, -0.05, None, 'images/s'),
-                    'throughput_per_gpu': (439, -0.05, None, 'images/s'),
-                },
-                'kebnekaise:gpu_2xV100': {
-                    'throughput': (832, -0.05, None, 'images/s'),
-                    'throughput_per_gpu': (416, -0.05, None, 'images/s'),
-                },
-                'dom:gpu': {
-                    'throughput': (1712, -0.05, None, 'images/s'),
-                    'throughput_per_gpu': (214, -0.05, None, 'images/s'),
-                },
-                'daint:gpu': {
-                    'throughput': (1712, -0.05, None, 'images/s'),
-                    'throughput_per_gpu': (214, -0.05, None, 'images/s')
-                },
-            }
+            self.reference = REFERENCE_SMALL_PERFOMANCE
         else:
-            self.reference = {
-                'alvis:8xT4': {
-                    'throughput': (4847, -0.05, None, 'images/s'),
-                    'throughput_per_gpu': (151, -0.05, None, 'images/s')
-                },
-                'alvis:2xV100': {
-                    'throughput': (3242, -0.05, None, 'images/s'),
-                    'throughput_per_gpu': (405, -0.05, None, 'images/s')
-                },
-                'alvis:4xA100': {
-                    'throughput': (2233, -0.05, None, 'images/s'),
-                    'throughput_per_gpu': (558, -0.05, None, 'images/s')
-                },
-                'kebnekaise:gpu_2xK80': {
-                    'throughput': (493, -0.05, None, 'images/s'),
-                    'throughput_per_gpu': (61.6, -0.05, None, 'images/s')
-                },
-                'daint:gpu': {
-                    'throughput': (6848, -0.05, None, 'images/s'),
-                    'throughput_per_gpu': (214, -0.05, None, 'images/s')
-                },
-            }
+            self.reference = REFERENCE_LARGE_PERFOMANCE
 
-        model = 'InceptionV3'
-        batch_size = 64
-        self.sanity_patterns = sn.all([
-            sn.assert_found(rf'Model: {model}', self.stdout),
-            sn.assert_found(rf'Batch size: {batch_size}', self.stdout)
-        ])
+        cp = self.current_partition.fullname
+        self.num_tasks_per_node = self.tasks_cpu_settings.get(cp)['num_tasks_per_node']
+        self.num_cpus_per_task = self.tasks_cpu_settings.get(cp)['num_cpus_per_task']
+        self.num_tasks = self.tasks_cpu_settings.get(cp)['num_tasks'][self.variant]
+
+    @run_after('init')
+    def set_modules(self):
+        module = {
+            'kebnekaise': ['fosscuda/2019b', 'Horovod/0.19.1-TensorFlow-2.1.0-Python-3.7.4'],
+            'alvis': ['Horovod/0.19.1-fosscuda-2019b-TensorFlow-2.1.0-Python-3.7.4'],
+            'dom': [f'Horovod/0.21.0-CrayGNU-{osext.cray_cdt_version()}-tf-2.4.0'],
+            'daint': [f'Horovod/0.21.0-CrayGNU-{osext.cray_cdt_version()}-tf-2.4.0'],
+        }
+        self.modules = module.get(self.current_system.name)
+
+    @run_after('init')
+    def set_executable_opts(self):
+        IB_HCA = {
+            'kebnekaise': 'mlx5_0',
+            'alvis': 'mlx5_2',
+            'dom': ipogif0',
+            'daint': ipogif0',
+        }
+
         self.variables = {
             'NCCL_DEBUG': 'INFO',
-            'NCCL_IB_HCA': self.IB_ifc,
+            'NCCL_IB_HCA': IB_HCA.get(self.current_system.name),
             'NCCL_IB_CUDA_SUPPORT': '1',
             'OMP_NUM_THREADS': '$SLURM_CPUS_PER_TASK',
             'OMPI_MCA_mpi_warn_on_fork': '0',
         }
-        script = 'tensorflow2_synthetic_benchmark.py'
-        self.prerun_cmds = ['wget https://raw.githubusercontent.com/horovod/'
-                            'horovod/842d1075e8440f15e84364f494645c28bf20c3ae/'
-                            'examples/tensorflow2_synthetic_benchmark.py',
-                            'sed -i "s/weights=None/weights=None, '
-                            f'input_shape=(224, 224, 3)/g" {script}']
-        self.executable = 'python'
         self.executable_opts = [
-            f'{script}',
-            f'--model {model}',
-            f'--batch-size {batch_size}',
+            f'{self.script}',
+            f'--model {self.model}',
+            f'--batch-size {self.batch_size}',
             '--num-iters 5',
             '--num-batches-per-iter 5',
             '--num-warmup-batches 5',
         ]
-        self.tags = {'production'}
-        self.maintainers = ['RS', 'TR', 'AS']
-
-    @run_before('run')
-    def set_run_params(self):
-        cs = self.current_system.name
-        cp = self.current_partition.fullname
-        cn = self.current_partition.name
-
-        self.num_tasks_per_node = self.tasks_cpu_settings.get(cp, 'default')['num_tasks_per_node']
-        self.num_cpus_per_task = self.tasks_cpu_settings.get(cp, 'default')['num_cpus_per_task']
-        self.num_tasks = self.tasks_cpu_settings.get(cp, 'default')['num_tasks'][self.variant]
-
-        self.perf_patterns = {
-            'throughput': sn.extractsingle(
-                rf'Total img/sec on {self.num_tasks} GPU\(s\): '
-                rf'(?P<throughput>\S+) \S+',
-                self.stdout, 'throughput', float),
-            'throughput_per_gpu': sn.extractsingle(
-                r'Img/sec per GPU: (?P<throughput_per_gpu>\S+) \S+',
-                self.stdout, 'throughput_per_gpu', float)
-        }
 
     @run_after('run')
     def set_nodelist(self):
