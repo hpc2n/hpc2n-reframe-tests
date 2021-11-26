@@ -5,9 +5,10 @@
 
 import reframe as rfm
 import reframe.utility.osext as osext
+
 from hpctestlib.apps.tensorflow.base_check import TensorFlow2Horovod_BaseTest
 
-REFERENCE_SMALL_PERFOMANCE = {
+REFERENCE_SMALL_PERFORMANCE = {
     'dom:gpu': {
         'throughput': (1712, -0.05, None, 'images/s'),
         'throughput_per_gpu': (214, -0.05, None, 'images/s'),
@@ -50,7 +51,7 @@ REFERENCE_SMALL_PERFOMANCE = {
     },
 }
 
-REFERENCE_LARGE_PERFOMANCE = {
+REFERENCE_LARGE_PERFORMANCE = {
     'daint:gpu': {
         'throughput': (6848, -0.05, None, 'images/s'),
         'throughput_per_gpu': (214, -0.05, None, 'images/s')
@@ -157,9 +158,9 @@ class TensorFlow2HorovodTestSNIC(rfm.RunOnlyRegressionTest):
 
         if self.variant == 'small':
             self.valid_systems += ['dom:gpu'] + self.kebnekaise_single_socket
-            self.reference = REFERENCE_SMALL_PERFOMANCE
+            self.reference = REFERENCE_SMALL_PERFROMANCE
         else:
-            self.reference = REFERENCE_LARGE_PERFOMANCE
+            self.reference = REFERENCE_LARGE_PERFROMANCE
 
         cp = self.current_partition.fullname
         self.num_tasks_per_node = self.tasks_cpu_settings.get(cp)['num_tasks_per_node']
