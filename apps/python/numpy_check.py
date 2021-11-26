@@ -10,8 +10,6 @@ from reframe.utility import find_modules
 
 class snic_numpy_test(numpy_ops_check):
     valid_prog_environs = ['builtin']
-    valid_systems = ['kebnekaise', 'alvis']
-    modules = ['numpy']
     num_tasks_per_node = 1
     use_multithreading = False
     all_ref = {
@@ -64,9 +62,7 @@ class snic_numpy_test(numpy_ops_check):
     @run_after('init')
     def process_module_info(self):
         s, e, m = self.module_info
-        #self.valid_systems = [s]
-        if self.current_system.name == 'kebnekaise':
-            self.valid_prog_environs = [e]
+        self.valid_prog_environs = [e]
         self.modules = [m]
 
     @run_after('setup')
@@ -86,12 +82,11 @@ class snic_numpy_test(numpy_ops_check):
         }
 
 @rfm.simple_test
-class alvis_numpy_test(snic_numpy_test):
+class c3se_numpy_test(snic_numpy_test):
     module_info = parameter(find_modules('SciPy-bundle', { r'.*': 'builtin' }))
     valid_systems = ['alvis']
 
 @rfm.simple_test
-class kebnekaise_numpy_test(snic_numpy_test):
+class hpc2n_numpy_test(snic_numpy_test):
     module_info = parameter(find_modules('SciPy-bundle'))
     valid_systems = ['kebnekaise']
-
