@@ -11,67 +11,67 @@ from hpctestlib.ml.tensorflow.horovod import tensorflow_cnn_check
 
 REFERENCE_SMALL_PERFORMANCE = {
     'dom:gpu': {
-        'throughput': (1712, -0.05, None, 'images/s'),
-        'throughput_per_gpu': (214, -0.05, None, 'images/s'),
+        'throughput_total': (1712, -0.05, None, 'images/s'),
+        'throughput_iteration': (214, -0.05, None, 'images/s'),
     },
     'daint:gpu': {
-        'throughput': (1712, -0.05, None, 'images/s'),
-        'throughput_per_gpu': (214, -0.05, None, 'images/s')
+        'throughput_total': (1712, -0.05, None, 'images/s'),
+        'throughput_iteration': (214, -0.05, None, 'images/s')
     },
     'alvis:8xT4': {
-        'throughput': (1233, -0.05, None, 'images/s'),
-        'throughput_per_gpu': (154, -0.05, None, 'images/s'),
+        'throughput_total': (1233, -0.05, None, 'images/s'),
+        'throughput_iteration': (154, -0.05, None, 'images/s'),
     },
     'alvis:2xV100': {
-        'throughput': (865, -0.05, None, 'images/s'),
-        'throughput_per_gpu': (432, -0.05, None, 'images/s'),
+        'throughput_total': (865, -0.05, None, 'images/s'),
+        'throughput_iteration': (432, -0.05, None, 'images/s'),
     },
     'alvis:4xA100': {
-        'throughput': (559, -0.05, None, 'images/s'),
-        'throughput_per_gpu': (2236, -0.05, None, 'images/s'),
+        'throughput_total': (559, -0.05, None, 'images/s'),
+        'throughput_iteration': (2236, -0.05, None, 'images/s'),
     },
     'kebnekaise:gpu_1xK80': {
-        'throughput': (124, -0.05, None, 'images/s'),
-        'throughput_per_gpu': (62.4, -0.05, None, 'images/s'),
+        'throughput_total': (124, -0.05, None, 'images/s'),
+        'throughput_iteration': (62.4, -0.05, None, 'images/s'),
     },
     'kebnekaise:gpu_2xK80': {
-        'throughput': (249, -0.05, None, 'images/s'),
-        'throughput_per_gpu': (62.4, -0.05, None, 'images/s'),
+        'throughput_total': (249, -0.05, None, 'images/s'),
+        'throughput_iteration': (62.4, -0.05, None, 'images/s'),
     },
     'kebnekaise:gpu_4xK80': {
-        'throughput': (494, -0.05, None, 'images/s'),
-        'throughput_per_gpu': (62.4, -0.05, None, 'images/s'),
+        'throughput_total': (494, -0.05, None, 'images/s'),
+        'throughput_iteration': (62.4, -0.05, None, 'images/s'),
     },
     'kebnekaise:gpu_1xV100': {
-        'throughput': (439, -0.05, None, 'images/s'),
-        'throughput_per_gpu': (439, -0.05, None, 'images/s'),
+        'throughput_total': (439, -0.05, None, 'images/s'),
+        'throughput_iteration': (439, -0.05, None, 'images/s'),
     },
     'kebnekaise:gpu_2xV100': {
-        'throughput': (832, -0.05, None, 'images/s'),
-        'throughput_per_gpu': (416, -0.05, None, 'images/s'),
+        'throughput_total': (832, -0.05, None, 'images/s'),
+        'throughput_iteration': (416, -0.05, None, 'images/s'),
     },
 }
 
 REFERENCE_LARGE_PERFORMANCE = {
     'daint:gpu': {
-        'throughput': (6848, -0.05, None, 'images/s'),
-        'throughput_per_gpu': (214, -0.05, None, 'images/s')
+        'throughput_total': (6848, -0.05, None, 'images/s'),
+        'throughput_iteration': (214, -0.05, None, 'images/s')
     },
     'alvis:8xT4': {
-        'throughput': (4847, -0.05, None, 'images/s'),
-        'throughput_per_gpu': (151, -0.05, None, 'images/s')
+        'throughput_total': (4847, -0.05, None, 'images/s'),
+        'throughput_iteration': (151, -0.05, None, 'images/s')
     },
     'alvis:2xV100': {
-        'throughput': (3242, -0.05, None, 'images/s'),
-        'throughput_per_gpu': (405, -0.05, None, 'images/s')
+        'throughput_total': (3242, -0.05, None, 'images/s'),
+        'throughput_iteration': (405, -0.05, None, 'images/s')
     },
     'alvis:4xA100': {
-        'throughput': (2233, -0.05, None, 'images/s'),
-        'throughput_per_gpu': (558, -0.05, None, 'images/s')
+        'throughput_total': (2233, -0.05, None, 'images/s'),
+        'throughput_iteration': (558, -0.05, None, 'images/s')
     },
     'kebnekaise:gpu_2xK80': {
-        'throughput': (493, -0.05, None, 'images/s'),
-        'throughput_per_gpu': (61.6, -0.05, None, 'images/s')
+        'throughput_total': (493, -0.05, None, 'images/s'),
+        'throughput_iteration': (61.6, -0.05, None, 'images/s')
     },
 }
 
