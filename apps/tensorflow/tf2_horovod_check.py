@@ -3,10 +3,11 @@
 #
 # SPDX-License-Identifier: BSD-3-Clause
 
+import contextlib
 import reframe as rfm
 import reframe.utility.osext as osext
 
-from hpctestlib.apps.tensorflow.base_check import TensorFlow2Horovod_BaseTest
+from hpctestlib.ml.tensorflow.horovod import tensorflow_cnn_check
 
 REFERENCE_SMALL_PERFORMANCE = {
     'dom:gpu': {
@@ -76,11 +77,10 @@ REFERENCE_LARGE_PERFORMANCE = {
 
 
 @rfm.simple_test
-class TensorFlow2HorovodTestSNIC(rfm.RunOnlyRegressionTest):
+class snic_tensorflow_horovod_check(tensorflow_cnn_check):
     variant = parameter(['small', 'large'])
-    sourcesdir = None
     batch_size = 64
-    tags = {'production'}
+    tags |= {'production'}
     maintainers = ['RS', 'TR', 'AS']
     valid_prog_environs = ['builtin']
 
@@ -91,6 +91,16 @@ class TensorFlow2HorovodTestSNIC(rfm.RunOnlyRegressionTest):
     kebnekaise_single_socket = ['kebnekaise:gpu_%s' % x for x in ['1xK80', '1xV100']]
 
     @run_after('init')
+    def set_modules(self):
+        module = {
+            'kebnekaise': ['fosscuda/2019b', 'Horovod/0.19.1-TensorFlow-2.1.0-Python-3.7.4'],
+            'alvis': ['Horovod/0.19.1-fosscuda-2019b-TensorFlow-2.1.0-Python-3.7.4'],
+            'dom': [f'Horovod/0.21.0-CrayGNU-{osext.cray_cdt_version()}-tf-2.4.0'],
+            'daint': [f'Horovod/0.21.0-CrayGNU-{osext.cray_cdt_version()}-tf-2.4.0'],
+        }
+        self.modules = module.get(self.current_system.name)
+
+    @run_before('run')
     def set_num_task(self):
         # Settings for various systems. num_tasks is per-variant
         self.tasks_cpu_settings = {
@@ -158,32 +168,22 @@ class TensorFlow2HorovodTestSNIC(rfm.RunOnlyRegressionTest):
 
         if self.variant == 'small':
             self.valid_systems += ['dom:gpu'] + self.kebnekaise_single_socket
-            self.reference = REFERENCE_SMALL_PERFROMANCE
+            self.reference = REFERENCE_SMALL_PERFORMANCE
         else:
-            self.reference = REFERENCE_LARGE_PERFROMANCE
+            self.reference = REFERENCE_LARGE_PERFORMANCE
 
         cp = self.current_partition.fullname
         self.num_tasks_per_node = self.tasks_cpu_settings.get(cp)['num_tasks_per_node']
         self.num_cpus_per_task = self.tasks_cpu_settings.get(cp)['num_cpus_per_task']
         self.num_tasks = self.tasks_cpu_settings.get(cp)['num_tasks'][self.variant]
 
-    @run_after('init')
-    def set_modules(self):
-        module = {
-            'kebnekaise': ['fosscuda/2019b', 'Horovod/0.19.1-TensorFlow-2.1.0-Python-3.7.4'],
-            'alvis': ['Horovod/0.19.1-fosscuda-2019b-TensorFlow-2.1.0-Python-3.7.4'],
-            'dom': [f'Horovod/0.21.0-CrayGNU-{osext.cray_cdt_version()}-tf-2.4.0'],
-            'daint': [f'Horovod/0.21.0-CrayGNU-{osext.cray_cdt_version()}-tf-2.4.0'],
-        }
-        self.modules = module.get(self.current_system.name)
-
-    @run_after('init')
-    def set_executable_opts(self):
+    @run_before('run')
+    def setup_run(self):
         IB_HCA = {
             'kebnekaise': 'mlx5_0',
             'alvis': 'mlx5_2',
-            'dom': ipogif0',
-            'daint': ipogif0',
+            'dom': 'ipogif0',
+            'daint': 'ipogif0',
         }
 
         self.variables = {
@@ -193,14 +193,6 @@ class TensorFlow2HorovodTestSNIC(rfm.RunOnlyRegressionTest):
             'OMP_NUM_THREADS': '$SLURM_CPUS_PER_TASK',
             'OMPI_MCA_mpi_warn_on_fork': '0',
         }
-        self.executable_opts = [
-            f'{self.script}',
-            f'--model {self.model}',
-            f'--batch-size {self.batch_size}',
-            '--num-iters 5',
-            '--num-batches-per-iter 5',
-            '--num-warmup-batches 5',
-        ]
 
     @run_after('run')
     def set_nodelist(self):
