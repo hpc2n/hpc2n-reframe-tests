@@ -140,7 +140,7 @@ class snic_tensorflow_horovod_check(tensorflow_cnn_check):
                 'num_tasks': {'small': 4, 'large': 8},
             },
             'kebnekaise:gpu_4xK80': {
-                'num_cpus_per_task': 7,
+                'num_cpus_per_task': 3,
                 'num_tasks_per_node': 8,
                 'num_tasks': {'small': 8, 'large': 32},
             },
