@@ -18,7 +18,7 @@ site_configuration = {
         {
             'name': 'alvis',
             'descr': 'Alvis cluster',
-            'hostnames': ['alvis1', 'alvis2', 'alvis3'],
+            'hostnames': ['alvis'],
             'modules_system': 'lmod',
             'partitions': [
                 {
@@ -64,7 +64,26 @@ site_configuration = {
                     'descr': 'GPU A100',
                     'scheduler': 'slurm',
                     'launcher': 'srun',
-                    'access': ['-A SNIC2021-5-261', '-C 4xA100'],
+                    'access': ['-A C3SE-STAFF', '-C 4xA100'],
+                    'environs': ['builtin', 'gnu', 'foss', 'fosscuda', 'fosscuda_2019b', 'fosscuda_2020a', 'fosscuda_2020b', 'foss_2021a', 'intelcuda_2019b', 'intelcuda_2020a', 'intelcuda_2020b'],
+                    'resources': [
+                        {
+                            'name': '_rfm_gpu',
+                            'options': ['--gpus-per-node=A100:{num_gpus_per_node}'],
+                        },
+                    ],
+                    'container_platforms': [
+                        {
+                            'type': 'Singularity',
+                        },
+                    ],
+                },
+                {
+                    'name': 'NxA100fat',
+                    'descr': 'GPU A100 fat nodes',
+                    'scheduler': 'slurm',
+                    'launcher': 'srun',
+                    'access': ['-A C3SE-STAFF', '-C 4xA100fat'],
                     'environs': ['builtin', 'gnu', 'foss', 'fosscuda', 'fosscuda_2019b', 'fosscuda_2020a', 'fosscuda_2020b', 'foss_2021a', 'intelcuda_2019b', 'intelcuda_2020a', 'intelcuda_2020b'],
                     'resources': [
                         {
@@ -83,7 +102,7 @@ site_configuration = {
                     'descr': 'GPU A40',
                     'scheduler': 'slurm',
                     'launcher': 'srun',
-                    'access': ['-A C3SE-STAFF', '--reservation=test', '-C 4xA40'],
+                    'access': ['-A C3SE-STAFF', '-C 4xA40'],
                     'environs': ['builtin', 'gnu', 'foss', 'fosscuda', 'fosscuda_2019b', 'fosscuda_2020a', 'fosscuda_2020b', 'foss_2021a', 'intelcuda_2019b', 'intelcuda_2020a', 'intelcuda_2020b'],
                     'resources': [
                         {
@@ -141,7 +160,20 @@ site_configuration = {
                     'descr': 'GPU 4xA100 nodes',
                     'scheduler': 'slurm',
                     'launcher': 'srun',
-                    'access': ['-A SNIC2021-5-261', '-C 4xA100', '--gpus-per-node=A100:4'],
+                    'access': ['-A C3SE-STAFF', '-C 4xA100', '--gpus-per-node=A100:4'],
+                    'environs': ['builtin', 'gnu', 'foss', 'fosscuda', 'fosscuda_2019b', 'fosscuda_2020a', 'fosscuda_2020b', 'foss_2021a', 'intelcuda_2019b', 'intelcuda_2020a', 'intelcuda_2020b'],
+                    'container_platforms': [
+                        {
+                            'type': 'Singularity',
+                        },
+                    ],
+                },
+                {
+                    'name': '4xA100',
+                    'descr': 'GPU 4xA100 fat nodes',
+                    'scheduler': 'slurm',
+                    'launcher': 'srun',
+                    'access': ['-A C3SE-STAFF', '-C 4xA100fat', '--gpus-per-node=A100:4'],
                     'environs': ['builtin', 'gnu', 'foss', 'fosscuda', 'fosscuda_2019b', 'fosscuda_2020a', 'fosscuda_2020b', 'foss_2021a', 'intelcuda_2019b', 'intelcuda_2020a', 'intelcuda_2020b'],
                     'container_platforms': [
                         {
@@ -154,8 +186,21 @@ site_configuration = {
                     'descr': 'GPU 4xA40 nodes',
                     'scheduler': 'slurm',
                     'launcher': 'srun',
-                    'access': ['-A C3SE-STAFF', '--reservation=test', '-C 4xA40', '--gpus-per-node=A40:4'],
+                    'access': ['-A C3SE-STAFF', '-C 4xA40', '--gpus-per-node=A40:4'],
                     'environs': ['builtin', 'gnu', 'foss', 'fosscuda', 'fosscuda_2019b', 'fosscuda_2020a', 'fosscuda_2020b', 'foss_2021a', 'intelcuda_2019b', 'intelcuda_2020a', 'intelcuda_2020b'],
+                    'container_platforms': [
+                        {
+                            'type': 'Singularity',
+                        },
+                    ],
+                },
+                {
+                    'name': 'CPU',
+                    'descr': 'CPU only nodes',
+                    'scheduler': 'slurm',
+                    'launcher': 'srun',
+                    'access': ['-A C3SE-STAFF', '-C NOGPU'],
+                    'environs': ['builtin', 'gnu', 'foss', 'foss_2021a'],
                     'container_platforms': [
                         {
                             'type': 'Singularity',
