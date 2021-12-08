@@ -185,9 +185,10 @@ class StreamTest2(StreamTest2Base):
         
         self.variables['OMP_NUM_THREADS'] = str(omp_threads)
         envname = self.current_environ.name
+        tc_name = envname.split('_')[0].replace("cuda", "")
 
         try:
-            self.reference = self.stream_bw_reference[envname.split('_')[0]]
+            self.reference = self.stream_bw_reference[tc_name]
         except KeyError:
             self.reference = self.stream_bw_reference['foss']
 
