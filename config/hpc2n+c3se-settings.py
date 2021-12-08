@@ -61,7 +61,7 @@ site_configuration = {
                 },
                 {
                     'name': 'NxA100',
-                    'descr': 'GPU A100',
+                    'descr': 'GPU A100 nodes',
                     'scheduler': 'slurm',
                     'launcher': 'srun',
                     'access': ['-A C3SE-STAFF', '-C 4xA100'],
@@ -169,7 +169,7 @@ site_configuration = {
                     ],
                 },
                 {
-                    'name': '4xA100',
+                    'name': '4xA100fat',
                     'descr': 'GPU 4xA100 fat nodes',
                     'scheduler': 'slurm',
                     'launcher': 'srun',
@@ -195,7 +195,7 @@ site_configuration = {
                     ],
                 },
                 {
-                    'name': 'CPU',
+                    'name': 'CPUonly',
                     'descr': 'CPU only nodes',
                     'scheduler': 'slurm',
                     'launcher': 'srun',
