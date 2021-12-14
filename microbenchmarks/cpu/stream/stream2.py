@@ -68,7 +68,7 @@ class StreamTest2(StreamTest2Base):
             'alvis:2xV100': 16,
             'alvis:4xV100': 32,
             'alvis:4xA100': 32,
-            'alvis:4xA100fat': 32,
+            'alvis:4xA100fat': 64,
             'alvis:4xA40': 64,
         }
         # Size of array in Mi-elements (*1024^2), total memory usage is size * 1024^2 * 8 * 3
