@@ -32,16 +32,16 @@ class gpu_burn_check(GpuBurn):
             'min_perf': (1000, -0.10, None, 'Gflop/s'),
         },
         'kebnekaise:gpu_2xV100': {
-            'min_perf': (6100, -0.10, None, 'Gflop/s'),
+            'min_perf': (6300, -0.10, None, 'Gflop/s'),
         },
         'alvis:NxT4': {
             'min_perf': (248, -0.10, None, 'Gflop/s'),
         },
         'alvis:NxV100': {
-            'min_perf': (6658, -0.10, None, 'Gflop/s'),
+            'min_perf': (6800, -0.10, None, 'Gflop/s'),
         },
         'alvis:NxA40': {
-            'min_perf': (1694, -0.10, None, 'Gflop/s'),
+            'min_perf': (488, -0.10, None, 'Gflop/s'),
         },
         'dom:gpu': {
             'min_perf': (4115, -0.10, None, 'Gflop/s'),
