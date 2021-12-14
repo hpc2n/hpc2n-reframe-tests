@@ -21,7 +21,7 @@ class gpu_burn_check(GpuBurn):
         'ault:intelv100', 'ault:amda100', 'ault:amdvega'
     ]
     valid_prog_environs = ['PrgEnv-gnu', 'fosscuda']
-    executable_opts = ['-d', '40']
+    executable_opts = ['-d', '120']
     num_tasks = 0
 
     reference = {
@@ -39,6 +39,9 @@ class gpu_burn_check(GpuBurn):
         },
         'alvis:NxV100': {
             'min_perf': (6658, -0.10, None, 'Gflop/s'),
+        },
+        'alvis:NxA40': {
+            'min_perf': (1694, -0.10, None, 'Gflop/s'),
         },
         'dom:gpu': {
             'min_perf': (4115, -0.10, None, 'Gflop/s'),
@@ -83,11 +86,11 @@ class gpu_burn_check(GpuBurn):
     def set_exclusive_access(self):
         cs = self.current_system.name
         if cs == 'alvis':
-            exclusive_access = False
+            self.exclusive_access = False
         else:
-            exclusive_access = True
+            self.exclusive_access = True
         if cs in {'kebnekaise', 'alvis'}:
-            num_tasks_per_node = 1
+            self.num_tasks_per_node = 1
 
     @run_after('run')
     def set_nodelist(self):
