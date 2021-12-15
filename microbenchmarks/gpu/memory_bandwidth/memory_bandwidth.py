@@ -131,6 +131,9 @@ class gpu_bandwidth_d2d_check(GpuBandwidthD2D, SystemConfigCSCS):
                 'kebnekaise:gpu_2xV100': {
                     'bw':   (9.55, -0.05, None, 'GB/s'),
                 },
+                'alvis:NxA40': {
+                    'bw': (54.3, -0.05, None, 'GB/s'),
+                },
                 'tsa:cn': {
                     'bw':   (163, -0.05, None, 'GB/s'),
                 },
@@ -160,6 +163,9 @@ class gpu_bandwidth_d2d_check(GpuBandwidthD2D, SystemConfigCSCS):
                 },
                 'kebnekaise:gpu_2xV100': {
                     'bw': (11.36, -0.05, None, 'GB/s'),
+                },
+                'alvis:NxA40': {
+                    'bw': (63.7, -0.05, None, 'GB/s'),
                 },
                 'tsa:cn': {
                     'bw': (74, -0.05, None, 'GB/s'),
