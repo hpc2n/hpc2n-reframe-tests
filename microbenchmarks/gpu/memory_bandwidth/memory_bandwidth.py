@@ -37,6 +37,11 @@ class gpu_bandwidth_check(GpuBandwidth, SystemConfigCSCS):
         'ault:amdv100', 'ault:intelv100', 'ault:amda100', 'ault:amdvega'
     ]
     valid_prog_environs = ['PrgEnv-gnu', 'fosscuda']
+
+    # Increase runtime and memory usage
+    #num_copies = 2000
+    #copy_size = 1073741824*2
+
     num_tasks = 0
     reference = {
         'kebnekaise:gpu_2xK80': {
