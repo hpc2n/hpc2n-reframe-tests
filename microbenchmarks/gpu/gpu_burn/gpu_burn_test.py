@@ -43,6 +43,15 @@ class gpu_burn_check(GpuBurn):
         'alvis:NxA40': {
             'min_perf': (488, -0.10, None, 'Gflop/s'),
         },
+        'alvis:NxA100_MEM256': {
+            'min_perf': (18100, -0.10, None, 'Gflop/s'),
+        },
+        'alvis:NxA100_MEM512': {
+            'min_perf': (18100, -0.10, None, 'Gflop/s'),
+        },
+        'alvis:NxA100_MEM768': {
+            'min_perf': (18100, -0.10, None, 'Gflop/s'),
+        },
         'dom:gpu': {
             'min_perf': (4115, -0.10, None, 'Gflop/s'),
         },
