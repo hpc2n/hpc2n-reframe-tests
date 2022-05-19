@@ -63,7 +63,7 @@ def set_num_gpus_per_node(self):
     if cs in {'alvis', 'kebnekaise'}:
         if cn in {'gpu_1xK80', 'gpu_2xV100', 'NxV100', '2xV100'}:
             self.num_gpus_per_node = 2
-        elif cn in {'gpu_2xK80', 'NxA100_MEM256', 'NxA100_MEM512', 'NxA100_MEM768', 'NxA40', '4xV100', '4xA100_MEM256', '4xA100_MEM512', '4xA100_MEM768', '4xA40'}:
+        elif cn in {'gpu_2xK80', 'NxA100_MEM256', 'NxA100_MEM512', 'NxA100_MEM768', 'NxA100fat', 'NxA40', '4xV100', '4xA100_MEM256', '4xA100_MEM512', '4xA100_MEM768', '4xA100fat', '4xA40'}:
             self.num_gpus_per_node = 4
         elif cn in {'gpu_4xK80', 'NxT4', '8xT4'}:
             self.num_gpus_per_node = 8
