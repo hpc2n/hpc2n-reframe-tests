@@ -52,6 +52,9 @@ class gpu_burn_check(GpuBurn):
         'alvis:NxA100_MEM768': {
             'min_perf': (18100, -0.10, None, 'Gflop/s'),
         },
+        'alvis:NxA100fat': {
+            'min_perf': (18500, -0.10, None, 'Gflop/s'),
+        },
         'dom:gpu': {
             'min_perf': (4115, -0.10, None, 'Gflop/s'),
         },
@@ -93,6 +96,8 @@ class gpu_burn_check(GpuBurn):
 
     @run_before('run')
     def set_exclusive_access(self):
+        self.time_limit = '1h'
+
         cs = self.current_system.name
         if cs == 'alvis':
             self.exclusive_access = False
