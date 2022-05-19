@@ -13,77 +13,22 @@ from hpctestlib.microbenchmarks.gpu.gpu_burn import GpuBurn
 import hpc2ntests.microbenchmarks.gpu.hooks as hooks
 
 
-@rfm.simple_test
-class gpu_burn_check(GpuBurn):
-    valid_systems = [
-        'kebnekaise:gpu_2xK80', 'kebnekaise:gpu_4xK80', 'kebnekaise:gpu_2xV100', 'alvis',
-        'daint:gpu', 'dom:gpu', 'arolla:cn', 'tsa:cn', 'ault:amdv100',
-        'ault:intelv100', 'ault:amda100', 'ault:amdvega'
-    ]
-    valid_prog_environs = ['PrgEnv-gnu', 'fosscuda']
-    executable_opts = ['-d', '120']
-    num_tasks = 0
+class gpu_burn_check_base(GpuBurn):
+    def __init__(self):
+        self.valid_systems = [
+            'kebnekaise:gpu_2xK80', 'kebnekaise:gpu_4xK80', 'kebnekaise:gpu_2xV100',
+            'kebnekaise:gpu_2xA6000',
+            'alvis',
+            'daint:gpu', 'dom:gpu', 'arolla:cn', 'tsa:cn', 'ault:amdv100',
+            'ault:intelv100', 'ault:amda100', 'ault:amdvega'
+        ]
+        self.valid_prog_environs = ['PrgEnv-gnu', 'fosscuda']
+        precision_opt = ''
+        if (self.precision == 'double'):
+            precision_opt = '-d'
+        self.executable_opts = [precision_opt, '120']
 
-    reference = {
-        'kebnekaise:gpu_2xK80': {
-            'min_perf': (1000, -0.10, None, 'Gflop/s'),
-        },
-        'kebnekaise:gpu_4xK80': {
-            'min_perf': (1000, -0.10, None, 'Gflop/s'),
-        },
-        'kebnekaise:gpu_2xV100': {
-            'min_perf': (6300, -0.10, None, 'Gflop/s'),
-        },
-        'alvis:NxT4': {
-            'min_perf': (248, -0.10, None, 'Gflop/s'),
-        },
-        'alvis:NxV100': {
-            'min_perf': (6800, -0.10, None, 'Gflop/s'),
-        },
-        'alvis:NxA40': {
-            'min_perf': (488, -0.10, None, 'Gflop/s'),
-        },
-        'alvis:NxA100_MEM256': {
-            'min_perf': (18100, -0.10, None, 'Gflop/s'),
-        },
-        'alvis:NxA100_MEM512': {
-            'min_perf': (18100, -0.10, None, 'Gflop/s'),
-        },
-        'alvis:NxA100_MEM768': {
-            'min_perf': (18100, -0.10, None, 'Gflop/s'),
-        },
-        'alvis:NxA100fat': {
-            'min_perf': (18500, -0.10, None, 'Gflop/s'),
-        },
-        'dom:gpu': {
-            'min_perf': (4115, -0.10, None, 'Gflop/s'),
-        },
-        'daint:gpu': {
-            'min_perf': (4115, -0.10, None, 'Gflop/s'),
-        },
-        'arolla:cn': {
-            'min_perf': (5861, -0.10, None, 'Gflop/s'),
-        },
-        'tsa:cn': {
-            'min_perf': (5861, -0.10, None, 'Gflop/s'),
-        },
-        'ault:amda100': {
-            'min_perf': (15000, -0.10, None, 'Gflop/s'),
-        },
-        'ault:amdv100': {
-            'min_perf': (5500, -0.10, None, 'Gflop/s'),
-        },
-        'ault:intelv100': {
-            'min_perf': (5500, -0.10, None, 'Gflop/s'),
-        },
-        'ault:amdvega': {
-            'min_perf': (3450, -0.10, None, 'Gflop/s'),
-        },
-        '*': {'temp': (0, None, None, 'degC')},
-    }
-
-    maintainers = ['AJ', 'TM', 'AS']
-    tags = {'diagnostic', 'benchmark', 'craype'}
+        self.num_tasks = 0
 
     # Inject external hooks
     @run_after('setup')
@@ -132,4 +77,86 @@ class gpu_burn_check(GpuBurn):
                         sn.assert_reference(val, ref, lt, ut).evaluate()
                     except SanityError:
                         self.perf_variables[nid] = node_perf
+
+@rfm.simple_test
+class gpu_burn_check(gpu_burn_check_base):
+    '''Run both single and double precision tests'''
+    precision = parameter(['double', 'single'])
+
+    def __init__(self):
+        super().__init__()
+
+        references = {
+            'double': {
+                'kebnekaise:gpu_2xK80': {
+                    'min_perf': (1000, -0.10, None, 'Gflop/s'),
+                },
+                'kebnekaise:gpu_4xK80': {
+                    'min_perf': (1000, -0.10, None, 'Gflop/s'),
+                },
+                'kebnekaise:gpu_2xV100': {
+                    'min_perf': (6300, -0.10, None, 'Gflop/s'),
+                },
+                'kebnekaise:gpu_2xA6000': {
+                    'min_perf': (538, -0.10, None, 'Gflop/s'),
+                },
+                'alvis:NxT4': {
+                    'min_perf': (248, -0.10, None, 'Gflop/s'),
+                },
+                'alvis:NxV100': {
+                    'min_perf': (6800, -0.10, None, 'Gflop/s'),
+                },
+                'alvis:NxA40': {
+                    'min_perf': (488, -0.10, None, 'Gflop/s'),
+                },
+                'alvis:NxA100_MEM256': {
+                    'min_perf': (18100, -0.10, None, 'Gflop/s'),
+                },
+                'alvis:NxA100_MEM512': {
+                    'min_perf': (18100, -0.10, None, 'Gflop/s'),
+                },
+                'alvis:NxA100_MEM768': {
+                    'min_perf': (18100, -0.10, None, 'Gflop/s'),
+                },
+                'alvis:NxA100fat': {
+                    'min_perf': (18500, -0.10, None, 'Gflop/s'),
+                },
+                'dom:gpu': {
+                    'min_perf': (4115, -0.10, None, 'Gflop/s'),
+                },
+                'daint:gpu': {
+                    'min_perf': (4115, -0.10, None, 'Gflop/s'),
+                },
+                'arolla:cn': {
+                    'min_perf': (5861, -0.10, None, 'Gflop/s'),
+                },
+                'tsa:cn': {
+                    'min_perf': (5861, -0.10, None, 'Gflop/s'),
+                },
+                'ault:amda100': {
+                    'min_perf': (15000, -0.10, None, 'Gflop/s'),
+                },
+                'ault:amdv100': {
+                    'min_perf': (5500, -0.10, None, 'Gflop/s'),
+                },
+                'ault:intelv100': {
+                    'min_perf': (5500, -0.10, None, 'Gflop/s'),
+                },
+                'ault:amdvega': {
+                    'min_perf': (3450, -0.10, None, 'Gflop/s'),
+                },
+                '*': {'temp': (0, None, None, 'degC')},
+            },
+            'single': {
+                'kebnekaise:gpu_2xA6000': {
+                    'min_perf': (14740, -0.10, None, 'Gflop/s'),
+                },
+                '*': {'temp': (0, None, None, 'degC')},
+            },
+        }
+
+        self.reference = references[self.precision]
+
+        self.tags = {'diagnostic', 'benchmark', 'craype'}
+        self.maintainers = ['AJ', 'TM', 'AS']
 
