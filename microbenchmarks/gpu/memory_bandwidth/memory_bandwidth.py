@@ -84,6 +84,11 @@ class gpu_bandwidth_check(GpuBandwidth, SystemConfigCSCS):
             'd2h': (24.53, -0.1, None, 'GB/s'),
             'd2d': (1234.3, -0.1, None, 'GB/s')
         },
+        'alvis:NxA100fat': {
+            'h2d': (23.57, -0.1, None, 'GB/s'),
+            'd2h': (24.53, -0.1, None, 'GB/s'),
+            'd2d': (1485, -0.1, None, 'GB/s')
+        },
         'daint:gpu': {
             'h2d': (11.881, -0.1, None, 'GB/s'),
             'd2h': (12.571, -0.1, None, 'GB/s'),
@@ -163,6 +168,9 @@ class gpu_bandwidth_d2d_check(GpuBandwidthD2D, SystemConfigCSCS):
                 'alvis:NxA100_MEM768': {
                     'bw': (262.69, -0.05, None, 'GB/s'),
                 },
+                'alvis:NxA100fat': {
+                    'bw': (262.69, -0.05, None, 'GB/s'),
+                },
                 'tsa:cn': {
                     'bw':   (163, -0.05, None, 'GB/s'),
                 },
@@ -203,6 +211,9 @@ class gpu_bandwidth_d2d_check(GpuBandwidthD2D, SystemConfigCSCS):
                     'bw': (61.8, -0.05, None, 'GB/s'),
                 },
                 'alvis:NxA100_MEM768': {
+                    'bw': (61.8, -0.05, None, 'GB/s'),
+                },
+                'alvis:NxA100fat': {
                     'bw': (61.8, -0.05, None, 'GB/s'),
                 },
                 'tsa:cn': {
