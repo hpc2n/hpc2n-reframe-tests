@@ -391,6 +391,34 @@ site_configuration = {
                     ],
                 },
                 {
+                    'name': 'gpu_1xA6000',
+                    'descr': 'GPU 1xA6000 half node',
+                    'scheduler': 'slurm',
+                    'launcher': 'srun',
+                    'access': ['-A sysop', '-p gpu', '-C broadwell&2xA6000', '--gres=gpu:a6000:1'],
+                    'environs': ['builtin', 'gnu', 'foss', 'intel', 'fosscuda', 'foss_2019a', 'foss_2019b', 'foss_2020a', 'foss_2020b', 'foss_2021a', 'intel_2019a', 'intel_2019b', 'intel_2020a', 'intel_2020b', 'intel_2021a'],
+                    'container_platforms': [
+                        {
+                            'type': 'Singularity',
+                            'modules': ['singularity'],
+                        },
+                    ],
+                },
+                {
+                    'name': 'gpu_2xA6000',
+                    'descr': 'GPU 2xA6000 nodes',
+                    'scheduler': 'slurm',
+                    'launcher': 'srun',
+                    'access': ['-A sysop', '-p gpu', '-C broadwell&2xA6000', '--gres=gpu:a6000:2', '--exclusive'],
+                    'environs': ['builtin', 'gnu', 'foss', 'intel', 'fosscuda', 'foss_2019a', 'foss_2019b', 'foss_2020a', 'foss_2020b', 'foss_2021a', 'intel_2019a', 'intel_2019b', 'intel_2020a', 'intel_2020b', 'intel_2021a'],
+                    'container_platforms': [
+                        {
+                            'type': 'Singularity',
+                            'modules': ['singularity'],
+                        },
+                    ],
+                },
+                {
                     'name': 'knl',
                     'descr': 'KNL compute nodes',
                     'scheduler': 'slurm',
