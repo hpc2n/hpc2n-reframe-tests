@@ -148,8 +148,20 @@ class gpu_burn_check(gpu_burn_check_base):
                 '*': {'temp': (0, None, None, 'degC')},
             },
             'single': {
+                'kebnekaise:gpu_2xK80': {
+                    'min_perf': (2300, -0.10, None, 'Gflop/s'),
+                },
                 'kebnekaise:gpu_2xA6000': {
                     'min_perf': (14740, -0.10, None, 'Gflop/s'),
+                },
+                'alvis:NxV100': {
+                    'min_perf': (14300, -0.10, None, 'Gflop/s'),
+                },
+                'alvis:NxA40': {
+                    'min_perf': (14100, -0.10, None, 'Gflop/s'),
+                },
+                'alvis:NxA100_MEM256': {
+                    'min_perf': (18100, -0.10, None, 'Gflop/s'),
                 },
                 '*': {'temp': (0, None, None, 'degC')},
             },
