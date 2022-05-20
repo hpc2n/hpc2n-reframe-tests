@@ -22,7 +22,7 @@ class gpu_burn_check_base(GpuBurn):
             'daint:gpu', 'dom:gpu', 'arolla:cn', 'tsa:cn', 'ault:amdv100',
             'ault:intelv100', 'ault:amda100', 'ault:amdvega'
         ]
-        self.valid_prog_environs = ['PrgEnv-gnu', 'fosscuda']
+        self.valid_prog_environs = ['PrgEnv-gnu', 'foss+cuda']
         precision_opt = ''
         if (self.precision == 'double'):
             precision_opt = '-d'
@@ -152,7 +152,7 @@ class gpu_burn_check(gpu_burn_check_base):
                     'min_perf': (2300, -0.10, None, 'Gflop/s'),
                 },
                 'kebnekaise:gpu_2xA6000': {
-                    'min_perf': (14740, -0.10, None, 'Gflop/s'),
+                    'min_perf': (21000, -0.10, None, 'Gflop/s'),
                 },
                 'alvis:NxV100': {
                     'min_perf': (14300, -0.10, None, 'Gflop/s'),
