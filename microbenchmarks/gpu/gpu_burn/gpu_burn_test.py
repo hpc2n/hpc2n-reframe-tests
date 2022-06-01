@@ -158,7 +158,7 @@ class gpu_burn_check(gpu_burn_check_base):
                     'min_perf': (14300, -0.10, None, 'Gflop/s'),
                 },
                 'alvis:NxA40': {
-                    'min_perf': (14100, -0.10, None, 'Gflop/s'),
+                    'min_perf': (19200, -0.10, None, 'Gflop/s'),
                 },
                 'alvis:NxA100_MEM256': {
                     'min_perf': (18100, -0.10, None, 'Gflop/s'),
