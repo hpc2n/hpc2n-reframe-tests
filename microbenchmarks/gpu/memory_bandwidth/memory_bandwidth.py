@@ -32,11 +32,12 @@ class SystemConfigCSCS(rfm.RegressionMixin):
 @rfm.simple_test
 class gpu_bandwidth_check(GpuBandwidth, SystemConfigCSCS):
     valid_systems = [
-        'kebnekaise:gpu_2xK80', 'kebnekaise:gpu_4xK80', 'kebnekaise:gpu_2xV100', 'alvis',
+        'kebnekaise:gpu_2xK80', 'kebnekaise:gpu_4xK80', 'kebnekaise:gpu_2xV100',
+        'kebnekaise:gpu_2xA6000', 'alvis',
         'daint:gpu', 'dom:gpu', 'arolla:cn', 'tsa:cn',
         'ault:amdv100', 'ault:intelv100', 'ault:amda100', 'ault:amdvega'
     ]
-    valid_prog_environs = ['PrgEnv-gnu', 'fosscuda']
+    valid_prog_environs = ['PrgEnv-gnu', 'foss+cuda']
 
     # Increase runtime and memory usage
     #num_copies = 2000
@@ -58,6 +59,11 @@ class gpu_bandwidth_check(GpuBandwidth, SystemConfigCSCS):
             'h2d': (12.6, -0.1, None, 'GB/s'),
             'd2h': (13.5, -0.1, None, 'GB/s'),
             'd2d': (816.4, -0.1, None, 'GB/s')
+        },
+        'kebnekaise:gpu_2xA6000': {
+            'h2d': (12, -0.1, None, 'GB/s'),
+            'd2h': (13, -0.1, None, 'GB/s'),
+            'd2d': (636, -0.1, None, 'GB/s')
         },
         'alvis:NxT4': {
             'h2d': (5.83, -0.1, None, 'GB/s'),
@@ -132,11 +138,12 @@ class gpu_bandwidth_check(GpuBandwidth, SystemConfigCSCS):
 @rfm.simple_test
 class gpu_bandwidth_d2d_check(GpuBandwidthD2D, SystemConfigCSCS):
     valid_systems = [
-        'kebnekaise:gpu_2xK80', 'kebnekaise:gpu_4xK80', 'kebnekaise:gpu_2xV100', 'alvis',
+        'kebnekaise:gpu_2xK80', 'kebnekaise:gpu_4xK80', 'kebnekaise:gpu_2xV100',
+        'kebnekaise:gpu_2xA6000', 'alvis',
         'tsa:cn', 'arola:cn', 'ault:amdv100', 'ault:intelv100',
         'ault:amda100', 'ault:amdvega'
     ]
-    valid_prog_environs = ['PrgEnv-gnu', 'fosscuda']
+    valid_prog_environs = ['PrgEnv-gnu', 'foss+cuda']
     num_tasks = 0
     tags = {'diagnostic', 'mch', 'craype', 'benchmark'}
     maintainers = ['AJ', 'SK']
@@ -151,10 +158,13 @@ class gpu_bandwidth_d2d_check(GpuBandwidthD2D, SystemConfigCSCS):
                     'bw':   (163, -0.05, None, 'GB/s'),
                 },
                 'kebnekaise:gpu_4xK80': {
-                    'bw':   (163, -0.05, None, 'GB/s'),
+                    'bw':   (9.5, -0.05, None, 'GB/s'),
                 },
                 'kebnekaise:gpu_2xV100': {
                     'bw':   (9.55, -0.05, None, 'GB/s'),
+                },
+                'kebnekaise:gpu_2xA6000': {
+                    'bw':   (636, -0.05, None, 'GB/s'),
                 },
                 'alvis:NxA40': {
                     'bw': (54.3, -0.05, None, 'GB/s'),
@@ -193,13 +203,16 @@ class gpu_bandwidth_d2d_check(GpuBandwidthD2D, SystemConfigCSCS):
         else:
             self.reference = {
                 'kebnekaise:gpu_2xK80': {
-                    'bw': (29.77, -0.05, None, 'GB/s'),
+                    'bw': (30, -0.05, None, 'GB/s'),
                 },
                 'kebnekaise:gpu_4xK80': {
-                    'bw': (64.92, -0.05, None, 'GB/s'),
+                    'bw': (65, -0.05, None, 'GB/s'),
                 },
                 'kebnekaise:gpu_2xV100': {
-                    'bw': (11.36, -0.05, None, 'GB/s'),
+                    'bw': (12, -0.05, None, 'GB/s'),
+                },
+                'kebnekaise:gpu_2xA6000': {
+                    'bw': (12, -0.05, None, 'GB/s'),
                 },
                 'alvis:NxA40': {
                     'bw': (63.7, -0.05, None, 'GB/s'),
