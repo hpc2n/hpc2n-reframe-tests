@@ -22,7 +22,7 @@ class gpu_burn_check_base(GpuBurn):
             'daint:gpu', 'dom:gpu', 'arolla:cn', 'tsa:cn', 'ault:amdv100',
             'ault:intelv100', 'ault:amda100', 'ault:amdvega'
         ]
-        self.valid_prog_environs = ['PrgEnv-gnu', 'foss+cuda']
+        self.valid_prog_environs = ['PrgEnv-gnu', 'foss_with_cuda']
         precision_opt = ''
         if (self.precision == 'double'):
             precision_opt = '-d'

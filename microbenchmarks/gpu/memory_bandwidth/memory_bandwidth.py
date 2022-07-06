@@ -37,7 +37,7 @@ class gpu_bandwidth_check(GpuBandwidth, SystemConfigCSCS):
         'daint:gpu', 'dom:gpu', 'arolla:cn', 'tsa:cn',
         'ault:amdv100', 'ault:intelv100', 'ault:amda100', 'ault:amdvega'
     ]
-    valid_prog_environs = ['PrgEnv-gnu', 'foss+cuda']
+    valid_prog_environs = ['PrgEnv-gnu', 'foss_with_cuda']
 
     # Increase runtime and memory usage
     #num_copies = 2000
@@ -143,7 +143,7 @@ class gpu_bandwidth_d2d_check(GpuBandwidthD2D, SystemConfigCSCS):
         'tsa:cn', 'arola:cn', 'ault:amdv100', 'ault:intelv100',
         'ault:amda100', 'ault:amdvega'
     ]
-    valid_prog_environs = ['PrgEnv-gnu', 'foss+cuda']
+    valid_prog_environs = ['PrgEnv-gnu', 'foss_with_cuda']
     num_tasks = 0
     tags = {'diagnostic', 'mch', 'craype', 'benchmark'}
     maintainers = ['AJ', 'SK']
