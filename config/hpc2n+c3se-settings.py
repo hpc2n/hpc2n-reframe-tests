@@ -588,6 +588,7 @@ site_configuration = {
             'cxx': 'g++',
             'ftn': 'gfortran',
             'target_systems': ['kebnekaise', 'alvis'],
+	    'features': ['cuda'],
         },
         {
             'name': 'fosscuda',
