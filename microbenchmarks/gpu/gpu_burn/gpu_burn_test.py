@@ -9,11 +9,11 @@ import reframe.utility.sanity as sn
 import reframe.utility.osext as osext
 from reframe.core.exceptions import SanityError
 
-from hpctestlib.microbenchmarks.gpu.gpu_burn import GpuBurn
+from hpctestlib.microbenchmarks.gpu.gpu_burn import gpu_burn_check
 import hpc2ntests.microbenchmarks.gpu.hooks as hooks
 
 
-class gpu_burn_check_base(GpuBurn):
+class gpu_burn_check_base(gpu_burn_check):
     def __init__(self):
         self.valid_systems = [
             'kebnekaise:gpu_2xK80', 'kebnekaise:gpu_4xK80', 'kebnekaise:gpu_2xV100',
@@ -23,10 +23,11 @@ class gpu_burn_check_base(GpuBurn):
             'ault:intelv100', 'ault:amda100', 'ault:amdvega'
         ]
         self.valid_prog_environs = ['PrgEnv-gnu', 'foss_with_cuda']
-        precision_opt = ''
-        if (self.precision == 'double'):
-            precision_opt = '-d'
-        self.executable_opts = [precision_opt, '120']
+        if self.precision == 'double':
+            use_dp = True
+        else:
+            use_dp = False
+        duration = 120
 
         self.num_tasks = 0
 
@@ -89,79 +90,79 @@ class gpu_burn_check(gpu_burn_check_base):
         references = {
             'double': {
                 'kebnekaise:gpu_2xK80': {
-                    'min_perf': (1000, -0.10, None, 'Gflop/s'),
+                    'gpu_perf_min': (1000, -0.10, None, 'Gflop/s'),
                 },
                 'kebnekaise:gpu_4xK80': {
-                    'min_perf': (1000, -0.10, None, 'Gflop/s'),
+                    'gpu_perf_min': (1000, -0.10, None, 'Gflop/s'),
                 },
                 'kebnekaise:gpu_2xV100': {
-                    'min_perf': (6300, -0.10, None, 'Gflop/s'),
+                    'gpu_perf_min': (6300, -0.10, None, 'Gflop/s'),
                 },
                 'kebnekaise:gpu_2xA6000': {
-                    'min_perf': (538, -0.10, None, 'Gflop/s'),
+                    'gpu_perf_min': (538, -0.10, None, 'Gflop/s'),
                 },
                 'alvis:NxT4': {
-                    'min_perf': (248, -0.10, None, 'Gflop/s'),
+                    'gpu_perf_min': (248, -0.10, None, 'Gflop/s'),
                 },
                 'alvis:NxV100': {
-                    'min_perf': (6800, -0.10, None, 'Gflop/s'),
+                    'gpu_perf_min': (6800, -0.10, None, 'Gflop/s'),
                 },
                 'alvis:NxA40': {
-                    'min_perf': (488, -0.10, None, 'Gflop/s'),
+                    'gpu_perf_min': (488, -0.10, None, 'Gflop/s'),
                 },
                 'alvis:NxA100_MEM256': {
-                    'min_perf': (18100, -0.10, None, 'Gflop/s'),
+                    'gpu_perf_min': (18100, -0.10, None, 'Gflop/s'),
                 },
                 'alvis:NxA100_MEM512': {
-                    'min_perf': (18100, -0.10, None, 'Gflop/s'),
+                    'gpu_perf_min': (18100, -0.10, None, 'Gflop/s'),
                 },
                 'alvis:NxA100_MEM768': {
-                    'min_perf': (18100, -0.10, None, 'Gflop/s'),
+                    'gpu_perf_min': (18100, -0.10, None, 'Gflop/s'),
                 },
                 'alvis:NxA100fat': {
-                    'min_perf': (18500, -0.10, None, 'Gflop/s'),
+                    'gpu_perf_min': (18500, -0.10, None, 'Gflop/s'),
                 },
                 'dom:gpu': {
-                    'min_perf': (4115, -0.10, None, 'Gflop/s'),
+                    'gpu_perf_min': (4115, -0.10, None, 'Gflop/s'),
                 },
                 'daint:gpu': {
-                    'min_perf': (4115, -0.10, None, 'Gflop/s'),
+                    'gpu_perf_min': (4115, -0.10, None, 'Gflop/s'),
                 },
                 'arolla:cn': {
-                    'min_perf': (5861, -0.10, None, 'Gflop/s'),
+                    'gpu_perf_min': (5861, -0.10, None, 'Gflop/s'),
                 },
                 'tsa:cn': {
-                    'min_perf': (5861, -0.10, None, 'Gflop/s'),
+                    'gpu_perf_min': (5861, -0.10, None, 'Gflop/s'),
                 },
                 'ault:amda100': {
-                    'min_perf': (15000, -0.10, None, 'Gflop/s'),
+                    'gpu_perf_min': (15000, -0.10, None, 'Gflop/s'),
                 },
                 'ault:amdv100': {
-                    'min_perf': (5500, -0.10, None, 'Gflop/s'),
+                    'gpu_perf_min': (5500, -0.10, None, 'Gflop/s'),
                 },
                 'ault:intelv100': {
-                    'min_perf': (5500, -0.10, None, 'Gflop/s'),
+                    'gpu_perf_min': (5500, -0.10, None, 'Gflop/s'),
                 },
                 'ault:amdvega': {
-                    'min_perf': (3450, -0.10, None, 'Gflop/s'),
+                    'gpu_perf_min': (3450, -0.10, None, 'Gflop/s'),
                 },
                 '*': {'temp': (0, None, None, 'degC')},
             },
             'single': {
                 'kebnekaise:gpu_2xK80': {
-                    'min_perf': (2300, -0.10, None, 'Gflop/s'),
+                    'gpu_perf_min': (2300, -0.10, None, 'Gflop/s'),
                 },
                 'kebnekaise:gpu_2xA6000': {
-                    'min_perf': (21000, -0.10, None, 'Gflop/s'),
+                    'gpu_perf_min': (21000, -0.10, None, 'Gflop/s'),
                 },
                 'alvis:NxV100': {
-                    'min_perf': (14300, -0.10, None, 'Gflop/s'),
+                    'gpu_perf_min': (14300, -0.10, None, 'Gflop/s'),
                 },
                 'alvis:NxA40': {
-                    'min_perf': (19200, -0.10, None, 'Gflop/s'),
+                    'gpu_perf_min': (19200, -0.10, None, 'Gflop/s'),
                 },
                 'alvis:NxA100_MEM256': {
-                    'min_perf': (18100, -0.10, None, 'Gflop/s'),
+                    'gpu_perf_min': (18100, -0.10, None, 'Gflop/s'),
                 },
                 '*': {'temp': (0, None, None, 'degC')},
             },
