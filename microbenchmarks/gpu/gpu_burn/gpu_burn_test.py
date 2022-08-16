@@ -24,10 +24,10 @@ class gpu_burn_check_base(gpu_burn_check):
         ]
         self.valid_prog_environs = ['PrgEnv-gnu', 'foss_with_cuda']
         if self.precision == 'double':
-            use_dp = True
+            self.use_dp = True
         else:
-            use_dp = False
-        duration = 120
+            self.use_dp = False
+        self.duration = 120
 
         self.num_tasks = 0
 
