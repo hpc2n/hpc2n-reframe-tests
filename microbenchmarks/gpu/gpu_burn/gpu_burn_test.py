@@ -103,6 +103,7 @@ class gpu_burn_check(gpu_burn_check_base):
                     'gpu_perf_min': (538, -0.10, None, 'Gflop/s'),
                 },
                 'kebnekaise:4xA40': {
+                    # Teoretical peak is 584.6 Gflops/s
                     'gpu_perf_min': (488, -0.10, None, 'Gflop/s'),
                 },
                 'alvis:NxT4': {
