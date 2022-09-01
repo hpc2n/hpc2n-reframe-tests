@@ -391,6 +391,34 @@ site_configuration = {
                     ],
                 },
                 {
+                    'name': '2xA40',
+                    'descr': 'GPU 2xA40 half node',
+                    'scheduler': 'slurm',
+                    'launcher': 'srun',
+                    'access': ['-A sysop', '-p gpu', '-C broadwell&4xA40', '--gres=gpu:a40:2'],
+                    'environs': ['builtin', 'gnu', 'foss', 'intel', 'foss_with_cuda', 'fosscuda', 'foss_2019a', 'foss_2019b', 'foss_2020a', 'foss_2020b', 'foss_2021a', 'intel_2019a', 'intel_2019b', 'intel_2020a', 'intel_2020b', 'intel_2021a'],
+                    'container_platforms': [
+                        {
+                            'type': 'Singularity',
+                            'modules': ['singularity'],
+                        },
+                    ],
+                },
+                {
+                    'name': '4xA40',
+                    'descr': 'GPU 4xA40 nodes',
+                    'scheduler': 'slurm',
+                    'launcher': 'srun',
+                    'access': ['-A sysop', '-p gpu', '-C broadwell&4xA40', '--gres=gpu:a40:4', '--exclusive'],
+                    'environs': ['builtin', 'gnu', 'foss', 'intel', 'foss_with_cuda', 'fosscuda', 'foss_2019a', 'foss_2019b', 'foss_2020a', 'foss_2020b', 'foss_2021a', 'intel_2019a', 'intel_2019b', 'intel_2020a', 'intel_2020b', 'intel_2021a'],
+                    'container_platforms': [
+                        {
+                            'type': 'Singularity',
+                            'modules': ['singularity'],
+                        },
+                    ],
+                },
+                {
                     'name': 'gpu_1xA6000',
                     'descr': 'GPU 1xA6000 half node',
                     'scheduler': 'slurm',
@@ -463,6 +491,21 @@ site_configuration = {
             ],
         },
         {
+            'name': 'UmU-Cloud',
+            'descr': 'UmU part of SNIC Cloud system',
+            'hostnames': ['u-cn-'],
+            'modules_system': 'lmod',
+            'partitions': [
+                {
+                    'name': 'default',
+                    'scheduler': 'local',
+                    'launcher': 'local',
+                    'environs': ['builtin', 'foss', 'foss_2021a', 'foss_with_cuda', 'intel_2021a'],
+                    'max_jobs': 1,
+                }
+            ],
+        },
+        {
             'name': 'generic',
             'descr': 'Generic system',
             'hostnames': ['.*'],
@@ -491,7 +534,7 @@ site_configuration = {
             'cc': 'gcc',
             'cxx': 'g++',
             'ftn': 'gfortran',
-            'target_systems': ['kebnekaise', 'alvis'],
+            'target_systems': ['kebnekaise', 'alvis', 'UmU-Cloud'],
         },
         {
             'name': 'foss_2019a',
@@ -531,7 +574,7 @@ site_configuration = {
             'cc': 'gcc',
             'cxx': 'g++',
             'ftn': 'gfortran',
-            'target_systems': ['kebnekaise', 'alvis'],
+            'target_systems': ['kebnekaise', 'alvis', 'UmU-Cloud'],
         },
         {
             'name': 'intel',
@@ -579,7 +622,7 @@ site_configuration = {
             'cc': 'icc',
             'cxx': 'icpc',
             'ftn': 'ifort',
-            'target_systems': ['kebnekaise', 'alvis'],
+            'target_systems': ['kebnekaise', 'alvis', 'UmU-Cloud'],
         },
         {
             'name': 'foss_with_cuda',
@@ -587,7 +630,7 @@ site_configuration = {
             'cc': 'gcc',
             'cxx': 'g++',
             'ftn': 'gfortran',
-            'target_systems': ['kebnekaise', 'alvis'],
+            'target_systems': ['kebnekaise', 'alvis', 'UmU-Cloud'],
 	    'features': ['cuda'],
         },
         {
