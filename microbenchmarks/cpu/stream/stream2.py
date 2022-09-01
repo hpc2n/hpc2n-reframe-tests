@@ -17,10 +17,10 @@ class StreamTest2Base(rfm.RunOnlyRegressionTest):
 
     def __init__(self):
         self.exclusive_access = True
-        if self.current_system.name == 'alvis':
+        if self.current_system.name in {'alvis', 'UmU-Cloud'}:
             self.exclusive_access = False
         self.valid_systems = ['kebnekaise:%s' % x for x in ['bdw', 'sky', 'knl', 'lm']]
-        self.valid_systems += ['alvis']
+        self.valid_systems += ['alvis', 'UmU-Cloud']
         self.valid_prog_environs = ['%s%s_%s' % (tc, c, tv) for tc in ['foss', 'intel']
             for c in ['', 'cuda']
             for tv in ['2019a', '2019b', '2020a', '2020b', '2021a']]
@@ -64,6 +64,7 @@ class StreamTest2(StreamTest2Base):
             'kebnekaise:gpu': 28,
             'kebnekaise:knl': 68,
             'kebnekaise:lm': 72,
+            'UmU-Cloud:default': 64,
             'alvis:8xT4': 32,
             'alvis:2xV100': 16,
             'alvis:4xV100': 32,
@@ -79,6 +80,7 @@ class StreamTest2(StreamTest2Base):
             'kebnekaise:gpu': 4500,
             'kebnekaise:knl': 6800,
             'kebnekaise:lm': 24000, # 121000, for using the whole memory, but that takes forever.
+            'UmU-Cloud:default': 21200,
             'alvis:8xT4': 23000,
             'alvis:2xV100': 31000,
             'alvis:4xV100': 31000,
@@ -115,6 +117,12 @@ class StreamTest2(StreamTest2Base):
                     'scale': (191500, -0.05, 0.05, 'MB/s'),
                     'add':   (198000, -0.05, 0.05, 'MB/s'),
                     'triad': (198000, -0.05, 0.05, 'MB/s'),
+                },
+                'UmU-Cloud:default': {
+                    'copy':  (166000, -0.05, 0.05, 'MB/s'),
+                    'scale': (166000, -0.05, 0.05, 'MB/s'),
+                    'add':   (182000, -0.05, 0.05, 'MB/s'),
+                    'triad': (182000, -0.05, 0.05, 'MB/s'),
                 },
                 'alvis:8xT4': {
                     'copy':  (135000, -0.05, 0.05, 'MB/s'),
@@ -153,6 +161,12 @@ class StreamTest2(StreamTest2Base):
                     'scale': (228000, -0.05, 0.05, 'MB/s'),
                     'add':   (225000, -0.05, 0.05, 'MB/s'),
                     'triad': (230000, -0.05, 0.05, 'MB/s'),
+                },
+                'UmU-Cloud:default': {
+                    'copy':  (166000, -0.05, 0.05, 'MB/s'),
+                    'scale': (166000, -0.05, 0.05, 'MB/s'),
+                    'add':   (182000, -0.05, 0.05, 'MB/s'),
+                    'triad': (182000, -0.05, 0.05, 'MB/s'),
                 },
                 'alvis:4xA40': {
                     'copy':  (311600, -0.05, 0.05, 'MB/s'),
@@ -220,7 +234,7 @@ class StreamTest2Build(rfm.CompileOnlyRegressionTest):
     def __init__(self):
         self.descr = 'STREAM Benchmark Build test'
         self.valid_systems = ['kebnekaise:%s' % x for x in ['bdw', 'sky', 'knl', 'lm']]
-        self.valid_systems += ['alvis']
+        self.valid_systems += ['alvis', 'UmU-Cloud']
         self.valid_prog_environs = ['%s%s_%s' % (tc, c, tv) for tc in ['foss', 'intel']
             for c in ['', 'cuda']
             for tv in ['2019a', '2019b', '2020a', '2020b', '2021a']]

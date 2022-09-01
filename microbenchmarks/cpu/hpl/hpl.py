@@ -33,11 +33,12 @@ class HPLBase(rfm.RunOnlyRegressionTest):
     # This part should be in site specifica part of test.
     @run_after('init')
     def valid_system_and_module(self):
-        self.valid_systems = ['kebnekaise', 'alvis']
+        self.valid_systems = ['kebnekaise', 'alvis', 'UmU-cloud']
         self.valid_prog_environs = ['builtin']
 
         hpl_module = {
             'kebnekaise': ['foss/2021a', 'HPL/2.3'],
+            'UmU-Cloud': ['foss/2021a', 'HPL/2.3'],
             'alvis': ['HPL/2.3-foss-2021a'],
         }
 
