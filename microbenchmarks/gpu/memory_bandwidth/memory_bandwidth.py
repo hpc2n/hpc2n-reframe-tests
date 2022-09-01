@@ -43,8 +43,8 @@ class gpu_bandwidth_check(GpuBandwidth, SystemConfigCSCS):
     valid_prog_environs = ['PrgEnv-gnu', 'foss_with_cuda']
 
     # Increase runtime and memory usage
-    #num_copies = 2000
-    #copy_size = 1073741824*2
+    #num_copies = 20
+    copy_size = 2*1024**3-1 # 2GB ~= 1/6 of K80 memory
 
     num_tasks = 0
     reference = {
@@ -160,6 +160,10 @@ class gpu_bandwidth_d2d_check(GpuBandwidthD2D, SystemConfigCSCS):
     num_tasks = 0
     tags = {'diagnostic', 'mch', 'craype', 'benchmark'}
     maintainers = ['AJ', 'SK']
+
+    # Increase runtime and memory usage
+    #num_copies = 20
+    copy_size = 2*1024**3-1 # 2GB ~= 1/6 of K80 memory
 
     @run_before('performance')
     def set_references(self):
