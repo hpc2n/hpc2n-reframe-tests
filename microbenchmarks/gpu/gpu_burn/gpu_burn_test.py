@@ -17,7 +17,8 @@ class gpu_burn_check_base(gpu_burn_check):
     def __init__(self):
         self.valid_systems = [
             'kebnekaise:gpu_2xK80', 'kebnekaise:gpu_4xK80', 'kebnekaise:gpu_2xV100',
-            'kebnekaise:gpu_2xA6000',
+            'kebnekaise:gpu_2xA6000', 'kebnekaise:4xA40',
+            'UmU-Cloud',
             'alvis',
             'daint:gpu', 'dom:gpu', 'arolla:cn', 'tsa:cn', 'ault:amdv100',
             'ault:intelv100', 'ault:amda100', 'ault:amdvega'
@@ -49,7 +50,7 @@ class gpu_burn_check_base(gpu_burn_check):
             self.exclusive_access = False
         else:
             self.exclusive_access = True
-        if cs in {'kebnekaise', 'alvis'}:
+        if cs in {'kebnekaise', 'alvis', 'UmU-Cloud'}:
             self.num_tasks_per_node = 1
 
     @run_after('run')
@@ -62,7 +63,7 @@ class gpu_burn_check_base(gpu_burn_check):
 
         # Only report the nodes that don't meet the perf reference
         with osext.change_dir(self.stagedir):
-            key = f'{self.current_partition.fullname}:min_perf'
+            key = f'{self.current_partition.fullname}:gpu_perf_min'
             if key in self.reference:
                 regex = r'\[(\S+)\] GPU\s+\d\(OK\): (\d+) GF/s'
                 nids = set(sn.extractall(regex, self.stdout, 1))
@@ -101,11 +102,17 @@ class gpu_burn_check(gpu_burn_check_base):
                 'kebnekaise:gpu_2xA6000': {
                     'gpu_perf_min': (538, -0.10, None, 'Gflop/s'),
                 },
+                'kebnekaise:4xA40': {
+                    'gpu_perf_min': (488, -0.10, None, 'Gflop/s'),
+                },
                 'alvis:NxT4': {
                     'gpu_perf_min': (248, -0.10, None, 'Gflop/s'),
                 },
                 'alvis:NxV100': {
                     'gpu_perf_min': (6800, -0.10, None, 'Gflop/s'),
+                },
+                'UmU-Cloud:default': {
+                    'gpu_perf_min': (18100, -0.10, None, 'Gflop/s'),
                 },
                 'alvis:NxA40': {
                     'gpu_perf_min': (488, -0.10, None, 'Gflop/s'),
@@ -154,6 +161,12 @@ class gpu_burn_check(gpu_burn_check_base):
                 },
                 'kebnekaise:gpu_2xA6000': {
                     'gpu_perf_min': (21000, -0.10, None, 'Gflop/s'),
+                },
+                'kebnekaise:4xA40': {
+                    'gpu_perf_min': (19500, -0.10, None, 'Gflop/s'),
+                },
+                'UmU-Cloud:default': {
+                    'gpu_perf_min': (18100, -0.10, None, 'Gflop/s'),
                 },
                 'alvis:NxV100': {
                     'gpu_perf_min': (14300, -0.10, None, 'Gflop/s'),

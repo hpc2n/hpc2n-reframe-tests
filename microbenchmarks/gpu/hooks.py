@@ -31,6 +31,8 @@ def set_gpu_arch(self):
             self.gpu_arch = '86'
         if 'A100' in cn:
             self.gpu_arch = '80'
+    elif cs in {'UmU-Cloud'}:
+        self.gpu_arch = '80'
     elif cs in {'dom', 'daint'}:
         self.gpu_arch = '60'
         if self.current_environ.name not in {'PrgEnv-nvidia'}:
