@@ -3,10 +3,13 @@
 #
 # SPDX-License-Identifier: BSD-3-Clause
 
+import os
+import sys
+
 import reframe as rfm
+from hpctestlib.microbenchmarks.gpu.memory_bandwidth import *
 
 import hpc2ntests.microbenchmarks.gpu.hooks as hooks
-from hpctestlib.microbenchmarks.gpu.memory_bandwidth import *
 
 
 class SystemConfigCSCS(rfm.RegressionMixin):
@@ -33,7 +36,7 @@ class SystemConfigCSCS(rfm.RegressionMixin):
 class gpu_bandwidth_check(GpuBandwidth, SystemConfigCSCS):
     valid_systems = [
         'kebnekaise:gpu_2xK80', 'kebnekaise:gpu_4xK80', 'kebnekaise:gpu_2xV100',
-        'kebnekaise:gpu_2xA6000', 'alvis',
+        'kebnekaise:gpu_2xA6000', 'kebnekaise:4xA40', 'alvis', 'UmU-Cloud',
         'daint:gpu', 'dom:gpu', 'arolla:cn', 'tsa:cn',
         'ault:amdv100', 'ault:intelv100', 'ault:amda100', 'ault:amdvega'
     ]
@@ -60,10 +63,20 @@ class gpu_bandwidth_check(GpuBandwidth, SystemConfigCSCS):
             'd2h': (13.5, -0.1, None, 'GB/s'),
             'd2d': (816.4, -0.1, None, 'GB/s')
         },
+        'kebnekaise:4xA40': {
+            'h2d': (12, -0.1, None, 'GB/s'),
+            'd2h': (13, -0.1, None, 'GB/s'),
+            'd2d': (533.0, -0.1, None, 'GB/s')
+        },
         'kebnekaise:gpu_2xA6000': {
             'h2d': (12, -0.1, None, 'GB/s'),
             'd2h': (13, -0.1, None, 'GB/s'),
             'd2d': (636, -0.1, None, 'GB/s')
+        },
+        'UmU-Cloud:default': {
+            'h2d': (25, -0.1, None, 'GB/s'),
+            'd2h': (24, -0.1, None, 'GB/s'),
+            'd2d': (1400, -0.1, None, 'GB/s')
         },
         'alvis:NxT4': {
             'h2d': (5.83, -0.1, None, 'GB/s'),
@@ -139,7 +152,7 @@ class gpu_bandwidth_check(GpuBandwidth, SystemConfigCSCS):
 class gpu_bandwidth_d2d_check(GpuBandwidthD2D, SystemConfigCSCS):
     valid_systems = [
         'kebnekaise:gpu_2xK80', 'kebnekaise:gpu_4xK80', 'kebnekaise:gpu_2xV100',
-        'kebnekaise:gpu_2xA6000', 'alvis',
+        'kebnekaise:gpu_2xA6000', 'kebnekaise:4xA40', 'alvis',
         'tsa:cn', 'arola:cn', 'ault:amdv100', 'ault:intelv100',
         'ault:amda100', 'ault:amdvega'
     ]
@@ -165,6 +178,9 @@ class gpu_bandwidth_d2d_check(GpuBandwidthD2D, SystemConfigCSCS):
                 },
                 'kebnekaise:gpu_2xA6000': {
                     'bw':   (636, -0.05, None, 'GB/s'),
+                },
+                'kebnekaise:4xA40': {
+                    'bw': (9.5, -0.05, None, 'GB/s'),
                 },
                 'alvis:NxA40': {
                     'bw': (54.3, -0.05, None, 'GB/s'),
@@ -213,6 +229,9 @@ class gpu_bandwidth_d2d_check(GpuBandwidthD2D, SystemConfigCSCS):
                 },
                 'kebnekaise:gpu_2xA6000': {
                     'bw': (12, -0.05, None, 'GB/s'),
+                },
+                'kebnekaise:4xA40': {
+                    'bw': (31, -0.05, None, 'GB/s'),
                 },
                 'alvis:NxA40': {
                     'bw': (63.7, -0.05, None, 'GB/s'),
