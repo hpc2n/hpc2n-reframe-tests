@@ -626,7 +626,7 @@ site_configuration = {
         },
         {
             'name': 'foss_with_cuda',
-            'modules': ['foss', 'UCX-CUDA'],
+            'modules': ['foss/2021b', 'UCX-CUDA'],
             'cc': 'gcc',
             'cxx': 'g++',
             'ftn': 'gfortran',
