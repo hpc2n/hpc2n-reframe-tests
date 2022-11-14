@@ -124,6 +124,7 @@ class IorCheck(rfm.RunOnlyRegressionTest):
     def set_modules(self):
         module = {
             'kebnekaise': ['foss/2021b', 'IOR/3.3.0'],
+            'alvis': ['IOR/3.3.0-gompi-2021a'],
         }
         self.modules = module.get(self.current_system.name)
 
