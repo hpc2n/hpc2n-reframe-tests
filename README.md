@@ -5,7 +5,7 @@ Simple use instructions:
  - mkdir reframe-rundir
  - cd reframe-rundir
  - clone the repo into this directory
- - ln -s hpc2n-checks hpc2ntests
+ - ln -s hpc2n-checks/checks hpc2ntests
  - Load ReFrame module (currently 3.11 - 3.12 known to work)
  - PYTHONPATH=$PWD:$PYTHONPATH
  - list all available tests:
