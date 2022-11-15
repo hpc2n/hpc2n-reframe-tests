@@ -18,8 +18,8 @@ class IorCheck(rfm.RunOnlyRegressionTest):
                           '/users'])
     username = getpass.getuser()
     time_limit = '5m'
-    maintainers = ['SO', 'GLR']
-    tags = {'ops', 'production', 'external-resources'}
+    maintainers = ['SO', 'GLR', 'ÅS']
+    tags = {'ops', 'maintenance'}
 
     @run_after('init')
     def set_description(self):
@@ -87,6 +87,7 @@ class IorCheck(rfm.RunOnlyRegressionTest):
         # Setting some default values
         for data in self.fs.values():
             data.setdefault('ior_block_size', '24g')
+            data.setdefault('ior_xfr_size', '4m')
             data.setdefault('ior_access_type', 'MPIIO')
             data.setdefault(
                 'reference',
@@ -137,13 +138,13 @@ class IorCheck(rfm.RunOnlyRegressionTest):
         test_file = os.path.join(test_dir,
                                  f'.ior.{self.current_partition.name}')
         self.prerun_cmds = [f'mkdir -p {test_dir}']
-        #self.executable = os.path.join('src', 'C', 'IOR')
         self.executable = 'ior'
 
         # executable options depends on the file system
         block_size = self.fs[self.base_dir]['ior_block_size']
+        xfr_size = self.fs[self.base_dir]['ior_xfr_size']
         access_type = self.fs[self.base_dir]['ior_access_type']
-        self.executable_opts = ['-F', '-C ', '-Q', str(self.num_tasks_per_node), '-t 4m', '-D 30',
+        self.executable_opts = ['-F', '-C ', '-Q', str(self.num_tasks_per_node), '-t', xfr_size , '-D 30',
                                 '-b', block_size, '-a', access_type,
                                 '-o', test_file]
 
