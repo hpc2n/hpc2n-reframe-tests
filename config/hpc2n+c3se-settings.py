@@ -263,7 +263,7 @@ site_configuration = {
                     'descr': 'CPU only nodes',
                     'scheduler': 'slurm',
                     'launcher': 'srun',
-                    'access': ['-A C3SE-STAFF', '-C NOGPU'],
+                    'access': ['-A C3SE-STAFF', '-C NOGPU&MEM512'],
                     'environs': ['builtin', 'gnu', 'foss', 'foss_2021a'],
                     'container_platforms': [
                         {
