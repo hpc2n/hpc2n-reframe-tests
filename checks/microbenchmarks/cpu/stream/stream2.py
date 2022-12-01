@@ -23,7 +23,7 @@ class StreamTest2Base(rfm.RunOnlyRegressionTest):
         self.valid_systems += ['alvis', 'UmU-Cloud']
         self.valid_prog_environs = ['%s%s_%s' % (tc, c, tv) for tc in ['foss', 'intel']
             for c in ['', 'cuda']
-            for tv in ['2019a', '2019b', '2020a', '2020b', '2021a']]
+            for tv in ['2019a', '2019b', '2020a', '2020b', '2021a', '2022a']]
         self.num_tasks = 1
         self.num_tasks_per_node = 1
         self.depends_on('StreamTest2Build', udeps.by_env)
@@ -237,7 +237,7 @@ class StreamTest2Build(rfm.CompileOnlyRegressionTest):
         self.valid_systems += ['alvis', 'UmU-Cloud']
         self.valid_prog_environs = ['%s%s_%s' % (tc, c, tv) for tc in ['foss', 'intel']
             for c in ['', 'cuda']
-            for tv in ['2019a', '2019b', '2020a', '2020b', '2021a']]
+            for tv in ['2019a', '2019b', '2020a', '2020b', '2021a', '2022a']]
 
         static = '-static' if self.current_system.name != 'alvis' else ''
         self.prgenv_flags = {
