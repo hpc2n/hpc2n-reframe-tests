@@ -736,7 +736,7 @@ site_configuration = {
                     'format': (
                         '%(check_job_completion_time)s|reframe %(version)s|'
                         '%(check_info)s|jobid=%(check_jobid)s|'
-                        'nodelist=%(check_mynodelist)s|'
+                        'nodelist=%(check_job_nodelist)s|'
                         '%(check_perf_var)s=%(check_perf_value)s|'
                         'ref=%(check_perf_ref)s '
                         '(l=%(check_perf_lower_thres)s, '
