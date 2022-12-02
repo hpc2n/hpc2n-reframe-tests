@@ -81,12 +81,12 @@ class StreamTest2(StreamTest2Base):
             'kebnekaise:knl': 6800,
             'kebnekaise:lm': 24000, # 121000, for using the whole memory, but that takes forever.
             'UmU-Cloud:default': 21200,
-            'alvis:8xT4': 23000,
-            'alvis:2xV100': 31000,
-            'alvis:4xV100': 31000,
-            'alvis:4xA100': 10500, # Min for all A100 node types
-            'alvis:4xA100fat': 41300,
-            'alvis:4xA40': 10500,
+            'alvis:8xT4': 22900,
+            'alvis:2xV100': 30900,
+            'alvis:4xV100': 30900,
+            'alvis:4xA100': 10400, # Min for all A100 node types
+            'alvis:4xA100fat': 41200,
+            'alvis:4xA40': 10400,
         }
         self.variables = {
             'OMP_PLACES': 'threads',
