@@ -14,10 +14,9 @@ class IorCheck(rfm.RunOnlyRegressionTest):
     base_dir = parameter(['/pfs/stor10/io-test',
                           '/cephyr/NOBACKUP/priv/c3-alvis/reframe/io-test',
                           '/mimer/NOBACKUP/groups/c3-staff/reframe/io-test',
-                          '/scratch/shared/fulen',
-                          '/users'])
+                          ])
     username = getpass.getuser()
-    time_limit = '5m'
+    time_limit = '15m'
     maintainers = ['SO', 'GLR', 'ÅS']
     tags = {'ops', 'maintenance'}
 
@@ -45,43 +44,36 @@ class IorCheck(rfm.RunOnlyRegressionTest):
             },
             '/cephyr/NOBACKUP/priv/c3-alvis/reframe/io-test': {
                 'valid_systems': ['alvis'],
-                'alvis': {
-                    'num_tasks': 4,
-                    'num_tasks_per_node': 4,
+                'alvis:CPUonly': {
+                    'num_tasks': 32,
+                    'num_tasks_per_node': 32,
+                },
+                'alvis:4xA100_MEM256': {
+                    'num_tasks': 64,
+                    'num_tasks_per_node': 64,
                 },
                 'reference': {
-                    'write_bw': (1000, -0.1, None, 'MiB/s'),
-                    'read_bw': (2000, -0.1, None, 'MiB/s'),
+                    'write_bw': (3100, -0.1, None, 'MiB/s'),
+                    'read_bw': (2500, -0.1, None, 'MiB/s'),
                 },
+                'ior_block_size': '240g',
             },
             '/mimer/NOBACKUP/groups/c3-staff/reframe/io-test': {
                 'valid_systems': ['alvis'],
-                'alvis': {
-                    'num_tasks': 4,
-                    'num_tasks_per_node': 4,
+                'alvis:CPUonly': {
+                    'num_tasks': 32,
+                    'num_tasks_per_node': 32,
                 },
+                'alvis:4xA100_MEM256': {
+                    'num_tasks': 64,
+                    'num_tasks_per_node': 64,
+                },
+                'ior_block_size': '240g',
                 'reference': {
-                    'write_bw': (1000, -0.1, None, 'MiB/s'),
-                    'read_bw': (2000, -0.1, None, 'MiB/s'),
+                    'write_bw': (6700, -0.1, None, 'MiB/s'),
+                    'read_bw': (6100, -0.1, None, 'MiB/s'),
                 },
             },
-            '/users': {
-                'valid_systems': ['daint:gpu', 'dom:gpu', 'fulen:normal'],
-                'ior_block_size': '8g',
-                'daint': {},
-                'dom': {},
-                'fulen': {
-                    'valid_prog_environs': ['PrgEnv-gnu']
-                }
-            },
-            '/scratch/shared/fulen': {
-                'valid_systems': ['fulen:normal'],
-                'ior_block_size': '48g',
-                'fulen': {
-                    'num_tasks': 8,
-                    'valid_prog_environs': ['PrgEnv-gnu']
-                }
-            }
         }
 
         # Setting some default values
@@ -117,15 +109,31 @@ class IorCheck(rfm.RunOnlyRegressionTest):
         penv = self.fs[self.base_dir][cur_sys].get(vpe, ['builtin'])
         self.valid_prog_environs = penv
 
-        tpn = self.fs[self.base_dir][cur_sys].get('num_tasks_per_node', 1)
-        self.num_tasks = self.fs[self.base_dir][cur_sys].get('num_tasks', 1)
-        self.num_tasks_per_node = tpn
 
-    @run_after('compile')
+    @run_before('run')
+    def set_tasks(self):
+        cur_sys = self.current_system.name
+        fullname = self.current_partition.fullname
+        if cur_sys not in self.fs[self.base_dir]:
+            cur_sys = 'dummy'
+        if fullname not in self.fs[self.base_dir]:
+            fullname = cur_sys
+
+        tpn = self.fs[self.base_dir][cur_sys].get('num_tasks_per_node', 1)
+        tpn = self.fs[self.base_dir][fullname].get('num_tasks_per_node', tpn)
+        cpt = self.fs[self.base_dir][cur_sys].get('cpus_per_task', 1)
+        cpt = self.fs[self.base_dir][fullname].get('cpus_per_task', cpt)
+        nt = self.fs[self.base_dir][cur_sys].get('num_tasks', 1)
+        nt = self.fs[self.base_dir][fullname].get('num_tasks', nt)
+        self.num_tasks = nt
+        self.tpn = tpn
+        self.num_cpus_per_task = cpt
+
+    @run_after('init')
     def set_modules(self):
         module = {
             'kebnekaise': ['foss/2021b', 'IOR/3.3.0'],
-            'alvis': ['IOR/3.3.0-gompi-2021a'],
+            'alvis': ['IOR/3.3.0-gompi-2022a'],
         }
         self.modules = module.get(self.current_system.name)
 
@@ -144,7 +152,7 @@ class IorCheck(rfm.RunOnlyRegressionTest):
         block_size = self.fs[self.base_dir]['ior_block_size']
         xfr_size = self.fs[self.base_dir]['ior_xfr_size']
         access_type = self.fs[self.base_dir]['ior_access_type']
-        self.executable_opts = ['-F', '-C ', '-Q', str(self.num_tasks_per_node), '-t', xfr_size , '-D 30',
+        self.executable_opts += ['-F', '-C ', '-Q', str(self.tpn), '-t', xfr_size , '-D 240',
                                 '-b', block_size, '-a', access_type,
                                 '-o', test_file]
 
@@ -155,7 +163,7 @@ class IorCheck(rfm.RunOnlyRegressionTest):
 
 @rfm.simple_test
 class IorWriteCheck(IorCheck):
-    executable_opts += ['-w', '-k']
+    executable_opts = ['-w', '-k']
     tags |= {'write'}
 
     @sanity_function
@@ -173,7 +181,7 @@ class IorWriteCheck(IorCheck):
 
 @rfm.simple_test
 class IorReadCheck(IorCheck):
-    executable_opts += ['-r']
+    executable_opts = ['-r']
     tags |= {'read'}
 
     @sanity_function
@@ -192,3 +200,23 @@ class IorReadCheck(IorCheck):
     def set_deps(self):
         variant = IorWriteCheck.get_variant_nums(base_dir=self.base_dir)[0]
         self.depends_on(IorWriteCheck.variant_name(variant))
+
+@rfm.simple_test
+class IorWriteReadCheck(IorCheck):
+    executable_opts = ['-w', '-r']
+    tags |= {'write', 'read'}
+
+    @sanity_function
+    def assert_output(self):
+        return sn.assert_found(r'^Max Write: ', self.stdout) and sn.assert_found(r'^Max Read: ', self.stdout)
+
+    @run_after('init')
+    def set_perf_patterns(self):
+        self.perf_patterns = {
+            'write_bw': sn.extractsingle(
+                r'^Max Write:\s+(?P<write_bw>\S+) MiB/sec', self.stdout,
+                'write_bw', float),
+            'read_bw': sn.extractsingle(
+                r'^Max Read:\s+(?P<read_bw>\S+) MiB/sec', self.stdout,
+                'read_bw', float)
+        }
