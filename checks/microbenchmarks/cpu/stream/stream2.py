@@ -68,7 +68,8 @@ class StreamTest2(StreamTest2Base):
             'alvis:8xT4': 32,
             'alvis:2xV100': 16,
             'alvis:4xV100': 32,
-            'alvis:4xA100': 32,
+            'alvis:4xA100_MEM256': 64,
+            'alvis:4xA100_MEM512': 64,
             'alvis:4xA100fat': 64,
             'alvis:4xA40': 64,
         }
@@ -84,7 +85,8 @@ class StreamTest2(StreamTest2Base):
             'alvis:8xT4': 22900,
             'alvis:2xV100': 30900,
             'alvis:4xV100': 30900,
-            'alvis:4xA100': 10400, # Min for all A100 node types
+            'alvis:4xA100_MEM256': 9000,
+            'alvis:4xA100_MEM512': 20000,
             'alvis:4xA100fat': 41200,
             'alvis:4xA40': 10400,
         }
@@ -169,6 +171,24 @@ class StreamTest2(StreamTest2Base):
                     'triad': (182000, -0.05, 0.05, 'MB/s'),
                 },
                 'alvis:4xA40': {
+                    'copy':  (311600, -0.05, 0.05, 'MB/s'),
+                    'scale': (310700, -0.05, 0.05, 'MB/s'),
+                    'add':   (312800, -0.05, 0.05, 'MB/s'),
+                    'triad': (311500, -0.05, 0.05, 'MB/s'),
+                },
+                'alvis:4xA100_MEM256': {
+                    'copy':  (311600, -0.05, 0.05, 'MB/s'),
+                    'scale': (310700, -0.05, 0.05, 'MB/s'),
+                    'add':   (312800, -0.05, 0.05, 'MB/s'),
+                    'triad': (311500, -0.05, 0.05, 'MB/s'),
+                },
+                'alvis:4xA100_MEM512': {
+                    'copy':  (311600, -0.05, 0.05, 'MB/s'),
+                    'scale': (310700, -0.05, 0.05, 'MB/s'),
+                    'add':   (312800, -0.05, 0.05, 'MB/s'),
+                    'triad': (311500, -0.05, 0.05, 'MB/s'),
+                },
+                'alvis:4xA100fat': {
                     'copy':  (311600, -0.05, 0.05, 'MB/s'),
                     'scale': (310700, -0.05, 0.05, 'MB/s'),
                     'add':   (312800, -0.05, 0.05, 'MB/s'),
