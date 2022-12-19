@@ -23,7 +23,12 @@ class gpu_burn_check_base(gpu_burn_check):
             'daint:gpu', 'dom:gpu', 'arolla:cn', 'tsa:cn', 'ault:amdv100',
             'ault:intelv100', 'ault:amda100', 'ault:amdvega'
         ]
-        self.valid_prog_environs = ['PrgEnv-gnu', 'foss_with_cuda']
+
+        if self.current_system.name == 'alvis':
+            self.valid_prog_environs = ['foss_with_cuda_alvis']
+        else:
+            self.valid_prog_environs = ['foss_with_cuda']
+
         if self.precision == 'double':
             self.use_dp = True
         else:
@@ -107,7 +112,7 @@ class gpu_burn_check(gpu_burn_check_base):
                     'gpu_perf_min': (488, -0.10, None, 'Gflop/s'),
                 },
                 'alvis:NxT4': {
-                    'gpu_perf_min': (248, -0.10, None, 'Gflop/s'),
+                    'gpu_perf_min': (250, -0.10, None, 'Gflop/s'),
                 },
                 'alvis:NxV100': {
                     'gpu_perf_min': (6800, -0.10, None, 'Gflop/s'),
@@ -168,6 +173,9 @@ class gpu_burn_check(gpu_burn_check_base):
                 },
                 'UmU-Cloud:default': {
                     'gpu_perf_min': (18100, -0.10, None, 'Gflop/s'),
+                },
+                'alvis:NxT4': {
+                    'gpu_perf_min': (4000, -0.10, None, 'Gflop/s'),
                 },
                 'alvis:NxV100': {
                     'gpu_perf_min': (14300, -0.10, None, 'Gflop/s'),
