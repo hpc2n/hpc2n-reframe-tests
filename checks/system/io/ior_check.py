@@ -32,14 +32,14 @@ class IorCheck(rfm.RunOnlyRegressionTest):
     def set_fs_information(self):
         self.fs = {
             '/pfs/stor10/io-test': {
-                'valid_systems': ['kebnekaise:bdw'],
+                'valid_systems': ['kebnekaise'],
                 'kebnekaise': {
-                    'num_tasks': 4,
-                    'num_tasks_per_node': 4,
+                    'num_tasks': 28,
+                    'num_tasks_per_node': 28,
                 },
                 'reference': {
-                    'write_bw': (1000, -0.1, None, 'MiB/s'),
-                    'read_bw': (2000, -0.1, None, 'MiB/s'),
+                    'write_bw': (5400, -0.1, None, 'MiB/s'),
+                    'read_bw': (5300, -0.1, None, 'MiB/s'),
                 },
             },
             '/cephyr/NOBACKUP/priv/c3-alvis/reframe/io-test': {
