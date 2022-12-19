@@ -165,6 +165,9 @@ class gpu_burn_check(gpu_burn_check_base):
                 'kebnekaise:gpu_2xK80': {
                     'gpu_perf_min': (2300, -0.10, None, 'Gflop/s'),
                 },
+                'kebnekaise:gpu_2xV100': {
+                    'gpu_perf_min': (13400, -0.10, None, 'Gflop/s'),
+                },
                 'kebnekaise:gpu_2xA6000': {
                     'gpu_perf_min': (21000, -0.10, None, 'Gflop/s'),
                 },
