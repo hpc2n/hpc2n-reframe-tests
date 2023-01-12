@@ -52,6 +52,10 @@ class IorCheck(rfm.RunOnlyRegressionTest):
                     'num_tasks': 64,
                     'num_tasks_per_node': 64,
                 },
+                'alvis:4xA100_MEM512': {
+                    'num_tasks': 64,
+                    'num_tasks_per_node': 64,
+                },
                 'reference': {
                     'write_bw': (3100, -0.1, None, 'MiB/s'),
                     'read_bw': (2500, -0.1, None, 'MiB/s'),
@@ -65,6 +69,10 @@ class IorCheck(rfm.RunOnlyRegressionTest):
                     'num_tasks_per_node': 32,
                 },
                 'alvis:4xA100_MEM256': {
+                    'num_tasks': 64,
+                    'num_tasks_per_node': 64,
+                },
+                'alvis:4xA100_MEM512': {
                     'num_tasks': 64,
                     'num_tasks_per_node': 64,
                 },
