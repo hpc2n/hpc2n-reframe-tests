@@ -73,6 +73,12 @@ class StreamTest2(StreamTest2Base):
             'alvis:4xA100fat': 64,
             'alvis:4xA40': 64,
         }
+        self.thread_reduction = {
+            # Due to the wekanode process we need to reduce number of OMP threads on A100 nodes
+            'alvis:4xA100_MEM256': 2,
+            'alvis:4xA100_MEM512': 2,
+            'alvis:4xA100fat': 2,
+        }
         # Size of array in Mi-elements (*1024^2), total memory usage is size * 1024^2 * 8 * 3
         self.stream_array = {
             'kebnekaise:local': 4500,
@@ -85,12 +91,19 @@ class StreamTest2(StreamTest2Base):
             'alvis:8xT4': 22900,
             'alvis:2xV100': 30900,
             'alvis:4xV100': 30900,
-            'alvis:4xA100_MEM256': 9000,
+            # Due to the wekanode process we need to reduce memory on A100 nodes
+            'alvis:4xA100_MEM256': 9800,
             'alvis:4xA100_MEM512': 20000,
-            'alvis:4xA100fat': 41200,
+            'alvis:4xA100fat': 41000,
             'alvis:4xA40': 10400,
         }
-        self.variables = {
+        self.use_omp_binding = {
+            # Due to the wekanode process we can't use OMP binding on A100 nodes
+            'alvis:4xA100_MEM256': False,
+            'alvis:4xA100_MEM512': False,
+            'alvis:4xA100fat': False,
+        }
+        self.default_variables = {
             'OMP_PLACES': 'threads',
             'OMP_PROC_BIND': 'spread'
         }
@@ -177,22 +190,22 @@ class StreamTest2(StreamTest2Base):
                     'triad': (311500, -0.05, 0.05, 'MB/s'),
                 },
                 'alvis:4xA100_MEM256': {
-                    'copy':  (311600, -0.05, 0.05, 'MB/s'),
-                    'scale': (310700, -0.05, 0.05, 'MB/s'),
-                    'add':   (312800, -0.05, 0.05, 'MB/s'),
-                    'triad': (311500, -0.05, 0.05, 'MB/s'),
+                    'copy':  (290000, -0.05, 0.05, 'MB/s'),
+                    'scale': (290000, -0.05, 0.05, 'MB/s'),
+                    'add':   (290000, -0.05, 0.05, 'MB/s'),
+                    'triad': (290000, -0.05, 0.05, 'MB/s'),
                 },
                 'alvis:4xA100_MEM512': {
-                    'copy':  (311600, -0.05, 0.05, 'MB/s'),
-                    'scale': (310700, -0.05, 0.05, 'MB/s'),
-                    'add':   (312800, -0.05, 0.05, 'MB/s'),
-                    'triad': (311500, -0.05, 0.05, 'MB/s'),
+                    'copy':  (290000, -0.05, 0.05, 'MB/s'),
+                    'scale': (290000, -0.05, 0.05, 'MB/s'),
+                    'add':   (290000, -0.05, 0.05, 'MB/s'),
+                    'triad': (290000, -0.05, 0.05, 'MB/s'),
                 },
                 'alvis:4xA100fat': {
-                    'copy':  (311600, -0.05, 0.05, 'MB/s'),
-                    'scale': (310700, -0.05, 0.05, 'MB/s'),
-                    'add':   (312800, -0.05, 0.05, 'MB/s'),
-                    'triad': (311500, -0.05, 0.05, 'MB/s'),
+                    'copy':  (290000, -0.05, 0.05, 'MB/s'),
+                    'scale': (290000, -0.05, 0.05, 'MB/s'),
+                    'add':   (290000, -0.05, 0.05, 'MB/s'),
+                    'triad': (290000, -0.05, 0.05, 'MB/s'),
                 },
             },
         }
@@ -217,7 +230,12 @@ class StreamTest2(StreamTest2Base):
         if self.current_partition.fullname == 'kebnekaise:knl':
             omp_threads *= 4
         
-        self.variables['OMP_NUM_THREADS'] = str(omp_threads)
+        thread_reduction = self.thread_reduction.get(self.current_partition.fullname, 0)
+        use_omp_binding = self.use_omp_binding.get(self.current_partition.fullname, True)
+        if use_omp_binding:
+            self.variables = self.default_variables
+        self.variables['OMP_NUM_THREADS'] = str(omp_threads-thread_reduction)
+
         envname = self.current_environ.name
         tc_name = envname.split('_')[0].replace("cuda", "")
 
