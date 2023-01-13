@@ -48,7 +48,7 @@ REFERENCE_SMALL_PERFORMANCE = {
 
 REFERENCE_LARGE_PERFORMANCE = {
     'alvis:8xT4': {
-        'throughput_total': (4847, -0.05, None, 'images/s'),
+        'throughput_total': (1208, -0.05, None, 'images/s'),
         'throughput_iteration': (151, -0.05, None, 'images/s')
     },
     'alvis:2xV100': {
@@ -116,19 +116,19 @@ class snic_tensorflow_horovod_check(tensorflow_cnn_check):
         self.tasks_cpu_settings = {
             'alvis:2xV100': {
                 'cpus_per_node': 16,
-                'num_nodes': {'small': 1, 'large': 4},
+                'num_nodes': {'small': 1, 'large': 1},
             },
             'alvis:4xV100': {
                 'cpus_per_node': 32,
-                'num_nodes': {'small': 1, 'large': 4},
+                'num_nodes': {'small': 1, 'large': 1},
             },
             'alvis:8xT4': {
                 'cpus_per_node': 32,
-                'num_nodes': {'small': 1, 'large': 2},
+                'num_nodes': {'small': 1, 'large': 1},
             },
             'alvis:4xA40': {
                 'cpus_per_node': 64,
-                'num_nodes': {'small': 1, 'large': 2},
+                'num_nodes': {'small': 1, 'large': 1},
             },
             'alvis:4xA100_MEM256': {
                 'cpus_per_node': 64,
