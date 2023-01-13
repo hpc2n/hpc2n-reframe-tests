@@ -10,14 +10,6 @@ import reframe.utility.osext as osext
 from hpctestlib.ml.tensorflow.horovod import tensorflow_cnn_check
 
 REFERENCE_SMALL_PERFORMANCE = {
-    'dom:gpu': {
-        'throughput_total': (1712, -0.05, None, 'images/s'),
-        'throughput_iteration': (214, -0.05, None, 'images/s'),
-    },
-    'daint:gpu': {
-        'throughput_total': (1712, -0.05, None, 'images/s'),
-        'throughput_iteration': (214, -0.05, None, 'images/s')
-    },
     'alvis:8xT4': {
         'throughput_total': (1233, -0.05, None, 'images/s'),
         'throughput_iteration': (154, -0.05, None, 'images/s'),
@@ -53,10 +45,6 @@ REFERENCE_SMALL_PERFORMANCE = {
 }
 
 REFERENCE_LARGE_PERFORMANCE = {
-    'daint:gpu': {
-        'throughput_total': (6848, -0.05, None, 'images/s'),
-        'throughput_iteration': (214, -0.05, None, 'images/s')
-    },
     'alvis:8xT4': {
         'throughput_total': (4847, -0.05, None, 'images/s'),
         'throughput_iteration': (151, -0.05, None, 'images/s')
@@ -84,8 +72,7 @@ class snic_tensorflow_horovod_check(tensorflow_cnn_check):
     maintainers = ['RS', 'TR', 'AS']
     valid_prog_environs = ['builtin']
 
-    valid_systems = ['daint:gpu']
-    valid_systems += ['kebnekaise:gpu_%s' % x for x in ['2xK80', '4xK80', '2xV100']]
+    valid_systems = ['kebnekaise:gpu_%s' % x for x in ['2xK80', '4xK80', '2xV100']]
     valid_systems += ['alvis']
 
     kebnekaise_single_socket = ['kebnekaise:gpu_%s' % x for x in ['1xK80', '1xV100']]
@@ -95,8 +82,6 @@ class snic_tensorflow_horovod_check(tensorflow_cnn_check):
         module = {
             'kebnekaise': ['fosscuda/2019b', 'Horovod/0.19.1-TensorFlow-2.1.0-Python-3.7.4'],
             'alvis': ['Horovod/0.23.0-fosscuda-2020b-TensorFlow-2.5.0'],
-            'dom': [f'Horovod/0.21.0-CrayGNU-{osext.cray_cdt_version()}-tf-2.4.0'],
-            'daint': [f'Horovod/0.21.0-CrayGNU-{osext.cray_cdt_version()}-tf-2.4.0'],
         }
         self.modules = module.get(self.current_system.name)
 
@@ -154,20 +139,10 @@ class snic_tensorflow_horovod_check(tensorflow_cnn_check):
                 'num_tasks_per_node': 2,
                 'num_tasks': {'small': 2, 'large': 4},
             },
-            'dom:gpu': {
-                'num_cpus_per_task': 12,
-                'num_tasks_per_node': 1,
-                'num_tasks': {'small': 8},
-            },
-            'daint:gpu': {
-                'num_cpus_per_task': 12,
-                'num_tasks_per_node': 1,
-                'num_tasks': {'small': 8, 'large': 32},
-            },
         }
 
         if self.variant == 'small':
-            self.valid_systems += ['dom:gpu'] + self.kebnekaise_single_socket
+            self.valid_systems += self.kebnekaise_single_socket
             self.reference = REFERENCE_SMALL_PERFORMANCE
         else:
             self.reference = REFERENCE_LARGE_PERFORMANCE
@@ -182,8 +157,6 @@ class snic_tensorflow_horovod_check(tensorflow_cnn_check):
         IB_HCA = {
             'kebnekaise': 'mlx5_0',
             'alvis': 'mlx5_0',
-            'dom': 'ipogif0',
-            'daint': 'ipogif0',
         }
 
         self.variables = {
