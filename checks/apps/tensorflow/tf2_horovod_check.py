@@ -9,6 +9,8 @@ import reframe.utility.osext as osext
 
 from hpctestlib.ml.tensorflow.horovod import tensorflow_cnn_check
 
+import hpc2ntests.microbenchmarks.gpu.hooks as hooks
+
 REFERENCE_SMALL_PERFORMANCE = {
     'alvis:8xT4': {
         'throughput_total': (1233, -0.05, None, 'images/s'),
@@ -75,8 +77,6 @@ class snic_tensorflow_horovod_check(tensorflow_cnn_check):
     valid_systems = ['kebnekaise:gpu_%s' % x for x in ['2xK80', '4xK80', '2xV100']]
     valid_systems += ['alvis']
 
-    kebnekaise_single_socket = ['kebnekaise:gpu_%s' % x for x in ['1xK80', '1xV100']]
-
     @run_after('init')
     def set_modules(self):
         module = {
@@ -86,71 +86,65 @@ class snic_tensorflow_horovod_check(tensorflow_cnn_check):
         self.modules = module.get(self.current_system.name)
 
     @run_before('run')
+    def set_horovod_version(self):
+        horovod_version = {
+            'kebnekaise': 'v0.19.1',
+            'alvis': 'v0.23.0',
+        }
+        self.benchmark_version = horovod_version.get(self.current_system.name)
+
+    @run_before('run')
+    def set_num_gpus_per_node(self):
+        hooks.set_num_gpus_per_node(self)
+
+    @run_before('run')
     def set_num_task(self):
         # Settings for various systems. num_tasks is per-variant
         self.tasks_cpu_settings = {
             'alvis:2xV100': {
-                'num_cpus_per_task': 8,
-                'num_tasks_per_node': 2,
-                'num_tasks': {'small': 2, 'large': 8},
+                'cpus_per_node': 16,
+                'num_nodes': {'small': 2, 'large': 8},
             },
             'alvis:4xV100': {
-                'num_cpus_per_task': 8,
-                'num_tasks_per_node': 4,
-                'num_tasks': {'small': 4, 'large': 12},
+                'cpus_per_node': 32,
+                'num_nodes': {'small': 4, 'large': 12},
             },
             'alvis:8xT4': {
-                'num_cpus_per_task': 4,
-                'num_tasks_per_node': 8,
-                'num_tasks': {'small': 8, 'large': 32},
+                'cpus_per_node': 32,
+                'num_nodes': {'small': 1, 'large': 2},
             },
             'alvis:4xA100_MEM512': {
-                'num_cpus_per_task': 16,
-                'num_tasks_per_node': 4,
-                'num_tasks': {'small': 4, 'large': 4},
+                'cpus_per_node': 64,
+                'num_nodes': {'small': 1, 'large': 1},
             },
             'alvis:4xA40': {
-                'num_cpus_per_task': 16,
-                'num_tasks_per_node': 4,
-                'num_tasks': {'small': 4, 'large': 32},
-            },
-            'kebnekaise:gpu_1xK80': {
-                'num_cpus_per_task': 7,
-                'num_tasks_per_node': 2,
-                'num_tasks': {'small': 2},
+                'cpus_per_node': 64,
+                'num_nodes': {'small': 1, 'large': 2},
             },
             'kebnekaise:gpu_2xK80': {
-                'num_cpus_per_task': 7,
-                'num_tasks_per_node': 4,
-                'num_tasks': {'small': 4, 'large': 8},
+                'cpus_per_node': 28,
+                'num_nodes': {'small': 4, 'large': 8},
             },
             'kebnekaise:gpu_4xK80': {
-                'num_cpus_per_task': 3,
-                'num_tasks_per_node': 8,
-                'num_tasks': {'small': 8, 'large': 32},
-            },
-            'kebnekaise:gpu_1xV100': {
-                'num_cpus_per_task': 14,
-                'num_tasks_per_node': 1,
-                'num_tasks': {'small': 1},
+                'cpus_per_node': 28,
+                'num_nodes': {'small': 8, 'large': 32},
             },
             'kebnekaise:gpu_2xV100': {
-                'num_cpus_per_task': 14,
-                'num_tasks_per_node': 2,
-                'num_tasks': {'small': 2, 'large': 4},
+                'cpus_per_node': 28,
+                'num_nodes': {'small': 2, 'large': 4},
             },
         }
 
         if self.variant == 'small':
-            self.valid_systems += self.kebnekaise_single_socket
             self.reference = REFERENCE_SMALL_PERFORMANCE
         else:
             self.reference = REFERENCE_LARGE_PERFORMANCE
 
         cp = self.current_partition.fullname
-        self.num_tasks_per_node = self.tasks_cpu_settings.get(cp)['num_tasks_per_node']
-        self.num_cpus_per_task = self.tasks_cpu_settings.get(cp)['num_cpus_per_task']
-        self.num_tasks = self.tasks_cpu_settings.get(cp)['num_tasks'][self.variant]
+        # Use one task per GPU
+        self.num_tasks_per_node = self.num_gpus_per_node
+        self.num_cpus_per_task = int(self.tasks_cpu_settings.get(cp)['cpus_per_node'] / self.num_tasks_per_node)
+        self.num_tasks = self.tasks_cpu_settings.get(cp)['num_nodes'][self.variant] * self.num_tasks_per_node
 
     @run_before('run')
     def setup_run(self):
