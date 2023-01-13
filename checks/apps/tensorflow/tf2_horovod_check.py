@@ -174,7 +174,7 @@ class snic_tensorflow_horovod_check(tensorflow_cnn_check):
             'alvis': 'mlx5_0',
         }
 
-        self.variables = {
+        self.env_vars = {
             'NCCL_DEBUG': 'INFO',
             'NCCL_IB_HCA': IB_HCA.get(self.current_system.name),
             'NCCL_IB_CUDA_SUPPORT': '1',
