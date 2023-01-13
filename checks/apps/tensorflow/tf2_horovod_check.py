@@ -26,9 +26,9 @@ REFERENCE_SMALL_PERFORMANCE = {
         'throughput_total': (865, -0.05, None, 'images/s'),
         'throughput_iteration': (432, -0.05, None, 'images/s'),
     },
-    'alvis:4xA100': {
-        'throughput_total': (559, -0.05, None, 'images/s'),
-        'throughput_iteration': (2236, -0.05, None, 'images/s'),
+    'alvis:4xA100_MEM512': {
+        'throughput_total': (2236, -0.05, None, 'images/s'),
+        'throughput_iteration': (559, -0.05, None, 'images/s'),
     },
     'kebnekaise:gpu_1xK80': {
         'throughput_total': (124, -0.05, None, 'images/s'),
@@ -65,7 +65,7 @@ REFERENCE_LARGE_PERFORMANCE = {
         'throughput_total': (3242, -0.05, None, 'images/s'),
         'throughput_iteration': (405, -0.05, None, 'images/s')
     },
-    'alvis:4xA100': {
+    'alvis:4xA100_MEM512': {
         'throughput_total': (2233, -0.05, None, 'images/s'),
         'throughput_iteration': (558, -0.05, None, 'images/s')
     },
@@ -94,7 +94,7 @@ class snic_tensorflow_horovod_check(tensorflow_cnn_check):
     def set_modules(self):
         module = {
             'kebnekaise': ['fosscuda/2019b', 'Horovod/0.19.1-TensorFlow-2.1.0-Python-3.7.4'],
-            'alvis': ['Horovod/0.19.1-fosscuda-2019b-TensorFlow-2.1.0-Python-3.7.4'],
+            'alvis': ['Horovod/0.23.0-fosscuda-2020b-TensorFlow-2.5.0'],
             'dom': [f'Horovod/0.21.0-CrayGNU-{osext.cray_cdt_version()}-tf-2.4.0'],
             'daint': [f'Horovod/0.21.0-CrayGNU-{osext.cray_cdt_version()}-tf-2.4.0'],
         }
@@ -119,8 +119,8 @@ class snic_tensorflow_horovod_check(tensorflow_cnn_check):
                 'num_tasks_per_node': 8,
                 'num_tasks': {'small': 8, 'large': 32},
             },
-            'alvis:4xA100': {
-                'num_cpus_per_task': 8,
+            'alvis:4xA100_MEM512': {
+                'num_cpus_per_task': 16,
                 'num_tasks_per_node': 4,
                 'num_tasks': {'small': 4, 'large': 4},
             },
@@ -181,7 +181,7 @@ class snic_tensorflow_horovod_check(tensorflow_cnn_check):
     def setup_run(self):
         IB_HCA = {
             'kebnekaise': 'mlx5_0',
-            'alvis': 'mlx5_2',
+            'alvis': 'mlx5_0',
             'dom': 'ipogif0',
             'daint': 'ipogif0',
         }
