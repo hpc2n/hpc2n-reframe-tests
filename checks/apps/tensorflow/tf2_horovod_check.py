@@ -24,21 +24,13 @@ REFERENCE_SMALL_PERFORMANCE = {
         'throughput_total': (2236, -0.05, None, 'images/s'),
         'throughput_iteration': (559, -0.05, None, 'images/s'),
     },
-    'kebnekaise:gpu_1xK80': {
-        'throughput_total': (124, -0.05, None, 'images/s'),
-        'throughput_iteration': (62.4, -0.05, None, 'images/s'),
-    },
     'kebnekaise:gpu_2xK80': {
         'throughput_total': (249, -0.05, None, 'images/s'),
-        'throughput_iteration': (62.4, -0.05, None, 'images/s'),
+        'throughput_iteration': (62, -0.05, None, 'images/s'),
     },
     'kebnekaise:gpu_4xK80': {
-        'throughput_total': (494, -0.05, None, 'images/s'),
-        'throughput_iteration': (62.4, -0.05, None, 'images/s'),
-    },
-    'kebnekaise:gpu_1xV100': {
-        'throughput_total': (439, -0.05, None, 'images/s'),
-        'throughput_iteration': (439, -0.05, None, 'images/s'),
+        'throughput_total': (499, -0.05, None, 'images/s'),
+        'throughput_iteration': (62, -0.05, None, 'images/s'),
     },
     'kebnekaise:gpu_2xV100': {
         'throughput_total': (832, -0.05, None, 'images/s'),
@@ -60,8 +52,12 @@ REFERENCE_LARGE_PERFORMANCE = {
         'throughput_iteration': (558, -0.05, None, 'images/s')
     },
     'kebnekaise:gpu_2xK80': {
-        'throughput_total': (493, -0.05, None, 'images/s'),
-        'throughput_iteration': (61.6, -0.05, None, 'images/s')
+        'throughput_total': (992, -0.05, None, 'images/s'),
+        'throughput_iteration': (62, -0.05, None, 'images/s')
+    },
+    'kebnekaise:gpu_2xV100': {
+        'throughput_total': (3328, -0.05, None, 'images/s'),
+        'throughput_iteration': (416, -0.05, None, 'images/s')
     },
 }
 
@@ -85,13 +81,14 @@ class snic_tensorflow_horovod_check(tensorflow_cnn_check):
         }
         self.modules = module.get(self.current_system.name)
 
-    @run_before('run')
-    def set_horovod_version(self):
+    @run_after('init')
+    def prepare_test(self):
         horovod_version = {
             'kebnekaise': 'v0.19.1',
             'alvis': 'v0.23.0',
         }
         self.benchmark_version = horovod_version.get(self.current_system.name)
+        super().prepare_test()
 
     @run_before('run')
     def set_num_gpus_per_node(self):
@@ -123,15 +120,15 @@ class snic_tensorflow_horovod_check(tensorflow_cnn_check):
             },
             'kebnekaise:gpu_2xK80': {
                 'cpus_per_node': 28,
-                'num_nodes': {'small': 4, 'large': 8},
+                'num_nodes': {'small': 1, 'large': 4},
             },
             'kebnekaise:gpu_4xK80': {
                 'cpus_per_node': 28,
-                'num_nodes': {'small': 8, 'large': 32},
+                'num_nodes': {'small': 1, 'large': 2},
             },
             'kebnekaise:gpu_2xV100': {
                 'cpus_per_node': 28,
-                'num_nodes': {'small': 2, 'large': 4},
+                'num_nodes': {'small': 1, 'large': 4},
             },
         }
 
