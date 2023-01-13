@@ -20,7 +20,15 @@ REFERENCE_SMALL_PERFORMANCE = {
         'throughput_total': (865, -0.05, None, 'images/s'),
         'throughput_iteration': (432, -0.05, None, 'images/s'),
     },
+    'alvis:4xA100_MEM256': {
+        'throughput_total': (2236, -0.05, None, 'images/s'),
+        'throughput_iteration': (559, -0.05, None, 'images/s'),
+    },
     'alvis:4xA100_MEM512': {
+        'throughput_total': (2236, -0.05, None, 'images/s'),
+        'throughput_iteration': (559, -0.05, None, 'images/s'),
+    },
+    'alvis:4xA100fat': {
         'throughput_total': (2236, -0.05, None, 'images/s'),
         'throughput_iteration': (559, -0.05, None, 'images/s'),
     },
@@ -47,7 +55,15 @@ REFERENCE_LARGE_PERFORMANCE = {
         'throughput_total': (3242, -0.05, None, 'images/s'),
         'throughput_iteration': (405, -0.05, None, 'images/s')
     },
+    'alvis:4xA100_MEM256': {
+        'throughput_total': (2233, -0.05, None, 'images/s'),
+        'throughput_iteration': (558, -0.05, None, 'images/s')
+    },
     'alvis:4xA100_MEM512': {
+        'throughput_total': (2233, -0.05, None, 'images/s'),
+        'throughput_iteration': (558, -0.05, None, 'images/s')
+    },
+    'alvis:4xA100fat': {
         'throughput_total': (2233, -0.05, None, 'images/s'),
         'throughput_iteration': (558, -0.05, None, 'images/s')
     },
@@ -110,13 +126,21 @@ class snic_tensorflow_horovod_check(tensorflow_cnn_check):
                 'cpus_per_node': 32,
                 'num_nodes': {'small': 1, 'large': 2},
             },
+            'alvis:4xA40': {
+                'cpus_per_node': 64,
+                'num_nodes': {'small': 1, 'large': 2},
+            },
+            'alvis:4xA100_MEM256': {
+                'cpus_per_node': 64,
+                'num_nodes': {'small': 1, 'large': 1},
+            },
             'alvis:4xA100_MEM512': {
                 'cpus_per_node': 64,
                 'num_nodes': {'small': 1, 'large': 1},
             },
-            'alvis:4xA40': {
+            'alvis:4xA100fat': {
                 'cpus_per_node': 64,
-                'num_nodes': {'small': 1, 'large': 2},
+                'num_nodes': {'small': 1, 'large': 1},
             },
             'kebnekaise:gpu_2xK80': {
                 'cpus_per_node': 28,
@@ -157,7 +181,3 @@ class snic_tensorflow_horovod_check(tensorflow_cnn_check):
             'OMP_NUM_THREADS': '$SLURM_CPUS_PER_TASK',
             'OMPI_MCA_mpi_warn_on_fork': '0',
         }
-
-    @run_after('run')
-    def set_nodelist(self):
-        self.mynodelist = self.job.nodelist
