@@ -693,12 +693,6 @@ site_configuration = {
             'ftn': 'ifort',
             'target_systems': ['alvis'],
         },
-        {
-            'name': 'builtin',
-            'cc': 'gcc',
-            'cxx': 'g++',
-            'ftn': 'gfortran',
-        },
     ],
     'logging': [
         {
