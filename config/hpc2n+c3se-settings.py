@@ -505,19 +505,6 @@ site_configuration = {
                 }
             ],
         },
-        {
-            'name': 'generic',
-            'descr': 'Generic system',
-            'hostnames': ['.*'],
-            'partitions': [
-                {
-                    'name': 'default',
-                    'scheduler': 'local',
-                    'launcher': 'local',
-                    'environs': ['builtin'],
-                }
-            ],
-        },
     ],
     'environments': [
         {
