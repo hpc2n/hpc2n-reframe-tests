@@ -233,8 +233,8 @@ class StreamTest2(StreamTest2Base):
         thread_reduction = self.thread_reduction.get(self.current_partition.fullname, 0)
         use_omp_binding = self.use_omp_binding.get(self.current_partition.fullname, True)
         if use_omp_binding:
-            self.variables = self.default_variables
-        self.variables['OMP_NUM_THREADS'] = str(omp_threads-thread_reduction)
+            self.env_vars = self.default_variables
+        self.env_vars['OMP_NUM_THREADS'] = str(omp_threads-thread_reduction)
 
         envname = self.current_environ.name
         tc_name = envname.split('_')[0].replace("cuda", "")
