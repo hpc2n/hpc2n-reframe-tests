@@ -21,16 +21,16 @@ REFERENCE_SMALL_PERFORMANCE = {
         'throughput_iteration': (432, -0.05, None, 'images/s'),
     },
     'alvis:4xA100_MEM256': {
-        'throughput_total': (2236, -0.05, None, 'images/s'),
-        'throughput_iteration': (559, -0.05, None, 'images/s'),
+        'throughput_total': (2000, -0.05, None, 'images/s'),
+        'throughput_iteration': (500, -0.05, None, 'images/s'),
     },
     'alvis:4xA100_MEM512': {
-        'throughput_total': (2236, -0.05, None, 'images/s'),
-        'throughput_iteration': (559, -0.05, None, 'images/s'),
+        'throughput_total': (2000, -0.05, None, 'images/s'),
+        'throughput_iteration': (500, -0.05, None, 'images/s'),
     },
     'alvis:4xA100fat': {
-        'throughput_total': (2236, -0.05, None, 'images/s'),
-        'throughput_iteration': (559, -0.05, None, 'images/s'),
+        'throughput_total': (2000, -0.05, None, 'images/s'),
+        'throughput_iteration': (500, -0.05, None, 'images/s'),
     },
     'kebnekaise:gpu_2xK80': {
         'throughput_total': (249, -0.05, None, 'images/s'),
@@ -56,16 +56,16 @@ REFERENCE_LARGE_PERFORMANCE = {
         'throughput_iteration': (405, -0.05, None, 'images/s')
     },
     'alvis:4xA100_MEM256': {
-        'throughput_total': (2233, -0.05, None, 'images/s'),
-        'throughput_iteration': (558, -0.05, None, 'images/s')
+        'throughput_total': (2000, -0.05, None, 'images/s'),
+        'throughput_iteration': (500, -0.05, None, 'images/s')
     },
     'alvis:4xA100_MEM512': {
-        'throughput_total': (2233, -0.05, None, 'images/s'),
-        'throughput_iteration': (558, -0.05, None, 'images/s')
+        'throughput_total': (2000, -0.05, None, 'images/s'),
+        'throughput_iteration': (500, -0.05, None, 'images/s')
     },
     'alvis:4xA100fat': {
-        'throughput_total': (2233, -0.05, None, 'images/s'),
-        'throughput_iteration': (558, -0.05, None, 'images/s')
+        'throughput_total': (2000, -0.05, None, 'images/s'),
+        'throughput_iteration': (500, -0.05, None, 'images/s')
     },
     'kebnekaise:gpu_2xK80': {
         'throughput_total': (992, -0.05, None, 'images/s'),
@@ -116,11 +116,11 @@ class snic_tensorflow_horovod_check(tensorflow_cnn_check):
         self.tasks_cpu_settings = {
             'alvis:2xV100': {
                 'cpus_per_node': 16,
-                'num_nodes': {'small': 2, 'large': 8},
+                'num_nodes': {'small': 1, 'large': 4},
             },
             'alvis:4xV100': {
                 'cpus_per_node': 32,
-                'num_nodes': {'small': 4, 'large': 12},
+                'num_nodes': {'small': 1, 'large': 4},
             },
             'alvis:8xT4': {
                 'cpus_per_node': 32,
