@@ -50,7 +50,7 @@ class HPLBase(rfm.RunOnlyRegressionTest):
             },
         }
 
-        self.variables = site_variables.get(self.current_system.name, {})
+        self.env_vars = site_variables.get(self.current_system.name, {})
 
 
     # Belongs in library part
