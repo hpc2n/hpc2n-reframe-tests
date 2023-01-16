@@ -255,7 +255,6 @@ class StreamTest2(StreamTest2Base):
         self.mynodelist = self.job.nodelist
 
 
-#@rfm.parameterized_test(*([n] for n in range(100)))
 class StreamTest2Multirun(StreamTest2):
     '''This test checks the stream test:
        Function    Best Rate MB/s  Avg time     Min time     Max time
