@@ -40,7 +40,7 @@ class gpu_bandwidth_check(GpuBandwidth, SystemConfigCSCS):
         'daint:gpu', 'dom:gpu', 'arolla:cn', 'tsa:cn',
         'ault:amdv100', 'ault:intelv100', 'ault:amda100', 'ault:amdvega'
     ]
-    valid_prog_environs = ['PrgEnv-gnu', 'foss_with_cuda', 'foss_with_cuda_alvis']
+    valid_prog_environs = ['PrgEnv-gnu', 'foss_with_cuda']
 
     # Increase runtime and memory usage
     #num_copies = 20

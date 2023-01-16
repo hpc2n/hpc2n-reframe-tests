@@ -24,10 +24,7 @@ class gpu_burn_check_base(gpu_burn_check):
             'ault:intelv100', 'ault:amda100', 'ault:amdvega'
         ]
 
-        if self.current_system.name == 'alvis':
-            self.valid_prog_environs = ['foss_with_cuda_alvis']
-        else:
-            self.valid_prog_environs = ['foss_with_cuda']
+        self.valid_prog_environs = ['foss_with_cuda']
 
         if self.precision == 'double':
             self.use_dp = True
