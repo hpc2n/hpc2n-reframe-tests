@@ -298,10 +298,12 @@ class StreamTest2Build(rfm.CompileOnlyRegressionTest):
         self.sourcepath = 'stream.c'
         self.build_system = 'SingleSource'
 
-        self.sanity_patterns = sn.assert_not_found('error', self.stderr)
-
-    @run_after('setup')
+    @run_before('compile')
     def prepare_test(self):
         envname = self.current_environ.name
         tc_name = envname.split('_')[0].replace("cuda", "")
         self.build_system.cflags = self.prgenv_flags.get(tc_name, ['-O3'])
+
+    @sanity_function
+    def validate_build(self):
+        return sn.assert_not_found('error', self.stderr)
