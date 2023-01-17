@@ -44,19 +44,6 @@ class StreamTest2(StreamTest2Base):
 
         self.descr = 'STREAM Benchmark'
 
-        self.sanity_patterns = sn.assert_found(
-            r'Solution Validates: avg error less than', self.stdout)
-        self.perf_patterns = {
-            'copy': sn.extractsingle(r'^Copy:\s+(?P<copy>[0-9.]+)\s+[0-9.]+\s+[0-9.]+\s+[0-9.]+$',
-                                      self.stdout, 'copy', float),
-            'scale': sn.extractsingle(r'^Scale:\s+(?P<scale>[0-9.]+)\s+[0-9.]+\s+[0-9.]+\s+[0-9.]+$',
-                                      self.stdout, 'scale', float),
-            'add': sn.extractsingle(r'^Add:\s+(?P<add>[0-9.]+)\s+[0-9.]+\s+[0-9.]+\s+[0-9.]+$',
-                                      self.stdout, 'add', float),
-            'triad': sn.extractsingle(r'^Triad:\s+(?P<triad>[0-9.]+)\s+[0-9.]+\s+[0-9.]+\s+[0-9.]+$',
-                                      self.stdout, 'triad', float),
-        }
-
         self.stream_cpus_per_task = {
             'kebnekaise:local': 28,
             'kebnekaise:bdw': 28,
@@ -110,104 +97,129 @@ class StreamTest2(StreamTest2Base):
         self.stream_bw_reference = {
             'foss': {
                 'kebnekaise:bdw': {
-                    'copy':  (86000, -0.05, 0.05, 'MB/s'),
-                    'scale': (86000, -0.05, 0.05, 'MB/s'),
-                    'add':   (97000, -0.05, 0.05, 'MB/s'),
-                    'triad': (97000, -0.05, 0.05, 'MB/s'),
+                    'Copy':  (86000, -0.05, 0.05, 'MB/s'),
+                    'Scale': (86000, -0.05, 0.05, 'MB/s'),
+                    'Add':   (97000, -0.05, 0.05, 'MB/s'),
+                    'Triad': (97000, -0.05, 0.05, 'MB/s'),
                 },
                 'kebnekaise:sky': {
-                    'copy':  (121000, -0.05, 0.05, 'MB/s'),
-                    'scale': (121000, -0.05, 0.05, 'MB/s'),
-                    'add':   (112500, -0.05, 0.05, 'MB/s'),
-                    'triad': (112500, -0.05, 0.05, 'MB/s'),
+                    'Copy':  (121000, -0.05, 0.05, 'MB/s'),
+                    'Scale': (121000, -0.05, 0.05, 'MB/s'),
+                    'Add':   (112500, -0.05, 0.05, 'MB/s'),
+                    'Triad': (112500, -0.05, 0.05, 'MB/s'),
                 },
                 'kebnekaise:knl': {
-                    'copy':  (57000, -0.05, 0.05, 'MB/s'),
-                    'scale': (56000, -0.05, 0.05, 'MB/s'),
-                    'add':   (63000, -0.05, 0.05, 'MB/s'),
-                    'triad': (63000, -0.05, 0.05, 'MB/s'),
+                    'Copy':  (57000, -0.05, 0.05, 'MB/s'),
+                    'Scale': (56000, -0.05, 0.05, 'MB/s'),
+                    'Add':   (63000, -0.05, 0.05, 'MB/s'),
+                    'Triad': (63000, -0.05, 0.05, 'MB/s'),
                 },
                 'kebnekaise:lm': {
-                    'copy':  (180000, -0.05, 0.05, 'MB/s'),
-                    'scale': (180000, -0.05, 0.05, 'MB/s'),
-                    'add':   (200000, -0.05, 0.05, 'MB/s'),
-                    'triad': (200000, -0.05, 0.05, 'MB/s'),
+                    'Copy':  (180000, -0.05, 0.05, 'MB/s'),
+                    'Scale': (180000, -0.05, 0.05, 'MB/s'),
+                    'Add':   (200000, -0.05, 0.05, 'MB/s'),
+                    'Triad': (200000, -0.05, 0.05, 'MB/s'),
                 },
                 'UmU-Cloud:default': {
-                    'copy':  (166000, -0.05, 0.05, 'MB/s'),
-                    'scale': (166000, -0.05, 0.05, 'MB/s'),
-                    'add':   (182000, -0.05, 0.05, 'MB/s'),
-                    'triad': (182000, -0.05, 0.05, 'MB/s'),
+                    'Copy':  (166000, -0.05, 0.05, 'MB/s'),
+                    'Scale': (166000, -0.05, 0.05, 'MB/s'),
+                    'Add':   (182000, -0.05, 0.05, 'MB/s'),
+                    'Triad': (182000, -0.05, 0.05, 'MB/s'),
                 },
                 'alvis:8xT4': {
-                    'copy':  (135000, -0.05, 0.05, 'MB/s'),
-                    'scale': (135000, -0.05, 0.05, 'MB/s'),
-                    'add':   (152000, -0.05, 0.05, 'MB/s'),
-                    'triad': (152000, -0.05, 0.05, 'MB/s'),
+                    'Copy':  (135000, -0.05, 0.05, 'MB/s'),
+                    'Scale': (135000, -0.05, 0.05, 'MB/s'),
+                    'Add':   (152000, -0.05, 0.05, 'MB/s'),
+                    'Triad': (152000, -0.05, 0.05, 'MB/s'),
                 },
                 'alvis:4xA40': {
-                    'copy':  (283600, -0.05, 0.05, 'MB/s'),
-                    'scale': (282600, -0.05, 0.05, 'MB/s'),
-                    'add':   (294000, -0.05, 0.05, 'MB/s'),
-                    'triad': (294200, -0.05, 0.05, 'MB/s'),
+                    'Copy':  (283600, -0.05, 0.05, 'MB/s'),
+                    'Scale': (282600, -0.05, 0.05, 'MB/s'),
+                    'Add':   (294000, -0.05, 0.05, 'MB/s'),
+                    'Triad': (294200, -0.05, 0.05, 'MB/s'),
                 },
             },
             'intel': {
                 'kebnekaise:bdw': {
-                    'copy':  (120000, -0.05, 0.05, 'MB/s'),
-                    'scale': (120000, -0.05, 0.05, 'MB/s'),
-                    'add':   (130000, -0.05, 0.05, 'MB/s'),
-                    'triad': (130000, -0.05, 0.05, 'MB/s'),
+                    'Copy':  (120000, -0.05, 0.05, 'MB/s'),
+                    'Scale': (120000, -0.05, 0.05, 'MB/s'),
+                    'Add':   (130000, -0.05, 0.05, 'MB/s'),
+                    'Triad': (130000, -0.05, 0.05, 'MB/s'),
                 },
                 'kebnekaise:sky': {
-                    'copy':  (156000, -0.05, 0.05, 'MB/s'),
-                    'scale': (156000, -0.05, 0.05, 'MB/s'),
-                    'add':   (119300, -0.05, 0.05, 'MB/s'),
-                    'triad': (122200, -0.05, 0.05, 'MB/s'),
+                    'Copy':  (156000, -0.05, 0.05, 'MB/s'),
+                    'Scale': (156000, -0.05, 0.05, 'MB/s'),
+                    'Add':   (119300, -0.05, 0.05, 'MB/s'),
+                    'Triad': (122200, -0.05, 0.05, 'MB/s'),
                 },
                 'kebnekaise:knl': {
-                    'copy':  (57000, -0.05, 0.05, 'MB/s'),
-                    'scale': (57000, -0.05, 0.05, 'MB/s'),
-                    'add':   (57900, -0.05, 0.05, 'MB/s'),
-                    'triad': (57900, -0.05, 0.05, 'MB/s'),
+                    'Copy':  (57000, -0.05, 0.05, 'MB/s'),
+                    'Scale': (57000, -0.05, 0.05, 'MB/s'),
+                    'Add':   (57900, -0.05, 0.05, 'MB/s'),
+                    'Triad': (57900, -0.05, 0.05, 'MB/s'),
                 },
                 'kebnekaise:lm': {
-                    'copy':  (230000, -0.05, 0.05, 'MB/s'),
-                    'scale': (230000, -0.05, 0.05, 'MB/s'),
-                    'add':   (250000, -0.05, 0.05, 'MB/s'),
-                    'triad': (250000, -0.05, 0.05, 'MB/s'),
+                    'Copy':  (230000, -0.05, 0.05, 'MB/s'),
+                    'Scale': (230000, -0.05, 0.05, 'MB/s'),
+                    'Add':   (250000, -0.05, 0.05, 'MB/s'),
+                    'Triad': (250000, -0.05, 0.05, 'MB/s'),
                 },
                 'UmU-Cloud:default': {
-                    'copy':  (166000, -0.05, 0.05, 'MB/s'),
-                    'scale': (166000, -0.05, 0.05, 'MB/s'),
-                    'add':   (182000, -0.05, 0.05, 'MB/s'),
-                    'triad': (182000, -0.05, 0.05, 'MB/s'),
+                    'Copy':  (166000, -0.05, 0.05, 'MB/s'),
+                    'Scale': (166000, -0.05, 0.05, 'MB/s'),
+                    'Add':   (182000, -0.05, 0.05, 'MB/s'),
+                    'Triad': (182000, -0.05, 0.05, 'MB/s'),
                 },
                 'alvis:4xA40': {
-                    'copy':  (311600, -0.05, 0.05, 'MB/s'),
-                    'scale': (310700, -0.05, 0.05, 'MB/s'),
-                    'add':   (312800, -0.05, 0.05, 'MB/s'),
-                    'triad': (311500, -0.05, 0.05, 'MB/s'),
+                    'Copy':  (311600, -0.05, 0.05, 'MB/s'),
+                    'Scale': (310700, -0.05, 0.05, 'MB/s'),
+                    'Add':   (312800, -0.05, 0.05, 'MB/s'),
+                    'Triad': (311500, -0.05, 0.05, 'MB/s'),
                 },
                 'alvis:4xA100_MEM256': {
-                    'copy':  (285000, -0.1, 0.05, 'MB/s'),
-                    'scale': (290000, -0.1, 0.05, 'MB/s'),
-                    'add':   (290000, -0.1, 0.05, 'MB/s'),
-                    'triad': (290000, -0.1, 0.05, 'MB/s'),
+                    'Copy':  (285000, -0.1, 0.05, 'MB/s'),
+                    'Scale': (290000, -0.1, 0.05, 'MB/s'),
+                    'Add':   (290000, -0.1, 0.05, 'MB/s'),
+                    'Triad': (290000, -0.1, 0.05, 'MB/s'),
                 },
                 'alvis:4xA100_MEM512': {
-                    'copy':  (285000, -0.1, 0.05, 'MB/s'),
-                    'scale': (290000, -0.1, 0.05, 'MB/s'),
-                    'add':   (290000, -0.1, 0.05, 'MB/s'),
-                    'triad': (290000, -0.1, 0.05, 'MB/s'),
+                    'Copy':  (285000, -0.1, 0.05, 'MB/s'),
+                    'Scale': (290000, -0.1, 0.05, 'MB/s'),
+                    'Add':   (290000, -0.1, 0.05, 'MB/s'),
+                    'Triad': (290000, -0.1, 0.05, 'MB/s'),
                 },
                 'alvis:4xA100fat': {
-                    'copy':  (285000, -0.1, 0.05, 'MB/s'),
-                    'scale': (290000, -0.1, 0.05, 'MB/s'),
-                    'add':   (290000, -0.1, 0.05, 'MB/s'),
-                    'triad': (290000, -0.1, 0.05, 'MB/s'),
+                    'Copy':  (285000, -0.1, 0.05, 'MB/s'),
+                    'Scale': (290000, -0.1, 0.05, 'MB/s'),
+                    'Add':   (290000, -0.1, 0.05, 'MB/s'),
+                    'Triad': (290000, -0.1, 0.05, 'MB/s'),
                 },
             },
+        }
+
+    @sanity_function
+    def validate_solution(self):
+        return sn.assert_found(r'Solution Validates: avg error less than', self.stdout)
+
+    @performance_function('MB/s')
+    def extract_bw(self, kind='Copy'):
+        '''Generic performance extraction function.'''
+
+        if kind not in ('Copy', 'Scale', 'Add', 'Triad'):
+            raise ValueError(f'illegal value in argument kind ({kind!r})')
+
+        return sn.extractsingle(rf'^{kind}:\s+([0-9.]+)\s+[0-9.]+\s+[0-9.]+\s+[0-9.]+$',
+                                      self.stdout, 1, float)
+
+    @run_before('performance')
+    def set_perf_variables(self):
+        '''Build the dictionary with all the performance variables.'''
+
+        self.perf_variables = {
+            'Copy': self.extract_bw(),
+            'Scale': self.extract_bw('Scale'),
+            'Add': self.extract_bw('Add'),
+            'Triad': self.extract_bw('Triad'),
         }
 
     @require_deps
