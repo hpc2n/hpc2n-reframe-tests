@@ -12,12 +12,7 @@ from hpctestlib.microbenchmarks.gpu.memory_bandwidth import *
 import hpc2ntests.microbenchmarks.gpu.hooks as hooks
 
 
-class SystemConfigCSCS(rfm.RegressionMixin):
-    @run_after('init')
-    def arola_tsa_valid_prog_environs(self):
-        if self.current_system.name in ['arolla', 'tsa']:
-            self.valid_prog_environs = ['PrgEnv-gnu-nompi']
-
+class SystemConfigHPC2N(rfm.RegressionMixin):
     # Inject external hooks
     @run_after('setup')
     def set_gpu_arch(self):
@@ -33,7 +28,7 @@ class SystemConfigCSCS(rfm.RegressionMixin):
 
 
 @rfm.simple_test
-class gpu_bandwidth_check(GpuBandwidth, SystemConfigCSCS):
+class gpu_bandwidth_check(GpuBandwidth, SystemConfigHPC2N):
     valid_systems = [
         'kebnekaise:gpu_2xK80', 'kebnekaise:gpu_4xK80', 'kebnekaise:gpu_2xV100',
         'kebnekaise:gpu_2xA6000', 'kebnekaise:4xA40', 'alvis', 'UmU-Cloud',
@@ -149,17 +144,15 @@ class gpu_bandwidth_check(GpuBandwidth, SystemConfigCSCS):
 
 
 @rfm.simple_test
-class gpu_bandwidth_d2d_check(GpuBandwidthD2D, SystemConfigCSCS):
+class gpu_bandwidth_d2d_check(GpuBandwidthD2D, SystemConfigHPC2N):
     valid_systems = [
         'kebnekaise:gpu_2xK80', 'kebnekaise:gpu_4xK80', 'kebnekaise:gpu_2xV100',
         'kebnekaise:gpu_2xA6000', 'kebnekaise:4xA40', 'alvis',
-        'tsa:cn', 'arola:cn', 'ault:amdv100', 'ault:intelv100',
-        'ault:amda100', 'ault:amdvega'
     ]
-    valid_prog_environs = ['PrgEnv-gnu', 'foss_with_cuda']
+    valid_prog_environs = ['foss_with_cuda']
     num_tasks = 0
-    tags = {'diagnostic', 'mch', 'craype', 'benchmark'}
-    maintainers = ['AJ', 'SK']
+    tags = {'diagnostic', 'mch', 'benchmark'}
+    maintainers = ['AJ', 'SK', 'AS']
 
     # Increase runtime and memory usage
     #num_copies = 20
@@ -201,24 +194,6 @@ class gpu_bandwidth_d2d_check(GpuBandwidthD2D, SystemConfigCSCS):
                 'alvis:4xA100fat': {
                     'bw': (262.69, -0.05, None, 'GB/s'),
                 },
-                'tsa:cn': {
-                    'bw':   (163, -0.05, None, 'GB/s'),
-                },
-                'arola:cn': {
-                    'bw':   (163, -0.05, None, 'GB/s'),
-                },
-                'ault:amda100': {
-                    'bw':   (282.07, -0.1, None, 'GB/s'),
-                },
-                'ault:amdv100': {
-                    'bw':   (5.7, -0.1, None, 'GB/s'),
-                },
-                'ault:intelv100': {
-                    'bw':   (31.0, -0.1, None, 'GB/s'),
-                },
-                'ault:amdvega': {
-                    'bw':   (11.75, -0.1, None, 'GB/s'),
-                },
             }
         else:
             self.reference = {
@@ -251,23 +226,5 @@ class gpu_bandwidth_d2d_check(GpuBandwidthD2D, SystemConfigCSCS):
                 },
                 'alvis:4xA100fat': {
                     'bw': (61.8, -0.05, None, 'GB/s'),
-                },
-                'tsa:cn': {
-                    'bw': (74, -0.05, None, 'GB/s'),
-                },
-                'arola:cn': {
-                    'bw': (74, -0.05, None, 'GB/s'),
-                },
-                'ault:amda100': {
-                    'bw': (54.13, -0.1, None, 'GB/s'),
-                },
-                'ault:amdv100': {
-                    'bw': (7.5, -0.1, None, 'GB/s'),
-                },
-                'ault:intelv100': {
-                    'bw': (33.6, -0.1, None, 'GB/s'),
-                },
-                'ault:amdvega': {
-                    'bw':   (11.75, -0.1, None, 'GB/s'),
                 },
             }
