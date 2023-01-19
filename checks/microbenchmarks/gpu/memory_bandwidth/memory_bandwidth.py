@@ -32,10 +32,8 @@ class gpu_bandwidth_check(GpuBandwidth, SystemConfigHPC2N):
     valid_systems = [
         'kebnekaise:gpu_2xK80', 'kebnekaise:gpu_4xK80', 'kebnekaise:gpu_2xV100',
         'kebnekaise:gpu_2xA6000', 'kebnekaise:4xA40', 'alvis', 'UmU-Cloud',
-        'daint:gpu', 'dom:gpu', 'arolla:cn', 'tsa:cn',
-        'ault:amdv100', 'ault:intelv100', 'ault:amda100', 'ault:amdvega'
     ]
-    valid_prog_environs = ['PrgEnv-gnu', 'foss_with_cuda']
+    valid_prog_environs = ['foss_with_cuda']
 
     # Increase runtime and memory usage
     #num_copies = 20
@@ -103,44 +101,9 @@ class gpu_bandwidth_check(GpuBandwidth, SystemConfigHPC2N):
             'd2h': (24.53, -0.1, None, 'GB/s'),
             'd2d': (1485, -0.1, None, 'GB/s')
         },
-        'daint:gpu': {
-            'h2d': (11.881, -0.1, None, 'GB/s'),
-            'd2h': (12.571, -0.1, None, 'GB/s'),
-            'd2d': (499, -0.1, None, 'GB/s')
-        },
-        'dom:gpu': {
-            'h2d': (11.881, -0.1, None, 'GB/s'),
-            'd2h': (12.571, -0.1, None, 'GB/s'),
-            'd2d': (499, -0.1, None, 'GB/s')
-        },
-        'tsa:cn': {
-            'h2d': (12.000, -0.1, None, 'GB/s'),
-            'd2h': (12.416, -0.1, None, 'GB/s'),
-            'd2d': (777.000, -0.1, None, 'GB/s')
-        },
-        'ault:amda100': {
-            'h2d': (25.500, -0.1, None, 'GB/s'),
-            'd2h': (26.170, -0.1, None, 'GB/s'),
-            'd2d': (1322.500, -0.1, None, 'GB/s')
-        },
-        'ault:amdv100': {
-            'h2d': (13.189, -0.1, None, 'GB/s'),
-            'd2h': (13.141, -0.1, None, 'GB/s'),
-            'd2d': (777.788, -0.1, None, 'GB/s')
-        },
-        'ault:intelv100': {
-            'h2d': (13.183, -0.1, None, 'GB/s'),
-            'd2h': (13.411, -0.1, None, 'GB/s'),
-            'd2d': (778.200, -0.1, None, 'GB/s')
-        },
-        'ault:amdvega': {
-            'h2d': (14, -0.1, None, 'GB/s'),
-            'd2h': (14, -0.1, None, 'GB/s'),
-            'd2d': (575.700, -0.1, None, 'GB/s')
-        },
     }
-    tags = {'diagnostic', 'mch', 'craype', 'benchmark'}
-    maintainers = ['AJ', 'SK']
+    tags = {'diagnostic', 'mch', 'benchmark'}
+    maintainers = ['AJ', 'SK', 'AS']
 
 
 @rfm.simple_test
