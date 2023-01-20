@@ -164,10 +164,6 @@ class IorCheck(rfm.RunOnlyRegressionTest):
                                 '-b', block_size, '-a', access_type,
                                 '-o', test_file]
 
-    @run_after('run')
-    def set_nodelist(self):
-        self.mynodelist = self.job.nodelist
-
 
 @rfm.simple_test
 class IorWriteCheck(IorCheck):

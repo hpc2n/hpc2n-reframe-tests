@@ -22,10 +22,6 @@ class SystemConfigHPC2N(rfm.RegressionMixin):
     def set_num_gpus_per_node(self):
         hooks.set_num_gpus_per_node(self)
 
-    @run_after('run')
-    def set_nodelist(self):
-        self.mynodelist = self.job.nodelist
-
 
 @rfm.simple_test
 class gpu_bandwidth_check(GpuBandwidth, SystemConfigHPC2N):

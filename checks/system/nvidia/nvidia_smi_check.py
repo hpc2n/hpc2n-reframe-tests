@@ -65,7 +65,3 @@ class nvidia_smi_check(rfm.RunOnlyRegressionTest):
         hooks.set_num_gpus_per_node(self)
         self.num_tasks = self.num_gpus_per_node
         self.num_tasks_per_node = self.num_gpus_per_node
-
-    @run_after('run')
-    def set_nodelist(self):
-        self.mynodelist = self.job.nodelist

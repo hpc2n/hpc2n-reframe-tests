@@ -55,10 +55,6 @@ class gpu_burn_check_base(gpu_burn_check):
         if cs in {'kebnekaise', 'alvis', 'UmU-Cloud'}:
             self.num_tasks_per_node = 1
 
-    @run_after('run')
-    def set_nodelist(self):
-        self.mynodelist = self.job.nodelist
-
     @run_before('performance')
     def report_slow_nodes(self):
         '''Report the base perf metrics and also all the slow nodes.'''

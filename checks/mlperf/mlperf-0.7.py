@@ -89,10 +89,6 @@ class MLPerfInference_07_Base(rfm.RunOnlyRegressionTest):
     def set_launcher(self):
         self.job.launcher = getlauncher('local')()
 
-    @run_after('run')
-    def set_nodelist(self):
-        self.mynodelist = self.job.nodelist
-
 
 @rfm.simple_test
 class MLPerfInference_07(MLPerfInference_07_Base):
