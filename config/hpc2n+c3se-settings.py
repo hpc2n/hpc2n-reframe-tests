@@ -892,4 +892,54 @@ site_configuration = {
             ]
         }
     ],
+    'modes': [
+        {
+            'name': 'maintenance',
+            'options': [
+                '--tag=maintenance',
+                '-Sstrict_check=1',
+                '-Jreservation=maintenance',
+                '--perflogdir=/cephyr/NOBACKUP/priv/c3-alvis/reframe/maintenance/perflogs',
+                '--report-file=/cephyr/NOBACKUP/priv/c3-alvis/reframe/maintenance/reports/maint_report_{sessionid}.json',
+                '--stage=/cephyr/NOBACKUP/priv/c3-alvis/reframe/maintenance/stage',
+                '--output=/cephyr/NOBACKUP/priv/c3-alvis/reframe/maintenance/output',
+                '--save-log-files',
+            ],
+            'target_systems': ['alvis'],
+        },
+        {
+            'name': 'production',
+            'options': [
+                '--tag=production',
+                '-Sstrict_check=1',
+                '--perflogdir=/cephyr/NOBACKUP/priv/c3-alvis/reframe/production/perflogs',
+                '--report-file=/cephyr/NOBACKUP/priv/c3-alvis/reframe/production/reports/prod_report_{sessionid}.json',
+                '--stage=/cephyr/NOBACKUP/priv/c3-alvis/reframe/production/stage',
+                '--output=/cephyr/NOBACKUP/priv/c3-alvis/reframe/production/output',
+                '--save-log-files',
+            ],
+            'target_systems': ['alvis'],
+        },
+        {
+            'name': 'maintenance',
+            'options': [
+                '--tag=maintenance',
+                '-Sstrict_check=1',
+                '-Jreservation=maintenance',
+                '--perflogdir=/pfs/data/reframe/maintenance/perflogs',
+                '--report-file=/pfs/data/reframe/maintenance/reports/maint_report_{sessionid}.json',
+            ],
+            'target_systems': ['kebnekaise'],
+        },
+        {
+            'name': 'production',
+            'options': [
+                '--tag=production',
+                '-Sstrict_check=1',
+                '--perflogdir=/pfs/data/reframe/production/perflogs',
+                '--report-file=/pfs/data/reframe/production/reports/prod_report_{sessionid}.json',
+            ],
+            'target_systems': ['kebnekaise'],
+        },
+    ],
 }
