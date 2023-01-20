@@ -972,4 +972,11 @@ site_configuration = {
             'target_systems': ['kebnekaise'],
         },
     ],
+    'general': [
+        {
+            'check_search_path': ['checks/'],
+            'check_search_recursive': True,
+            'remote_detect': True,
+        },
+    ],
 }

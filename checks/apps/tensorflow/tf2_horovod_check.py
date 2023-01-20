@@ -9,7 +9,7 @@ import reframe.utility.osext as osext
 
 from hpctestlib.ml.tensorflow.horovod import tensorflow_cnn_check
 
-import hpc2ntests.microbenchmarks.gpu.hooks as hooks
+import microbenchmarks.gpu.hooks as hooks
 
 REFERENCE_SMALL_PERFORMANCE = {
     'alvis:8xT4': {

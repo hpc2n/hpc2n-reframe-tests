@@ -10,7 +10,7 @@ import reframe.utility.osext as osext
 from reframe.core.exceptions import SanityError
 
 from hpctestlib.microbenchmarks.gpu.gpu_burn import gpu_burn_check
-import hpc2ntests.microbenchmarks.gpu.hooks as hooks
+import microbenchmarks.gpu.hooks as hooks
 
 
 class gpu_burn_check_base(gpu_burn_check):

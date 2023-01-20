@@ -9,7 +9,7 @@ import sys
 import reframe as rfm
 from hpctestlib.microbenchmarks.gpu.memory_bandwidth import *
 
-import hpc2ntests.microbenchmarks.gpu.hooks as hooks
+import microbenchmarks.gpu.hooks as hooks
 
 
 class SystemConfigHPC2N(rfm.RegressionMixin):

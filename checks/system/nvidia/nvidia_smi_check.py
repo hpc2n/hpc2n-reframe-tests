@@ -6,7 +6,7 @@
 import reframe as rfm
 import reframe.utility.sanity as sn
 import reframe.utility.typecheck as typ
-import hpc2ntests.microbenchmarks.gpu.hooks as hooks
+import microbenchmarks.gpu.hooks as hooks
 
 from reframe.core.backends import getlauncher
 
