@@ -438,7 +438,7 @@ site_configuration = {
                     ],
                 },
                 {
-                    'name': 'gpu_1xK80',
+                    'name': '1xK80',
                     'descr': 'GPU 1xK80 half node',
                     'scheduler': 'slurm',
                     'launcher': 'srun',
@@ -460,7 +460,7 @@ site_configuration = {
                     ],
                 },
                 {
-                    'name': 'gpu_2xK80',
+                    'name': '2xK80',
                     'descr': 'GPU 2xK80 nodes',
                     'scheduler': 'slurm',
                     'launcher': 'srun',
@@ -482,7 +482,7 @@ site_configuration = {
                     ],
                 },
                 {
-                    'name': 'gpu_4xK80',
+                    'name': '4xK80',
                     'descr': 'GPU 4xK80 nodes',
                     'scheduler': 'slurm',
                     'launcher': 'srun',
@@ -504,7 +504,7 @@ site_configuration = {
                     ],
                 },
                 {
-                    'name': 'gpu_1xV100',
+                    'name': '1xV100',
                     'descr': 'GPU 1xV00 half node',
                     'scheduler': 'slurm',
                     'launcher': 'srun',
@@ -526,7 +526,7 @@ site_configuration = {
                     ],
                 },
                 {
-                    'name': 'gpu_2xV100',
+                    'name': '2xV100',
                     'descr': 'GPU 2xV00 nodes',
                     'scheduler': 'slurm',
                     'launcher': 'srun',
@@ -592,7 +592,7 @@ site_configuration = {
                     ],
                 },
                 {
-                    'name': 'gpu_1xA6000',
+                    'name': '1xA6000',
                     'descr': 'GPU 1xA6000 half node',
                     'scheduler': 'slurm',
                     'launcher': 'srun',
@@ -614,7 +614,7 @@ site_configuration = {
                     ],
                 },
                 {
-                    'name': 'gpu_2xA6000',
+                    'name': '2xA6000',
                     'descr': 'GPU 2xA6000 nodes',
                     'scheduler': 'slurm',
                     'launcher': 'srun',

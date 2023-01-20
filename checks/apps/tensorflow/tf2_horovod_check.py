@@ -32,15 +32,15 @@ REFERENCE_SMALL_PERFORMANCE = {
         'throughput_total': (2000, -0.05, None, 'images/s'),
         'throughput_iteration': (500, -0.05, None, 'images/s'),
     },
-    'kebnekaise:gpu_2xK80': {
+    'kebnekaise:2xK80': {
         'throughput_total': (249, -0.05, None, 'images/s'),
         'throughput_iteration': (62, -0.05, None, 'images/s'),
     },
-    'kebnekaise:gpu_4xK80': {
+    'kebnekaise:4xK80': {
         'throughput_total': (499, -0.05, None, 'images/s'),
         'throughput_iteration': (62, -0.05, None, 'images/s'),
     },
-    'kebnekaise:gpu_2xV100': {
+    'kebnekaise:2xV100': {
         'throughput_total': (832, -0.05, None, 'images/s'),
         'throughput_iteration': (416, -0.05, None, 'images/s'),
     },
@@ -67,11 +67,11 @@ REFERENCE_LARGE_PERFORMANCE = {
         'throughput_total': (2000, -0.05, None, 'images/s'),
         'throughput_iteration': (500, -0.05, None, 'images/s')
     },
-    'kebnekaise:gpu_2xK80': {
+    'kebnekaise:2xK80': {
         'throughput_total': (992, -0.05, None, 'images/s'),
         'throughput_iteration': (62, -0.05, None, 'images/s')
     },
-    'kebnekaise:gpu_2xV100': {
+    'kebnekaise:2xV100': {
         'throughput_total': (3328, -0.05, None, 'images/s'),
         'throughput_iteration': (416, -0.05, None, 'images/s')
     },
@@ -86,7 +86,7 @@ class snic_tensorflow_horovod_check(tensorflow_cnn_check):
     maintainers = ['RS', 'TR', 'AS']
     valid_prog_environs = ['builtin']
 
-    valid_systems = ['kebnekaise:gpu_%s' % x for x in ['2xK80', '4xK80', '2xV100']]
+    valid_systems = ['kebnekaise:%s' % x for x in ['2xK80', '4xK80', '2xV100']]
     valid_systems += ['alvis']
 
     @run_after('init')
@@ -142,15 +142,15 @@ class snic_tensorflow_horovod_check(tensorflow_cnn_check):
                 'cpus_per_node': 64,
                 'num_nodes': {'small': 1, 'large': 1},
             },
-            'kebnekaise:gpu_2xK80': {
+            'kebnekaise:2xK80': {
                 'cpus_per_node': 28,
                 'num_nodes': {'small': 1, 'large': 4},
             },
-            'kebnekaise:gpu_4xK80': {
+            'kebnekaise:4xK80': {
                 'cpus_per_node': 28,
                 'num_nodes': {'small': 1, 'large': 2},
             },
-            'kebnekaise:gpu_2xV100': {
+            'kebnekaise:2xV100': {
                 'cpus_per_node': 28,
                 'num_nodes': {'small': 1, 'large': 4},
             },

@@ -16,8 +16,8 @@ import microbenchmarks.gpu.hooks as hooks
 class gpu_burn_check_base(gpu_burn_check):
     def __init__(self):
         self.valid_systems = [
-            'kebnekaise:gpu_2xK80', 'kebnekaise:gpu_4xK80', 'kebnekaise:gpu_2xV100',
-            'kebnekaise:gpu_2xA6000', 'kebnekaise:4xA40',
+            'kebnekaise:2xK80', 'kebnekaise:4xK80', 'kebnekaise:2xV100',
+            'kebnekaise:2xA6000', 'kebnekaise:4xA40',
             'UmU-Cloud',
             'alvis',
             'daint:gpu', 'dom:gpu', 'arolla:cn', 'tsa:cn', 'ault:amdv100',
@@ -88,16 +88,16 @@ class gpu_burn_check(gpu_burn_check_base):
 
         references = {
             'double': {
-                'kebnekaise:gpu_2xK80': {
+                'kebnekaise:2xK80': {
                     'gpu_perf_min': (1000, -0.10, None, 'Gflop/s'),
                 },
-                'kebnekaise:gpu_4xK80': {
+                'kebnekaise:4xK80': {
                     'gpu_perf_min': (1000, -0.10, None, 'Gflop/s'),
                 },
-                'kebnekaise:gpu_2xV100': {
+                'kebnekaise:2xV100': {
                     'gpu_perf_min': (6300, -0.10, None, 'Gflop/s'),
                 },
-                'kebnekaise:gpu_2xA6000': {
+                'kebnekaise:2xA6000': {
                     'gpu_perf_min': (538, -0.10, None, 'Gflop/s'),
                 },
                 'kebnekaise:4xA40': {
@@ -155,13 +155,13 @@ class gpu_burn_check(gpu_burn_check_base):
                 '*': {'temp': (0, None, None, 'degC')},
             },
             'single': {
-                'kebnekaise:gpu_2xK80': {
+                'kebnekaise:2xK80': {
                     'gpu_perf_min': (2300, -0.10, None, 'Gflop/s'),
                 },
-                'kebnekaise:gpu_2xV100': {
+                'kebnekaise:2xV100': {
                     'gpu_perf_min': (13400, -0.10, None, 'Gflop/s'),
                 },
-                'kebnekaise:gpu_2xA6000': {
+                'kebnekaise:2xA6000': {
                     'gpu_perf_min': (21000, -0.10, None, 'Gflop/s'),
                 },
                 'kebnekaise:4xA40': {

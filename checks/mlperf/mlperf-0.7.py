@@ -13,10 +13,10 @@ class MLPerfInference_07_Base(rfm.RunOnlyRegressionTest):
     def __init__(self):
         self.descr = 'MLPerf Inference 0.7'
 
-        self.valid_systems = ['kebnekaise:gpu_%s' % x for x in ['2xK80', '4xK80', '2xV100']]
+        self.valid_systems = ['kebnekaise:%s' % x for x in ['2xK80', '4xK80', '2xV100']]
         self.valid_systems += ['alvis']
 
-        self.kebnekaise_single_socket = ['kebnekaise:gpu_%s' % x for x in ['1xK80', '1xV100']]
+        self.kebnekaise_single_socket = ['kebnekaise:%s' % x for x in ['1xK80', '1xV100']]
         self.valid_systems += self.kebnekaise_single_socket
 
         # This test uses no modules, just singularity from OS packages

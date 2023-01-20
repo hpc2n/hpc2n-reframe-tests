@@ -26,8 +26,8 @@ class SystemConfigHPC2N(rfm.RegressionMixin):
 @rfm.simple_test
 class gpu_bandwidth_check(GpuBandwidth, SystemConfigHPC2N):
     valid_systems = [
-        'kebnekaise:gpu_2xK80', 'kebnekaise:gpu_4xK80', 'kebnekaise:gpu_2xV100',
-        'kebnekaise:gpu_2xA6000', 'kebnekaise:4xA40', 'alvis', 'UmU-Cloud',
+        'kebnekaise:2xK80', 'kebnekaise:4xK80', 'kebnekaise:2xV100',
+        'kebnekaise:2xA6000', 'kebnekaise:4xA40', 'alvis', 'UmU-Cloud',
     ]
     valid_prog_environs = ['foss_with_cuda']
 
@@ -37,17 +37,17 @@ class gpu_bandwidth_check(GpuBandwidth, SystemConfigHPC2N):
 
     num_tasks = 0
     reference = {
-        'kebnekaise:gpu_2xK80': {
+        'kebnekaise:2xK80': {
             'h2d': (11.2, -0.1, None, 'GB/s'),
             'd2h': (11.4, -0.1, None, 'GB/s'),
             'd2d': (167.5, -0.1, None, 'GB/s')
         },
-        'kebnekaise:gpu_4xK80': {
+        'kebnekaise:4xK80': {
             'h2d': (11.2, -0.1, None, 'GB/s'),
             'd2h': (11.4, -0.1, None, 'GB/s'),
             'd2d': (167.5, -0.1, None, 'GB/s')
         },
-        'kebnekaise:gpu_2xV100': {
+        'kebnekaise:2xV100': {
             'h2d': (12.6, -0.1, None, 'GB/s'),
             'd2h': (13.5, -0.1, None, 'GB/s'),
             'd2d': (816.4, -0.1, None, 'GB/s')
@@ -57,7 +57,7 @@ class gpu_bandwidth_check(GpuBandwidth, SystemConfigHPC2N):
             'd2h': (13, -0.1, None, 'GB/s'),
             'd2d': (533.0, -0.1, None, 'GB/s')
         },
-        'kebnekaise:gpu_2xA6000': {
+        'kebnekaise:2xA6000': {
             'h2d': (12, -0.1, None, 'GB/s'),
             'd2h': (13, -0.1, None, 'GB/s'),
             'd2d': (636, -0.1, None, 'GB/s')
@@ -105,8 +105,8 @@ class gpu_bandwidth_check(GpuBandwidth, SystemConfigHPC2N):
 @rfm.simple_test
 class gpu_bandwidth_d2d_check(GpuBandwidthD2D, SystemConfigHPC2N):
     valid_systems = [
-        'kebnekaise:gpu_2xK80', 'kebnekaise:gpu_4xK80', 'kebnekaise:gpu_2xV100',
-        'kebnekaise:gpu_2xA6000', 'kebnekaise:4xA40', 'alvis',
+        'kebnekaise:2xK80', 'kebnekaise:4xK80', 'kebnekaise:2xV100',
+        'kebnekaise:2xA6000', 'kebnekaise:4xA40', 'alvis',
     ]
     valid_prog_environs = ['foss_with_cuda']
     num_tasks = 0
@@ -123,16 +123,16 @@ class gpu_bandwidth_d2d_check(GpuBandwidthD2D, SystemConfigHPC2N):
 
         if self.p2p:
             self.reference = {
-                'kebnekaise:gpu_2xK80': {
+                'kebnekaise:2xK80': {
                     'bw':   (163, -0.05, None, 'GB/s'),
                 },
-                'kebnekaise:gpu_4xK80': {
+                'kebnekaise:4xK80': {
                     'bw':   (9.5, -0.05, None, 'GB/s'),
                 },
-                'kebnekaise:gpu_2xV100': {
+                'kebnekaise:2xV100': {
                     'bw':   (9.55, -0.05, None, 'GB/s'),
                 },
-                'kebnekaise:gpu_2xA6000': {
+                'kebnekaise:2xA6000': {
                     'bw':   (636, -0.05, None, 'GB/s'),
                 },
                 'kebnekaise:4xA40': {
@@ -156,16 +156,16 @@ class gpu_bandwidth_d2d_check(GpuBandwidthD2D, SystemConfigHPC2N):
             }
         else:
             self.reference = {
-                'kebnekaise:gpu_2xK80': {
+                'kebnekaise:2xK80': {
                     'bw': (30, -0.05, None, 'GB/s'),
                 },
-                'kebnekaise:gpu_4xK80': {
+                'kebnekaise:4xK80': {
                     'bw': (65, -0.05, None, 'GB/s'),
                 },
-                'kebnekaise:gpu_2xV100': {
+                'kebnekaise:2xV100': {
                     'bw': (12, -0.05, None, 'GB/s'),
                 },
-                'kebnekaise:gpu_2xA6000': {
+                'kebnekaise:2xA6000': {
                     'bw': (12, -0.05, None, 'GB/s'),
                 },
                 'kebnekaise:4xA40': {
