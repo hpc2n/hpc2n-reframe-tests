@@ -13,18 +13,18 @@ from reframe.core.backends import getlauncher
 @rfm.simple_test
 class nvidia_smi_check(rfm.RunOnlyRegressionTest):
     gpu_mode = parameter(['accounting', 'compute', 'ecc'])
-    valid_systems = ['daint:gpu', 'dom:gpu', 'alvis', 'kebnekaise']
+    valid_systems = ['alvis', 'kebnekaise']
     valid_prog_environs = ['builtin']
     executable = 'nvidia-smi'
     executable_opts = ['-a', '-d']
     num_tasks = 1
     num_tasks_per_node = 1
     exclusive = True
-    tags = {'maintenance', 'production'}
-    maintainers = ['VH']
+    tags = {'maintenance', 'production', 'reboot'}
+    maintainers = ['AS']
     mode_values = variable(typ.Dict[str, str], value={
         'accounting': 'Enabled',
-        'compute': 'Exclusive_Process',
+        'compute': 'Default',
         'ecc': 'Enabled'
     })
 
@@ -43,7 +43,7 @@ class nvidia_smi_check(rfm.RunOnlyRegressionTest):
         num_gpus_detected = sn.count(sn.findall(patt, self.stdout))
         num_gpus_all = self.num_tasks
 
-        # We can't an use f-string here, because it will misinterpret the
+        # We can't use an f-string here, because it will misinterpret the
         # placeholders for the sanity function message
         errmsg = ('{0} out of {1} GPU(s) have the correct %s mode' %
                   self.gpu_mode)
@@ -54,11 +54,6 @@ class nvidia_smi_check(rfm.RunOnlyRegressionTest):
     @run_after('setup')
     def set_launcher(self):
         self.job.launcher = getlauncher('local')()
-
-    @run_after('setup')
-    def set_compute_mode(self):
-        if self.current_system.name in ['kebnekaise', 'alvis']:
-            self.mode_values.update({'compute': 'Default'})
 
     @run_before('run')
     def set_num_gpus_per_node(self):
