@@ -122,9 +122,6 @@ class gpu_burn_check(gpu_burn_check_base):
                 'alvis:NxA100_MEM512': {
                     'gpu_perf_min': (18100, -0.10, None, 'Gflop/s'),
                 },
-                'alvis:NxA100_MEM768': {
-                    'gpu_perf_min': (18100, -0.10, None, 'Gflop/s'),
-                },
                 'alvis:NxA100fat': {
                     'gpu_perf_min': (18500, -0.10, None, 'Gflop/s'),
                 },

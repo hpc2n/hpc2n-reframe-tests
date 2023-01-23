@@ -87,11 +87,6 @@ class gpu_bandwidth_check(GpuBandwidth, SystemConfigHPC2N):
             'd2h': (24.53, -0.1, None, 'GB/s'),
             'd2d': (1234.3, -0.1, None, 'GB/s')
         },
-        'alvis:4xA100_MEM768': {
-            'h2d': (23.57, -0.1, None, 'GB/s'),
-            'd2h': (24.53, -0.1, None, 'GB/s'),
-            'd2d': (1234.3, -0.1, None, 'GB/s')
-        },
         'alvis:4xA100fat': {
             'h2d': (23.57, -0.1, None, 'GB/s'),
             'd2h': (24.53, -0.1, None, 'GB/s'),
@@ -147,9 +142,6 @@ class gpu_bandwidth_d2d_check(GpuBandwidthD2D, SystemConfigHPC2N):
                 'alvis:4xA100_MEM512': {
                     'bw': (262.69, -0.05, None, 'GB/s'),
                 },
-                'alvis:4xA100_MEM768': {
-                    'bw': (262.69, -0.05, None, 'GB/s'),
-                },
                 'alvis:4xA100fat': {
                     'bw': (262.69, -0.05, None, 'GB/s'),
                 },
@@ -178,9 +170,6 @@ class gpu_bandwidth_d2d_check(GpuBandwidthD2D, SystemConfigHPC2N):
                     'bw': (61.8, -0.05, None, 'GB/s'),
                 },
                 'alvis:4xA100_MEM512': {
-                    'bw': (61.8, -0.05, None, 'GB/s'),
-                },
-                'alvis:4xA100_MEM768': {
                     'bw': (61.8, -0.05, None, 'GB/s'),
                 },
                 'alvis:4xA100fat': {
