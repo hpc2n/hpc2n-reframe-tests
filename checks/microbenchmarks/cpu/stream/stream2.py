@@ -62,7 +62,7 @@ class StreamTest2(StreamTest2Base):
     valid_systems = ['kebnekaise:%s' % x for x in ['bdw', 'sky', 'knl', 'lm']]
     valid_systems += ['alvis', 'UmU-Cloud']
     valid_prog_environs = ['%s_%s' % (tc, tv) for tc in ['foss', 'intel']
-        for tv in ['2019a', '2019b', '2020a', '2020b', '2021a', '2022a']]
+        for tv in ['2021b', '2022a']]
 
     stream_cpus_per_task = {
         'kebnekaise:local': 28,
