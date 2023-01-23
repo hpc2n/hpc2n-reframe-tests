@@ -115,10 +115,6 @@ class MLPerfInference_07(MLPerfInference_07_Base):
                     'samples_per_second': (13465, -0.00, None, 'samples/s'),
                     'accuracy': (90.874, -0.01, None, 'accuracy'),
                 },
-                'alvis:4xA100_MEM768': {
-                    'samples_per_second': (13465, -0.00, None, 'samples/s'),
-                    'accuracy': (90.874, -0.01, None, 'accuracy'),
-                },
                 'alvis:4xA100fat': {
                     'samples_per_second': (13465, -0.00, None, 'samples/s'),
                     'accuracy': (90.874, -0.01, None, 'accuracy'),
@@ -141,10 +137,6 @@ class MLPerfInference_07(MLPerfInference_07_Base):
                     'samples_per_second': (150512, -0.00, None, 'samples/s'),
                     'accuracy': (76.46, -0.01, None, 'accuracy'),
                 },
-                'alvis:4xA100_MEM768': {
-                    'samples_per_second': (150512, -0.00, None, 'samples/s'),
-                    'accuracy': (76.46, -0.01, None, 'accuracy'),
-                },
                 'alvis:4xA100fat': {
                     'samples_per_second': (150512, -0.00, None, 'samples/s'),
                     'accuracy': (76.46, -0.01, None, 'accuracy'),
@@ -164,10 +156,6 @@ class MLPerfInference_07(MLPerfInference_07_Base):
                     'accuracy': (20.0, -0.01, None, 'accuracy'),
                 },
                 'alvis:4xA100_MEM512': {
-                    'samples_per_second': (3947, -0.00, None, 'samples/s'),
-                    'accuracy': (20.0, -0.01, None, 'accuracy'),
-                },
-                'alvis:4xA100_MEM768': {
                     'samples_per_second': (3947, -0.00, None, 'samples/s'),
                     'accuracy': (20.0, -0.01, None, 'accuracy'),
                 },
@@ -199,10 +187,6 @@ class MLPerfInference_07(MLPerfInference_07_Base):
                     'samples_per_second': (41722, -0.00, None, 'samples/s'),
                     'accuracy': (100-7.45225, -0.01, None, 'accuracy'),
                 },
-                'alvis:4xA100_MEM768': {
-                    'samples_per_second': (41722, -0.00, None, 'samples/s'),
-                    'accuracy': (100-7.45225, -0.01, None, 'accuracy'),
-                },
                 'alvis:4xA100fat': {
                     'samples_per_second': (41722, -0.00, None, 'samples/s'),
                     'accuracy': (100-7.45225, -0.01, None, 'accuracy'),
@@ -222,10 +206,6 @@ class MLPerfInference_07(MLPerfInference_07_Base):
                     'accuracy': (0.853, -0.01, None, 'accuracy'),
                 },
                 'alvis:4xA100_MEM512': {
-                    'samples_per_second': (183, -0.00, None, 'samples/s'),
-                    'accuracy': (0.853, -0.01, None, 'accuracy'),
-                },
-                'alvis:4xA100_MEM768': {
                     'samples_per_second': (183, -0.00, None, 'samples/s'),
                     'accuracy': (0.853, -0.01, None, 'accuracy'),
                 },
