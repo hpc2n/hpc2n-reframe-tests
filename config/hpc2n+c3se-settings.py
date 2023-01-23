@@ -76,33 +76,6 @@ site_configuration = {
                     ],
                 },
                 {
-                    'name': 'NxA100_MEM768',
-                    'descr': 'GPU A100 nodes with 768G memory and 2x16 cores',
-                    'scheduler': 'slurm',
-                    'launcher': 'srun',
-                    'access': ['-A C3SE-STAFF', '-C MEM768'],
-                    'max_jobs': 100,
-                    'environs': ['builtin', 'gnu', 'foss', 'foss_with_cuda', 'fosscuda', 'fosscuda_2020b', 'foss_2021a', 'intelcuda_2020b', 'intel_2021a', 'intel_2022a'],
-                    'resources': [
-                        {
-                            'name': '_rfm_gpu',
-                            'options': ['--gpus-per-node=A100:{num_gpus_per_node}'],
-                        },
-                    ],
-                    'devices': [
-                        {
-                            'type': 'gpu',
-                            'arch': 'sm_80',
-                            'num_devices': 4
-                        },
-                    ],
-                    'container_platforms': [
-                        {
-                            'type': 'Singularity',
-                        },
-                    ],
-                },
-                {
                     'name': 'NxA100_MEM256',
                     'descr': 'GPU A100 nodes with 256G memory and 2x32 cores',
                     'scheduler': 'slurm',
@@ -265,27 +238,6 @@ site_configuration = {
                             'type': 'gpu',
                             'arch': 'sm_75',
                             'num_devices': 8
-                        },
-                    ],
-                    'container_platforms': [
-                        {
-                            'type': 'Singularity',
-                        },
-                    ],
-                },
-                {
-                    'name': '4xA100_MEM768',
-                    'descr': 'GPU 4xA100 nodes with 768G memory and 2x16 cores',
-                    'scheduler': 'slurm',
-                    'launcher': 'srun',
-                    'access': ['-A C3SE-STAFF', '-C MEM768', '--gpus-per-node=A100:4'],
-                    'max_jobs': 100,
-                    'environs': ['builtin', 'gnu', 'foss', 'foss_with_cuda', 'fosscuda', 'fosscuda_2020b', 'foss_2021a', 'intelcuda_2020b', 'intel_2021a', 'intel_2022a'],
-                    'devices': [
-                        {
-                            'type': 'gpu',
-                            'arch': 'sm_80',
-                            'num_devices': 4
                         },
                     ],
                     'container_platforms': [
