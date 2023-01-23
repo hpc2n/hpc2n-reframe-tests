@@ -707,6 +707,22 @@ site_configuration = {
             'target_systems': ['kebnekaise', 'alvis', 'UmU-Cloud'],
         },
         {
+            'name': 'foss_2021b',
+            'modules': ['foss/2021b'],
+            'cc': 'gcc',
+            'cxx': 'g++',
+            'ftn': 'gfortran',
+            'target_systems': ['kebnekaise', 'alvis', 'UmU-Cloud'],
+        },
+        {
+            'name': 'foss_2022a',
+            'modules': ['foss/2022a'],
+            'cc': 'gcc',
+            'cxx': 'g++',
+            'ftn': 'gfortran',
+            'target_systems': ['kebnekaise', 'alvis', 'UmU-Cloud'],
+        },
+        {
             'name': 'intel',
             'modules': ['intel'],
             'cc': 'icc',
@@ -749,6 +765,14 @@ site_configuration = {
         {
             'name': 'intel_2021a',
             'modules': ['intel/2021a'],
+            'cc': 'icc',
+            'cxx': 'icpc',
+            'ftn': 'ifort',
+            'target_systems': ['kebnekaise', 'alvis', 'UmU-Cloud'],
+        },
+        {
+            'name': 'intel_2021b',
+            'modules': ['intel/2021b'],
             'cc': 'icc',
             'cxx': 'icpc',
             'ftn': 'ifort',
