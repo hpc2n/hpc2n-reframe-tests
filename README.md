@@ -14,3 +14,7 @@ Simple use instructions:
 To run maintenance tests:
 reframe -C config/hpc2n+c3se-settings.py -r -t maintenance
 This will run the tests that are tagged with maintenance on all node types (reframe paritions).
+
+To run maintenance test on a specific node:
+reframe -C config/hpc2n+c3se-settings.py -r -t maintenance --system alvis:<partition> -J nodelist=alvisx-y
+See config/hpc2n+c3se-settings.py for partition names
