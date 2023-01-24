@@ -33,7 +33,7 @@ class gpu_burn_check(gpu_burn_check_base):
     '''Run both single and double precision tests'''
     precision = parameter(['double', 'single'])
 
-    tags = {'diagnostic', 'benchmark'}
+    tags = {'diagnostic', 'benchmark', 'maintenance'}
     maintainers = ['AJ', 'TM', 'AS']
 
     references = {
