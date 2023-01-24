@@ -65,21 +65,11 @@ def set_num_gpus_per_node(self):
     cn = self.current_partition.name
 
     if cs in {'alvis', 'kebnekaise'}:
-        if cn in {'1xK80', '2xV100', '2xA6000', 'NxV100', '2xV100'}:
+        if cn in {'1xK80', '2xV100', '2xA6000', '2xV100'}:
             self.num_gpus_per_node = 2
-        elif cn in {'2xK80', 'NxA100_MEM256', 'NxA100_MEM512', 'NxA100fat', 'NxA40', '4xV100', '4xA100_MEM256', '4xA100_MEM512', '4xA100fat', '4xA40'}:
+        elif cn in {'2xK80', '4xV100', '4xA100_MEM256', '4xA100_MEM512', '4xA100fat', '4xA40'}:
             self.num_gpus_per_node = 4
-        elif cn in {'4xK80', 'NxT4', '8xT4'}:
+        elif cn in {'4xK80', '8xT4'}:
             self.num_gpus_per_node = 8
-    elif cs in {'dom', 'daint'}:
-        self.num_gpus_per_node = 1
-    elif cs in {'arola', 'tsa'}:
-        self.num_gpus_per_node = 8
-    elif cp in {'ault:amda100', 'ault:intelv100'}:
-        self.num_gpus_per_node = 4
-    elif cp in {'ault:amdv100'}:
-        self.num_gpus_per_node = 2
-    elif cp in {'ault:amdvega'}:
-        self.num_gpus_per_node = 3
     else:
         self.num_gpus_per_node = 1
