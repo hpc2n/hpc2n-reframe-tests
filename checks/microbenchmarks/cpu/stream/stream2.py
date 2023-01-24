@@ -41,7 +41,7 @@ class StreamTest2Base(rfm.RunOnlyRegressionTest):
     num_tasks = 1
     num_tasks_per_node = 1
 
-    tags = {'production', 'reboot', 'maintenance'}
+    tags = {'production'}
     maintainers = ['ÅS']
 
     stream_binary = fixture(build_stream, scope='environment')
@@ -309,13 +309,10 @@ class StreamTest2(StreamTest2Base):
         self.executable_opts = ["-s", "%s" % mem_sz]
 
 
-class StreamTest2Multirun(StreamTest2):
-    '''This test checks the stream test:
-       Function    Best Rate MB/s  Avg time     Min time     Max time
-       Triad:          13991.7     0.017174     0.017153     0.017192
-    '''
+@rfm.simple_test
+class StreamTest2Maintenance(StreamTest2):
+    '''Maintenance version of StreamTest2'''
 
-    nruns = parameter([n] for n in range(100))
+    valid_prog_environs = ['intel_2022a']
 
-    def __init__(self):
-        super().__init__()
+    tags = {'maintenance'}
