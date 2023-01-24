@@ -31,7 +31,7 @@ class gpu_bandwidth_check(GpuBandwidth, SystemConfigHPC2N):
     ]
     valid_prog_environs = ['foss_with_cuda']
 
-    tags = {'diagnostic', 'mch', 'benchmark'}
+    tags = {'diagnostic', 'mch', 'benchmark', 'maintenance'}
     maintainers = ['AJ', 'SK', 'AS']
 
     # Increase runtime and memory usage
@@ -107,7 +107,7 @@ class gpu_bandwidth_d2d_check(GpuBandwidthD2D, SystemConfigHPC2N):
     ]
     valid_prog_environs = ['foss_with_cuda']
 
-    tags = {'diagnostic', 'mch', 'benchmark'}
+    tags = {'diagnostic', 'mch', 'benchmark', 'maintenance'}
     maintainers = ['AJ', 'SK', 'AS']
 
     # Increase runtime and memory usage
