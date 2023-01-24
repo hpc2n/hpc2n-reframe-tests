@@ -29,7 +29,7 @@ site_configuration = {
                     'access': ['-A C3SE-STAFF', '-C 2xV100', '--gpus-per-node=V100:2'],
                     'max_jobs': 100,
                     'features': ['gpu', 'nvgpu'],
-                    'environs': ['builtin', 'gnu', 'foss', 'foss_with_cuda', 'foss_2021a', 'intel_2021a', 'intel_2022a'],
+                    'environs': ['builtin', 'gnu', 'foss', 'foss_with_cuda', 'foss_2021a', 'foss_2021b', 'foss_2022a', 'intel_2021a', 'intel_2022a'],
                     'devices': [
                         {
                             'type': 'gpu',
@@ -51,7 +51,7 @@ site_configuration = {
                     'access': ['-A C3SE-STAFF', '-C 4xV100', '--gpus-per-node=V100:4'],
                     'max_jobs': 100,
                     'features': ['gpu', 'nvgpu'],
-                    'environs': ['builtin', 'gnu', 'foss', 'foss_with_cuda', 'foss_2021a', 'intel_2021a', 'intel_2022a'],
+                    'environs': ['builtin', 'gnu', 'foss', 'foss_with_cuda', 'foss_2021a', 'foss_2021b', 'foss_2022a', 'intel_2021a', 'intel_2022a'],
                     'devices': [
                         {
                             'type': 'gpu',
@@ -73,7 +73,7 @@ site_configuration = {
                     'access': ['-A C3SE-STAFF', '-C 8xT4', '--gpus-per-node=T4:8'],
                     'max_jobs': 100,
                     'features': ['gpu', 'nvgpu'],
-                    'environs': ['builtin', 'gnu', 'foss', 'foss_with_cuda', 'foss_2021a', 'intel_2021a', 'intel_2022a'],
+                    'environs': ['builtin', 'gnu', 'foss', 'foss_with_cuda', 'foss_2021a', 'foss_2021b', 'foss_2022a', 'intel_2021a', 'intel_2022a'],
                     'devices': [
                         {
                             'type': 'gpu',
@@ -95,7 +95,7 @@ site_configuration = {
                     'access': ['-A C3SE-STAFF', '-C MEM256', '--gpus-per-node=A100:4'],
                     'max_jobs': 100,
                     'features': ['gpu', 'nvgpu'],
-                    'environs': ['builtin', 'gnu', 'foss', 'foss_with_cuda', 'foss_2021a', 'intel_2021a', 'intel_2022a'],
+                    'environs': ['builtin', 'gnu', 'foss', 'foss_with_cuda', 'foss_2021a', 'foss_2021b', 'foss_2022a', 'intel_2021a', 'intel_2022a'],
                     'container_platforms': [
                         {
                             'type': 'Singularity',
@@ -110,7 +110,7 @@ site_configuration = {
                     'access': ['-A C3SE-STAFF', '-C MEM512', '--gpus-per-node=A100:4'],
                     'max_jobs': 100,
                     'features': ['gpu', 'nvgpu'],
-                    'environs': ['builtin', 'gnu', 'foss', 'foss_with_cuda', 'foss_2021a', 'intel_2021a', 'intel_2022a'],
+                    'environs': ['builtin', 'gnu', 'foss', 'foss_with_cuda', 'foss_2021a', 'foss_2021b', 'foss_2022a', 'intel_2021a', 'intel_2022a'],
                     'devices': [
                         {
                             'type': 'gpu',
@@ -132,7 +132,7 @@ site_configuration = {
                     'access': ['-A C3SE-STAFF', '-C 4xA100fat', '--gpus-per-node=A100fat:4'],
                     'max_jobs': 100,
                     'features': ['gpu', 'nvgpu'],
-                    'environs': ['builtin', 'gnu', 'foss', 'foss_with_cuda', 'foss_2021a', 'intel_2021a', 'intel_2022a'],
+                    'environs': ['builtin', 'gnu', 'foss', 'foss_with_cuda', 'foss_2021a', 'foss_2021b', 'foss_2022a', 'intel_2021a', 'intel_2022a'],
                     'devices': [
                         {
                             'type': 'gpu',
@@ -154,7 +154,7 @@ site_configuration = {
                     'access': ['-A C3SE-STAFF', '-C 4xA40', '--gpus-per-node=A40:4'],
                     'max_jobs': 100,
                     'features': ['gpu', 'nvgpu'],
-                    'environs': ['builtin', 'gnu', 'foss', 'foss_with_cuda', 'foss_2021a', 'intel_2021a', 'intel_2022a'],
+                    'environs': ['builtin', 'gnu', 'foss', 'foss_with_cuda', 'foss_2021a', 'foss_2021b', 'foss_2022a', 'intel_2021a', 'intel_2022a'],
                     'devices': [
                         {
                             'type': 'gpu',
@@ -175,7 +175,7 @@ site_configuration = {
                     'launcher': 'srun',
                     'access': ['-A C3SE-STAFF', '-C NOGPU'],
                     'max_jobs': 4,
-                    'environs': ['builtin', 'gnu', 'foss', 'foss_2021a', 'intel_2021a', 'intel_2022a'],
+                    'environs': ['builtin', 'gnu', 'foss', 'foss_2021a', 'foss_2021b', 'foss_2022a', 'intel_2021a', 'intel_2022a'],
                     'container_platforms': [
                         {
                             'type': 'Singularity',
@@ -196,7 +196,7 @@ site_configuration = {
                     'scheduler': 'local',
                     'launcher': 'local',
                     'max_jobs': 4,
-                    'environs': ['builtin', 'gnu', 'foss', 'intel', 'foss_2019a', 'foss_2019b', 'foss_2020a', 'foss_2020b', 'foss_2021a', 'intel_2019a', 'intel_2019b', 'intel_2020a', 'intel_2020b', 'intel_2021a', 'intel_2022a'],
+                    'environs': ['builtin', 'gnu', 'foss', 'intel', 'foss_2019a', 'foss_2019b', 'foss_2020a', 'foss_2020b', 'foss_2021a', 'foss_2021b', 'foss_2022a', 'intel_2019a', 'intel_2019b', 'intel_2020a', 'intel_2020b', 'intel_2021a', 'intel_2022a'],
                     'container_platforms': [
                         {
                             'type': 'Singularity',
@@ -211,7 +211,7 @@ site_configuration = {
                     'launcher': 'srun',
                     'access': ['-C broadwell', '-A sysop'],
                     'max_jobs': 100,
-                    'environs': ['builtin', 'gnu', 'foss', 'intel', 'foss_2019a', 'foss_2019b', 'foss_2020a', 'foss_2020b', 'foss_2021a', 'intel_2019a', 'intel_2019b', 'intel_2020a', 'intel_2020b', 'intel_2021a', 'intel_2022a'],
+                    'environs': ['builtin', 'gnu', 'foss', 'intel', 'foss_2019a', 'foss_2019b', 'foss_2020a', 'foss_2020b', 'foss_2021a', 'foss_2021b', 'foss_2022a', 'intel_2019a', 'intel_2019b', 'intel_2020a', 'intel_2020b', 'intel_2021a', 'intel_2022a'],
                     'container_platforms': [
                         {
                             'type': 'Singularity',
@@ -226,7 +226,7 @@ site_configuration = {
                     'launcher': 'srun',
                     'access': ['-C skylake', '-A sysop'],
                     'max_jobs': 100,
-                    'environs': ['builtin', 'gnu', 'foss', 'intel', 'foss_2019a', 'foss_2019b', 'foss_2020a', 'foss_2020b', 'foss_2021a', 'intel_2019a', 'intel_2019b', 'intel_2020a', 'intel_2020b', 'intel_2021a', 'intel_2022a'],
+                    'environs': ['builtin', 'gnu', 'foss', 'intel', 'foss_2019a', 'foss_2019b', 'foss_2020a', 'foss_2020b', 'foss_2021a', 'foss_2021b', 'foss_2022a', 'intel_2019a', 'intel_2019b', 'intel_2020a', 'intel_2020b', 'intel_2021a', 'intel_2022a'],
                     'container_platforms': [
                         {
                             'type': 'Singularity',
@@ -242,7 +242,7 @@ site_configuration = {
                     'access': ['-A sysop', '-p gpu', '-C broadwell&2xK80', '--gres=gpu:k80:1'],
                     'max_jobs': 100,
                     'features': ['gpu', 'nvgpu'],
-                    'environs': ['builtin', 'gnu', 'foss', 'intel', 'foss_with_cuda', 'foss_2019a', 'foss_2019b', 'foss_2020a', 'foss_2020b', 'foss_2021a', 'intel_2019a', 'intel_2019b', 'intel_2020a', 'intel_2020b', 'intel_2021a', 'intel_2022a'],
+                    'environs': ['builtin', 'gnu', 'foss', 'intel', 'foss_with_cuda', 'foss_2019a', 'foss_2019b', 'foss_2020a', 'foss_2020b', 'foss_2021a', 'foss_2021b', 'foss_2022a', 'intel_2019a', 'intel_2019b', 'intel_2020a', 'intel_2020b', 'intel_2021a', 'intel_2022a'],
                     'devices': [
                         {
                             'type': 'gpu',
@@ -265,7 +265,7 @@ site_configuration = {
                     'access': ['-A sysop', '-p gpu', '-C broadwell&2xK80', '--gres=gpu:k80:2', '--exclusive'],
                     'max_jobs': 100,
                     'features': ['gpu', 'nvgpu'],
-                    'environs': ['builtin', 'gnu', 'foss', 'intel', 'foss_with_cuda', 'foss_2019a', 'foss_2019b', 'foss_2020a', 'foss_2020b', 'foss_2021a', 'intel_2019a', 'intel_2019b', 'intel_2020a', 'intel_2020b', 'intel_2021a', 'intel_2022a'],
+                    'environs': ['builtin', 'gnu', 'foss', 'intel', 'foss_with_cuda', 'foss_2019a', 'foss_2019b', 'foss_2020a', 'foss_2020b', 'foss_2021a', 'foss_2021b', 'foss_2022a', 'intel_2019a', 'intel_2019b', 'intel_2020a', 'intel_2020b', 'intel_2021a', 'intel_2022a'],
                     'devices': [
                         {
                             'type': 'gpu',
@@ -288,7 +288,7 @@ site_configuration = {
                     'access': ['-A sysop', '-p gpu', '-C broadwell&4xK80', '--gres=gpu:k80:4', '--exclusive'],
                     'max_jobs': 100,
                     'features': ['gpu', 'nvgpu'],
-                    'environs': ['builtin', 'gnu', 'foss', 'intel', 'foss_with_cuda', 'foss_2019a', 'foss_2019b', 'foss_2020a', 'foss_2020b', 'foss_2021a', 'intel_2019a', 'intel_2019b', 'intel_2020a', 'intel_2020b', 'intel_2021a', 'intel_2022a'],
+                    'environs': ['builtin', 'gnu', 'foss', 'intel', 'foss_with_cuda', 'foss_2019a', 'foss_2019b', 'foss_2020a', 'foss_2020b', 'foss_2021a', 'foss_2021b', 'foss_2022a', 'intel_2019a', 'intel_2019b', 'intel_2020a', 'intel_2020b', 'intel_2021a', 'intel_2022a'],
                     'devices': [
                         {
                             'type': 'gpu',
@@ -311,7 +311,7 @@ site_configuration = {
                     'access': ['-A sysop', '-p gpu', '-C skylake&2xV100', '--gres=gpu:v100:1'],
                     'max_jobs': 100,
                     'features': ['gpu', 'nvgpu'],
-                    'environs': ['builtin', 'gnu', 'foss', 'intel', 'foss_with_cuda', 'foss_2019a', 'foss_2019b', 'foss_2020a', 'foss_2020b', 'foss_2021a', 'intel_2019a', 'intel_2019b', 'intel_2020a', 'intel_2020b', 'intel_2021a', 'intel_2022a'],
+                    'environs': ['builtin', 'gnu', 'foss', 'intel', 'foss_with_cuda', 'foss_2019a', 'foss_2019b', 'foss_2020a', 'foss_2020b', 'foss_2021a', 'foss_2021b', 'foss_2022a', 'intel_2019a', 'intel_2019b', 'intel_2020a', 'intel_2020b', 'intel_2021a', 'intel_2022a'],
                     'devices': [
                         {
                             'type': 'gpu',
@@ -334,7 +334,7 @@ site_configuration = {
                     'access': ['-A sysop', '-p gpu', '-C skylake&2xV100', '--gres=gpu:v100:2', '--exclusive'],
                     'max_jobs': 100,
                     'features': ['gpu', 'nvgpu'],
-                    'environs': ['builtin', 'gnu', 'foss', 'intel', 'foss_with_cuda', 'foss_2019a', 'foss_2019b', 'foss_2020a', 'foss_2020b', 'foss_2021a', 'intel_2019a', 'intel_2019b', 'intel_2020a', 'intel_2020b', 'intel_2021a', 'intel_2022a'],
+                    'environs': ['builtin', 'gnu', 'foss', 'intel', 'foss_with_cuda', 'foss_2019a', 'foss_2019b', 'foss_2020a', 'foss_2020b', 'foss_2021a', 'foss_2021b', 'foss_2022a', 'intel_2019a', 'intel_2019b', 'intel_2020a', 'intel_2020b', 'intel_2021a', 'intel_2022a'],
                     'devices': [
                         {
                             'type': 'gpu',
@@ -357,7 +357,7 @@ site_configuration = {
                     'access': ['-A sysop', '-p gpu', '-C broadwell&4xA40', '--gres=gpu:a40:2'],
                     'max_jobs': 100,
                     'features': ['gpu', 'nvgpu'],
-                    'environs': ['builtin', 'gnu', 'foss', 'intel', 'foss_with_cuda', 'foss_2019a', 'foss_2019b', 'foss_2020a', 'foss_2020b', 'foss_2021a', 'intel_2019a', 'intel_2019b', 'intel_2020a', 'intel_2020b', 'intel_2021a', 'intel_2022a'],
+                    'environs': ['builtin', 'gnu', 'foss', 'intel', 'foss_with_cuda', 'foss_2019a', 'foss_2019b', 'foss_2020a', 'foss_2020b', 'foss_2021a', 'foss_2021b', 'foss_2022a', 'intel_2019a', 'intel_2019b', 'intel_2020a', 'intel_2020b', 'intel_2021a', 'intel_2022a'],
                     'devices': [
                         {
                             'type': 'gpu',
@@ -380,7 +380,7 @@ site_configuration = {
                     'access': ['-A sysop', '-p gpu', '-C broadwell&4xA40', '--gres=gpu:a40:4', '--exclusive'],
                     'max_jobs': 100,
                     'features': ['gpu', 'nvgpu'],
-                    'environs': ['builtin', 'gnu', 'foss', 'intel', 'foss_with_cuda', 'foss_2019a', 'foss_2019b', 'foss_2020a', 'foss_2020b', 'foss_2021a', 'intel_2019a', 'intel_2019b', 'intel_2020a', 'intel_2020b', 'intel_2021a', 'intel_2022a'],
+                    'environs': ['builtin', 'gnu', 'foss', 'intel', 'foss_with_cuda', 'foss_2019a', 'foss_2019b', 'foss_2020a', 'foss_2020b', 'foss_2021a', 'foss_2021b', 'foss_2022a', 'intel_2019a', 'intel_2019b', 'intel_2020a', 'intel_2020b', 'intel_2021a', 'intel_2022a'],
                     'devices': [
                         {
                             'type': 'gpu',
@@ -403,7 +403,7 @@ site_configuration = {
                     'access': ['-A sysop', '-p gpu', '-C broadwell&2xA6000', '--gres=gpu:a6000:1'],
                     'max_jobs': 100,
                     'features': ['gpu', 'nvgpu'],
-                    'environs': ['builtin', 'gnu', 'foss', 'intel', 'foss_with_cuda', 'foss_2019a', 'foss_2019b', 'foss_2020a', 'foss_2020b', 'foss_2021a', 'intel_2019a', 'intel_2019b', 'intel_2020a', 'intel_2020b', 'intel_2021a', 'intel_2022a'],
+                    'environs': ['builtin', 'gnu', 'foss', 'intel', 'foss_with_cuda', 'foss_2019a', 'foss_2019b', 'foss_2020a', 'foss_2020b', 'foss_2021a', 'foss_2021b', 'foss_2022a', 'intel_2019a', 'intel_2019b', 'intel_2020a', 'intel_2020b', 'intel_2021a', 'intel_2022a'],
                     'devices': [
                         {
                             'type': 'gpu',
@@ -426,7 +426,7 @@ site_configuration = {
                     'access': ['-A sysop', '-p gpu', '-C broadwell&2xA6000', '--gres=gpu:a6000:2', '--exclusive'],
                     'max_jobs': 100,
                     'features': ['gpu', 'nvgpu'],
-                    'environs': ['builtin', 'gnu', 'foss', 'intel', 'foss_with_cuda', 'foss_2019a', 'foss_2019b', 'foss_2020a', 'foss_2020b', 'foss_2021a', 'intel_2019a', 'intel_2019b', 'intel_2020a', 'intel_2020b', 'intel_2021a', 'intel_2022a'],
+                    'environs': ['builtin', 'gnu', 'foss', 'intel', 'foss_with_cuda', 'foss_2019a', 'foss_2019b', 'foss_2020a', 'foss_2020b', 'foss_2021a', 'foss_2021b', 'foss_2022a', 'intel_2019a', 'intel_2019b', 'intel_2020a', 'intel_2020b', 'intel_2021a', 'intel_2022a'],
                     'devices': [
                         {
                             'type': 'gpu',
@@ -448,7 +448,7 @@ site_configuration = {
                     'launcher': 'srun',
                     'access': ['-p knl', '-A sysop'],
                     'max_jobs': 100,
-                    'environs': ['builtin', 'gnu', 'foss', 'intel', 'foss_2019a', 'foss_2019b', 'foss_2020a', 'foss_2020b', 'foss_2021a', 'intel_2019a', 'intel_2019b', 'intel_2020a', 'intel_2020b', 'intel_2021a', 'intel_2022a'],
+                    'environs': ['builtin', 'gnu', 'foss', 'intel', 'foss_2019a', 'foss_2019b', 'foss_2020a', 'foss_2020b', 'foss_2021a', 'foss_2021b', 'foss_2022a', 'intel_2019a', 'intel_2019b', 'intel_2020a', 'intel_2020b', 'intel_2021a', 'intel_2022a'],
                     'resources': [
                         {
                             'name': 'threads',
@@ -477,7 +477,7 @@ site_configuration = {
                     'launcher': 'srun',
                     'access': ['-p largemem', '-A sysop'],
                     'max_jobs': 100,
-                    'environs': ['builtin', 'gnu', 'foss', 'intel', 'foss_2019a', 'foss_2019b', 'foss_2020a', 'foss_2020b', 'foss_2021a', 'intel_2019a', 'intel_2019b', 'intel_2020a', 'intel_2020b', 'intel_2021a', 'intel_2022a'],
+                    'environs': ['builtin', 'gnu', 'foss', 'intel', 'foss_2019a', 'foss_2019b', 'foss_2020a', 'foss_2020b', 'foss_2021a', 'foss_2021b', 'foss_2022a', 'intel_2019a', 'intel_2019b', 'intel_2020a', 'intel_2020b', 'intel_2021a', 'intel_2022a'],
                     'container_platforms': [
                         {
                             'type': 'Singularity',
