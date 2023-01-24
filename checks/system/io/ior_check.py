@@ -18,7 +18,7 @@ class IorCheck(rfm.RunOnlyRegressionTest):
     username = getpass.getuser()
     time_limit = '15m'
     maintainers = ['SO', 'GLR', 'ÅS']
-    tags = {'ops', 'maintenance'}
+    tags = {'ops'}
 
     @run_after('init')
     def set_description(self):
@@ -205,9 +205,11 @@ class IorReadCheck(IorCheck):
         variant = IorWriteCheck.get_variant_nums(base_dir=self.base_dir)[0]
         self.depends_on(IorWriteCheck.variant_name(variant))
 
+
 @rfm.simple_test
 class IorWriteReadCheck(IorCheck):
     executable_opts = ['-w', '-r']
+    tags = {'ops', 'maintenance'}
     tags |= {'write', 'read'}
 
     @sanity_function
