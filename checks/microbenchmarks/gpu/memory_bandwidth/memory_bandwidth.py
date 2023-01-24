@@ -31,11 +31,15 @@ class gpu_bandwidth_check(GpuBandwidth, SystemConfigHPC2N):
     ]
     valid_prog_environs = ['foss_with_cuda']
 
+    tags = {'diagnostic', 'mch', 'benchmark'}
+    maintainers = ['AJ', 'SK', 'AS']
+
     # Increase runtime and memory usage
     #num_copies = 20
     copy_size = 2*1024**3-1 # 2GB ~= 1/6 of K80 memory
 
     num_tasks = 0
+
     reference = {
         'kebnekaise:2xK80': {
             'h2d': (11.2, -0.1, None, 'GB/s'),
@@ -93,8 +97,6 @@ class gpu_bandwidth_check(GpuBandwidth, SystemConfigHPC2N):
             'd2d': (1485, -0.1, None, 'GB/s')
         },
     }
-    tags = {'diagnostic', 'mch', 'benchmark'}
-    maintainers = ['AJ', 'SK', 'AS']
 
 
 @rfm.simple_test
@@ -104,13 +106,15 @@ class gpu_bandwidth_d2d_check(GpuBandwidthD2D, SystemConfigHPC2N):
         'kebnekaise:2xA6000', 'kebnekaise:4xA40', 'alvis',
     ]
     valid_prog_environs = ['foss_with_cuda']
-    num_tasks = 0
+
     tags = {'diagnostic', 'mch', 'benchmark'}
     maintainers = ['AJ', 'SK', 'AS']
 
     # Increase runtime and memory usage
     #num_copies = 20
     copy_size = 2*1024**3-1 # 2GB ~= 1/6 of K80 memory
+
+    num_tasks = 0
 
     @run_before('performance')
     def set_references(self):
