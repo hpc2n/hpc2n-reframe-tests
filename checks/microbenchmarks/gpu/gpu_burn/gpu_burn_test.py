@@ -33,6 +33,9 @@ class gpu_burn_check(gpu_burn_check_base):
     '''Run both single and double precision tests'''
     precision = parameter(['double', 'single'])
 
+    tags = {'diagnostic', 'benchmark'}
+    maintainers = ['AJ', 'TM', 'AS']
+
     references = {
         'double': {
             'kebnekaise:2xK80': {
@@ -105,9 +108,6 @@ class gpu_burn_check(gpu_burn_check_base):
             '*': {'gpu_temp_max': (0, None, None, 'degC')},
         },
     }
-
-    tags = {'diagnostic', 'benchmark', 'craype'}
-    maintainers = ['AJ', 'TM', 'AS']
 
     @run_after('setup')
     def set_reference(self):
