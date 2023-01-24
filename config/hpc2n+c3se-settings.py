@@ -175,6 +175,7 @@ site_configuration = {
                     'launcher': 'srun',
                     'access': ['-A C3SE-STAFF', '-C NOGPU'],
                     'max_jobs': 4,
+                    'features': ['cpu', 'intelcpu'],
                     'environs': ['builtin', 'gnu', 'foss', 'foss_2021a', 'foss_2021b', 'foss_2022a', 'intel_2021a', 'intel_2022a'],
                     'container_platforms': [
                         {
@@ -211,6 +212,7 @@ site_configuration = {
                     'launcher': 'srun',
                     'access': ['-C broadwell', '-A sysop'],
                     'max_jobs': 100,
+                    'features': ['cpu', 'intelcpu'],
                     'environs': ['builtin', 'gnu', 'foss', 'intel', 'foss_2019a', 'foss_2019b', 'foss_2020a', 'foss_2020b', 'foss_2021a', 'foss_2021b', 'foss_2022a', 'intel_2019a', 'intel_2019b', 'intel_2020a', 'intel_2020b', 'intel_2021a', 'intel_2022a'],
                     'container_platforms': [
                         {
@@ -226,6 +228,7 @@ site_configuration = {
                     'launcher': 'srun',
                     'access': ['-C skylake', '-A sysop'],
                     'max_jobs': 100,
+                    'features': ['cpu', 'intelcpu'],
                     'environs': ['builtin', 'gnu', 'foss', 'intel', 'foss_2019a', 'foss_2019b', 'foss_2020a', 'foss_2020b', 'foss_2021a', 'foss_2021b', 'foss_2022a', 'intel_2019a', 'intel_2019b', 'intel_2020a', 'intel_2020b', 'intel_2021a', 'intel_2022a'],
                     'container_platforms': [
                         {
@@ -477,6 +480,7 @@ site_configuration = {
                     'launcher': 'srun',
                     'access': ['-p largemem', '-A sysop'],
                     'max_jobs': 100,
+                    'features': ['cpu', 'intelcpu'],
                     'environs': ['builtin', 'gnu', 'foss', 'intel', 'foss_2019a', 'foss_2019b', 'foss_2020a', 'foss_2020b', 'foss_2021a', 'foss_2021b', 'foss_2022a', 'intel_2019a', 'intel_2019b', 'intel_2020a', 'intel_2020b', 'intel_2021a', 'intel_2022a'],
                     'container_platforms': [
                         {
