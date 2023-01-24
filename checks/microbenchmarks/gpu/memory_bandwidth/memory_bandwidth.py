@@ -25,11 +25,9 @@ class SystemConfigHPC2N(rfm.RegressionMixin):
 
 @rfm.simple_test
 class gpu_bandwidth_check(GpuBandwidth, SystemConfigHPC2N):
-    valid_systems = [
-        'kebnekaise:2xK80', 'kebnekaise:4xK80', 'kebnekaise:2xV100',
-        'kebnekaise:2xA6000', 'kebnekaise:4xA40', 'alvis', 'UmU-Cloud',
-    ]
-    valid_prog_environs = ['foss_with_cuda']
+    valid_systems = ['+gpu']
+    valid_prog_environs = ['+cuda', '+hip']
+
 
     tags = {'diagnostic', 'mch', 'benchmark', 'maintenance'}
     maintainers = ['AJ', 'SK', 'AS']
@@ -101,11 +99,8 @@ class gpu_bandwidth_check(GpuBandwidth, SystemConfigHPC2N):
 
 @rfm.simple_test
 class gpu_bandwidth_d2d_check(GpuBandwidthD2D, SystemConfigHPC2N):
-    valid_systems = [
-        'kebnekaise:2xK80', 'kebnekaise:4xK80', 'kebnekaise:2xV100',
-        'kebnekaise:2xA6000', 'kebnekaise:4xA40', 'alvis',
-    ]
-    valid_prog_environs = ['foss_with_cuda']
+    valid_systems = ['+gpu']
+    valid_prog_environs = ['+cuda', '+hip']
 
     tags = {'diagnostic', 'mch', 'benchmark', 'maintenance'}
     maintainers = ['AJ', 'SK', 'AS']
