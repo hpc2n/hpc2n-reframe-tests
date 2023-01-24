@@ -54,22 +54,22 @@ class gpu_burn_check(gpu_burn_check_base):
             'alvis:8xT4': {
                 'gpu_perf_min': (250, -0.10, None, 'Gflop/s'),
             },
-            'alvis:NxV100': {
+            'alvis:4xV100': {
                 'gpu_perf_min': (6800, -0.10, None, 'Gflop/s'),
             },
             'UmU-Cloud:default': {
                 'gpu_perf_min': (18100, -0.10, None, 'Gflop/s'),
             },
-            'alvis:NxA40': {
+            'alvis:4xA40': {
                 'gpu_perf_min': (488, -0.10, None, 'Gflop/s'),
             },
-            'alvis:NxA100_MEM256': {
+            'alvis:4xA100_MEM256': {
                 'gpu_perf_min': (18100, -0.10, None, 'Gflop/s'),
             },
-            'alvis:NxA100_MEM512': {
+            'alvis:4xA100_MEM512': {
                 'gpu_perf_min': (18100, -0.10, None, 'Gflop/s'),
             },
-            'alvis:NxA100fat': {
+            'alvis:4xA100fat': {
                 'gpu_perf_min': (18500, -0.10, None, 'Gflop/s'),
             },
             '*': {'gpu_temp_max': (0, None, None, 'degC')},
@@ -93,13 +93,13 @@ class gpu_burn_check(gpu_burn_check_base):
             'alvis:8xT4': {
                 'gpu_perf_min': (4000, -0.10, None, 'Gflop/s'),
             },
-            'alvis:NxV100': {
+            'alvis:4xV100': {
                 'gpu_perf_min': (14300, -0.10, None, 'Gflop/s'),
             },
-            'alvis:NxA40': {
+            'alvis:4xA40': {
                 'gpu_perf_min': (19200, -0.10, None, 'Gflop/s'),
             },
-            'alvis:NxA100_MEM256': {
+            'alvis:4xA100_MEM256': {
                 'gpu_perf_min': (18100, -0.10, None, 'Gflop/s'),
             },
             '*': {'gpu_temp_max': (0, None, None, 'degC')},
