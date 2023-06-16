@@ -12,7 +12,7 @@ class MdtestCheck(rfm.RunOnlyRegressionTest):
                           '/mimer/NOBACKUP/groups/c3-staff/reframe/io-test',
                           ])
     username = getpass.getuser()
-    time_limit = '15m'
+    time_limit = '30m'
     maintainers = ['ÅS']
     tags = {'ops'}
 
