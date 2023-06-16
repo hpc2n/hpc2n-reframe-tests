@@ -8,6 +8,7 @@ import reframe.utility.sanity as sn
 class MdtestCheck(rfm.RunOnlyRegressionTest):
     base_dir = parameter(['/pfs/stor10/io-test',
                           '/cephyr/NOBACKUP/priv/c3-alvis/reframe/io-test',
+                          '/cephyr2/NOBACKUP/priv/c3-alvis/reframe/io-test',
                           '/mimer/NOBACKUP/groups/c3-staff/reframe/io-test',
                           ])
     username = getpass.getuser()
@@ -56,12 +57,35 @@ class MdtestCheck(rfm.RunOnlyRegressionTest):
                     'num_tasks_per_node': 64,
                 },
                 'reference': {
-                    'create': (0, -0.1, None, 'files/s'),
-                    'stat': (0, -0.1, None, 'files/s'),
-                    'read': (0, -0.1, None, 'files/s'),
-                    'remove': (0, -0.1, None, 'files/s'),
-                    'tree_create': (0, -0.1, None, 'dirs/s'),
-                    'tree_remove': (0, -0.1, None, 'dirs/s'),
+                    'create': (4000, -0.1, None, 'files/s'),
+                    'stat': (18000, -0.1, None, 'files/s'),
+                    'read': (7000, -0.1, None, 'files/s'),
+                    'remove': (5400, -0.1, None, 'files/s'),
+                    'tree_create': (8, -0.1, None, 'dirs/s'),
+                    'tree_remove': (3, -0.1, None, 'dirs/s'),
+                },
+            },
+            '/cephyr2/NOBACKUP/priv/c3-alvis/reframe/io-test': {
+                'valid_systems': ['alvis'],
+                'alvis:CPUonly': {
+                    'num_tasks': 32,
+                    'num_tasks_per_node': 32,
+                },
+                'alvis:4xA100_MEM256': {
+                    'num_tasks': 64,
+                    'num_tasks_per_node': 64,
+                },
+                'alvis:4xA100_MEM512': {
+                    'num_tasks': 64,
+                    'num_tasks_per_node': 64,
+                },
+                'reference': {
+                    'create': (4000, -0.1, None, 'files/s'),
+                    'stat': (18000, -0.1, None, 'files/s'),
+                    'read': (7000, -0.1, None, 'files/s'),
+                    'remove': (5400, -0.1, None, 'files/s'),
+                    'tree_create': (8, -0.1, None, 'dirs/s'),
+                    'tree_remove': (3, -0.1, None, 'dirs/s'),
                 },
             },
             '/mimer/NOBACKUP/groups/c3-staff/reframe/io-test': {
