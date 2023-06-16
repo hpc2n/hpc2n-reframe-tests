@@ -34,12 +34,12 @@ class MdtestCheck(rfm.RunOnlyRegressionTest):
                     'num_tasks_per_node': 28,
                 },
                 'reference': {
-                    'create': (0, -0.1, None, 'files/s'),
-                    'stat': (0, -0.1, None, 'files/s'),
-                    'read': (0, -0.1, None, 'files/s'),
-                    'remove': (0, -0.1, None, 'files/s'),
-                    'tree_create': (0, -0.1, None, 'dirs/s'),
-                    'tree_remove': (0, -0.1, None, 'dirs/s'),
+                    'create': (6800, -0.1, None, 'files/s'),
+                    'stat': (26500, -0.1, None, 'files/s'),
+                    'read': (10100, -0.1, None, 'files/s'),
+                    'remove': (15000, -0.1, None, 'files/s'),
+                    'tree_create': (52, -0.1, None, 'dirs/s'),
+                    'tree_remove': (4, -0.1, None, 'dirs/s'),
                 },
             },
             '/cephyr/NOBACKUP/priv/c3-alvis/reframe/io-test': {
