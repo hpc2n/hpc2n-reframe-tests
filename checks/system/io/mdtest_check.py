@@ -132,7 +132,9 @@ class MDtestBase(rfm.RunOnlyRegressionTest):
         self.executable = 'mdtest'
 
         stonewall_timer = self.fs[self.base_dir]['stonewall_timer']
-        self.executable_opts = ['-u ', '-Y', '-W', stonewall_timer, '-d', target_dir]
+        iterations = self.fs[self.base_dir]['iterations']
+        self.executable_opts = ['-u ', '-Y', '-W', stonewall_timer,
+                                '-i', iterations, '-d', target_dir]
 
 
 @rfm.simple_test
@@ -233,12 +235,11 @@ class MDtestNode(MDtestBase):
     def prepare_run(self):
         # executable options depends on the file system
         nr_files = self.fs[self.base_dir]['nr_dirs_files_per_proc']
-        iterations = self.fs[self.base_dir]['iterations']
         io_api = self.fs[self.base_dir]['io_api']
         stride = self.fs[self.base_dir]['stride']
         hierarch_depth = self.fs[self.base_dir]['hierarch_depth']
         self.executable_opts += ['-L', '-F',
-                                '-a', io_api, '-n', nr_files, '-i', iterations,
+                                '-a', io_api, '-n', nr_files,
                                 '-N', stride, '-z', hierarch_depth]
 
 
@@ -252,7 +253,7 @@ class MDtestSingle(MDtestBase):
             '/pfs/stor10/io-test': {
                 'valid_systems': ['kebnekaise'],
                 'nr_dirs_files_per_proc': '10000',
-                'iterations', '7',
+                'iterations': '7',
                 'reference': {
                     'file_create': (900, -0.1, None, 'files/s'),
                     'file_stat': (950, -0.1, None, 'files/s'),
@@ -265,7 +266,7 @@ class MDtestSingle(MDtestBase):
             '/cephyr/NOBACKUP/priv/c3-alvis/reframe/io-test': {
                 'valid_systems': ['alvis'],
                 'nr_dirs_files_per_proc': '10000',
-                'iterations', '7',
+                'iterations': '7',
                 'reference': {
                     'file_create': (3400, -0.1, None, 'files/s'),
                     'file_stat': (138000, -0.1, None, 'files/s'),
@@ -278,7 +279,7 @@ class MDtestSingle(MDtestBase):
             '/cephyr2/NOBACKUP/priv/c3-alvis/reframe/io-test': {
                 'valid_systems': ['alvis'],
                 'nr_dirs_files_per_proc': '10000',
-                'iterations', '7',
+                'iterations': '7',
                 'reference': {
                     'file_create': (3400, -0.1, None, 'files/s'),
                     'file_stat': (138000, -0.1, None, 'files/s'),
@@ -291,7 +292,7 @@ class MDtestSingle(MDtestBase):
             '/mimer/NOBACKUP/groups/c3-staff/reframe/io-test': {
                 'valid_systems': ['alvis'],
                 'nr_dirs_files_per_proc': '10000',
-                'iterations', '7',
+                'iterations': '7',
                 'reference': {
                     'file_create': (2500, -0.1, None, 'files/s'),
                     'file_stat': (27000, -0.1, None, 'files/s'),
@@ -307,7 +308,5 @@ class MDtestSingle(MDtestBase):
     def prepare_run(self):
         # executable options depends on the file system
         nr_files = self.fs[self.base_dir]['nr_dirs_files_per_proc']
-        iterations = self.fs[self.base_dir]['iterations']
         hierarch_depth = self.fs[self.base_dir]['hierarch_depth']
-        self.executable_opts += ['-F', '-n', nr_files,
-                                '-i', iterations]
+        self.executable_opts += ['-F', '-n', nr_files]
