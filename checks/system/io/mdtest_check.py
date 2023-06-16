@@ -5,7 +5,7 @@ import reframe as rfm
 import reframe.utility.sanity as sn
 
 
-class MdtestCheck(rfm.RunOnlyRegressionTest):
+class MDtestBase(rfm.RunOnlyRegressionTest):
     base_dir = parameter(['/pfs/stor10/io-test',
                           '/cephyr/NOBACKUP/priv/c3-alvis/reframe/io-test',
                           '/cephyr2/NOBACKUP/priv/c3-alvis/reframe/io-test',
@@ -14,7 +14,7 @@ class MdtestCheck(rfm.RunOnlyRegressionTest):
     username = getpass.getuser()
     time_limit = '30m'
     maintainers = ['ÅS']
-    tags = {'ops'}
+    tags = {'ops', 'maintenance'}
 
     @run_after('init')
     def set_description(self):
@@ -23,193 +23,6 @@ class MdtestCheck(rfm.RunOnlyRegressionTest):
     @run_after('init')
     def add_fs_tags(self):
         self.tags |= {self.base_dir}
-
-    @run_after('init')
-    def set_fs_information(self):
-        self.fs = {
-            '/pfs/stor10/io-test': {
-                'valid_systems': ['kebnekaise'],
-                'kebnekaise': {
-                    'num_tasks': 28,
-                    'num_tasks_per_node': 28,
-                },
-                'reference': {
-                    'create': (6800, -0.1, None, 'files/s'),
-                    'stat': (26500, -0.1, None, 'files/s'),
-                    'read': (10100, -0.1, None, 'files/s'),
-                    'remove': (15000, -0.1, None, 'files/s'),
-                    'tree_create': (52, -0.1, None, 'dirs/s'),
-                    'tree_remove': (4, -0.1, None, 'dirs/s'),
-                },
-            },
-            '/cephyr/NOBACKUP/priv/c3-alvis/reframe/io-test': {
-                'valid_systems': ['alvis'],
-                'alvis:CPUonly': {
-                    'num_tasks': 32,
-                    'num_tasks_per_node': 32,
-                },
-                'alvis:4xA100_MEM256': {
-                    'num_tasks': 64,
-                    'num_tasks_per_node': 64,
-                },
-                'alvis:4xA100_MEM512': {
-                    'num_tasks': 64,
-                    'num_tasks_per_node': 64,
-                },
-                'reference': {
-                    'create': (4000, -0.1, None, 'files/s'),
-                    'stat': (18000, -0.1, None, 'files/s'),
-                    'read': (7000, -0.1, None, 'files/s'),
-                    'remove': (5400, -0.1, None, 'files/s'),
-                    'tree_create': (8, -0.1, None, 'dirs/s'),
-                    'tree_remove': (3, -0.1, None, 'dirs/s'),
-                },
-            },
-            '/cephyr2/NOBACKUP/priv/c3-alvis/reframe/io-test': {
-                'valid_systems': ['alvis'],
-                'alvis:CPUonly': {
-                    'num_tasks': 32,
-                    'num_tasks_per_node': 32,
-                },
-                'alvis:4xA100_MEM256': {
-                    'num_tasks': 64,
-                    'num_tasks_per_node': 64,
-                },
-                'alvis:4xA100_MEM512': {
-                    'num_tasks': 64,
-                    'num_tasks_per_node': 64,
-                },
-                'reference': {
-                    'create': (4000, -0.1, None, 'files/s'),
-                    'stat': (18000, -0.1, None, 'files/s'),
-                    'read': (7000, -0.1, None, 'files/s'),
-                    'remove': (5400, -0.1, None, 'files/s'),
-                    'tree_create': (8, -0.1, None, 'dirs/s'),
-                    'tree_remove': (3, -0.1, None, 'dirs/s'),
-                },
-            },
-            '/mimer/NOBACKUP/groups/c3-staff/reframe/io-test': {
-                'valid_systems': ['alvis'],
-                'alvis:CPUonly': {
-                    'num_tasks': 32,
-                    'num_tasks_per_node': 32,
-                },
-                'alvis:4xA100_MEM256': {
-                    'num_tasks': 48,
-                    'num_tasks_per_node': 48,
-                },
-                'alvis:4xA100_MEM512': {
-                    'num_tasks': 64,
-                    'num_tasks_per_node': 64,
-                },
-                'reference': {
-                    'create': (70000, -0.1, None, 'files/s'),
-                    'stat': (210000, -0.1, None, 'files/s'),
-                    'read': (110000, -0.1, None, 'files/s'),
-                    'remove': (105000, -0.1, None, 'files/s'),
-                    'tree_create': (10, -0.1, None, 'dirs/s'),
-                    'tree_remove': (1, -0.1, None, 'dirs/s'),
-                },
-            },
-        }
-
-        # Setting some default values
-        for data in self.fs.values():
-            data.setdefault('nr_dirs_files_per_proc', '1000000')
-            data.setdefault('iterations', '1')
-            data.setdefault('io_api', 'POSIX')
-            data.setdefault('stride', '1')
-            data.setdefault('hierarch_depth', '0')
-            data.setdefault('stonewall_timer', '300')
-            data.setdefault(
-                'reference',
-                {
-                    'create': (0, -0.1, None, 'files/s'),
-                    'stat': (0, -0.1, None, 'files/s'),
-                    'read': (0, -0.1, None, 'files/s'),
-                    'remove': (0, -0.1, None, 'files/s'),
-                    'tree_create': (0, -0.1, None, 'dirs/s'),
-                    'tree_remove': (0, -0.1, None, 'dirs/s'),
-                },
-            )
-            data.setdefault('dummy', {})  # entry for unknown systems
-
-    @run_after('init')
-    def set_performance_reference(self):
-        # Converting the references from each fs to per system.
-        self.reference = {
-            '*': self.fs[self.base_dir]['reference']
-        }
-
-    @run_after('init')
-    def set_valid_systems(self):
-        self.valid_systems = self.fs[self.base_dir]['valid_systems']
-
-        cur_sys = self.current_system.name
-        if cur_sys not in self.fs[self.base_dir]:
-            cur_sys = 'dummy'
-
-        vpe = 'valid_prog_environs'
-        penv = self.fs[self.base_dir][cur_sys].get(vpe, ['builtin'])
-        self.valid_prog_environs = penv
-
-
-    @run_before('run')
-    def set_tasks(self):
-        cur_sys = self.current_system.name
-        fullname = self.current_partition.fullname
-        if cur_sys not in self.fs[self.base_dir]:
-            cur_sys = 'dummy'
-        if fullname not in self.fs[self.base_dir]:
-            fullname = cur_sys
-
-        tpn = self.fs[self.base_dir][cur_sys].get('num_tasks_per_node', 1)
-        tpn = self.fs[self.base_dir][fullname].get('num_tasks_per_node', tpn)
-        cpt = self.fs[self.base_dir][cur_sys].get('cpus_per_task', 1)
-        cpt = self.fs[self.base_dir][fullname].get('cpus_per_task', cpt)
-        nt = self.fs[self.base_dir][cur_sys].get('num_tasks', 1)
-        nt = self.fs[self.base_dir][fullname].get('num_tasks', nt)
-        self.num_tasks = nt
-        self.tpn = tpn
-        self.num_cpus_per_task = cpt
-
-    @run_after('init')
-    def set_modules(self):
-        module = {
-            'kebnekaise': ['foss/2022a', 'IOR/3.3.0'],
-            'alvis': ['IOR/3.3.0-gompi-2022a'],
-        }
-        self.modules = module.get(self.current_system.name)
-
-    @run_before('run')
-    def prepare_run(self):
-        # Default umask is 0022, which generates file permissions -rw-r--r--
-        # we want -rw-rw-r-- so we set umask to 0002
-        os.umask(2)
-        test_dir = os.path.join(self.base_dir, self.username, '.mdtest')
-        target_dir = os.path.join(test_dir,
-                                 f'.mdtest.{self.current_partition.name}')
-        self.prerun_cmds = [f'mkdir -p {test_dir}']
-        self.executable = 'mdtest'
-
-        # executable options depends on the file system
-        nr_files = self.fs[self.base_dir]['nr_dirs_files_per_proc']
-        iterations = self.fs[self.base_dir]['iterations']
-        io_api = self.fs[self.base_dir]['io_api']
-        stonewall_timer = self.fs[self.base_dir]['stonewall_timer']
-        stride = self.fs[self.base_dir]['stride']
-        hierarch_depth = self.fs[self.base_dir]['hierarch_depth']
-        self.executable_opts += ['-L', '-F', '-u ', '-Y', '-W', stonewall_timer,
-                                '-a', io_api, '-n', nr_files, '-i', iterations,
-                                '-N', stride, '-z', hierarch_depth,
-                                '-d', target_dir]
-
-
-@rfm.simple_test
-class MdtestFullCheck(MdtestCheck):
-    executable_opts = []
-    tags = {'ops', 'maintenance'}
-    tags |= {'write', 'read'}
 
     @sanity_function
     def assert_output(self):
@@ -237,3 +50,260 @@ class MdtestFullCheck(MdtestCheck):
                 r'^\s+Tree removal\s+:\s+[0-9.]+\s+[0-9.]+\s+(?P<tree_removal>\S+)\s+', self.stdout,
                 'tree_removal', float),
         }
+
+    @run_after('init')
+    def set_modules(self):
+        module = {
+            'kebnekaise': ['foss/2022a', 'IOR/3.3.0'],
+            'alvis': ['IOR/3.3.0-gompi-2022a'],
+        }
+        self.modules = module.get(self.current_system.name)
+
+    @run_after('init')
+    def set_fs_information(self):
+        # Setting some default values
+        for data in self.fs.values():
+            data.setdefault('nr_dirs_files_per_proc', '1000000')
+            data.setdefault('iterations', '3')
+            data.setdefault('io_api', 'POSIX')
+            data.setdefault('stride', '1')
+            data.setdefault('hierarch_depth', '0')
+            data.setdefault('stonewall_timer', '300')
+            data.setdefault(
+                'reference',
+                {
+                    'file_create': (0, -0.1, None, 'files/s'),
+                    'file_stat': (0, -0.1, None, 'files/s'),
+                    'file_read': (0, -0.1, None, 'files/s'),
+                    'file_removal': (0, -0.1, None, 'files/s'),
+                    'tree_create': (0, -0.1, None, 'dirs/s'),
+                    'tree_removal': (0, -0.1, None, 'dirs/s'),
+                },
+            )
+            data.setdefault('dummy', {})  # entry for unknown systems
+
+    @run_after('init')
+    def set_valid_systems(self):
+        self.valid_systems = self.fs[self.base_dir]['valid_systems']
+
+        cur_sys = self.current_system.name
+        if cur_sys not in self.fs[self.base_dir]:
+            cur_sys = 'dummy'
+
+        vpe = 'valid_prog_environs'
+        penv = self.fs[self.base_dir][cur_sys].get(vpe, ['builtin'])
+        self.valid_prog_environs = penv
+
+    @run_before('run')
+    def set_performance_reference(self):
+        # Converting the references from each fs to per system.
+        self.reference = {
+            '*': self.fs[self.base_dir]['reference']
+        }
+
+    @run_before('run')
+    def set_tasks(self):
+        cur_sys = self.current_system.name
+        fullname = self.current_partition.fullname
+        if cur_sys not in self.fs[self.base_dir]:
+            cur_sys = 'dummy'
+        if fullname not in self.fs[self.base_dir]:
+            fullname = cur_sys
+
+        tpn = self.fs[self.base_dir][cur_sys].get('num_tasks_per_node', 1)
+        tpn = self.fs[self.base_dir][fullname].get('num_tasks_per_node', tpn)
+        cpt = self.fs[self.base_dir][cur_sys].get('cpus_per_task', 1)
+        cpt = self.fs[self.base_dir][fullname].get('cpus_per_task', cpt)
+        nt = self.fs[self.base_dir][cur_sys].get('num_tasks', 1)
+        nt = self.fs[self.base_dir][fullname].get('num_tasks', nt)
+        self.num_tasks = nt
+        self.tpn = tpn
+        self.num_cpus_per_task = cpt
+
+    @run_before('run')
+    def prepare_run_base(self):
+        # Default umask is 0022, which generates file permissions -rw-r--r--
+        # we want -rw-rw-r-- so we set umask to 0002
+        os.umask(2)
+        test_dir = os.path.join(self.base_dir, self.username, '.mdtest')
+        target_dir = os.path.join(test_dir,
+                                 f'.mdtest.{self.current_partition.name}')
+        self.prerun_cmds = [f'mkdir -p {test_dir}']
+        self.executable = 'mdtest'
+
+        stonewall_timer = self.fs[self.base_dir]['stonewall_timer']
+        self.executable_opts = ['-u ', '-Y', '-W', stonewall_timer, '-d', target_dir]
+
+
+@rfm.simple_test
+class MDtestNode(MDtestBase):
+    # Single node test
+    tags |= {'full'}
+
+    def __init__(self):
+        self.fs = {
+            '/pfs/stor10/io-test': {
+                'valid_systems': ['kebnekaise'],
+                'kebnekaise': {
+                    'num_tasks': 28,
+                    'num_tasks_per_node': 28,
+                },
+                'reference': {
+                    'file_create': (6800, -0.1, None, 'files/s'),
+                    'file_stat': (26500, -0.1, None, 'files/s'),
+                    'file_read': (10100, -0.1, None, 'files/s'),
+                    'file_removal': (15000, -0.1, None, 'files/s'),
+                    'tree_create': (52, -0.1, None, 'dirs/s'),
+                    'tree_removal': (4, -0.1, None, 'dirs/s'),
+                },
+            },
+            '/cephyr/NOBACKUP/priv/c3-alvis/reframe/io-test': {
+                'valid_systems': ['alvis'],
+                'alvis:CPUonly': {
+                    'num_tasks': 32,
+                    'num_tasks_per_node': 32,
+                },
+                'alvis:4xA100_MEM256': {
+                    'num_tasks': 64,
+                    'num_tasks_per_node': 64,
+                },
+                'alvis:4xA100_MEM512': {
+                    'num_tasks': 64,
+                    'num_tasks_per_node': 64,
+                },
+                'reference': {
+                    'file_create': (4000, -0.1, None, 'files/s'),
+                    'file_stat': (18000, -0.1, None, 'files/s'),
+                    'file_read': (7000, -0.1, None, 'files/s'),
+                    'file_removal': (5400, -0.1, None, 'files/s'),
+                    'tree_create': (8, -0.1, None, 'dirs/s'),
+                    'tree_removal': (3, -0.1, None, 'dirs/s'),
+                },
+            },
+            '/cephyr2/NOBACKUP/priv/c3-alvis/reframe/io-test': {
+                'valid_systems': ['alvis'],
+                'alvis:CPUonly': {
+                    'num_tasks': 32,
+                    'num_tasks_per_node': 32,
+                },
+                'alvis:4xA100_MEM256': {
+                    'num_tasks': 64,
+                    'num_tasks_per_node': 64,
+                },
+                'alvis:4xA100_MEM512': {
+                    'num_tasks': 64,
+                    'num_tasks_per_node': 64,
+                },
+                'reference': {
+                    'file_create': (4000, -0.1, None, 'files/s'),
+                    'file_stat': (18000, -0.1, None, 'files/s'),
+                    'file_read': (7000, -0.1, None, 'files/s'),
+                    'file_removal': (5400, -0.1, None, 'files/s'),
+                    'tree_create': (8, -0.1, None, 'dirs/s'),
+                    'tree_removal': (3, -0.1, None, 'dirs/s'),
+                },
+            },
+            '/mimer/NOBACKUP/groups/c3-staff/reframe/io-test': {
+                'valid_systems': ['alvis'],
+                'alvis:CPUonly': {
+                    'num_tasks': 32,
+                    'num_tasks_per_node': 32,
+                },
+                'alvis:4xA100_MEM256': {
+                    'num_tasks': 48,
+                    'num_tasks_per_node': 48,
+                },
+                'alvis:4xA100_MEM512': {
+                    'num_tasks': 64,
+                    'num_tasks_per_node': 64,
+                },
+                'reference': {
+                    'file_create': (70000, -0.1, None, 'files/s'),
+                    'file_stat': (210000, -0.1, None, 'files/s'),
+                    'file_read': (110000, -0.1, None, 'files/s'),
+                    'file_removal': (105000, -0.1, None, 'files/s'),
+                    'tree_create': (10, -0.1, None, 'dirs/s'),
+                    'tree_removal': (1, -0.1, None, 'dirs/s'),
+                },
+            },
+        }
+
+
+    @run_before('run')
+    def prepare_run(self):
+        # executable options depends on the file system
+        nr_files = self.fs[self.base_dir]['nr_dirs_files_per_proc']
+        iterations = self.fs[self.base_dir]['iterations']
+        io_api = self.fs[self.base_dir]['io_api']
+        stride = self.fs[self.base_dir]['stride']
+        hierarch_depth = self.fs[self.base_dir]['hierarch_depth']
+        self.executable_opts += ['-L', '-F',
+                                '-a', io_api, '-n', nr_files, '-i', iterations,
+                                '-N', stride, '-z', hierarch_depth]
+
+
+@rfm.simple_test
+class MDtestSingle(MDtestBase):
+    # Single thread test
+    tags |= {'single'}
+
+    def __init__(self):
+        self.fs = {
+            '/pfs/stor10/io-test': {
+                'valid_systems': ['kebnekaise'],
+                'nr_dirs_files_per_proc': '10000',
+                'reference': {
+                    'file_create': (900, -0.1, None, 'files/s'),
+                    'file_stat': (950, -0.1, None, 'files/s'),
+                    'file_read': (1100, -0.1, None, 'files/s'),
+                    'file_removal': (1700, -0.1, None, 'files/s'),
+                    'tree_create': (850, -0.1, None, 'dirs/s'),
+                    'tree_removal': (1200, -0.1, None, 'dirs/s'),
+                },
+            },
+            '/cephyr/NOBACKUP/priv/c3-alvis/reframe/io-test': {
+                'valid_systems': ['alvis'],
+                'nr_dirs_files_per_proc': '10000',
+                'reference': {
+                    'file_create': (900, -0.1, None, 'files/s'),
+                    'file_stat': (950, -0.1, None, 'files/s'),
+                    'file_read': (1100, -0.1, None, 'files/s'),
+                    'file_removal': (1700, -0.1, None, 'files/s'),
+                    'tree_create': (850, -0.1, None, 'dirs/s'),
+                    'tree_removal': (1200, -0.1, None, 'dirs/s'),
+                },
+            },
+            '/cephyr2/NOBACKUP/priv/c3-alvis/reframe/io-test': {
+                'valid_systems': ['alvis'],
+                'nr_dirs_files_per_proc': '10000',
+                'reference': {
+                    'file_create': (900, -0.1, None, 'files/s'),
+                    'file_stat': (950, -0.1, None, 'files/s'),
+                    'file_read': (1100, -0.1, None, 'files/s'),
+                    'file_removal': (1700, -0.1, None, 'files/s'),
+                    'tree_create': (850, -0.1, None, 'dirs/s'),
+                    'tree_removal': (1200, -0.1, None, 'dirs/s'),
+                },
+            },
+            '/mimer/NOBACKUP/groups/c3-staff/reframe/io-test': {
+                'valid_systems': ['alvis'],
+                'nr_dirs_files_per_proc': '10000',
+                'reference': {
+                    'file_create': (900, -0.1, None, 'files/s'),
+                    'file_stat': (950, -0.1, None, 'files/s'),
+                    'file_read': (1100, -0.1, None, 'files/s'),
+                    'file_removal': (1700, -0.1, None, 'files/s'),
+                    'tree_create': (850, -0.1, None, 'dirs/s'),
+                    'tree_removal': (1200, -0.1, None, 'dirs/s'),
+                },
+            },
+        }
+
+    @run_before('run')
+    def prepare_run(self):
+        # executable options depends on the file system
+        nr_files = self.fs[self.base_dir]['nr_dirs_files_per_proc']
+        iterations = self.fs[self.base_dir]['iterations']
+        hierarch_depth = self.fs[self.base_dir]['hierarch_depth']
+        self.executable_opts += ['-F', '-n', nr_files,
+                                '-i', iterations]
