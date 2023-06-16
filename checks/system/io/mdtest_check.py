@@ -252,6 +252,7 @@ class MDtestSingle(MDtestBase):
             '/pfs/stor10/io-test': {
                 'valid_systems': ['kebnekaise'],
                 'nr_dirs_files_per_proc': '10000',
+                'iterations', '7',
                 'reference': {
                     'file_create': (900, -0.1, None, 'files/s'),
                     'file_stat': (950, -0.1, None, 'files/s'),
@@ -264,6 +265,7 @@ class MDtestSingle(MDtestBase):
             '/cephyr/NOBACKUP/priv/c3-alvis/reframe/io-test': {
                 'valid_systems': ['alvis'],
                 'nr_dirs_files_per_proc': '10000',
+                'iterations', '7',
                 'reference': {
                     'file_create': (3400, -0.1, None, 'files/s'),
                     'file_stat': (138000, -0.1, None, 'files/s'),
@@ -276,6 +278,7 @@ class MDtestSingle(MDtestBase):
             '/cephyr2/NOBACKUP/priv/c3-alvis/reframe/io-test': {
                 'valid_systems': ['alvis'],
                 'nr_dirs_files_per_proc': '10000',
+                'iterations', '7',
                 'reference': {
                     'file_create': (3400, -0.1, None, 'files/s'),
                     'file_stat': (138000, -0.1, None, 'files/s'),
@@ -288,6 +291,7 @@ class MDtestSingle(MDtestBase):
             '/mimer/NOBACKUP/groups/c3-staff/reframe/io-test': {
                 'valid_systems': ['alvis'],
                 'nr_dirs_files_per_proc': '10000',
+                'iterations', '7',
                 'reference': {
                     'file_create': (2500, -0.1, None, 'files/s'),
                     'file_stat': (27000, -0.1, None, 'files/s'),
