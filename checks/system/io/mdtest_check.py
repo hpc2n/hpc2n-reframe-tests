@@ -301,6 +301,9 @@ class MDtestSingle(MDtestBase):
                 'hierarch_depth': '3',
                 'hierarch_branch': '3',
                 'reference': {
+                    'dir_create': (1700, -0.1, None, 'dirs/s'),
+                    'dir_stat': (155000, -0.1, None, 'dirs/s'),
+                    'dir_removal': (1700, -0.1, None, 'dirs/s'),
                     'file_create': (3400, -0.1, None, 'files/s'),
                     'file_stat': (138000, -0.1, None, 'files/s'),
                     'file_read': (138000, -0.1, None, 'files/s'),
@@ -316,6 +319,9 @@ class MDtestSingle(MDtestBase):
                 'hierarch_depth': '3',
                 'hierarch_branch': '3',
                 'reference': {
+                    'dir_create': (1700, -0.1, None, 'dirs/s'),
+                    'dir_stat': (155000, -0.1, None, 'dirs/s'),
+                    'dir_removal': (1700, -0.1, None, 'dirs/s'),
                     'file_create': (3400, -0.1, None, 'files/s'),
                     'file_stat': (138000, -0.1, None, 'files/s'),
                     'file_read': (138000, -0.1, None, 'files/s'),
@@ -331,6 +337,9 @@ class MDtestSingle(MDtestBase):
                 'hierarch_depth': '3',
                 'hierarch_branch': '3',
                 'reference': {
+                    'dir_create': (2500, -0.1, None, 'dirs/s'),
+                    'dir_stat': (16000, -0.1, None, 'dirs/s'),
+                    'dir_removal': (2000, -0.1, None, 'dirs/s'),
                     'file_create': (2500, -0.1, None, 'files/s'),
                     'file_stat': (27000, -0.1, None, 'files/s'),
                     'file_read': (32000, -0.1, None, 'files/s'),
