@@ -31,6 +31,15 @@ class MDtestBase(rfm.RunOnlyRegressionTest):
     @run_after('init')
     def set_perf_patterns(self):
         self.perf_patterns = {
+            'dir_create': sn.extractsingle(
+                r'^\s+Directory creation\s+:\s+[0-9.]+\s+[0-9.]+\s+(?P<dir_create>\S+)\s+', self.stdout,
+                'dir_create', float),
+            'dir_stat': sn.extractsingle(
+                r'^\s+Directory stat\s+:\s+[0-9.]+\s+[0-9.]+\s+(?P<dir_stat>\S+)\s+', self.stdout,
+                'dir_stat', float),
+            'dir_removal': sn.extractsingle(
+                r'^\s+Directory removal\s+:\s+[0-9.]+\s+[0-9.]+\s+(?P<dir_removal>\S+)\s+', self.stdout,
+                'dir_removal', float),
             'file_create': sn.extractsingle(
                 r'^\s+File creation\s+:\s+[0-9.]+\s+[0-9.]+\s+(?P<file_create>\S+)\s+', self.stdout,
                 'file_create', float),
@@ -67,11 +76,17 @@ class MDtestBase(rfm.RunOnlyRegressionTest):
             data.setdefault('iterations', '3')
             data.setdefault('io_api', 'POSIX')
             data.setdefault('stride', '1')
+            data.setdefault('unique_dir_per_task', True)
             data.setdefault('hierarch_depth', '0')
+            data.setdefault('hierarch_branch', '1')
+            data.setdefault('bytes_per_file', '0')
             data.setdefault('stonewall_timer', '300')
             data.setdefault(
                 'reference',
                 {
+                    'dir_create': (0, -0.1, None, 'dirs/s'),
+                    'dir_stat': (0, -0.1, None, 'dirs/s'),
+                    'dir_removal': (0, -0.1, None, 'dirs/s'),
                     'file_create': (0, -0.1, None, 'files/s'),
                     'file_stat': (0, -0.1, None, 'files/s'),
                     'file_read': (0, -0.1, None, 'files/s'),
@@ -131,10 +146,24 @@ class MDtestBase(rfm.RunOnlyRegressionTest):
         self.prerun_cmds = [f'mkdir -p {test_dir}']
         self.executable = 'mdtest'
 
-        stonewall_timer = self.fs[self.base_dir]['stonewall_timer']
+        nr_files = self.fs[self.base_dir]['nr_dirs_files_per_proc']
         iterations = self.fs[self.base_dir]['iterations']
-        self.executable_opts = ['-u ', '-Y', '-W', stonewall_timer,
-                                '-i', iterations, '-d', target_dir]
+        stonewall_timer = self.fs[self.base_dir]['stonewall_timer']
+        bytes_per_file = self.fs[self.base_dir]['bytes_per_file']
+        hierarch_depth = self.fs[self.base_dir]['hierarch_depth']
+        hierarch_branch = self.fs[self.base_dir]['hierarch_branch']
+        unique_dir = self.fs[self.base_dir]['unique_dir_per_task']
+
+        self.executable_opts = ['-Y', '-i', iterations, '-n', nr_files,
+                                '-d', target_dir]
+        if unique_dir:
+            self.executable_opts += ['-u']
+        if bytes_per_file != '0':
+            self.executable_opts += ['-w', bytes_per_file, '-e', bytes_per_file]
+        if hierarch_branch == '1':
+            self.executable_opts += ['-W', stonewall_timer]
+        else:
+            self.executable_opts += ['-z', hierarch_depth, '-b', hierarch_branch]
 
 
 @rfm.simple_test
@@ -234,13 +263,10 @@ class MDtestNode(MDtestBase):
     @run_before('run')
     def prepare_run(self):
         # executable options depends on the file system
-        nr_files = self.fs[self.base_dir]['nr_dirs_files_per_proc']
         io_api = self.fs[self.base_dir]['io_api']
         stride = self.fs[self.base_dir]['stride']
-        hierarch_depth = self.fs[self.base_dir]['hierarch_depth']
-        self.executable_opts += ['-L', '-F',
-                                '-a', io_api, '-n', nr_files,
-                                '-N', stride, '-z', hierarch_depth]
+        self.executable_opts += ['-a', io_api,
+                                '-N', stride]
 
 
 @rfm.simple_test
@@ -252,9 +278,14 @@ class MDtestSingle(MDtestBase):
         self.fs = {
             '/pfs/stor10/io-test': {
                 'valid_systems': ['kebnekaise'],
-                'nr_dirs_files_per_proc': '10000',
-                'iterations': '11',
+                'nr_dirs_files_per_proc': '100000',
+                'iterations': '5',
+                'hierarch_depth': '3',
+                'hierarch_branch': '3',
                 'reference': {
+                    'dir_create': (1900, -0.1, None, 'dirs/s'),
+                    'dir_stat': (2100, -0.1, None, 'dirs/s'),
+                    'dir_removal': (1800, -0.1, None, 'dirs/s'),
                     'file_create': (900, -0.1, None, 'files/s'),
                     'file_stat': (950, -0.1, None, 'files/s'),
                     'file_read': (1100, -0.1, None, 'files/s'),
@@ -303,10 +334,3 @@ class MDtestSingle(MDtestBase):
                 },
             },
         }
-
-    @run_before('run')
-    def prepare_run(self):
-        # executable options depends on the file system
-        nr_files = self.fs[self.base_dir]['nr_dirs_files_per_proc']
-        hierarch_depth = self.fs[self.base_dir]['hierarch_depth']
-        self.executable_opts += ['-F', '-n', nr_files]
