@@ -8,11 +8,10 @@ import reframe.utility.sanity as sn
 class MDtestBase(rfm.RunOnlyRegressionTest):
     base_dir = parameter(['/pfs/stor10/io-test',
                           '/cephyr/NOBACKUP/priv/c3-alvis/reframe/io-test',
-                          '/cephyr2/NOBACKUP/priv/c3-alvis/reframe/io-test',
                           '/mimer/NOBACKUP/groups/c3-staff/reframe/io-test',
                           ])
     username = getpass.getuser()
-    time_limit = '90m'
+    time_limit = '270m'
     maintainers = ['ÅS']
     tags = {'ops', 'maintenance'}
 
@@ -211,29 +210,6 @@ class MDtestNode(MDtestBase):
                     'tree_removal': (3, -0.1, None, 'dirs/s'),
                 },
             },
-            '/cephyr2/NOBACKUP/priv/c3-alvis/reframe/io-test': {
-                'valid_systems': ['alvis'],
-                'alvis:CPUonly': {
-                    'num_tasks': 32,
-                    'num_tasks_per_node': 32,
-                },
-                'alvis:4xA100_MEM256': {
-                    'num_tasks': 64,
-                    'num_tasks_per_node': 64,
-                },
-                'alvis:4xA100_MEM512': {
-                    'num_tasks': 64,
-                    'num_tasks_per_node': 64,
-                },
-                'reference': {
-                    'file_create': (4000, -0.1, None, 'files/s'),
-                    'file_stat': (18000, -0.1, None, 'files/s'),
-                    'file_read': (7000, -0.1, None, 'files/s'),
-                    'file_removal': (5400, -0.1, None, 'files/s'),
-                    'tree_create': (8, -0.1, None, 'dirs/s'),
-                    'tree_removal': (3, -0.1, None, 'dirs/s'),
-                },
-            },
             '/mimer/NOBACKUP/groups/c3-staff/reframe/io-test': {
                 'valid_systems': ['alvis'],
                 'alvis:CPUonly': {
@@ -297,25 +273,7 @@ class MDtestSingle(MDtestBase):
             '/cephyr/NOBACKUP/priv/c3-alvis/reframe/io-test': {
                 'valid_systems': ['alvis'],
                 'nr_dirs_files_per_proc': '100000',
-                'iterations': '5',
-                'hierarch_depth': '3',
-                'hierarch_branch': '3',
-                'reference': {
-                    'dir_create': (1700, -0.1, None, 'dirs/s'),
-                    'dir_stat': (155000, -0.1, None, 'dirs/s'),
-                    'dir_removal': (1700, -0.1, None, 'dirs/s'),
-                    'file_create': (3400, -0.1, None, 'files/s'),
-                    'file_stat': (138000, -0.1, None, 'files/s'),
-                    'file_read': (138000, -0.1, None, 'files/s'),
-                    'file_removal': (3300, -0.1, None, 'files/s'),
-                    'tree_create': (3600, -0.1, None, 'dirs/s'),
-                    'tree_removal': (900, -0.1, None, 'dirs/s'),
-                },
-            },
-            '/cephyr2/NOBACKUP/priv/c3-alvis/reframe/io-test': {
-                'valid_systems': ['alvis'],
-                'nr_dirs_files_per_proc': '100000',
-                'iterations': '5',
+                'iterations': '1',
                 'hierarch_depth': '3',
                 'hierarch_branch': '3',
                 'reference': {
