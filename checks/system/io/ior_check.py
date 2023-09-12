@@ -68,6 +68,11 @@ class IorCheck(rfm.RunOnlyRegressionTest):
                     'num_tasks': 32,
                     'num_tasks_per_node': 32,
                 },
+                'alvis:4xA40': {
+                    'num_tasks': 48,
+                    'num_tasks_per_node': 48,
+                    'ior_access_type': 'POSIX',
+                },
                 'alvis:4xA100_MEM256': {
                     'num_tasks': 48,
                     'num_tasks_per_node': 48,
@@ -147,6 +152,13 @@ class IorCheck(rfm.RunOnlyRegressionTest):
 
     @run_before('run')
     def prepare_run(self):
+        cur_sys = self.current_system.name
+        fullname = self.current_partition.fullname
+        if cur_sys not in self.fs[self.base_dir]:
+            cur_sys = 'dummy'
+        if fullname not in self.fs[self.base_dir]:
+            fullname = cur_sys
+
         # Default umask is 0022, which generates file permissions -rw-r--r--
         # we want -rw-rw-r-- so we set umask to 0002
         os.umask(2)
@@ -158,8 +170,17 @@ class IorCheck(rfm.RunOnlyRegressionTest):
 
         # executable options depends on the file system
         block_size = self.fs[self.base_dir]['ior_block_size']
+        block_size = self.fs[self.base_dir][cur_sys].get('ior_block_size', block_size)
+        block_size = self.fs[self.base_dir][fullname].get('ior_block_size', block_size)
+
         xfr_size = self.fs[self.base_dir]['ior_xfr_size']
+        xfr_size = self.fs[self.base_dir][cur_sys].get('ior_xfr_size', xfr_size)
+        xfr_size = self.fs[self.base_dir][fullname].get('ior_xfr_size', xfr_size)
+
         access_type = self.fs[self.base_dir]['ior_access_type']
+        access_type = self.fs[self.base_dir][cur_sys].get('ior_access_type', access_type)
+        access_type = self.fs[self.base_dir][fullname].get('ior_access_type', access_type)
+
         self.executable_opts += ['-F', '-C ', '-Q', str(self.tpn), '-t', xfr_size , '-D 240',
                                 '-b', block_size, '-a', access_type,
                                 '-o', test_file]
