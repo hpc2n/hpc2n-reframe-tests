@@ -33,19 +33,23 @@ class HPLBase(rfm.RunOnlyRegressionTest):
     # This part should be in site specifica part of test.
     @run_after('init')
     def valid_system_and_module(self):
-        self.valid_systems = ['kebnekaise', 'alvis', 'UmU-cloud']
+        self.valid_systems = ['kebnekaise', 'alvis', 'vera', 'UmU-cloud']
         self.valid_prog_environs = ['builtin']
 
         hpl_module = {
             'kebnekaise': ['foss/2021a', 'HPL/2.3'],
             'UmU-Cloud': ['foss/2021a', 'HPL/2.3'],
             'alvis': ['HPL/2.3-foss-2021a'],
+            'vera': ['HPL/2.3-foss-2021a'],
         }
 
         self.modules = hpl_module[self.current_system.name]
 
         site_variables = {
             'alvis': {
+                'OMP_NUM_THREADS': '1',
+            },
+            'vera': {
                 'OMP_NUM_THREADS': '1',
             },
         }
@@ -118,7 +122,8 @@ class HPLBaseSingleNode_Fixed(HPLBase):
 
         self.hpl_settings = {
             'kebnekaise:bdw': {'N': 107520, 'NB': 192, 'P': 7, 'Q': 4},
-            'kebnekaise:skx': {'N': 107520, 'NB': 192, 'P': 7, 'Q': 4},
+            'kebnekaise:sky': {'N': 107520, 'NB': 192, 'P': 7, 'Q': 4},
+            'vera:skylake': {'N': 92928, 'NB': 192, 'P': 7, 'Q': 4},
             'alvis:2xV100': {'N': 280000, 'NB': 200, 'P': 4, 'Q': 4},
         }
 
@@ -126,7 +131,10 @@ class HPLBaseSingleNode_Fixed(HPLBase):
             'kebnekaise:bdw': {
                 'GFlops': (871, -0.05, 0.05, 'GFlops/s'),
             },
-            'kebnekaise:skx': {
+            'kebnekaise:sky': {
+                'GFlops': (871, -0.05, 0.05, 'GFlops/s'),
+            },
+            'vera:skylake': {
                 'GFlops': (871, -0.05, 0.05, 'GFlops/s'),
             },
             'alvis:2xV100': {
