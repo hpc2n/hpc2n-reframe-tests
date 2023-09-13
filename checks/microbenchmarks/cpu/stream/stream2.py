@@ -21,7 +21,7 @@ class build_stream(rfm.CompileOnlyRegressionTest):
 
     @run_before('compile')
     def prepare_build(self):
-        static = '-static' if self.current_system.name != 'alvis' else ''
+        static = '-static' if self.current_system.name != 'alvis' and self.current_system.name != 'vera' else ''
         self.prgenv_flags = {
             'foss': ['-fopenmp', '-O3', '-march=native', static],
             'intel': ['-qopenmp', '-O3', '-xHost', '-ip', '-ansi-alias', '-fno-alias', static, '-qopt-prefetch-distance=64,8', '-qopt-streaming-cache-evict=0', '-qopt-streaming-stores always'],
@@ -60,7 +60,7 @@ class StreamTest2(StreamTest2Base):
     descr = 'STREAM Benchmark'
 
     valid_systems = ['kebnekaise:%s' % x for x in ['bdw', 'sky', 'knl', 'lm']]
-    valid_systems += ['alvis', 'UmU-Cloud']
+    valid_systems += ['alvis', 'vera', 'UmU-Cloud']
     valid_prog_environs = ['%s_%s' % (tc, tv) for tc in ['foss', 'intel']
         for tv in ['2021b', '2022a']]
 
@@ -72,6 +72,7 @@ class StreamTest2(StreamTest2Base):
         'kebnekaise:knl': 68,
         'kebnekaise:lm': 72,
         'UmU-Cloud:default': 64,
+        'vera:skylake': 32,
         'alvis:8xT4': 32,
         'alvis:2xV100': 16,
         'alvis:4xV100': 32,
@@ -95,6 +96,7 @@ class StreamTest2(StreamTest2Base):
         'kebnekaise:knl': 6800,
         'kebnekaise:lm': 24000, # 121000, for using the whole memory, but that takes forever.
         'UmU-Cloud:default': 21200,
+        'vera:skylake': 3900,
         'alvis:8xT4': 22900,
         'alvis:2xV100': 30900,
         'alvis:4xV100': 30900,
@@ -145,6 +147,12 @@ class StreamTest2(StreamTest2Base):
                 'Scale': (166000, -0.05, 0.05, 'MB/s'),
                 'Add':   (182000, -0.05, 0.05, 'MB/s'),
                 'Triad': (182000, -0.05, 0.05, 'MB/s'),
+            },
+            'vera:skylake': {
+                'Copy':  (121000, -0.05, 0.05, 'MB/s'),
+                'Scale': (121000, -0.05, 0.05, 'MB/s'),
+                'Add':   (112500, -0.05, 0.05, 'MB/s'),
+                'Triad': (112500, -0.05, 0.05, 'MB/s'),
             },
             'alvis:8xT4': {
                 'Copy':  (135000, -0.05, 0.05, 'MB/s'),
@@ -208,6 +216,12 @@ class StreamTest2(StreamTest2Base):
                 'Add':   (182000, -0.05, 0.05, 'MB/s'),
                 'Triad': (182000, -0.05, 0.05, 'MB/s'),
             },
+            'vera:skylake': {
+                'Copy':  (156000, -0.05, 0.05, 'MB/s'),
+                'Scale': (156000, -0.05, 0.05, 'MB/s'),
+                'Add':   (119300, -0.05, 0.05, 'MB/s'),
+                'Triad': (122200, -0.05, 0.05, 'MB/s'),
+            },
             'alvis:8xT4': {
                 'Copy':  (185000, -0.05, 0.05, 'MB/s'),
                 'Scale': (185000, -0.05, 0.05, 'MB/s'),
@@ -269,7 +283,7 @@ class StreamTest2(StreamTest2Base):
     @run_after('setup')
     def setup_exclusive(self):
         self.exclusive_access = True
-        if self.current_system.name in {'alvis', 'UmU-Cloud'}:
+        if self.current_system.name in {'alvis', 'vera', 'UmU-Cloud'}:
             self.exclusive_access = False
 
     # Stream is serial or OpenMP and should not be started by srun.
