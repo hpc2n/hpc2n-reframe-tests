@@ -26,7 +26,7 @@ site_configuration = {
                     'descr': 'Skylake nodes',
                     'scheduler': 'slurm',
                     'launcher': 'srun',
-                    'access': ['-A C3SE-STAFF', '-C SKYLAKE+MEM96+NOGPU'],
+                    'access': ['-A C3SE-STAFF', '-C SKYLAKE&MEM96&NOGPU'],
                     'max_jobs': 100,
                     'features': ['cpu', 'intelcpu'],
                     'environs': ['builtin', 'gnu', 'foss', 'foss_2021a', 'foss_2021b', 'foss_2022a', 'intel_2021a', 'intel_2022a'],
