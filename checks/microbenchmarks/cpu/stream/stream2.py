@@ -96,7 +96,7 @@ class StreamTest2(StreamTest2Base):
         'kebnekaise:knl': 6800,
         'kebnekaise:lm': 24000, # 121000, for using the whole memory, but that takes forever.
         'UmU-Cloud:default': 21200,
-        'vera:skylake': 3900,
+        'vera:skylake': 3600,
         'alvis:8xT4': 22900,
         'alvis:2xV100': 30900,
         'alvis:4xV100': 30900,
@@ -217,10 +217,10 @@ class StreamTest2(StreamTest2Base):
                 'Triad': (182000, -0.05, 0.05, 'MB/s'),
             },
             'vera:skylake': {
-                'Copy':  (156000, -0.05, 0.05, 'MB/s'),
-                'Scale': (156000, -0.05, 0.05, 'MB/s'),
-                'Add':   (119300, -0.05, 0.05, 'MB/s'),
-                'Triad': (122200, -0.05, 0.05, 'MB/s'),
+                'Copy':  (165000, -0.05, 0.05, 'MB/s'),
+                'Scale': (165000, -0.05, 0.05, 'MB/s'),
+                'Add':   (172000, -0.05, 0.05, 'MB/s'),
+                'Triad': (172000, -0.05, 0.05, 'MB/s'),
             },
             'alvis:8xT4': {
                 'Copy':  (185000, -0.05, 0.05, 'MB/s'),
