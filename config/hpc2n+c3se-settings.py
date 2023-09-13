@@ -16,6 +16,29 @@ site_configuration = {
             ],
         },
         {
+            'name': 'skylake',
+            'descr': 'Vera cluster',
+            'hostnames': ['vera'],
+            'modules_system': 'lmod',
+            'partitions': [
+                {
+                    'name': 'vera',
+                    'descr': 'Skylake nodes',
+                    'scheduler': 'slurm',
+                    'launcher': 'srun',
+                    'access': ['-A C3SE-STAFF', '-C SKYLAKE+MEM96+NOGPU'],
+                    'max_jobs': 100',
+                    'features': ['cpu', 'intelcpu'],
+                    'environs': ['builtin', 'gnu', 'foss', 'foss_2021a', 'foss_2021b', 'foss_2022a', 'intel_2021a', 'intel_2022a'],
+                    'container_platforms': [
+                        {
+                            'type': 'Singularity',
+                        },
+                    ],
+                },
+            ],
+        },
+        {
             'name': 'alvis',
             'descr': 'Alvis cluster',
             'hostnames': ['alvis'],
@@ -514,7 +537,7 @@ site_configuration = {
             'cc': 'gcc',
             'cxx': 'g++',
             'ftn': 'gfortran',
-            'target_systems': ['kebnekaise', 'alvis'],
+            'target_systems': ['kebnekaise', 'alvis', 'vera'],
         },
         {
             'name': 'foss',
@@ -522,7 +545,7 @@ site_configuration = {
             'cc': 'gcc',
             'cxx': 'g++',
             'ftn': 'gfortran',
-            'target_systems': ['kebnekaise', 'alvis', 'UmU-Cloud'],
+            'target_systems': ['kebnekaise', 'alvis', 'vera', 'UmU-Cloud'],
         },
         {
             'name': 'foss_2019a',
@@ -530,7 +553,7 @@ site_configuration = {
             'cc': 'gcc',
             'cxx': 'g++',
             'ftn': 'gfortran',
-            'target_systems': ['kebnekaise', 'alvis'],
+            'target_systems': ['kebnekaise', 'alvis', 'vera'],
         },
         {
             'name': 'foss_2019b',
@@ -538,7 +561,7 @@ site_configuration = {
             'cc': 'gcc',
             'cxx': 'g++',
             'ftn': 'gfortran',
-            'target_systems': ['kebnekaise', 'alvis'],
+            'target_systems': ['kebnekaise', 'alvis', 'vera'],
         },
         {
             'name': 'foss_2020a',
@@ -546,7 +569,7 @@ site_configuration = {
             'cc': 'gcc',
             'cxx': 'g++',
             'ftn': 'gfortran',
-            'target_systems': ['kebnekaise', 'alvis'],
+            'target_systems': ['kebnekaise', 'alvis', 'vera'],
         },
         {
             'name': 'foss_2020b',
@@ -554,7 +577,7 @@ site_configuration = {
             'cc': 'gcc',
             'cxx': 'g++',
             'ftn': 'gfortran',
-            'target_systems': ['kebnekaise', 'alvis'],
+            'target_systems': ['kebnekaise', 'alvis', 'vera'],
         },
         {
             'name': 'foss_2021a',
@@ -562,7 +585,7 @@ site_configuration = {
             'cc': 'gcc',
             'cxx': 'g++',
             'ftn': 'gfortran',
-            'target_systems': ['kebnekaise', 'alvis', 'UmU-Cloud'],
+            'target_systems': ['kebnekaise', 'alvis', 'vera', 'UmU-Cloud'],
         },
         {
             'name': 'foss_2021b',
@@ -570,7 +593,7 @@ site_configuration = {
             'cc': 'gcc',
             'cxx': 'g++',
             'ftn': 'gfortran',
-            'target_systems': ['kebnekaise', 'alvis', 'UmU-Cloud'],
+            'target_systems': ['kebnekaise', 'alvis', 'vera', 'UmU-Cloud'],
         },
         {
             'name': 'foss_2022a',
@@ -578,7 +601,7 @@ site_configuration = {
             'cc': 'gcc',
             'cxx': 'g++',
             'ftn': 'gfortran',
-            'target_systems': ['kebnekaise', 'alvis', 'UmU-Cloud'],
+            'target_systems': ['kebnekaise', 'alvis', 'vera', 'UmU-Cloud'],
         },
         {
             'name': 'intel',
@@ -586,7 +609,7 @@ site_configuration = {
             'cc': 'icc',
             'cxx': 'icpc',
             'ftn': 'ifort',
-            'target_systems': ['kebnekaise', 'alvis'],
+            'target_systems': ['kebnekaise', 'alvis', 'vera'],
         },
         {
             'name': 'intel_2019a',
@@ -594,7 +617,7 @@ site_configuration = {
             'cc': 'icc',
             'cxx': 'icpc',
             'ftn': 'ifort',
-            'target_systems': ['kebnekaise', 'alvis'],
+            'target_systems': ['kebnekaise', 'alvis', 'vera'],
         },
         {
             'name': 'intel_2019b',
@@ -602,7 +625,7 @@ site_configuration = {
             'cc': 'icc',
             'cxx': 'icpc',
             'ftn': 'ifort',
-            'target_systems': ['kebnekaise', 'alvis'],
+            'target_systems': ['kebnekaise', 'alvis', 'vera'],
         },
         {
             'name': 'intel_2020a',
@@ -610,7 +633,7 @@ site_configuration = {
             'cc': 'icc',
             'cxx': 'icpc',
             'ftn': 'ifort',
-            'target_systems': ['kebnekaise', 'alvis'],
+            'target_systems': ['kebnekaise', 'alvis', 'vera'],
         },
         {
             'name': 'intel_2020b',
@@ -618,7 +641,7 @@ site_configuration = {
             'cc': 'icc',
             'cxx': 'icpc',
             'ftn': 'ifort',
-            'target_systems': ['kebnekaise', 'alvis'],
+            'target_systems': ['kebnekaise', 'alvis', 'vera'],
         },
         {
             'name': 'intel_2021a',
@@ -626,7 +649,7 @@ site_configuration = {
             'cc': 'icc',
             'cxx': 'icpc',
             'ftn': 'ifort',
-            'target_systems': ['kebnekaise', 'alvis', 'UmU-Cloud'],
+            'target_systems': ['kebnekaise', 'alvis', 'vera', 'UmU-Cloud'],
         },
         {
             'name': 'intel_2021b',
@@ -634,7 +657,7 @@ site_configuration = {
             'cc': 'icc',
             'cxx': 'icpc',
             'ftn': 'ifort',
-            'target_systems': ['kebnekaise', 'alvis', 'UmU-Cloud'],
+            'target_systems': ['kebnekaise', 'alvis', 'vera', 'UmU-Cloud'],
         },
         {
             'name': 'intel_2022a',
@@ -642,7 +665,7 @@ site_configuration = {
             'cc': 'icc',
             'cxx': 'icpc',
             'ftn': 'ifort',
-            'target_systems': ['kebnekaise', 'alvis', 'UmU-Cloud'],
+            'target_systems': ['kebnekaise', 'alvis', 'vera', 'UmU-Cloud'],
         },
         {
             'name': 'foss_with_cuda',
@@ -713,7 +736,7 @@ site_configuration = {
                 '--output=/cephyr/NOBACKUP/priv/c3-alvis/reframe/maintenance/output',
                 '--save-log-files',
             ],
-            'target_systems': ['alvis'],
+            'target_systems': ['alvis', 'vera'],
         },
         {
             'name': 'production',
@@ -726,7 +749,7 @@ site_configuration = {
                 '--output=/cephyr/NOBACKUP/priv/c3-alvis/reframe/production/output',
                 '--save-log-files',
             ],
-            'target_systems': ['alvis'],
+            'target_systems': ['alvis', 'vera'],
         },
         {
             'name': 'maintenance',
