@@ -58,7 +58,7 @@ class HPLBase(rfm.RunOnlyRegressionTest):
 
 
     # Belongs in library part
-    @run_after('setup')
+    @run_before('run')
     def setup_HPL_data(self):
         '''Create the HPL.dat input file'''
 
@@ -123,7 +123,7 @@ class HPLBaseSingleNode_Fixed(HPLBase):
         self.hpl_settings = {
             'kebnekaise:bdw': {'N': 107520, 'NB': 192, 'P': 7, 'Q': 4},
             'kebnekaise:sky': {'N': 107520, 'NB': 192, 'P': 7, 'Q': 4},
-            'vera:skylake': {'N': 92928, 'NB': 192, 'P': 7, 'Q': 4},
+            'vera:skylake': {'N': 101760, 'NB': 192, 'P': 8, 'Q': 4},
             'alvis:2xV100': {'N': 280000, 'NB': 200, 'P': 4, 'Q': 4},
         }
 
@@ -135,7 +135,7 @@ class HPLBaseSingleNode_Fixed(HPLBase):
                 'GFlops': (871, -0.05, 0.05, 'GFlops/s'),
             },
             'vera:skylake': {
-                'GFlops': (871, -0.05, 0.05, 'GFlops/s'),
+                'GFlops': (1200, -0.05, 0.05, 'GFlops/s'),
             },
             'alvis:2xV100': {
                 'GFlops': (1140, -0.05, 0.05, 'GFlops/s'),
