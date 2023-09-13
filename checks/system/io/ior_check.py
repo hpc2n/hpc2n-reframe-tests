@@ -148,7 +148,7 @@ class IorCheck(rfm.RunOnlyRegressionTest):
             'kebnekaise': ['gompi/2022a', 'IOR/3.3.0'],
             'alvis': ['IOR/3.3.0-gompi-2022a'],
         }
-        self.modules = module.get(self.current_system.name)
+        self.modules = module.get(self.current_system.name, [])
 
     @run_before('run')
     def prepare_run(self):
