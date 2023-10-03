@@ -1,0 +1,20 @@
+#!/usr/bin/env perl
+
+$header=0;
+while (<>) {
+    chomp;
+    @fields = split(/\|/);
+    @data = split(/,/, $fields[5]);
+    if ($header == 0) {
+        @hf = @fields;
+        @hd = @data;
+        $header++;
+    } else {
+        ($dummy, $nodes) = split(/=/, $fields[4]);
+        print "$fields[0] @ $nodes\n";
+        for ($i = 0; $i < 9; $i++) {
+            print "$hd[$i*5]: $data[$i*5] $data[$i*5+1]\n";
+        }
+        print "\n";
+    }
+}
