@@ -11,6 +11,10 @@ while (<>) {
         $header++;
     } else {
         ($dummy, $nodes) = split(/=/, $fields[4]);
+        if ($header < 2) {
+            print "$fields[2]\n";
+            $header++;
+        }
         print "$fields[0] @ $nodes\n";
         for ($i = 0; $i < 9; $i++) {
             print "$hd[$i*5]: $data[$i*5] $data[$i*5+1]\n";
