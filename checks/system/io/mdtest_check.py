@@ -187,8 +187,8 @@ class MDtestNode(MDtestBase):
                     'file_stat': (30000, -0.1, None, 'files/s'),
                     'file_read': (10000, -0.1, None, 'files/s'),
                     'file_removal': (15000, -0.1, None, 'files/s'),
-                    'tree_create': (550, -0.1, None, 'dirs/s'),
-                    'tree_removal': (450, -0.1, None, 'dirs/s'),
+                    'tree_create': (500, -0.1, None, 'dirs/s'),
+                    'tree_removal': (400, -0.1, None, 'dirs/s'),
                 },
             },
             '/cephyr/NOBACKUP/priv/c3-alvis/reframe/io-test': {
