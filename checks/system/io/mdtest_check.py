@@ -71,13 +71,13 @@ class MDtestBase(rfm.RunOnlyRegressionTest):
     def set_fs_information(self):
         # Setting some default values
         for data in self.fs.values():
-            data.setdefault('nr_dirs_files_per_proc', '1000000')
+            data.setdefault('nr_dirs_files_per_proc', '20000')
             data.setdefault('iterations', '3')
             data.setdefault('io_api', 'POSIX')
-            data.setdefault('stride', '1')
+            data.setdefault('stride', '0')
             data.setdefault('unique_dir_per_task', True)
-            data.setdefault('hierarch_depth', '0')
-            data.setdefault('hierarch_branch', '1')
+            data.setdefault('hierarch_depth', '3')
+            data.setdefault('hierarch_branch', '3')
             data.setdefault('bytes_per_file', '0')
             data.setdefault('stonewall_timer', '300')
             data.setdefault(
@@ -273,7 +273,7 @@ class MDtestSingle(MDtestBase):
             '/cephyr/NOBACKUP/priv/c3-alvis/reframe/io-test': {
                 'valid_systems': ['alvis'],
                 'nr_dirs_files_per_proc': '100000',
-                'iterations': '1',
+                'iterations': '5',
                 'hierarch_depth': '3',
                 'hierarch_branch': '3',
                 'reference': {
