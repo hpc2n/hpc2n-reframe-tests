@@ -261,6 +261,22 @@ site_configuration = {
                     ],
                 },
                 {
+                    'name': 'zen3',
+                    'descr': 'Zen3 compute nodes',
+                    'scheduler': 'slurm',
+                    'launcher': 'srun',
+                    'access': ['-C zen3', '-A sysop'],
+                    'max_jobs': 100,
+                    'features': ['cpu', 'amdcpu'],
+                    'environs': ['builtin', 'gnu', 'foss', 'intel', 'foss_2021b', 'foss_2022a', 'intel_2022a'],
+                    'container_platforms': [
+                        {
+                            'type': 'Singularity',
+                            'modules': ['singularity'],
+                        },
+                    ],
+                },
+                {
                     'name': '1xK80',
                     'descr': 'GPU 1xK80 half node',
                     'scheduler': 'slurm',
@@ -505,6 +521,51 @@ site_configuration = {
                     'max_jobs': 100,
                     'features': ['cpu', 'intelcpu'],
                     'environs': ['builtin', 'gnu', 'foss', 'intel', 'foss_2019a', 'foss_2019b', 'foss_2020a', 'foss_2020b', 'foss_2021a', 'foss_2021b', 'foss_2022a', 'intel_2019a', 'intel_2019b', 'intel_2020a', 'intel_2020b', 'intel_2021a', 'intel_2022a'],
+                    'container_platforms': [
+                        {
+                            'type': 'Singularity',
+                            'modules': ['singularity'],
+                        },
+                    ],
+                },
+                {
+                    'name': '2xA100',
+                    'descr': 'GPU 2xA100 node',
+                    'scheduler': 'slurm',
+                    'launcher': 'srun',
+                    'access': ['-A sysop', '-p amd_gpu', '-C zen3&2xA100', '--gres=gpu:a100:2'],
+                    'max_jobs': 100,
+                    'features': ['gpu', 'nvgpu'],
+                    'environs': ['builtin', 'gnu', 'foss', 'intel', 'foss_with_cuda', 'foss_2021b', 'foss_2022a', 'intel_2022a'],
+                    'devices': [
+                        {
+                            'type': 'gpu',
+                            'arch': 'sm_80',
+                            'num_devices': 2
+                        },
+                    ],
+                    'container_platforms': [
+                        {
+                            'type': 'Singularity',
+                            'modules': ['singularity'],
+                        },
+                    ],
+                },
+                {
+                    'name': '2xMI100',
+                    'descr': 'GPU 2xMI100 node',
+                    'scheduler': 'slurm',
+                    'launcher': 'srun',
+                    'access': ['-A sysop', '-p amd_gpu', '-C zen3&2xMI100', '--gres=gpu:mi100:2'],
+                    'max_jobs': 100,
+                    'features': ['gpu', 'amdgpu'],
+                    'environs': ['builtin', 'gnu', 'foss', 'intel', 'foss_with_cuda', 'foss_2021b', 'foss_2022a', 'intel_2022a'],
+                    'devices': [
+                        {
+                            'type': 'gpu',
+                            'num_devices': 2
+                        },
+                    ],
                     'container_platforms': [
                         {
                             'type': 'Singularity',
