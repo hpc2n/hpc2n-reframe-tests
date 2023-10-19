@@ -193,6 +193,7 @@ class MDtestNode(MDtestBase):
             },
             '/cephyr/NOBACKUP/priv/c3-alvis/reframe/io-test': {
                 'valid_systems': ['alvis'],
+                'nr_dirs_files_per_proc': '1000',
                 'alvis:CPUonly': {
                     'num_tasks': 32,
                     'num_tasks_per_node': 32,
@@ -292,8 +293,6 @@ class MDtestSingle(MDtestBase):
                 'valid_systems': ['kebnekaise'],
                 'nr_dirs_files_per_proc': '100000',
                 'iterations': '5',
-                'hierarch_depth': '3',
-                'hierarch_branch': '3',
                 'reference': {
                     'dir_create': (1900, -0.1, None, 'dirs/s'),
                     'dir_stat': (2100, -0.1, None, 'dirs/s'),
@@ -310,8 +309,6 @@ class MDtestSingle(MDtestBase):
                 'valid_systems': ['alvis'],
                 'nr_dirs_files_per_proc': '100000',
                 'iterations': '5',
-                'hierarch_depth': '3',
-                'hierarch_branch': '3',
                 'reference': {
                     'dir_create': (1700, -0.1, None, 'dirs/s'),
                     'dir_stat': (155000, -0.1, None, 'dirs/s'),
@@ -328,8 +325,6 @@ class MDtestSingle(MDtestBase):
                 'valid_systems': ['alvis'],
                 'nr_dirs_files_per_proc': '100000',
                 'iterations': '5',
-                'hierarch_depth': '3',
-                'hierarch_branch': '3',
                 'reference': {
                     'dir_create': (2500, -0.1, None, 'dirs/s'),
                     'dir_stat': (16000, -0.1, None, 'dirs/s'),
@@ -346,8 +341,6 @@ class MDtestSingle(MDtestBase):
                 'valid_systems': ['alvis'],
                 'nr_dirs_files_per_proc': '100000',
                 'iterations': '5',
-                'hierarch_depth': '3',
-                'hierarch_branch': '3',
                 'reference': {
                     'dir_create': (1700, -0.1, None, 'dirs/s'),
                     'dir_stat': (155000, -0.1, None, 'dirs/s'),
