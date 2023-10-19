@@ -265,7 +265,7 @@ site_configuration = {
                     'descr': 'Zen3 compute nodes',
                     'scheduler': 'slurm',
                     'launcher': 'srun',
-                    'access': ['-C zen3', '-A sysop'],
+                    'access': ['-C zen3', '-A sysop', '-p amd'],
                     'max_jobs': 100,
                     'features': ['cpu', 'amdcpu'],
                     'environs': ['builtin', 'gnu', 'foss', 'intel', 'foss_2021b', 'foss_2022a', 'intel_2022a'],
