@@ -63,7 +63,7 @@ class MDtestBase(rfm.RunOnlyRegressionTest):
     @run_after('init')
     def set_modules(self):
         module = {
-            'kebnekaise': ['foss/2022a', 'IOR/3.3.0'],
+            'kebnekaise': ['gompi/2022a', 'IOR/3.3.0'],
             'alvis': ['IOR/3.3.0-gompi-2022a'],
         }
         self.modules = module.get(self.current_system.name, [])
@@ -178,6 +178,10 @@ class MDtestNode(MDtestBase):
                 'kebnekaise': {
                     'num_tasks': 28,
                     'num_tasks_per_node': 28,
+                },
+                'kebnekaise:zen3': {
+                    'num_tasks': 128,
+                    'num_tasks_per_node': 128,
                 },
                 'reference': {
                     'dir_create': (13000, -0.1, None, 'dirs/s'),
