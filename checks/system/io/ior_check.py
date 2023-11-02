@@ -37,6 +37,10 @@ class IorCheck(rfm.RunOnlyRegressionTest):
                     'num_tasks': 28,
                     'num_tasks_per_node': 28,
                 },
+                'kebnekaise:zen3': {
+                    'num_tasks': 128,
+                    'num_tasks_per_node': 128,
+                },
                 'reference': {
                     'write_bw': (5400, -0.1, None, 'MiB/s'),
                     'read_bw': (5300, -0.1, None, 'MiB/s'),
