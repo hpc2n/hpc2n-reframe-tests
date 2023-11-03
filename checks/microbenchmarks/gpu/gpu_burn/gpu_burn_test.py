@@ -54,6 +54,9 @@ class gpu_burn_check(gpu_burn_check_base):
                 # Teoretical peak is 584.6 Gflops/s
                 'gpu_perf_min': (488, -0.10, None, 'Gflop/s'),
             },
+            'kebnbekaise:2xA100': {
+                'gpu_perf_min': (18100, -0.10, None, 'Gflop/s'),
+            },
             'alvis:8xT4': {
                 'gpu_perf_min': (250, -0.10, None, 'Gflop/s'),
             },
@@ -89,6 +92,9 @@ class gpu_burn_check(gpu_burn_check_base):
             },
             'kebnekaise:4xA40': {
                 'gpu_perf_min': (19500, -0.10, None, 'Gflop/s'),
+            },
+            'kebnekaise:2xA100': {
+                'gpu_perf_min': (18100, -0.10, None, 'Gflop/s'),
             },
             'UmU-Cloud:default': {
                 'gpu_perf_min': (18100, -0.10, None, 'Gflop/s'),
