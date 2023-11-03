@@ -64,6 +64,11 @@ class gpu_bandwidth_check(GpuBandwidth, SystemConfigHPC2N):
             'd2h': (13, -0.1, None, 'GB/s'),
             'd2d': (636, -0.1, None, 'GB/s')
         },
+        'kebnekaise:2xA100': {
+            'h2d': (25, -0.1, None, 'GB/s'),
+            'd2h': (25, -0.1, None, 'GB/s'),
+            'd2d': (1435, -0.1, None, 'GB/s')
+        },
         'UmU-Cloud:default': {
             'h2d': (25, -0.1, None, 'GB/s'),
             'd2h': (24, -0.1, None, 'GB/s'),
@@ -132,6 +137,9 @@ class gpu_bandwidth_d2d_check(GpuBandwidthD2D, SystemConfigHPC2N):
                 'kebnekaise:4xA40': {
                     'bw': (9.5, -0.05, None, 'GB/s'),
                 },
+                'kebnekaise:2xA100': {
+                    'bw': (19.5, -0.05, None, 'GB/s'),
+                },
                 'alvis:4xA40': {
                     'bw': (54.3, -0.05, None, 'GB/s'),
                 },
@@ -161,6 +169,9 @@ class gpu_bandwidth_d2d_check(GpuBandwidthD2D, SystemConfigHPC2N):
                 },
                 'kebnekaise:4xA40': {
                     'bw': (31, -0.05, None, 'GB/s'),
+                },
+                'kebnekaise:2xA100': {
+                    'bw': (17, -0.05, None, 'GB/s'),
                 },
                 'alvis:4xA40': {
                     'bw': (63.7, -0.05, None, 'GB/s'),
