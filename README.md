@@ -6,7 +6,7 @@ Simple use instructions:
  - cd reframe-rundir
  - clone the repo into this directory
  - cd hpc2n-reframe-tests
- - Load ReFrame module (4.0 or later)
+ - Load ReFrame module (4.2 or later)
  - PYTHONPATH=$PWD/checks:$PYTHONPATH
  - list all available tests:
    reframe -C config/hpc2n+c3se-settings.py -l
