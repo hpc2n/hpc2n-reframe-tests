@@ -202,9 +202,13 @@ class MDtestNode(MDtestBase):
                     'num_tasks': 32,
                     'num_tasks_per_node': 32,
                 },
-                'alvis:4xA100_MEM256': {
+                'alvis:4xA40': {
                     'num_tasks': 64,
                     'num_tasks_per_node': 64,
+                },
+                'alvis:4xA100_MEM256': {
+                    'num_tasks': 63,
+                    'num_tasks_per_node': 63,
                 },
                 'alvis:4xA100_MEM512': {
                     'num_tasks': 63,
@@ -228,9 +232,13 @@ class MDtestNode(MDtestBase):
                     'num_tasks': 32,
                     'num_tasks_per_node': 32,
                 },
+                'alvis:4xA40': {
+                    'num_tasks': 64,
+                    'num_tasks_per_node': 64,
+                },
                 'alvis:4xA100_MEM256': {
-                    'num_tasks': 48,
-                    'num_tasks_per_node': 48,
+                    'num_tasks': 63,
+                    'num_tasks_per_node': 63,
                 },
                 'alvis:4xA100_MEM512': {
                     'num_tasks': 63,
