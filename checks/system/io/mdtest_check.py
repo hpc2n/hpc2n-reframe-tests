@@ -9,7 +9,6 @@ class MDtestBase(rfm.RunOnlyRegressionTest):
     base_dir = parameter(['/pfs/stor10/io-test',
                           '/cephyr/NOBACKUP/priv/c3-alvis/reframe/io-test',
                           '/mimer/NOBACKUP/groups/c3-staff/reframe/io-test',
-                          '/scratch/BULK/reframe/io-test',
                           ])
     username = getpass.getuser()
     time_limit = '270m'
@@ -202,6 +201,14 @@ class MDtestNode(MDtestBase):
                     'num_tasks': 32,
                     'num_tasks_per_node': 32,
                 },
+                'alvis:2xV100': {
+                    'num_tasks': 16,
+                    'num_tasks_per_node': 16,
+                },
+                'alvis:4xV100': {
+                    'num_tasks': 32,
+                    'num_tasks_per_node': 32,
+                },
                 'alvis:4xA40': {
                     'num_tasks': 64,
                     'num_tasks_per_node': 64,
@@ -232,6 +239,14 @@ class MDtestNode(MDtestBase):
                     'num_tasks': 32,
                     'num_tasks_per_node': 32,
                 },
+                'alvis:2xV100': {
+                    'num_tasks': 16,
+                    'num_tasks_per_node': 16,
+                },
+                'alvis:4xV100': {
+                    'num_tasks': 32,
+                    'num_tasks_per_node': 32,
+                },
                 'alvis:4xA40': {
                     'num_tasks': 64,
                     'num_tasks_per_node': 64,
@@ -254,32 +269,6 @@ class MDtestNode(MDtestBase):
                     'file_removal': (70000, -0.1, None, 'files/s'),
                     'tree_create': (250, -0.1, None, 'dirs/s'),
                     'tree_removal': (450, -0.1, None, 'dirs/s'),
-                },
-            },
-            '/scratch/BULK/reframe/io-test': {
-                'valid_systems': ['alvis'],
-                'alvis:CPUonly': {
-                    'num_tasks': 32,
-                    'num_tasks_per_node': 32,
-                },
-                'alvis:4xA100_MEM256': {
-                    'num_tasks': 64,
-                    'num_tasks_per_node': 64,
-                },
-                'alvis:4xA100_MEM512': {
-                    'num_tasks': 63,
-                    'num_tasks_per_node': 63,
-                },
-                'reference': {
-                    'dir_create': (10000, -0.1, None, 'dirs/s'),
-                    'dir_stat': (63000, -0.1, None, 'dirs/s'),
-                    'dir_removal': (4000, -0.1, None, 'dirs/s'),
-                    'file_create': (12000, -0.1, None, 'files/s'),
-                    'file_stat': (65000, -0.1, None, 'files/s'),
-                    'file_read': (65000, -0.1, None, 'files/s'),
-                    'file_removal': (10000, -0.1, None, 'files/s'),
-                    'tree_create': (110, -0.1, None, 'dirs/s'),
-                    'tree_removal': (50, -0.1, None, 'dirs/s'),
                 },
             },
         }
@@ -347,22 +336,6 @@ class MDtestSingle(MDtestBase):
                     'file_removal': (2500, -0.1, None, 'files/s'),
                     'tree_create': (1200, -0.1, None, 'dirs/s'),
                     'tree_removal': (700, -0.1, None, 'dirs/s'),
-                },
-            },
-            '/scratch/BULK/reframe/io-test': {
-                'valid_systems': ['alvis'],
-                'nr_dirs_files_per_proc': '100000',
-                'iterations': '5',
-                'reference': {
-                    'dir_create': (1700, -0.1, None, 'dirs/s'),
-                    'dir_stat': (155000, -0.1, None, 'dirs/s'),
-                    'dir_removal': (1700, -0.1, None, 'dirs/s'),
-                    'file_create': (3400, -0.1, None, 'files/s'),
-                    'file_stat': (138000, -0.1, None, 'files/s'),
-                    'file_read': (138000, -0.1, None, 'files/s'),
-                    'file_removal': (3300, -0.1, None, 'files/s'),
-                    'tree_create': (3600, -0.1, None, 'dirs/s'),
-                    'tree_removal': (900, -0.1, None, 'dirs/s'),
                 },
             },
         }
