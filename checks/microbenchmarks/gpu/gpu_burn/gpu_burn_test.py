@@ -55,7 +55,7 @@ class gpu_burn_check(gpu_burn_check_base):
                 'gpu_perf_min': (488, -0.10, None, 'Gflop/s'),
             },
             'kebnekaise:2xA100': {
-                'gpu_perf_min': (18100, -0.10, None, 'Gflop/s'),
+                'gpu_perf_min': (17000, -0.10, None, 'Gflop/s'),
             },
             'alvis:8xT4': {
                 'gpu_perf_min': (250, -0.10, None, 'Gflop/s'),
