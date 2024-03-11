@@ -60,13 +60,17 @@ class IorCheck(rfm.RunOnlyRegressionTest):
                     'num_tasks': 32,
                     'num_tasks_per_node': 32,
                 },
+                'alvis:4xA40': {
+                    'num_tasks': 48,
+                    'num_tasks_per_node': 48,
+                },
                 'alvis:4xA100_MEM256': {
-                    'num_tasks': 63,
-                    'num_tasks_per_node': 63,
+                    'num_tasks': 48,
+                    'num_tasks_per_node': 48,
                 },
                 'alvis:4xA100_MEM512': {
-                    'num_tasks': 63,
-                    'num_tasks_per_node': 63,
+                    'num_tasks': 48,
+                    'num_tasks_per_node': 48,
                 },
                 'reference': {
                     'write_bw': (3100, -0.1, None, 'MiB/s'),
@@ -96,12 +100,12 @@ class IorCheck(rfm.RunOnlyRegressionTest):
                     'ior_access_type': 'POSIX',
                 },
                 'alvis:4xA100_MEM256': {
-                    'num_tasks': 63,
-                    'num_tasks_per_node': 63,
+                    'num_tasks': 48,
+                    'num_tasks_per_node': 48,
                 },
                 'alvis:4xA100_MEM512': {
-                    'num_tasks': 63,
-                    'num_tasks_per_node': 63,
+                    'num_tasks': 48,
+                    'num_tasks_per_node': 48,
                 },
                 'ior_block_size': '240g',
                 'reference': {
