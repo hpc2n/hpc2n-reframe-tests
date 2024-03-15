@@ -1,6 +1,7 @@
 #!/usr/bin/env perl
 
-$header=0;
+$header = 0;
+$count = 0;
 while (<>) {
     chomp;
     @fields = split(/\|/);
@@ -18,7 +19,16 @@ while (<>) {
         print "$fields[0] @ $nodes\n";
         for ($i = 0; $i < $#data/5; $i++) {
             print "$hd[$i*5]: $data[$i*5] $data[$i*5+1]\n";
+            $avg[$i*5] += $data[$i*5];
         }
         print "\n";
+        $count++;
+    }
+}
+
+if ($count > 0) {
+    print "Average values:\n";
+    for ($i = 0; $i < $#data/5; $i++) {
+        printf "%s: %6.1f %s\n", $hd[$i*5], $avg[$i*5] / $count, $data[$i*5+1];
     }
 }
