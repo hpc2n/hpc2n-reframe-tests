@@ -8,7 +8,7 @@ while (<>) {
     @data = split(/,/, $fields[5]);
     if ($header == 0) {
         @hf = @fields;
-        @hd = @data;
+        @hd = map { s/_value//r } @data;
         $header++;
     } else {
         ($dummy, $nodes) = split(/=/, $fields[4]);
