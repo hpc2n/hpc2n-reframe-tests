@@ -60,9 +60,10 @@ class StreamTest2(StreamTest2Base):
     descr = 'STREAM Benchmark'
 
     valid_systems = ['kebnekaise:%s' % x for x in ['bdw', 'sky', 'knl', 'lm', 'zen3']]
+    valid_systems += ['aigert']
     valid_systems += ['alvis', 'vera', 'UmU-Cloud']
     valid_prog_environs = ['%s_%s' % (tc, tv) for tc in ['foss', 'intel']
-        for tv in ['2021b', '2022a']]
+        for tv in ['2021b', '2022a', '2023b']]
 
     stream_cpus_per_task = {
         'kebnekaise:local': 28,
@@ -72,6 +73,7 @@ class StreamTest2(StreamTest2Base):
         'kebnekaise:knl': 68,
         'kebnekaise:lm': 72,
         'kebnekaise:zen3': 128,
+        'aigert:zen4': 256,
         'UmU-Cloud:default': 64,
         'vera:skylake': 32,
         'alvis:8xT4': 32,
@@ -97,6 +99,7 @@ class StreamTest2(StreamTest2Base):
         'kebnekaise:knl': 6800,
         'kebnekaise:lm': 24000, # 121000, for using the whole memory, but that takes forever.
         'kebnekaise:zen3': 42000,
+        'aigert:zen4': 30000,
         'UmU-Cloud:default': 21200,
         'vera:skylake': 3600,
         'alvis:8xT4': 22900,
@@ -149,6 +152,12 @@ class StreamTest2(StreamTest2Base):
                 'Scale': (200000, -0.05, 0.05, 'MB/s'),
                 'Add':   (230000, -0.05, 0.05, 'MB/s'),
                 'Triad': (230000, -0.05, 0.05, 'MB/s'),
+            },
+            'aigert:zen4': {
+                'Copy':  (455000, -0.05, 0.05, 'MB/s'),
+                'Scale': (455000, -0.05, 0.05, 'MB/s'),
+                'Add':   (520000, -0.05, 0.05, 'MB/s'),
+                'Triad': (520000, -0.05, 0.05, 'MB/s'),
             },
             'UmU-Cloud:default': {
                 'Copy':  (166000, -0.05, 0.05, 'MB/s'),
