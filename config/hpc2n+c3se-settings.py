@@ -590,6 +590,23 @@ site_configuration = {
                 }
             ],
         },
+        {
+            'name': 'aigert',
+            'descr': 'HPC2N WLCG compute cluster',
+            'hostnames': ['g-cn'],
+            'modules_system': 'lmod',
+            'partitions': [
+                {
+                    'name': 'zen4',
+                    'descr': 'AMD zen4c nodes',
+                    'scheduler': 'slurm',
+                    'launcher': 'srun',
+                    'access': ['-A sysop', '-p grid' '-C zen4'],
+                    'max_jobs': 100,
+                    'environs': ['builtin', 'foss', 'foss_2023b'],
+                },
+            ],
+        },
     ],
     'environments': [
         {
@@ -606,7 +623,7 @@ site_configuration = {
             'cc': 'gcc',
             'cxx': 'g++',
             'ftn': 'gfortran',
-            'target_systems': ['kebnekaise', 'alvis', 'vera', 'UmU-Cloud'],
+            'target_systems': ['kebnekaise', 'alvis', 'vera', 'UmU-Cloud', 'aigert'],
         },
         {
             'name': 'foss_2019a',
@@ -663,6 +680,14 @@ site_configuration = {
             'cxx': 'g++',
             'ftn': 'gfortran',
             'target_systems': ['kebnekaise', 'alvis', 'vera', 'UmU-Cloud'],
+        },
+        {
+            'name': 'foss_2023b',
+            'modules': ['foss/2023b'],
+            'cc': 'gcc',
+            'cxx': 'g++',
+            'ftn': 'gfortran',
+            'target_systems': ['kebnekaise', 'alvis', 'vera', 'UmU-Cloud', 'aigert'],
         },
         {
             'name': 'intel',
