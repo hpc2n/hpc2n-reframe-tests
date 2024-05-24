@@ -31,6 +31,10 @@ def set_gpu_arch(self):
             self.gpu_arch = '86'
         if 'A100' in cn:
             self.gpu_arch = '80'
+        if 'l40' in cn:
+            self.gpu_arch = '89'
+        if 'h100' in cn:
+            self.gpu_arch = '90'
     elif cs in {'UmU-Cloud'}:
         self.gpu_arch = '80'
     elif cs in {'dom', 'daint'}:
@@ -71,5 +75,10 @@ def set_num_gpus_per_node(self):
             self.num_gpus_per_node = 4
         elif cn in {'4xK80', '8xT4'}:
             self.num_gpus_per_node = 8
-    else:
-        self.num_gpus_per_node = 1
+
+    if self.num_gpus_per_node is None:
+        gpu_devices = self.current_partition.select_devices('gpu')
+        if gpu_devices:
+            self.num_gpus_per_node = gpu_devices[0].num_devices
+        else:
+            self.num_gpus_per_node = 1

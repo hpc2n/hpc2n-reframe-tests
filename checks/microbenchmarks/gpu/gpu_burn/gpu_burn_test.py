@@ -57,6 +57,12 @@ class gpu_burn_check(gpu_burn_check_base):
             'kebnekaise:2xA100': {
                 'gpu_perf_min': (17000, -0.10, None, 'Gflop/s'),
             },
+            'kebnekaise:gen4-l40s': {
+                'gpu_perf_min': (1129, -0.10, None, 'Gflop/s'),
+            },
+            'kebnekaise:gen4-h100': {
+                'gpu_perf_min': (52400, -0.10, None, 'Gflop/s'),
+            },
             'alvis:8xT4': {
                 'gpu_perf_min': (250, -0.10, None, 'Gflop/s'),
             },
@@ -95,6 +101,12 @@ class gpu_burn_check(gpu_burn_check_base):
             },
             'kebnekaise:2xA100': {
                 'gpu_perf_min': (18100, -0.10, None, 'Gflop/s'),
+            },
+            'kebnekaise:gen4-l40s': {
+                'gpu_perf_min': (44000, -0.10, None, 'Gflop/s'),
+            },
+            'kebnekaise:gen4-h100': {
+                'gpu_perf_min': (50100, -0.10, None, 'Gflop/s'),
             },
             'UmU-Cloud:default': {
                 'gpu_perf_min': (18100, -0.10, None, 'Gflop/s'),

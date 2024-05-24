@@ -34,7 +34,7 @@ class gpu_bandwidth_check(GpuBandwidth, SystemConfigHPC2N):
 
     # Increase runtime and memory usage
     #num_copies = 20
-    copy_size = 2*1024**3-1 # 2GB ~= 1/6 of K80 memory
+    copy_size = 4*1024**3 # 4GB ~= 1/3 of K80 memory
 
     num_tasks = 0
 
@@ -68,6 +68,16 @@ class gpu_bandwidth_check(GpuBandwidth, SystemConfigHPC2N):
             'h2d': (22, -0.1, None, 'GB/s'),
             'd2h': (25, -0.1, None, 'GB/s'),
             'd2d': (1435, -0.1, None, 'GB/s')
+        },
+        'kebnekaise:gen4-l40s': {
+            'h2d': (25, -0.1, None, 'GB/s'),
+            'd2h': (25, -0.1, None, 'GB/s'),
+            'd2d': (626, -0.1, None, 'GB/s')
+        },
+        'kebnekaise:gen4-h100': {
+            'h2d': (48, -0.1, None, 'GB/s'),
+            'd2h': (47, -0.1, None, 'GB/s'),
+            'd2d': (2472, -0.1, None, 'GB/s')
         },
         'UmU-Cloud:default': {
             'h2d': (25, -0.1, None, 'GB/s'),
@@ -112,7 +122,7 @@ class gpu_bandwidth_d2d_check(GpuBandwidthD2D, SystemConfigHPC2N):
 
     # Increase runtime and memory usage
     #num_copies = 20
-    copy_size = 2*1024**3-1 # 2GB ~= 1/6 of K80 memory
+    copy_size = 4*1024**3 # 4GB ~= 1/3 of K80 memory
 
     num_tasks = 0
 
@@ -139,6 +149,12 @@ class gpu_bandwidth_d2d_check(GpuBandwidthD2D, SystemConfigHPC2N):
                 },
                 'kebnekaise:2xA100': {
                     'bw': (10.5, -0.05, None, 'GB/s'),
+                },
+                'kebnekaise:gen4-l40s': {
+                    'bw': (372, -0.05, None, 'GB/s'),
+                },
+                'kebnekaise:gen4-h100': {
+                    'bw': (372, -0.05, None, 'GB/s'),
                 },
                 'alvis:4xA40': {
                     'bw': (54.3, -0.05, None, 'GB/s'),
@@ -172,6 +188,12 @@ class gpu_bandwidth_d2d_check(GpuBandwidthD2D, SystemConfigHPC2N):
                 },
                 'kebnekaise:2xA100': {
                     'bw': (17, -0.05, None, 'GB/s'),
+                },
+                'kebnekaise:gen4-l40s': {
+                    'bw': (10, -0.05, None, 'GB/s'),
+                },
+                'kebnekaise:gen4-h100': {
+                    'bw': (70, -0.05, None, 'GB/s'),
                 },
                 'alvis:4xA40': {
                     'bw': (63.7, -0.05, None, 'GB/s'),

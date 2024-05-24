@@ -37,7 +37,7 @@ class HPLBase(rfm.RunOnlyRegressionTest):
         self.valid_prog_environs = ['builtin']
 
         hpl_module = {
-            'kebnekaise': ['foss/2021a', 'HPL/2.3'],
+            'kebnekaise': ['foss/2023b', 'HPL/2.3'],
             'UmU-Cloud': ['foss/2021a', 'HPL/2.3'],
             'alvis': ['HPL/2.3-intel-2021b'],
             'vera': ['HPL/2.3-foss-2021a'],
@@ -123,6 +123,9 @@ class HPLBaseSingleNode_Fixed(HPLBase):
         self.hpl_settings = {
             'kebnekaise:bdw': {'N': 107520, 'NB': 192, 'P': 7, 'Q': 4},
             'kebnekaise:sky': {'N': 107520, 'NB': 192, 'P': 7, 'Q': 4},
+            'kebnekaise:gen4-cpu': {'N': 107520, 'NB': 192, 'P': 16, 'Q': 16},
+            'kebnekaise:gen4-l40s': {'N': 107520, 'NB': 192, 'P': 8, 'Q': 6},
+            'kebnekaise:gen4-h100': {'N': 107520, 'NB': 192, 'P': 12, 'Q': 8},
             'vera:skylake': {'N': 101760, 'NB': 192, 'P': 8, 'Q': 4},
             'alvis:2xV100': {'N': 280000, 'NB': 200, 'P': 4, 'Q': 4},
             'alvis:8xT4': {'N': 240000, 'NB': 200, 'P': 4, 'Q': 4},
@@ -134,6 +137,15 @@ class HPLBaseSingleNode_Fixed(HPLBase):
             },
             'kebnekaise:sky': {
                 'GFlops': (871, -0.05, 0.05, 'GFlops/s'),
+            },
+            'kebnekaise:gen4-cpu': {
+                'GFlops': (6200, -0.05, 0.05, 'GFlops/s'),
+            },
+            'kebnekaise:gen4-l40s': {
+                'GFlops': (2000, -0.05, 0.05, 'GFlops/s'),
+            },
+            'kebnekaise:gen4-h100': {
+                'GFlops': (3350, -0.05, 0.05, 'GFlops/s'),
             },
             'vera:skylake': {
                 'GFlops': (1200, -0.05, 0.05, 'GFlops/s'),
