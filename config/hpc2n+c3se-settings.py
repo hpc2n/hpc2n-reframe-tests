@@ -277,6 +277,68 @@ site_configuration = {
                     ],
                 },
                 {
+                    'name': 'gen4-cpu',
+                    'descr': 'Zen4 compute nodes',
+                    'scheduler': 'slurm',
+                    'launcher': 'srun',
+                    'access': ['-A sysop', '-C zen4', '-p gen4-cpu'],
+                    'max_jobs': 100,
+                    'features': ['cpu', 'amdcpu'],
+                    'environs': ['builtin', 'gnu', 'foss', 'foss_2021b', 'foss_2023b'],
+                    'container_platforms': [
+                        {
+                            'type': 'Singularity',
+                            'modules': ['singularity'],
+                        },
+                    ],
+                },
+                {
+                    'name': 'gen4-l40s',
+                    'descr': 'Zen4 L40s gpu nodes',
+                    'scheduler': 'slurm',
+                    'launcher': 'srun',
+                    'access': ['-A sysop', '-C zen4&2xL40S', '-p gen4-gpu', '--gpus-per-node=l40s:2'],
+                    'max_jobs': 100,
+                    'features': ['cpu', 'amdcpu', 'gpu', 'nvgpu'],
+                    'environs': ['builtin', 'gnu', 'foss', 'foss_with_cuda', 'foss_2021b', 'foss_2023b'],
+                    'devices': [
+                        {
+                            'type': 'gpu',
+                            'arch': 'sm_89',
+                            'num_devices': 2,
+                        },
+                    ],
+                    'container_platforms': [
+                        {
+                            'type': 'Singularity',
+                            'modules': ['singularity'],
+                        },
+                    ],
+                },
+                {
+                    'name': 'gen4-h100',
+                    'descr': 'Zen4 H100 gpu nodes',
+                    'scheduler': 'slurm',
+                    'launcher': 'srun',
+                    'access': ['-A sysop', '-C zen4&4xH100', '-p gen4-gpu', '--gpus-per-node=h100:4'],
+                    'max_jobs': 100,
+                    'features': ['cpu', 'amdcpu', 'gpu', 'nvgpu'],
+                    'environs': ['builtin', 'gnu', 'foss', 'foss_with_cuda', 'foss_2021b', 'foss_2023b'],
+                    'devices': [
+                        {
+                            'type': 'gpu',
+                            'arch': 'sm_90',
+                            'num_devices': 4,
+                        },
+                    ],
+                    'container_platforms': [
+                        {
+                            'type': 'Singularity',
+                            'modules': ['singularity'],
+                        },
+                    ],
+                },
+                {
                     'name': '1xK80',
                     'descr': 'GPU 1xK80 half node',
                     'scheduler': 'slurm',
@@ -752,6 +814,15 @@ site_configuration = {
             'cxx': 'icpc',
             'ftn': 'ifort',
             'target_systems': ['kebnekaise', 'alvis', 'vera', 'UmU-Cloud'],
+        },
+        {
+            'name': 'foss_with_cuda',
+            'modules': ['foss/2023b', 'UCX-CUDA/1.15.0-CUDA-12.4.0'],
+            'cc': 'gcc',
+            'cxx': 'g++',
+            'ftn': 'gfortran',
+            'target_systems': ['kebnekaise:gen4-l40s', 'kebnekaise:gen4-h100'],
+	    'features': ['cuda'],
         },
         {
             'name': 'foss_with_cuda',
