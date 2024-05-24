@@ -14,6 +14,7 @@ class IorCheck(rfm.RunOnlyRegressionTest):
     base_dir = parameter(['/pfs/stor10/io-test',
                           '/cephyr/NOBACKUP/priv/c3-alvis/reframe/io-test',
                           '/mimer/NOBACKUP/groups/c3-staff/reframe/io-test',
+                          '/scratch',
                           ])
     username = getpass.getuser()
     time_limit = '15m'
@@ -45,6 +46,22 @@ class IorCheck(rfm.RunOnlyRegressionTest):
                     'write_bw': (5400, -0.1, None, 'MiB/s'),
                     'read_bw': (5300, -0.1, None, 'MiB/s'),
                 },
+            },
+            '/scratch': {
+                'valid_systems': ['kebnekaise'],
+                'kebnekaise:gen4-cpu': {
+                    'num_tasks': 256,
+                    'num_tasks_per_node': 256,
+                },
+                'kebnekaise:gen4-l40s': {
+                    'num_tasks': 48,
+                    'num_tasks_per_node': 48,
+                },
+                'kebnekaise:gen4-h100': {
+                    'num_tasks': 96,
+                    'num_tasks_per_node': 96,
+                },
+                'ior_block_size': '10g',
             },
             '/cephyr/NOBACKUP/priv/c3-alvis/reframe/io-test': {
                 'valid_systems': ['alvis'],
@@ -171,7 +188,7 @@ class IorCheck(rfm.RunOnlyRegressionTest):
     @run_after('init')
     def set_modules(self):
         module = {
-            'kebnekaise': ['gompi/2022a', 'IOR/3.3.0'],
+            'kebnekaise': ['gompi/2023b', 'IOR/4.0.0'],
             'alvis': ['IOR/3.3.0-gompi-2022a'],
         }
         self.modules = module.get(self.current_system.name, [])
@@ -209,6 +226,7 @@ class IorCheck(rfm.RunOnlyRegressionTest):
 
         self.executable_opts += ['-F', '-C ', '-Q', str(self.tpn), '-t', xfr_size , '-D 240',
                                 '-b', block_size, '-a', access_type,
+                                '-A -1',  # Refnumber used for matching the correct output lines
                                 '-o', test_file]
 
 
@@ -225,7 +243,7 @@ class IorWriteCheck(IorCheck):
     def set_perf_patterns(self):
         self.perf_patterns = {
             'write_bw': sn.extractsingle(
-                r'^Max Write:\s+(?P<write_bw>\S+) MiB/sec', self.stdout,
+                r'^write\s+(?P<write_bw>\S+)\s+.*\s+-1$', self.stdout,
                 'write_bw', float)
         }
 
@@ -243,7 +261,7 @@ class IorReadCheck(IorCheck):
     def set_perf_patterns(self):
         self.perf_patterns = {
             'read_bw': sn.extractsingle(
-                r'^Max Read:\s+(?P<read_bw>\S+) MiB/sec', self.stdout,
+                r'^read\s+(?P<read_bw>\S+)\s+.*\s+-1$', self.stdout,
                 'read_bw', float)
         }
 
@@ -261,15 +279,15 @@ class IorWriteReadCheck(IorCheck):
 
     @sanity_function
     def assert_output(self):
-        return sn.assert_found(r'^Max Write: ', self.stdout) and sn.assert_found(r'^Max Read: ', self.stdout)
+        return sn.assert_found(r'^write\s+.*\s+-1$', self.stdout) and sn.assert_found(r'^read\s+.*\s+-1$', self.stdout)
 
     @run_after('init')
     def set_perf_patterns(self):
         self.perf_patterns = {
             'write_bw': sn.extractsingle(
-                r'^Max Write:\s+(?P<write_bw>\S+) MiB/sec', self.stdout,
+                r'^write\s+(?P<write_bw>\S+)\s+.*\s+-1$', self.stdout,
                 'write_bw', float),
             'read_bw': sn.extractsingle(
-                r'^Max Read:\s+(?P<read_bw>\S+) MiB/sec', self.stdout,
+                r'^read\s+(?P<read_bw>\S+)\s+.*\s+-1$', self.stdout,
                 'read_bw', float)
         }
