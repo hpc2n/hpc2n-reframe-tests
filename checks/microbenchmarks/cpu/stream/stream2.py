@@ -79,6 +79,7 @@ class StreamTest2(StreamTest2Base):
         'aigert:zen4': 256,
         'UmU-Cloud:default': 64,
         'vera:skylake': 32,
+        'vera:icelake': 64,
         'alvis:8xT4': 32,
         'alvis:2xV100': 16,
         'alvis:4xV100': 32,
@@ -108,6 +109,7 @@ class StreamTest2(StreamTest2Base):
         'aigert:zen4': 30000,
         'UmU-Cloud:default': 21200,
         'vera:skylake': 3600,
+        'vera:icelake': 20000,
         'alvis:8xT4': 22900,
         'alvis:2xV100': 30900,
         'alvis:4xV100': 30900,
@@ -195,6 +197,12 @@ class StreamTest2(StreamTest2Base):
                 'Add':   (112500, -0.05, 0.05, 'MB/s'),
                 'Triad': (112500, -0.05, 0.05, 'MB/s'),
             },
+            'vera:icelake': {
+                'Copy':  (242000, -0.05, 0.05, 'MB/s'),
+                'Scale': (242000, -0.05, 0.05, 'MB/s'),
+                'Add':   (225000, -0.05, 0.05, 'MB/s'),
+                'Triad': (225000, -0.05, 0.05, 'MB/s'),
+            },
             'alvis:8xT4': {
                 'Copy':  (135000, -0.05, 0.05, 'MB/s'),
                 'Scale': (135000, -0.05, 0.05, 'MB/s'),
@@ -268,6 +276,12 @@ class StreamTest2(StreamTest2Base):
                 'Scale': (165000, -0.05, 0.05, 'MB/s'),
                 'Add':   (172000, -0.05, 0.05, 'MB/s'),
                 'Triad': (172000, -0.05, 0.05, 'MB/s'),
+            },
+            'vera:icelake': {
+                'Copy':  (330000, -0.05, 0.05, 'MB/s'),
+                'Scale': (330000, -0.05, 0.05, 'MB/s'),
+                'Add':   (330000, -0.05, 0.05, 'MB/s'),
+                'Triad': (330000, -0.05, 0.05, 'MB/s'),
             },
             'alvis:8xT4': {
                 'Copy':  (185000, -0.05, 0.05, 'MB/s'),
