@@ -36,6 +36,21 @@ site_configuration = {
                         },
                     ],
                 },
+                {
+                    'name': 'icelake',
+                    'descr': 'Icelake nodes',
+                    'scheduler': 'slurm',
+                    'launcher': 'srun',
+                    'access': ['-A C3SE-STAFF', '-C ICELAKE&MEM512&NOGPU'],
+                    'max_jobs': 100,
+                    'features': ['cpu', 'intelcpu'],
+                    'environs': ['builtin', 'gnu', 'foss', 'foss_2021a', 'foss_2021b', 'foss_2022a', 'intel_2021a', 'intel_2022a'],
+                    'container_platforms': [
+                        {
+                            'type': 'Singularity',
+                        },
+                    ],
+                },
             ],
         },
         {
