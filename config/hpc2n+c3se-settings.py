@@ -265,7 +265,7 @@ site_configuration = {
                     'descr': 'Zen3 compute nodes',
                     'scheduler': 'slurm',
                     'launcher': 'srun',
-                    'access': ['-C zen3', '-A sysop', '-p amd'],
+                    'access': ['-C zen3', '-A sysop'],
                     'max_jobs': 100,
                     'features': ['cpu', 'amdcpu'],
                     'environs': ['builtin', 'gnu', 'foss', 'intel', 'foss_2021b', 'foss_2022a', 'intel_2022a'],
@@ -277,11 +277,11 @@ site_configuration = {
                     ],
                 },
                 {
-                    'name': 'gen4-cpu',
+                    'name': 'zen4',
                     'descr': 'Zen4 compute nodes',
                     'scheduler': 'slurm',
                     'launcher': 'srun',
-                    'access': ['-A sysop', '-C zen4', '-p gen4-cpu'],
+                    'access': ['-A sysop', '-C zen4'],
                     'max_jobs': 100,
                     'features': ['cpu', 'amdcpu'],
                     'environs': ['builtin', 'gnu', 'foss', 'foss_2021b', 'foss_2023b'],
@@ -293,11 +293,11 @@ site_configuration = {
                     ],
                 },
                 {
-                    'name': 'gen4-l40s',
-                    'descr': 'Zen4 L40s gpu nodes',
+                    'name': '2xl40s',
+                    'descr': 'Zen4 2xL40s gpu nodes',
                     'scheduler': 'slurm',
                     'launcher': 'srun',
-                    'access': ['-A sysop', '-C zen4&2xL40S', '-p gen4-gpu', '--gpus-per-node=l40s:2'],
+                    'access': ['-A sysop', '-C zen4&l40s', '--gpus-per-node=l40s:2'],
                     'max_jobs': 100,
                     'features': ['cpu', 'amdcpu', 'gpu', 'nvgpu'],
                     'environs': ['builtin', 'gnu', 'foss', 'foss_with_cuda', 'foss_2021b', 'foss_2023b'],
@@ -316,11 +316,11 @@ site_configuration = {
                     ],
                 },
                 {
-                    'name': 'gen4-h100',
-                    'descr': 'Zen4 H100 gpu nodes',
+                    'name': '4xh100',
+                    'descr': 'Zen4 4xH100 gpu nodes',
                     'scheduler': 'slurm',
                     'launcher': 'srun',
-                    'access': ['-A sysop', '-C zen4&4xH100', '-p gen4-gpu', '--gpus-per-node=h100:4'],
+                    'access': ['-A sysop', '-C zen4&H100', '--gpus-per-node=h100:4'],
                     'max_jobs': 100,
                     'features': ['cpu', 'amdcpu', 'gpu', 'nvgpu'],
                     'environs': ['builtin', 'gnu', 'foss', 'foss_with_cuda', 'foss_2021b', 'foss_2023b'],
@@ -339,103 +339,11 @@ site_configuration = {
                     ],
                 },
                 {
-                    'name': '1xK80',
-                    'descr': 'GPU 1xK80 half node',
+                    'name': '2xv100',
+                    'descr': 'GPU 2xV100 nodes',
                     'scheduler': 'slurm',
                     'launcher': 'srun',
-                    'access': ['-A sysop', '-p gpu', '-C broadwell&2xK80', '--gres=gpu:k80:1'],
-                    'max_jobs': 100,
-                    'features': ['gpu', 'nvgpu'],
-                    'environs': ['builtin', 'gnu', 'foss', 'intel', 'foss_with_cuda', 'foss_2019a', 'foss_2019b', 'foss_2020a', 'foss_2020b', 'foss_2021a', 'foss_2021b', 'foss_2022a', 'intel_2019a', 'intel_2019b', 'intel_2020a', 'intel_2020b', 'intel_2021a', 'intel_2022a'],
-                    'devices': [
-                        {
-                            'type': 'gpu',
-                            'arch': 'sm_37',
-                            'num_devices': 1
-                        },
-                    ],
-                    'container_platforms': [
-                        {
-                            'type': 'Singularity',
-                            'modules': ['singularity'],
-                        },
-                    ],
-                },
-                {
-                    'name': '2xK80',
-                    'descr': 'GPU 2xK80 nodes',
-                    'scheduler': 'slurm',
-                    'launcher': 'srun',
-                    'access': ['-A sysop', '-p gpu', '-C broadwell&2xK80', '--gres=gpu:k80:2', '--exclusive'],
-                    'max_jobs': 100,
-                    'features': ['gpu', 'nvgpu'],
-                    'environs': ['builtin', 'gnu', 'foss', 'intel', 'foss_with_cuda', 'foss_2019a', 'foss_2019b', 'foss_2020a', 'foss_2020b', 'foss_2021a', 'foss_2021b', 'foss_2022a', 'intel_2019a', 'intel_2019b', 'intel_2020a', 'intel_2020b', 'intel_2021a', 'intel_2022a'],
-                    'devices': [
-                        {
-                            'type': 'gpu',
-                            'arch': 'sm_37',
-                            'num_devices': 2
-                        },
-                    ],
-                    'container_platforms': [
-                        {
-                            'type': 'Singularity',
-                            'modules': ['singularity'],
-                        },
-                    ],
-                },
-                {
-                    'name': '4xK80',
-                    'descr': 'GPU 4xK80 nodes',
-                    'scheduler': 'slurm',
-                    'launcher': 'srun',
-                    'access': ['-A sysop', '-p gpu', '-C broadwell&4xK80', '--gres=gpu:k80:4', '--exclusive'],
-                    'max_jobs': 100,
-                    'features': ['gpu', 'nvgpu'],
-                    'environs': ['builtin', 'gnu', 'foss', 'intel', 'foss_with_cuda', 'foss_2019a', 'foss_2019b', 'foss_2020a', 'foss_2020b', 'foss_2021a', 'foss_2021b', 'foss_2022a', 'intel_2019a', 'intel_2019b', 'intel_2020a', 'intel_2020b', 'intel_2021a', 'intel_2022a'],
-                    'devices': [
-                        {
-                            'type': 'gpu',
-                            'arch': 'sm_37',
-                            'num_devices': 4
-                        },
-                    ],
-                    'container_platforms': [
-                        {
-                            'type': 'Singularity',
-                            'modules': ['singularity'],
-                        },
-                    ],
-                },
-                {
-                    'name': '1xV100',
-                    'descr': 'GPU 1xV00 half node',
-                    'scheduler': 'slurm',
-                    'launcher': 'srun',
-                    'access': ['-A sysop', '-p gpu', '-C skylake&2xV100', '--gres=gpu:v100:1'],
-                    'max_jobs': 100,
-                    'features': ['gpu', 'nvgpu'],
-                    'environs': ['builtin', 'gnu', 'foss', 'intel', 'foss_with_cuda', 'foss_2019a', 'foss_2019b', 'foss_2020a', 'foss_2020b', 'foss_2021a', 'foss_2021b', 'foss_2022a', 'intel_2019a', 'intel_2019b', 'intel_2020a', 'intel_2020b', 'intel_2021a', 'intel_2022a'],
-                    'devices': [
-                        {
-                            'type': 'gpu',
-                            'arch': 'sm_70',
-                            'num_devices': 1
-                        },
-                    ],
-                    'container_platforms': [
-                        {
-                            'type': 'Singularity',
-                            'modules': ['singularity'],
-                        },
-                    ],
-                },
-                {
-                    'name': '2xV100',
-                    'descr': 'GPU 2xV00 nodes',
-                    'scheduler': 'slurm',
-                    'launcher': 'srun',
-                    'access': ['-A sysop', '-p gpu', '-C skylake&2xV100', '--gres=gpu:v100:2', '--exclusive'],
+                    'access': ['-A sysop', '-C skylake&2xV100', '--gpus-per-node=v100:2', '--exclusive'],
                     'max_jobs': 100,
                     'features': ['gpu', 'nvgpu'],
                     'environs': ['builtin', 'gnu', 'foss', 'intel', 'foss_with_cuda', 'foss_2019a', 'foss_2019b', 'foss_2020a', 'foss_2020b', 'foss_2021a', 'foss_2021b', 'foss_2022a', 'intel_2019a', 'intel_2019b', 'intel_2020a', 'intel_2020b', 'intel_2021a', 'intel_2022a'],
@@ -454,11 +362,11 @@ site_configuration = {
                     ],
                 },
                 {
-                    'name': '2xA40',
-                    'descr': 'GPU 2xA40 half node',
+                    'name': '8xa40',
+                    'descr': 'GPU 8xA40',
                     'scheduler': 'slurm',
                     'launcher': 'srun',
-                    'access': ['-A sysop', '-p gpu', '-C broadwell&4xA40', '--gres=gpu:a40:2'],
+                    'access': ['-A sysop', '-C zen4&8xA40', '--gpus-per-node=a40:8'],
                     'max_jobs': 100,
                     'features': ['gpu', 'nvgpu'],
                     'environs': ['builtin', 'gnu', 'foss', 'intel', 'foss_with_cuda', 'foss_2019a', 'foss_2019b', 'foss_2020a', 'foss_2020b', 'foss_2021a', 'foss_2021b', 'foss_2022a', 'intel_2019a', 'intel_2019b', 'intel_2020a', 'intel_2020b', 'intel_2021a', 'intel_2022a'],
@@ -466,7 +374,7 @@ site_configuration = {
                         {
                             'type': 'gpu',
                             'arch': 'sm_86',
-                            'num_devices': 2
+                            'num_devices': 8
                         },
                     ],
                     'container_platforms': [
@@ -477,57 +385,11 @@ site_configuration = {
                     ],
                 },
                 {
-                    'name': '4xA40',
-                    'descr': 'GPU 4xA40 nodes',
-                    'scheduler': 'slurm',
-                    'launcher': 'srun',
-                    'access': ['-A sysop', '-p gpu', '-C broadwell&4xA40', '--gres=gpu:a40:4', '--exclusive'],
-                    'max_jobs': 100,
-                    'features': ['gpu', 'nvgpu'],
-                    'environs': ['builtin', 'gnu', 'foss', 'intel', 'foss_with_cuda', 'foss_2019a', 'foss_2019b', 'foss_2020a', 'foss_2020b', 'foss_2021a', 'foss_2021b', 'foss_2022a', 'intel_2019a', 'intel_2019b', 'intel_2020a', 'intel_2020b', 'intel_2021a', 'intel_2022a'],
-                    'devices': [
-                        {
-                            'type': 'gpu',
-                            'arch': 'sm_86',
-                            'num_devices': 4
-                        },
-                    ],
-                    'container_platforms': [
-                        {
-                            'type': 'Singularity',
-                            'modules': ['singularity'],
-                        },
-                    ],
-                },
-                {
-                    'name': '1xA6000',
-                    'descr': 'GPU 1xA6000 half node',
-                    'scheduler': 'slurm',
-                    'launcher': 'srun',
-                    'access': ['-A sysop', '-p gpu', '-C broadwell&2xA6000', '--gres=gpu:a6000:1'],
-                    'max_jobs': 100,
-                    'features': ['gpu', 'nvgpu'],
-                    'environs': ['builtin', 'gnu', 'foss', 'intel', 'foss_with_cuda', 'foss_2019a', 'foss_2019b', 'foss_2020a', 'foss_2020b', 'foss_2021a', 'foss_2021b', 'foss_2022a', 'intel_2019a', 'intel_2019b', 'intel_2020a', 'intel_2020b', 'intel_2021a', 'intel_2022a'],
-                    'devices': [
-                        {
-                            'type': 'gpu',
-                            'arch': 'sm_86',
-                            'num_devices': 1
-                        },
-                    ],
-                    'container_platforms': [
-                        {
-                            'type': 'Singularity',
-                            'modules': ['singularity'],
-                        },
-                    ],
-                },
-                {
-                    'name': '2xA6000',
+                    'name': '2xa6000',
                     'descr': 'GPU 2xA6000 nodes',
                     'scheduler': 'slurm',
                     'launcher': 'srun',
-                    'access': ['-A sysop', '-p gpu', '-C broadwell&2xA6000', '--gres=gpu:a6000:2', '--exclusive'],
+                    'access': ['-A sysop', '-C zen3&2xA6000', '--gpus-per-node=a6000:2', '--exclusive'],
                     'max_jobs': 100,
                     'features': ['gpu', 'nvgpu'],
                     'environs': ['builtin', 'gnu', 'foss', 'intel', 'foss_with_cuda', 'foss_2019a', 'foss_2019b', 'foss_2020a', 'foss_2020b', 'foss_2021a', 'foss_2021b', 'foss_2022a', 'intel_2019a', 'intel_2019b', 'intel_2020a', 'intel_2020b', 'intel_2021a', 'intel_2022a'],
@@ -545,35 +407,6 @@ site_configuration = {
                         },
                     ],
                 },
-#                {
-#                    'name': 'knl',
-#                    'descr': 'KNL compute nodes',
-#                    'scheduler': 'slurm',
-#                    'launcher': 'srun',
-#                    'access': ['-p knl', '-A sysop'],
-#                    'max_jobs': 100,
-#                    'environs': ['builtin', 'gnu', 'foss', 'intel', 'foss_2019a', 'foss_2019b', 'foss_2020a', 'foss_2020b', 'foss_2021a', 'foss_2021b', 'foss_2022a', 'intel_2019a', 'intel_2019b', 'intel_2020a', 'intel_2020b', 'intel_2021a', 'intel_2022a'],
-#                    'resources': [
-#                        {
-#                            'name': 'threads',
-#                            'options': ['--threads-per-core={threads}'],
-#                        },
-#                        {
-#                            'name': 'mode',
-#                            'options': ['--constraint={numa},{mcdram}'],
-#                        },
-#                        {
-#                            'name': 'hbm',
-#                            'options': ['--gres=hbm:{hbm_size}'],
-#                        },
-#                    ],
-#                    'container_platforms': [
-#                        {
-#                            'type': 'Singularity',
-#                            'modules': ['singularity'],
-#                        },
-#                    ],
-#                },
                 {
                     'name': 'lm',
                     'descr': 'Broadwell largememory compute nodes',
@@ -591,11 +424,11 @@ site_configuration = {
                     ],
                 },
                 {
-                    'name': '2xA100',
+                    'name': '2xa100',
                     'descr': 'GPU 2xA100 node',
                     'scheduler': 'slurm',
                     'launcher': 'srun',
-                    'access': ['-A sysop', '-p amd_gpu', '-C zen3&2xA100', '--gres=gpu:a100:2', '--exclusive'],
+                    'access': ['-A sysop', '-C zen3&2xA100', '--gpus-per-node=a100:2', '--exclusive'],
                     'max_jobs': 100,
                     'features': ['gpu', 'nvgpu'],
                     'environs': ['builtin', 'gnu', 'foss', 'intel', 'foss_with_cuda', 'foss_2021b', 'foss_2022a', 'intel_2022a'],
@@ -614,11 +447,11 @@ site_configuration = {
                     ],
                 },
                 {
-                    'name': '2xMI100',
+                    'name': '2xmi100',
                     'descr': 'GPU 2xMI100 node',
                     'scheduler': 'slurm',
                     'launcher': 'srun',
-                    'access': ['-A sysop', '-p amd_gpu', '-C zen3&2xMI100', '--gres=gpu:mi100:2', '--exclusive'],
+                    'access': ['-A sysop', '-C zen3&2xMI100', '--gpus-per-node=mi100:2', '--exclusive'],
                     'max_jobs': 100,
                     'features': ['gpu', 'amdgpu'],
                     'environs': ['builtin', 'gnu', 'foss', 'intel', 'foss_with_cuda', 'foss_2021b', 'foss_2022a', 'intel_2022a'],
@@ -935,6 +768,7 @@ site_configuration = {
             'check_search_path': ['checks/'],
             'check_search_recursive': True,
             'remote_detect': True,
+	    'reframe_module': 'ReFrame',
         },
     ],
 }
