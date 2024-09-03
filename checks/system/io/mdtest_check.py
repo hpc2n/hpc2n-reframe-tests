@@ -7,6 +7,7 @@ import reframe.utility.sanity as sn
 
 class MDtestBase(rfm.RunOnlyRegressionTest):
     base_dir = parameter(['/pfs/stor10/io-test',
+                          '/scratch',
                           '/cephyr/NOBACKUP/priv/c3-alvis/reframe/io-test',
                           '/mimer/NOBACKUP/groups/c3-staff/reframe/io-test',
                           ])
@@ -182,6 +183,18 @@ class MDtestNode(MDtestBase):
                     'num_tasks': 128,
                     'num_tasks_per_node': 128,
                 },
+                'kebnekaise:zen4': {
+                    'num_tasks': 256,
+                    'num_tasks_per_node': 256,
+                },
+                'kebnekaise:6xl40s': {
+                    'num_tasks': 60,
+                    'num_tasks_per_node': 60,
+                },
+                'kebnekaise:8xa40': {
+                    'num_tasks': 64,
+                    'num_tasks_per_node': 64,
+                },
                 'reference': {
                     'dir_create': (13000, -0.1, None, 'dirs/s'),
                     'dir_stat': (23000, -0.1, None, 'dirs/s'),
@@ -192,6 +205,21 @@ class MDtestNode(MDtestBase):
                     'file_removal': (15000, -0.1, None, 'files/s'),
                     'tree_create': (500, -0.1, None, 'dirs/s'),
                     'tree_removal': (400, -0.1, None, 'dirs/s'),
+                },
+            },
+            '/scratch': {
+                'valid_systems': ['kebnekaise'],
+                'kebnekaise:zen4': {
+                    'num_tasks': 256,
+                    'num_tasks_per_node': 256,
+                },
+                'kebnekaise:2xl40s': {
+                    'num_tasks': 48,
+                    'num_tasks_per_node': 48,
+                },
+                'kebnekaise:4xh100': {
+                    'num_tasks': 96,
+                    'num_tasks_per_node': 96,
                 },
             },
             '/cephyr/NOBACKUP/priv/c3-alvis/reframe/io-test': {
@@ -305,6 +333,11 @@ class MDtestSingle(MDtestBase):
                     'tree_create': (850, -0.1, None, 'dirs/s'),
                     'tree_removal': (1200, -0.1, None, 'dirs/s'),
                 },
+            },
+            '/scratch': {
+                'valid_systems': ['kebnekaise'],
+                'nr_dirs_files_per_proc': '100000',
+                'iterations': '5',
             },
             '/cephyr/NOBACKUP/priv/c3-alvis/reframe/io-test': {
                 'valid_systems': ['alvis'],
