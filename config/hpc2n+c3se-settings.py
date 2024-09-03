@@ -682,15 +682,6 @@ site_configuration = {
         },
         {
             'name': 'foss_with_cuda',
-            'modules': ['foss/2021b', 'UCX-CUDA/1.11.2-CUDA-11.4.1'],
-            'cc': 'gcc',
-            'cxx': 'g++',
-            'ftn': 'gfortran',
-            'target_systems': ['kebnekaise', 'UmU-Cloud'],
-	    'features': ['cuda'],
-        },
-        {
-            'name': 'foss_with_cuda',
             'modules': ['foss/2021b', 'UCX-CUDA/1.11.2-GCCcore-11.2.0-CUDA-11.4.1'],
             'cc': 'gcc',
             'cxx': 'g++',
