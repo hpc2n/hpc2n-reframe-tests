@@ -42,6 +42,22 @@ class IorCheck(rfm.RunOnlyRegressionTest):
                     'num_tasks': 128,
                     'num_tasks_per_node': 128,
                 },
+                'kebnekaise:zen4': {
+                    'num_tasks': 256,
+                    'num_tasks_per_node': 256,
+                },
+                'kebnekaise:8xa40': {
+                    'num_tasks': 64,
+                    'num_tasks_per_node': 64,
+                },
+                'kebnekaise:2xl40s': {
+                    'num_tasks': 48,
+                    'num_tasks_per_node': 48,
+                },
+                'kebnekaise:6xl40s': {
+                    'num_tasks': 60,
+                    'num_tasks_per_node': 60,
+                },
                 'reference': {
                     'write_bw': (5400, -0.1, None, 'MiB/s'),
                     'read_bw': (5300, -0.1, None, 'MiB/s'),
@@ -49,15 +65,15 @@ class IorCheck(rfm.RunOnlyRegressionTest):
             },
             '/scratch': {
                 'valid_systems': ['kebnekaise'],
-                'kebnekaise:gen4-cpu': {
+                'kebnekaise:zen4': {
                     'num_tasks': 256,
                     'num_tasks_per_node': 256,
                 },
-                'kebnekaise:gen4-l40s': {
+                'kebnekaise:2xl40s': {
                     'num_tasks': 48,
                     'num_tasks_per_node': 48,
                 },
-                'kebnekaise:gen4-h100': {
+                'kebnekaise:4xh100': {
                     'num_tasks': 96,
                     'num_tasks_per_node': 96,
                 },
