@@ -25,44 +25,44 @@ class MDtestBase(rfm.RunOnlyRegressionTest):
 
     @sanity_function
     def assert_output(self):
-        return sn.assert_found(r'^\s+File creation\s+:\s', self.stdout) and sn.assert_found(r'^\s+Tree removal\s+:\s', self.stdout)
+        return sn.assert_found(r'^\s+File creation\s+:?\s', self.stdout) and sn.assert_found(r'^\s+Tree removal\s+:?\s', self.stdout)
 
     @run_after('init')
     def set_perf_patterns(self):
         self.perf_patterns = {
             'dir_create': sn.extractsingle(
-                r'^\s+Directory creation\s+:\s+[0-9.]+\s+[0-9.]+\s+(?P<dir_create>\S+)\s+', self.stdout,
+                r'^\s+Directory creation\s+:?\s+[0-9.]+\s+[0-9.]+\s+(?P<dir_create>\S+)\s+', self.stdout,
                 'dir_create', float),
             'dir_stat': sn.extractsingle(
-                r'^\s+Directory stat\s+:\s+[0-9.]+\s+[0-9.]+\s+(?P<dir_stat>\S+)\s+', self.stdout,
+                r'^\s+Directory stat\s+:?\s+[0-9.]+\s+[0-9.]+\s+(?P<dir_stat>\S+)\s+', self.stdout,
                 'dir_stat', float),
             'dir_removal': sn.extractsingle(
-                r'^\s+Directory removal\s+:\s+[0-9.]+\s+[0-9.]+\s+(?P<dir_removal>\S+)\s+', self.stdout,
+                r'^\s+Directory removal\s+:?\s+[0-9.]+\s+[0-9.]+\s+(?P<dir_removal>\S+)\s+', self.stdout,
                 'dir_removal', float),
             'file_create': sn.extractsingle(
-                r'^\s+File creation\s+:\s+[0-9.]+\s+[0-9.]+\s+(?P<file_create>\S+)\s+', self.stdout,
+                r'^\s+File creation\s+:?\s+[0-9.]+\s+[0-9.]+\s+(?P<file_create>\S+)\s+', self.stdout,
                 'file_create', float),
             'file_stat': sn.extractsingle(
-                r'^\s+File stat\s+:\s+[0-9.]+\s+[0-9.]+\s+(?P<file_stat>\S+)\s+', self.stdout,
+                r'^\s+File stat\s+:?\s+[0-9.]+\s+[0-9.]+\s+(?P<file_stat>\S+)\s+', self.stdout,
                 'file_stat', float),
             'file_read': sn.extractsingle(
-                r'^\s+File read\s+:\s+[0-9.]+\s+[0-9.]+\s+(?P<file_read>\S+)\s+', self.stdout,
+                r'^\s+File read\s+:?\s+[0-9.]+\s+[0-9.]+\s+(?P<file_read>\S+)\s+', self.stdout,
                 'file_read', float),
             'file_removal': sn.extractsingle(
-                r'^\s+File removal\s+:\s+[0-9.]+\s+[0-9.]+\s+(?P<file_removal>\S+)\s+', self.stdout,
+                r'^\s+File removal\s+:?\s+[0-9.]+\s+[0-9.]+\s+(?P<file_removal>\S+)\s+', self.stdout,
                 'file_removal', float),
             'tree_create': sn.extractsingle(
-                r'^\s+Tree creation\s+:\s+[0-9.]+\s+[0-9.]+\s+(?P<tree_create>\S+)\s+', self.stdout,
+                r'^\s+Tree creation\s+:?\s+[0-9.]+\s+[0-9.]+\s+(?P<tree_create>\S+)\s+', self.stdout,
                 'tree_create', float),
             'tree_removal': sn.extractsingle(
-                r'^\s+Tree removal\s+:\s+[0-9.]+\s+[0-9.]+\s+(?P<tree_removal>\S+)\s+', self.stdout,
+                r'^\s+Tree removal\s+:?\s+[0-9.]+\s+[0-9.]+\s+(?P<tree_removal>\S+)\s+', self.stdout,
                 'tree_removal', float),
         }
 
     @run_after('init')
     def set_modules(self):
         module = {
-            'kebnekaise': ['gompi/2022a', 'IOR/3.3.0'],
+            'kebnekaise': ['gompi/2023b', 'IOR/4.0.0'],
             'alvis': ['IOR/3.3.0-gompi-2022a'],
         }
         self.modules = module.get(self.current_system.name, [])
