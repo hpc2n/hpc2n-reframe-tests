@@ -58,6 +58,10 @@ class IorCheck(rfm.RunOnlyRegressionTest):
                     'num_tasks': 60,
                     'num_tasks_per_node': 60,
                 },
+                'kebnekaise:4xh100': {
+                    'num_tasks': 96,
+                    'num_tasks_per_node': 96,
+                },
                 'reference': {
                     'write_bw': (5400, -0.1, None, 'MiB/s'),
                     'read_bw': (5300, -0.1, None, 'MiB/s'),
