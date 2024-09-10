@@ -187,6 +187,10 @@ class MDtestNode(MDtestBase):
                     'num_tasks': 256,
                     'num_tasks_per_node': 256,
                 },
+                'kebnekaise:2xl40s': {
+                    'num_tasks': 48,
+                    'num_tasks_per_node': 48,
+                },
                 'kebnekaise:6xl40s': {
                     'num_tasks': 60,
                     'num_tasks_per_node': 60,
@@ -194,6 +198,10 @@ class MDtestNode(MDtestBase):
                 'kebnekaise:8xa40': {
                     'num_tasks': 64,
                     'num_tasks_per_node': 64,
+                },
+                'kebnekaise:4xh100': {
+                    'num_tasks': 96,
+                    'num_tasks_per_node': 96,
                 },
                 'reference': {
                     'dir_create': (13000, -0.1, None, 'dirs/s'),
