@@ -40,7 +40,7 @@ class HPLBase(rfm.RunOnlyRegressionTest):
             'kebnekaise': ['foss/2023b', 'HPL/2.3'],
             'UmU-Cloud': ['foss/2021a', 'HPL/2.3'],
             'alvis': ['HPL/2.3-intel-2021b'],
-            'vera': ['HPL/2.3-foss-2021a'],
+            'vera': ['HPL/2.3-intel-2021b'],
         }
 
         self.modules = hpl_module[self.current_system.name]
@@ -127,6 +127,7 @@ class HPLBaseSingleNode_Fixed(HPLBase):
             'kebnekaise:gen4-l40s': {'N': 107520, 'NB': 192, 'P': 8, 'Q': 6},
             'kebnekaise:gen4-h100': {'N': 107520, 'NB': 192, 'P': 12, 'Q': 8},
             'vera:skylake': {'N': 101760, 'NB': 192, 'P': 8, 'Q': 4},
+            'vera:icelake': {'N': 245760, 'NB': 192, 'P': 16, 'Q': 4},
             'alvis:2xV100': {'N': 280000, 'NB': 200, 'P': 4, 'Q': 4},
             'alvis:8xT4': {'N': 240000, 'NB': 200, 'P': 4, 'Q': 4},
         }
@@ -149,6 +150,9 @@ class HPLBaseSingleNode_Fixed(HPLBase):
             },
             'vera:skylake': {
                 'GFlops': (1200, -0.05, 0.05, 'GFlops/s'),
+            },
+            'vera:icelake': {
+                'GFlops': (3100, -0.05, 0.05, 'GFlops/s'),
             },
             'alvis:2xV100': {
                 'GFlops': (1140, -0.05, 0.05, 'GFlops/s'),
