@@ -125,6 +125,9 @@ class StreamTest2(StreamTest2Base):
         'alvis:4xA100_MEM512': False,
         'alvis:4xA100fat': False,
     }
+    # Default is to use hugepages, this is for turning it off
+    disable_hugepages = {
+    }
     default_variables = {
         'OMP_PLACES': 'threads',
         'OMP_PROC_BIND': 'spread'
@@ -381,7 +384,11 @@ class StreamTest2(StreamTest2Base):
             self.stream_binary.executable
         )
         mem_sz = self.stream_array.get(self.current_partition.fullname, 2500)*1024*1024
-        self.executable_opts = ["-s", "%s" % mem_sz]
+        disable_hugepages = self.disable_hugepages.get(self.current_partition.fullname, False)
+        hp='-h'
+        if disable_hugepages:
+            hp=''
+        self.executable_opts = [hp, "-s", "%s" % mem_sz]
 
 
 @rfm.simple_test
