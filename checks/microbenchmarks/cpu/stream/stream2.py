@@ -59,7 +59,7 @@ class StreamTest2(StreamTest2Base):
 
     descr = 'STREAM Benchmark'
 
-    valid_systems = ['kebnekaise:%s' % x for x in ['bdw', 'sky', 'knl', 'lm', 'zen3', 'gen4-cpu', 'gen4-l40s', 'gen4-h100']]
+    valid_systems = ['kebnekaise:%s' % x for x in ['bdw', 'sky', 'knl', 'lm', 'zen3', 'zen4', '2xl40s', '4xh100']]
     valid_systems += ['aigert']
     valid_systems += ['alvis', 'vera', 'UmU-Cloud']
     valid_prog_environs = ['%s_%s' % (tc, tv) for tc in ['foss', 'intel']
@@ -73,9 +73,9 @@ class StreamTest2(StreamTest2Base):
         'kebnekaise:knl': 68,
         'kebnekaise:lm': 72,
         'kebnekaise:zen3': 128,
-        'kebnekaise:gen4-cpu': 256,
-        'kebnekaise:gen4-l40s': 48,
-        'kebnekaise:gen4-h100': 96,
+        'kebnekaise:zen4': 256,
+        'kebnekaise:2xl40s': 48,
+        'kebnekaise:4xh100': 96,
         'aigert:zen4': 256,
         'UmU-Cloud:default': 64,
         'vera:skylake': 32,
@@ -103,9 +103,9 @@ class StreamTest2(StreamTest2Base):
         'kebnekaise:knl': 6800,
         'kebnekaise:lm': 24000, # 121000, for using the whole memory, but that takes forever.
         'kebnekaise:zen3': 42000,
-        'kebnekaise:gen4-cpu': 26000,
-        'kebnekaise:gen4-l40s': 13000,
-        'kebnekaise:gen4-h100': 26000,
+        'kebnekaise:zen4': 26000,
+        'kebnekaise:2xl40s': 13000,
+        'kebnekaise:4xh100': 26000,
         'aigert:zen4': 30000,
         'UmU-Cloud:default': 21200,
         'vera:skylake': 3600,
@@ -164,19 +164,19 @@ class StreamTest2(StreamTest2Base):
                 'Add':   (230000, -0.05, 0.05, 'MB/s'),
                 'Triad': (230000, -0.05, 0.05, 'MB/s'),
             },
-            'kebnekaise:gen4-cpu': {
+            'kebnekaise:zen4': {
                 'Copy':  (430000, -0.05, 0.05, 'MB/s'),
                 'Scale': (430000, -0.05, 0.05, 'MB/s'),
                 'Add':   (500000, -0.05, 0.05, 'MB/s'),
                 'Triad': (500000, -0.05, 0.05, 'MB/s'),
             },
-            'kebnekaise:gen4-l40s': {
+            'kebnekaise:2xl40s': {
                 'Copy':  (393000, -0.05, 0.05, 'MB/s'),
                 'Scale': (393000, -0.05, 0.05, 'MB/s'),
                 'Add':   (437000, -0.05, 0.05, 'MB/s'),
                 'Triad': (437000, -0.05, 0.05, 'MB/s'),
             },
-            'kebnekaise:gen4-h100': {
+            'kebnekaise:4xh100': {
                 'Copy':  (466000, -0.05, 0.05, 'MB/s'),
                 'Scale': (466000, -0.05, 0.05, 'MB/s'),
                 'Add':   (522000, -0.05, 0.05, 'MB/s'),
