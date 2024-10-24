@@ -44,6 +44,13 @@ class hpc2n_gromacs_check(gromacs_check):
                 'HECBioSim/hEGFRDimerSmallerPL': (31.0, None, None, 'ns/day'),
                 'HECBioSim/hEGFRDimerPair': (7.0, None, None, 'ns/day'),
             },
+            'x86_64_v4': {
+                'HECBioSim/Crambin': (745.0, None, None, 'ns/day'),
+                'HECBioSim/Glutamine-Binding-Protein': (322.0, None, None, 'ns/day'),  # noqa: E501
+                'HECBioSim/hEGFRDimer': (46.0, None, None, 'ns/day'),
+                'HECBioSim/hEGFRDimerSmallerPL': (67.0, None, None, 'ns/day'),
+                'HECBioSim/hEGFRDimerPair': (18.0, None, None, 'ns/day'),
+            },
         },
         2: {
             'sm_60': {
@@ -61,6 +68,13 @@ class hpc2n_gromacs_check(gromacs_check):
                 'HECBioSim/hEGFRDimerPair': (4.0, None, None, 'ns/day'),
             },
             'zen2': {
+                'HECBioSim/Crambin': (355.0, None, None, 'ns/day'),
+                'HECBioSim/Glutamine-Binding-Protein': (210.0, None, None, 'ns/day'),  # noqa: E501
+                'HECBioSim/hEGFRDimer': (31.0, None, None, 'ns/day'),
+                'HECBioSim/hEGFRDimerSmallerPL': (53.0, None, None, 'ns/day'),
+                'HECBioSim/hEGFRDimerPair': (13.0, None, None, 'ns/day'),
+            },
+            'x86_64_v4': {
                 'HECBioSim/Crambin': (355.0, None, None, 'ns/day'),
                 'HECBioSim/Glutamine-Binding-Protein': (210.0, None, None, 'ns/day'),  # noqa: E501
                 'HECBioSim/hEGFRDimer': (31.0, None, None, 'ns/day'),
@@ -93,6 +107,14 @@ class hpc2n_gromacs_check(gromacs_check):
                 'HECBioSim/hEGFRDimerPair': (25.0, None, None, 'ns/day'),
                 'HECBioSim/hEGFRtetramerPair': (11.0, None, None, 'ns/day'),
             },
+            'x86_64_v4': {
+                'HECBioSim/Crambin': (340.0, None, None, 'ns/day'),
+                'HECBioSim/Glutamine-Binding-Protein': (230.0, None, None, 'ns/day'),  # noqa: E501
+                'HECBioSim/hEGFRDimer': (56.0, None, None, 'ns/day'),
+                'HECBioSim/hEGFRDimerSmallerPL': (80.0, None, None, 'ns/day'),
+                'HECBioSim/hEGFRDimerPair': (25.0, None, None, 'ns/day'),
+                'HECBioSim/hEGFRtetramerPair': (11.0, None, None, 'ns/day'),
+            },
         },
         6: {
             'sm_60': {
@@ -112,6 +134,13 @@ class hpc2n_gromacs_check(gromacs_check):
                 'HECBioSim/hEGFRtetramerPair': (5.0, None, None, 'ns/day'),
             },
             'zen2': {
+                'HECBioSim/Glutamine-Binding-Protein': (240.0, None, None, 'ns/day'),  # noqa: E501
+                'HECBioSim/hEGFRDimer': (75.0, None, None, 'ns/day'),
+                'HECBioSim/hEGFRDimerSmallerPL': (110.0, None, None, 'ns/day'),
+                'HECBioSim/hEGFRDimerPair': (33.0, None, None, 'ns/day'),
+                'HECBioSim/hEGFRtetramerPair': (13.0, None, None, 'ns/day'),
+            },
+            'x86_64_v4': {
                 'HECBioSim/Glutamine-Binding-Protein': (240.0, None, None, 'ns/day'),  # noqa: E501
                 'HECBioSim/hEGFRDimer': (75.0, None, None, 'ns/day'),
                 'HECBioSim/hEGFRDimerSmallerPL': (110.0, None, None, 'ns/day'),
@@ -143,6 +172,13 @@ class hpc2n_gromacs_check(gromacs_check):
                 'HECBioSim/hEGFRDimerPair': (43.0, None, None, 'ns/day'),
                 'HECBioSim/hEGFRtetramerPair': (20.0, None, None, 'ns/day'),
             },
+            'x86_64_v4': {
+                'HECBioSim/Glutamine-Binding-Protein': (250.0, None, None, 'ns/day'),   # noqa: E501
+                'HECBioSim/hEGFRDimer': (80.0, None, None, 'ns/day'),
+                'HECBioSim/hEGFRDimerSmallerPL': (104.0, None, None, 'ns/day'),
+                'HECBioSim/hEGFRDimerPair': (43.0, None, None, 'ns/day'),
+                'HECBioSim/hEGFRtetramerPair': (20.0, None, None, 'ns/day'),
+            },
         },
         16: {
             'sm_60': {
@@ -160,6 +196,12 @@ class hpc2n_gromacs_check(gromacs_check):
                 'HECBioSim/hEGFRtetramerPair': (10.0, None, None, 'ns/day'),
             },
             'zen2': {
+                'HECBioSim/hEGFRDimer': (82.0, None, None, 'ns/day'),
+                'HECBioSim/hEGFRDimerSmallerPL': (70.0, None, None, 'ns/day'),
+                'HECBioSim/hEGFRDimerPair': (49.0, None, None, 'ns/day'),
+                'HECBioSim/hEGFRtetramerPair': (25.0, None, None, 'ns/day'),
+            },
+            'x86_64_v4': {
                 'HECBioSim/hEGFRDimer': (82.0, None, None, 'ns/day'),
                 'HECBioSim/hEGFRDimerSmallerPL': (70.0, None, None, 'ns/day'),
                 'HECBioSim/hEGFRDimerPair': (49.0, None, None, 'ns/day'),
