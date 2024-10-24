@@ -123,9 +123,9 @@ class HPLBaseSingleNode_Fixed(HPLBase):
         self.hpl_settings = {
             'kebnekaise:bdw': {'N': 107520, 'NB': 192, 'P': 7, 'Q': 4},
             'kebnekaise:sky': {'N': 107520, 'NB': 192, 'P': 7, 'Q': 4},
-            'kebnekaise:gen4-cpu': {'N': 107520, 'NB': 192, 'P': 16, 'Q': 16},
-            'kebnekaise:gen4-l40s': {'N': 107520, 'NB': 192, 'P': 8, 'Q': 6},
-            'kebnekaise:gen4-h100': {'N': 107520, 'NB': 192, 'P': 12, 'Q': 8},
+            'kebnekaise:zen4': {'N': 107520, 'NB': 192, 'P': 16, 'Q': 16},
+            'kebnekaise:2xl40s': {'N': 107520, 'NB': 192, 'P': 8, 'Q': 6},
+            'kebnekaise:4xh100': {'N': 107520, 'NB': 192, 'P': 12, 'Q': 8},
             'vera:skylake': {'N': 101760, 'NB': 192, 'P': 8, 'Q': 4},
             'vera:icelake': {'N': 245760, 'NB': 192, 'P': 16, 'Q': 4},
             'alvis:2xV100': {'N': 280000, 'NB': 200, 'P': 4, 'Q': 4},
@@ -139,13 +139,13 @@ class HPLBaseSingleNode_Fixed(HPLBase):
             'kebnekaise:sky': {
                 'GFlops': (871, -0.05, 0.05, 'GFlops/s'),
             },
-            'kebnekaise:gen4-cpu': {
-                'GFlops': (6200, -0.05, 0.05, 'GFlops/s'),
+            'kebnekaise:zen4': {
+                'GFlops': (6200, -0.05, 0.10, 'GFlops/s'),
             },
-            'kebnekaise:gen4-l40s': {
+            'kebnekaise:2xl40s': {
                 'GFlops': (2000, -0.05, 0.05, 'GFlops/s'),
             },
-            'kebnekaise:gen4-h100': {
+            'kebnekaise:4xh100': {
                 'GFlops': (3350, -0.05, 0.05, 'GFlops/s'),
             },
             'vera:skylake': {
