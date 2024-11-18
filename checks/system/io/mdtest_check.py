@@ -132,7 +132,7 @@ class MDtestBase(rfm.RunOnlyRegressionTest):
         nt = self.fs[self.base_dir][cur_sys].get('num_tasks', 1)
         nt = self.fs[self.base_dir][fullname].get('num_tasks', nt)
         self.num_tasks = nt
-        self.tpn = tpn
+        self.num_tasks_per_node = tpn
         self.num_cpus_per_task = cpt
 
     @run_before('run')
