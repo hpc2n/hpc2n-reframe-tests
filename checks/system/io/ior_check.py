@@ -202,7 +202,7 @@ class IorCheck(rfm.RunOnlyRegressionTest):
         nt = self.fs[self.base_dir][cur_sys].get('num_tasks', 1)
         nt = self.fs[self.base_dir][fullname].get('num_tasks', nt)
         self.num_tasks = nt
-        self.tpn = tpn
+        self.num_tasks_per_node = tpn
         self.num_cpus_per_task = cpt
 
     @run_after('init')
@@ -244,7 +244,7 @@ class IorCheck(rfm.RunOnlyRegressionTest):
         access_type = self.fs[self.base_dir][cur_sys].get('ior_access_type', access_type)
         access_type = self.fs[self.base_dir][fullname].get('ior_access_type', access_type)
 
-        self.executable_opts += ['-F', '-C ', '-Q', str(self.tpn), '-t', xfr_size , '-D 240',
+        self.executable_opts += ['-F', '-C ', '-Q', str(self.num_tasks_per_node), '-t', xfr_size , '-D 240',
                                 '-b', block_size, '-a', access_type,
                                 '-A -1',  # Refnumber used for matching the correct output lines
                                 '-o', test_file]
