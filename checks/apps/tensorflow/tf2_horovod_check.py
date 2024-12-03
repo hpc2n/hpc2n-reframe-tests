@@ -87,13 +87,13 @@ class snic_tensorflow_horovod_check(tensorflow_cnn_check):
     valid_prog_environs = ['builtin']
 
     valid_systems = ['kebnekaise:%s' % x for x in ['2xK80', '4xK80', '2xV100']]
-    valid_systems += ['alvis']
+    valid_systems += ['+nvgpu']
 
     @run_after('init')
     def set_modules(self):
         module = {
             'kebnekaise': ['fosscuda/2019b', 'Horovod/0.19.1-TensorFlow-2.1.0-Python-3.7.4'],
-            'alvis': ['Horovod/0.23.0-fosscuda-2020b-TensorFlow-2.5.0'],
+            'alvis': ['Horovod/0.28.1-foss-2022a-CUDA-11.7.0-TensorFlow-2.11.0'],
         }
         self.modules = module.get(self.current_system.name, [])
 
