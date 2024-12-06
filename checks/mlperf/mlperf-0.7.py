@@ -32,16 +32,17 @@ class MLPerfInference_07_Base(rfm.RunOnlyRegressionTest):
         dataset_base = '/mimer/NOBACKUP/groups/c3-staff/datasets/mlperf-v0.7-inference'
         # This is a container run
         self.container_platform = 'Singularity'
-        self.container_platform.image = '/cephyr/users/akesa/Alvis/reframe/test-runs/mlperf-inference-lni-latest-trt-7234-cudnn-811.sif'
+        self.container_platform.image = '/mimer/NOBACKUP/groups/c3-staff/containers/mlperf-inference-lni-latest-trt-7234-cudnn-811.sif'
         self.container_platform.mount_points = [
             #(dataset_base + "/Language Processing/build", "/work/build"),
             (dataset_base + "/Language Processing", "/dataset"),
             (dataset_base + "/nvidia/models", "/work/build/models"),
             (dataset_base + "/nvidia/data", "/work/build/data"),
             (dataset_base + "/nvidia/preprocessed_data", "/work/build/preprocessed_data"),
-            ("/cephyr/users/akesa/Alvis/reframe/test-runs/mlperf/0.7/configs", "/work/configs"),
-            ("/cephyr/users/akesa/Alvis/reframe/test-runs/mlperf/0.7/system_list.py", "/work/code/common/system_list.py"),
-            ("/cephyr/users/akesa/Alvis/reframe/test-runs/mlperf/0.7/main.py", "/work/code/main.py"),
+            ("/mimer/NOBACKUP/groups/c3-staff/reframe/mlperf/0.7/configs", "/work/configs"),
+            ("/mimer/NOBACKUP/groups/c3-staff/reframe/mlperf/0.7/system_list.py", "/work/code/common/system_list.py"),
+            ("/mimer/NOBACKUP/groups/c3-staff/reframe/mlperf/0.7/main.py", "/work/code/main.py"),
+            ("/mimer/NOBACKUP/groups/c3-staff/reframe/mlperf/0.7/__init__.py", "/work/code/common/__init__.py"),
             ("$TMPDIR/measurements", "/work/measurements"),
             ("$TMPDIR/engines", "/work/build/engines"),
             ("$TMPDIR/logs", "/work/build/logs"),
@@ -59,7 +60,7 @@ class MLPerfInference_07_Base(rfm.RunOnlyRegressionTest):
         if self.benchmark == 'resnet50':
             self.time_limit = '2h'
 
-        self.container_platform.options = ['--pwd /work']
+        self.container_platform.options = ['--pwd /work --env BASH_ENV=""']
         self.container_platform.command = (
             'make run RUN_ARGS="--benchmarks=%s --scenarios=offline --config_ver=default --test_mode=SubmissionRun"' % self.benchmark
         )
@@ -220,4 +221,3 @@ class MLPerfInference_07(MLPerfInference_07_Base):
 
         self.tags = {'production'}
         self.maintainers = ['AS']
-
