@@ -797,7 +797,6 @@ site_configuration = {
             'check_search_path': ['checks/'],
             'check_search_recursive': True,
             'remote_detect': True,
-	    'reframe_module': 'ReFrame',
         },
     ],
 }
