@@ -78,8 +78,8 @@ class StreamTest2(StreamTest2Base):
         'kebnekaise:4xh100': 96,
         'aigert:zen4': 256,
         'UmU-Cloud:default': 64,
-        'vera:skylake': 32,
         'vera:icelake': 64,
+        "alvis:CPUonly": 32,
         'alvis:8xT4': 32,
         'alvis:2xV100': 16,
         'alvis:4xV100': 32,
@@ -109,7 +109,11 @@ class StreamTest2(StreamTest2Base):
         'aigert:zen4': 30000,
         'UmU-Cloud:default': 21200,
         'vera:skylake': 3600,
+<<<<<<< HEAD
         'vera:icelake': 20000,
+=======
+        'alvis:Cpuonly': 26000,
+>>>>>>> 229e015 (Add stream settings for alvis:CPUonly)
         'alvis:8xT4': 22900,
         'alvis:2xV100': 30900,
         'alvis:4xV100': 30900,
@@ -333,7 +337,7 @@ class StreamTest2(StreamTest2Base):
         omp_threads = self.num_cpus_per_task
         if self.current_partition.fullname == 'kebnekaise:knl':
             omp_threads *= 4
-        
+
         thread_reduction = self.thread_reduction.get(self.current_partition.fullname, 0)
         use_omp_binding = self.use_omp_binding.get(self.current_partition.fullname, True)
         if use_omp_binding:
