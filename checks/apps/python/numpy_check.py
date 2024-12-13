@@ -57,6 +57,13 @@ class numpy_check(numpy_ops_check):
             'eigendec': (4.14, None, 0.05, 's'),
             'inv': (0.16, None, 0.05, 's'),
         },
+        'icelake@64c': {
+            'dot': (0.16, None, 0.05, 's'),
+            'svd': (0.58, None, 0.05, 's'),
+            'cholesky': (0.08, None, 0.05, 's'),
+            'eigendec': (4.08, None, 0.05, 's'),
+            'inv': (0.12, None, 0.05, 's'),
+        },
     }
     tags = {'production'}
     maintainers = ['RS', 'TR', 'AS']
