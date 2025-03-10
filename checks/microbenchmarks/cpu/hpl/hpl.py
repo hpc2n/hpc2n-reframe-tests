@@ -39,8 +39,8 @@ class HPLBase(rfm.RunOnlyRegressionTest):
         hpl_module = {
             'kebnekaise': ['foss/2023b', 'HPL/2.3'],
             'UmU-Cloud': ['foss/2021a', 'HPL/2.3'],
-            'alvis': ['HPL/2.3-intel-2021b'],
-            'vera': ['HPL/2.3-intel-2021b'],
+            'alvis': ['HPL/2.3-foss-2024a'],
+            'vera': ['HPL/2.3-foss-2024a'],
         }
 
         self.modules = hpl_module[self.current_system.name]
