@@ -93,7 +93,7 @@ class snic_tensorflow_horovod_check(tensorflow_cnn_check):
     def set_modules(self):
         module = {
             'kebnekaise': ['fosscuda/2019b', 'Horovod/0.19.1-TensorFlow-2.1.0-Python-3.7.4'],
-            'alvis': ['Horovod/0.23.0-fosscuda-2020b-TensorFlow-2.5.0'],
+            'alvis': ['Horovod/0.28.1-foss-2022a-CUDA-11.7.0-TensorFlow-2.11.0'],
         }
         self.modules = module.get(self.current_system.name, [])
 
@@ -101,7 +101,7 @@ class snic_tensorflow_horovod_check(tensorflow_cnn_check):
     def prepare_test(self):
         horovod_version = {
             'kebnekaise': 'v0.19.1',
-            'alvis': 'v0.23.0',
+            'alvis': 'v0.28.1',
         }
         self.benchmark_version = horovod_version.get(self.current_system.name, '')
         super().prepare_test()
