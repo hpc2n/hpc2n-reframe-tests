@@ -693,7 +693,7 @@ site_configuration = {
             'cxx': 'g++',
             'ftn': 'gfortran',
             'target_systems': ['kebnekaise'],
-	    'features': ['cuda'],
+            'features': ['cuda'],
         },
         {
             'name': 'foss_with_cuda',
@@ -702,7 +702,7 @@ site_configuration = {
             'cxx': 'g++',
             'ftn': 'gfortran',
             'target_systems': ['alvis'],
-	    'features': ['cuda'],
+            'features': ['cuda'],
         },
     ],
     'logging': [
@@ -797,7 +797,6 @@ site_configuration = {
             'check_search_path': ['checks/'],
             'check_search_recursive': True,
             'remote_detect': True,
-	    'reframe_module': 'ReFrame',
         },
     ],
 }
