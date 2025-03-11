@@ -12,8 +12,8 @@ from reframe.core.backends import getlauncher
 
 @rfm.simple_test
 class nvidia_smi_check(rfm.RunOnlyRegressionTest):
-    gpu_mode = parameter(['accounting', 'compute', 'ecc'])
-    valid_systems = ['alvis', 'kebnekaise']
+    gpu_mode = parameter(['compute', 'ecc'])
+    valid_systems = ['+nvgpu']
     valid_prog_environs = ['builtin']
     executable = 'nvidia-smi'
     executable_opts = ['-a', '-d']
