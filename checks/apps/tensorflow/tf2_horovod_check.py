@@ -20,6 +20,10 @@ REFERENCE_SMALL_PERFORMANCE = {
         'throughput_total': (865, -0.05, None, 'images/s'),
         'throughput_iteration': (432, -0.05, None, 'images/s'),
     },
+    'alvis:4xV100': {
+        'throughput_total': (1696, -0.05, None, 'images/s'),
+        'throughput_iteration': (424, -0.05, None, 'images/s'),
+    },
     'alvis:4xA100_MEM256': {
         'throughput_total': (2000, -0.05, None, 'images/s'),
         'throughput_iteration': (500, -0.05, None, 'images/s'),
