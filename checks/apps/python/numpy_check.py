@@ -43,6 +43,20 @@ class numpy_check(numpy_ops_check):
             'eigendec': (4.14, None, 0.05, 's'),
             'inv': (0.16, None, 0.05, 's'),
         },
+        'cascadelake@16c': {
+            'dot': (0.16, None, 0.05, 's'),
+            'svd': (0.64, None, 0.05, 's'),
+            'cholesky': (0.13, None, 0.05, 's'),
+            'eigendec': (4.96, None, 0.05, 's'),
+            'inv': (0.21, None, 0.05, 's'),
+        },
+        'cascadelake@32c': {
+            'dot': (0.16, None, 0.05, 's'),
+            'svd': (0.64, None, 0.05, 's'),
+            'cholesky': (0.13, None, 0.05, 's'),
+            'eigendec': (4.96, None, 0.05, 's'),
+            'inv': (0.21, None, 0.05, 's'),
+        },
         'skylake@14c': {
             'dot': (0.3, None, 0.05, 's'),
             'svd': (0.35, None, 0.05, 's'),
@@ -56,6 +70,13 @@ class numpy_check(numpy_ops_check):
             'cholesky': (0.1, None, 0.05, 's'),
             'eigendec': (4.14, None, 0.05, 's'),
             'inv': (0.16, None, 0.05, 's'),
+        },
+        'icelake@64c': {
+            'dot': (0.19, None, 0.05, 's'),
+            'svd': (1.29, None, 0.05, 's'),
+            'cholesky': (0.46, None, 0.05, 's'),
+            'eigendec': (9.56, None, 0.05, 's'),
+            'inv': (0.36, None, 0.05, 's'),
         },
     }
     tags = {'production'}
