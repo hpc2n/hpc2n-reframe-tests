@@ -19,7 +19,7 @@ class IorCheck(rfm.RunOnlyRegressionTest):
     username = getpass.getuser()
     time_limit = '15m'
     maintainers = ['SO', 'GLR', 'ÅS']
-    tags = {'ops'}
+    tags = {'ops', 'production'}
 
     @run_after('init')
     def set_description(self):
