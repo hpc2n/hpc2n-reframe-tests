@@ -9,6 +9,7 @@ import sys
 import reframe as rfm
 from hpctestlib.microbenchmarks.gpu.memory_bandwidth import *
 
+sys.path.append(os.path.abspath(os.path.join(__file__, '../../..')))
 import microbenchmarks.gpu.hooks as hooks
 
 
