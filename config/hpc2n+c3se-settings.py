@@ -754,6 +754,7 @@ site_configuration = {
                 '--stage=/cephyr/NOBACKUP/priv/c3-staff/reframe/maintenance/stage',
                 '--output=/cephyr/NOBACKUP/priv/c3-staff/reframe/maintenance/output',
                 '--save-log-files',
+                '--session-extras=mode=maintenance',
             ],
             'target_systems': ['alvis', 'vera'],
         },
@@ -767,6 +768,7 @@ site_configuration = {
                 '--stage=/cephyr/NOBACKUP/priv/c3-staff/reframe/production/stage',
                 '--output=/cephyr/NOBACKUP/priv/c3-staff/reframe/production/output',
                 '--save-log-files',
+                '--session-extras=mode=production',
             ],
             'target_systems': ['alvis', 'vera'],
         },
@@ -798,5 +800,12 @@ site_configuration = {
             'check_search_recursive': True,
             'remote_detect': True,
         },
+    ],
+    'storage': [
+        {
+            'enable': True,
+            'sqlite_db_file': '/cephyr/NOBACKUP/priv/c3-staff/reframe/results.db',
+            'target_systems': ['alvis', 'vera'],
+        }
     ],
 }
