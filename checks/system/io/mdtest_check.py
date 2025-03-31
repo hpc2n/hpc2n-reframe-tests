@@ -8,7 +8,7 @@ import reframe.utility.sanity as sn
 class MDtestBase(rfm.RunOnlyRegressionTest):
     base_dir = parameter(['/pfs/stor10/io-test',
                           '/scratch',
-                          '/cephyr/NOBACKUP/priv/c3-alvis/reframe/io-test',
+                          '/cephyr/NOBACKUP/priv/c3-staff/reframe/io-test',
                           '/mimer/NOBACKUP/groups/c3-staff/reframe/io-test',
                           ])
     username = getpass.getuser()
@@ -230,7 +230,7 @@ class MDtestNode(MDtestBase):
                     'num_tasks_per_node': 96,
                 },
             },
-            '/cephyr/NOBACKUP/priv/c3-alvis/reframe/io-test': {
+            '/cephyr/NOBACKUP/priv/c3-staff/reframe/io-test': {
                 'valid_systems': ['alvis'],
                 'nr_dirs_files_per_proc': '1000',
                 'alvis:CPUonly': {
@@ -347,7 +347,7 @@ class MDtestSingle(MDtestBase):
                 'nr_dirs_files_per_proc': '100000',
                 'iterations': '5',
             },
-            '/cephyr/NOBACKUP/priv/c3-alvis/reframe/io-test': {
+            '/cephyr/NOBACKUP/priv/c3-staff/reframe/io-test': {
                 'valid_systems': ['alvis'],
                 'nr_dirs_files_per_proc': '100000',
                 'iterations': '5',

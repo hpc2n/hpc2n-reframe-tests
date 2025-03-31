@@ -12,7 +12,7 @@ import reframe.utility.sanity as sn
 
 class IorCheck(rfm.RunOnlyRegressionTest):
     base_dir = parameter(['/pfs/stor10/io-test',
-                          '/cephyr/NOBACKUP/priv/c3-alvis/reframe/io-test',
+                          '/cephyr/NOBACKUP/priv/c3-staff/reframe/io-test',
                           '/mimer/NOBACKUP/groups/c3-staff/reframe/io-test',
                           '/scratch',
                           ])
@@ -83,7 +83,7 @@ class IorCheck(rfm.RunOnlyRegressionTest):
                 },
                 'ior_block_size': '10g',
             },
-            '/cephyr/NOBACKUP/priv/c3-alvis/reframe/io-test': {
+            '/cephyr/NOBACKUP/priv/c3-staff/reframe/io-test': {
                 'valid_systems': ['alvis'],
                 'alvis:CPUonly': {
                     'num_tasks': 32,
