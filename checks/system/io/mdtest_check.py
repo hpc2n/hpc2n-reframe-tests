@@ -14,7 +14,7 @@ class MDtestBase(rfm.RunOnlyRegressionTest):
     username = getpass.getuser()
     time_limit = '270m'
     maintainers = ['ÅS']
-    tags = {'ops', 'maintenance'}
+    tags = {'ops', 'production', 'maintenance'}
 
     @run_after('init')
     def set_description(self):
