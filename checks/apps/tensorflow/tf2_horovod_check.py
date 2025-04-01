@@ -4,12 +4,13 @@
 # SPDX-License-Identifier: BSD-3-Clause
 
 import contextlib
+import os
+import sys
 import reframe as rfm
 import reframe.utility.osext as osext
 
 from hpctestlib.ml.tensorflow.horovod import tensorflow_cnn_check
 
-import os,sys
 sys.path.append(os.path.abspath(os.path.join(__file__, '../../..')))
 import microbenchmarks.gpu.hooks as hooks
 

@@ -3,15 +3,16 @@
 #
 # SPDX-License-Identifier: BSD-3-Clause
 
+import os
+import sys
 import reframe as rfm
 import reframe.utility.sanity as sn
 import reframe.utility.typecheck as typ
 
-import os,sys
+from reframe.core.backends import getlauncher
+
 sys.path.append(os.path.abspath(os.path.join(__file__, '../../..')))
 import microbenchmarks.gpu.hooks as hooks
-
-from reframe.core.backends import getlauncher
 
 @rfm.simple_test
 class nvidia_smi_check(rfm.RunOnlyRegressionTest):
