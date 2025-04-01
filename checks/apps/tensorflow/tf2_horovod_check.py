@@ -5,9 +5,9 @@
 
 import contextlib
 import os
-import sys
 import reframe as rfm
 import reframe.utility.osext as osext
+import sys
 
 from hpctestlib.ml.tensorflow.horovod import tensorflow_cnn_check
 

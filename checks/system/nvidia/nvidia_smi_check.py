@@ -4,10 +4,10 @@
 # SPDX-License-Identifier: BSD-3-Clause
 
 import os
-import sys
 import reframe as rfm
 import reframe.utility.sanity as sn
 import reframe.utility.typecheck as typ
+import sys
 
 from reframe.core.backends import getlauncher
 
