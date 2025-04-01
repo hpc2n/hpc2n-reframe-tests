@@ -8,8 +8,10 @@ import reframe as rfm
 from hpctestlib.python.numpy.numpy_ops import numpy_ops_check
 from reframe.utility import find_modules
 
-class snic_numpy_test(numpy_ops_check):
+@rfm.simple_test
+class numpy_check(numpy_ops_check):
     valid_prog_environs = ['builtin']
+    valid_systems = ['alvis', 'kebnekaise']
     num_tasks_per_node = 1
     use_multithreading = False
     all_ref = {
@@ -41,6 +43,20 @@ class snic_numpy_test(numpy_ops_check):
             'eigendec': (4.14, None, 0.05, 's'),
             'inv': (0.16, None, 0.05, 's'),
         },
+        'cascadelake@16c': {
+            'dot': (0.16, None, 0.05, 's'),
+            'svd': (0.64, None, 0.05, 's'),
+            'cholesky': (0.13, None, 0.05, 's'),
+            'eigendec': (4.96, None, 0.05, 's'),
+            'inv': (0.21, None, 0.05, 's'),
+        },
+        'cascadelake@32c': {
+            'dot': (0.16, None, 0.05, 's'),
+            'svd': (0.64, None, 0.05, 's'),
+            'cholesky': (0.13, None, 0.05, 's'),
+            'eigendec': (4.96, None, 0.05, 's'),
+            'inv': (0.21, None, 0.05, 's'),
+        },
         'skylake@14c': {
             'dot': (0.3, None, 0.05, 's'),
             'svd': (0.35, None, 0.05, 's'),
@@ -55,15 +71,24 @@ class snic_numpy_test(numpy_ops_check):
             'eigendec': (4.14, None, 0.05, 's'),
             'inv': (0.16, None, 0.05, 's'),
         },
+        'icelake@64c': {
+            'dot': (0.19, None, 0.05, 's'),
+            'svd': (1.29, None, 0.05, 's'),
+            'cholesky': (0.46, None, 0.05, 's'),
+            'eigendec': (9.56, None, 0.05, 's'),
+            'inv': (0.36, None, 0.05, 's'),
+        },
     }
     tags = {'production'}
     maintainers = ['RS', 'TR', 'AS']
 
     @run_after('init')
-    def process_module_info(self):
-        s, e, m = self.module_info
-        self.valid_prog_environs = [e]
-        self.modules = [m]
+    def set_modules(self):
+        module = {
+            'kebnekaise': [],
+            'alvis': ['SciPy-bundle/2024.05-gfbf-2024a'],
+        }
+        self.modules = module.get(self.current_system.name, [])
 
     @run_after('setup')
     def set_num_cpus_per_task(self):
@@ -80,13 +105,3 @@ class snic_numpy_test(numpy_ops_check):
         self.reference = {
             pname: self.all_ref[f'{arch}@{num_cores}c']
         }
-
-@rfm.simple_test
-class c3se_numpy_test(snic_numpy_test):
-    module_info = parameter(find_modules('SciPy-bundle', { r'.*': 'builtin' }))
-    valid_systems = ['alvis']
-
-@rfm.simple_test
-class hpc2n_numpy_test(snic_numpy_test):
-    module_info = parameter(find_modules('SciPy-bundle'))
-    valid_systems = ['kebnekaise']
