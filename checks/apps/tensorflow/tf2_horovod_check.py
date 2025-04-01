@@ -89,11 +89,7 @@ class snic_tensorflow_horovod_check(tensorflow_cnn_check):
     tags |= {'production'}
     maintainers = ['RS', 'TR', 'AS']
     valid_prog_environs = ['builtin']
-
-    valid_systems = ['kebnekaise:%s' % x for x in ['2xK80', '4xK80', '2xV100']]
-    valid_systems += ['alvis:%s' % x for x in [
-        '8xT4', '2xV100', '4xV100', '4xA40', '4xA100_MEM256', '4xA100_MEM512', '4xA100fat'
-    ]]
+    valid_systems = ['+nvgpu']
 
     @run_after('init')
     def set_modules(self):
