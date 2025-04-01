@@ -17,7 +17,7 @@ class IorCheck(rfm.RunOnlyRegressionTest):
                           '/scratch',
                           ])
     username = getpass.getuser()
-    time_limit = '15m'
+    time_limit = '60m'
     maintainers = ['SO', 'GLR', 'ÅS']
     tags = {'ops'}
 
@@ -62,6 +62,7 @@ class IorCheck(rfm.RunOnlyRegressionTest):
                     'num_tasks': 96,
                     'num_tasks_per_node': 96,
                 },
+                'ior_block_size': '480g',
                 'reference': {
                     'write_bw': (5400, -0.1, None, 'MiB/s'),
                     'read_bw': (5300, -0.1, None, 'MiB/s'),
@@ -244,7 +245,7 @@ class IorCheck(rfm.RunOnlyRegressionTest):
         access_type = self.fs[self.base_dir][cur_sys].get('ior_access_type', access_type)
         access_type = self.fs[self.base_dir][fullname].get('ior_access_type', access_type)
 
-        self.executable_opts += ['-F', '-C ', '-Q', str(self.num_tasks_per_node), '-t', xfr_size , '-D 240',
+        self.executable_opts += ['-F', '-C ', '-Q', str(self.num_tasks_per_node), '-t', xfr_size , '-D 1200',
                                 '-b', block_size, '-a', access_type,
                                 '-A -1',  # Refnumber used for matching the correct output lines
                                 '-o', test_file]
