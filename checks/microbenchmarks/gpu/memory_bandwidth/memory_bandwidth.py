@@ -3,9 +3,6 @@
 #
 # SPDX-License-Identifier: BSD-3-Clause
 
-import os
-import sys
-
 import reframe as rfm
 
 from hpctestlib.microbenchmarks.gpu.memory_bandwidth import *
