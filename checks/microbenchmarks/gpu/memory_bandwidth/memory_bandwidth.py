@@ -7,7 +7,7 @@ import reframe as rfm
 
 from hpctestlib.microbenchmarks.gpu.memory_bandwidth import *
 
-hooks = rfm.utility.import_module("..hooks")
+hooks = rfm.utility.import_module("....microbenchmarks.gpu.hooks")
 
 class SystemConfigHPC2N(rfm.RegressionMixin):
     # Inject external hooks
