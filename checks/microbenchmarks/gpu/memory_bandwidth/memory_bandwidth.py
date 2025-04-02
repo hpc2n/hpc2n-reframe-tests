@@ -3,14 +3,11 @@
 #
 # SPDX-License-Identifier: BSD-3-Clause
 
-import os
-import sys
-
 import reframe as rfm
+
 from hpctestlib.microbenchmarks.gpu.memory_bandwidth import *
 
-import microbenchmarks.gpu.hooks as hooks
-
+hooks = rfm.utility.import_module("....microbenchmarks.gpu.hooks")
 
 class SystemConfigHPC2N(rfm.RegressionMixin):
     # Inject external hooks

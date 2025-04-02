@@ -3,13 +3,12 @@
 #
 # SPDX-License-Identifier: BSD-3-Clause
 
-import contextlib
 import reframe as rfm
 import reframe.utility.osext as osext
 
 from hpctestlib.ml.tensorflow.horovod import tensorflow_cnn_check
 
-import microbenchmarks.gpu.hooks as hooks
+hooks = rfm.utility.import_module("...microbenchmarks.gpu.hooks")
 
 REFERENCE_SMALL_PERFORMANCE = {
     'alvis:8xT4': {

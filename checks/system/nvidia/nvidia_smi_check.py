@@ -6,9 +6,10 @@
 import reframe as rfm
 import reframe.utility.sanity as sn
 import reframe.utility.typecheck as typ
-import microbenchmarks.gpu.hooks as hooks
 
 from reframe.core.backends import getlauncher
+
+hooks = rfm.utility.import_module("...microbenchmarks.gpu.hooks")
 
 @rfm.simple_test
 class nvidia_smi_check(rfm.RunOnlyRegressionTest):
