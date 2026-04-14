@@ -423,11 +423,11 @@ site_configuration = {
                     ],
                 },
                 {
-                    'name': '6xl40s',
-                    'descr': 'Zen4 6xL40s gpu nodes',
+                    'name': '8xl40s',
+                    'descr': 'Zen4 8xL40s gpu nodes',
                     'scheduler': 'slurm',
                     'launcher': 'srun',
-                    'access': ['-A sysop', '-C zen4&l40s', '--gpus-per-node=l40s:6'],
+                    'access': ['-A sysop', '-C zen4&l40s', '--gpus-per-node=l40s:8'],
                     'max_jobs': 100,
                     'features': ['cpu', 'amdcpu', 'gpu', 'nvgpu'],
                     'environs': ['builtin', 'gnu', 'foss', 'foss_with_cuda', 'foss_2021b', 'foss_2023b'],
@@ -435,7 +435,7 @@ site_configuration = {
                         {
                             'type': 'gpu',
                             'arch': 'sm_89',
-                            'num_devices': 6,
+                            'num_devices': 8,
                         },
                     ],
                     'container_platforms': [
