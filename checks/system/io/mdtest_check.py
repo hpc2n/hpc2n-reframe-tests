@@ -195,9 +195,9 @@ class MDtestNode(MDtestBase):
                     'num_tasks': 48,
                     'num_tasks_per_node': 48,
                 },
-                'kebnekaise:6xl40s': {
-                    'num_tasks': 60,
-                    'num_tasks_per_node': 60,
+                'kebnekaise:8xl40s': {
+                    'num_tasks': 64,
+                    'num_tasks_per_node': 64,
                 },
                 'kebnekaise:8xa40': {
                     'num_tasks': 64,
