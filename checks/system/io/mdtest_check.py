@@ -179,6 +179,10 @@ class MDtestNode(MDtestBase):
                     'num_tasks': 28,
                     'num_tasks_per_node': 28,
                 },
+                'kebnekaise:lm': {
+                    'num_tasks': 72,
+                    'num_tasks_per_node': 72,
+                },
                 'kebnekaise:zen3': {
                     'num_tasks': 128,
                     'num_tasks_per_node': 128,
